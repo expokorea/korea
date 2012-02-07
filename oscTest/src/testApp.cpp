@@ -12,8 +12,8 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	for(int i=0; i<clients.size(); i++){
-		clients[i]->update();
+	for(int i=0; i<videoClients.size(); i++){
+		videoClients[i]->update();
 	}
 }
 
@@ -25,23 +25,25 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	if(key==' '){
-		for(int i=0; i<clients.size(); i++){
-			clients[i]->togglePlaying();
+		for(int i=0; i<videoClients.size(); i++){
+			videoClients[i]->togglePlaying();
 		}
 	}
 }
 
 
 void testApp::newAvahiService(ofxAvahiService & service){
-	ofLogVerbose() << "new service" << service.ip << ":" << service.port;
-	clients.push_back(ofPtr<OscPlayerClient>(new OscPlayerClient(service.ip,service.port)));
+	ofLogVerbose() << "new service" << service.name << service.ip << ":" << service.port;
+	if(service.name=="oscvideoplayer"){
+		videoClients.push_back(ofPtr<OscPlayerClient>(new OscPlayerClient(service.ip,service.port)));
+	}
 }
 
 void testApp::removedAvahiService(ofxAvahiService & service){
 	ofLogVerbose() << "removing service" << service.ip << ":" << service.port;
-	for(int i=0; i<clients.size(); i++){
-		if(clients[i]->getIp()==service.ip){
-			clients.erase(clients.begin()+i);
+	for(int i=0; i<videoClients.size(); i++){
+		if(videoClients[i]->getIp()==service.ip){
+			videoClients.erase(videoClients.begin()+i);
 			return;
 		}
 	}

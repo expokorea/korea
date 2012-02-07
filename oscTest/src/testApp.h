@@ -24,7 +24,7 @@ class testApp : public ofBaseApp{
 		void newAvahiService(ofxAvahiService & service);
 		void removedAvahiService(ofxAvahiService & service);
 
-		vector<ofPtr<OscPlayerClient> > clients;
+		vector<ofPtr<OscPlayerClient> > videoClients;
 		ofxAvahiClientBrowser avahi;
 
 };
