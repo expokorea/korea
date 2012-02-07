@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxKinect.h"
+#include "ofxCv.h"
+#include "ofxOsc.h"
 
 class testApp : public ofBaseApp{
 
@@ -19,4 +22,9 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+		ofxKinect kinect;
+		ContourFinder contourFinder;
+		vector<ofPolyline> polylines;
+		ofxOscSender osc;
+		int frame;
 };

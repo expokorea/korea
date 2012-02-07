@@ -3,6 +3,8 @@
 	<name>mainServer</name>
 	<comment></comment>
 	<projects>
+		<project>libs</project>
+		<project>openFrameworks</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -31,7 +33,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/mainServer/Debug}</value>
+					<value>${workspace_loc:/mainServer}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
@@ -55,7 +57,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
-					<value>all</value>
+					<value>Debug</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.stopOnError</key>
@@ -79,4 +81,11 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>ofxOsc</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOsc</location>
+		</link>
+	</linkedResources>
 </projectDescription>
