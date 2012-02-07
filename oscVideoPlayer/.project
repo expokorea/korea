@@ -79,6 +79,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>ofxAvahiClient</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxAvahiClient</location>
+		</link>
+		<link>
 			<name>ofxOsc</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOsc</location>

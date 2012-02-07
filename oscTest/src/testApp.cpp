@@ -2,20 +2,19 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	osc.setup("localhost", 6666);
-	playing = false;
+	ofSetLogLevel(OF_LOG_VERBOSE);
+	ofAddListener(avahi.serviceNewE,this,&testApp::newAvahiService);
+	ofAddListener(avahi.serviceRemoveE,this,&testApp::removedAvahiService);
+
+	avahi.lookup("_oscit._udp");
 	ofSetFrameRate(10);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	ofxOscMessage msg;
-	if(playing){
-		msg.setAddress("play");
-	}else{
-		msg.setAddress("stop");
+	for(int i=0; i<clients.size(); i++){
+		clients[i]->update();
 	}
-	osc.sendMessage(msg);
 }
 
 //--------------------------------------------------------------
@@ -26,7 +25,25 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	if(key==' '){
-		playing = !playing;
+		for(int i=0; i<clients.size(); i++){
+			clients[i]->togglePlaying();
+		}
+	}
+}
+
+
+void testApp::newAvahiService(ofxAvahiService & service){
+	ofLogVerbose() << "new service" << service.ip << ":" << service.port;
+	clients.push_back(ofPtr<OscPlayerClient>(new OscPlayerClient(service.ip,service.port)));
+}
+
+void testApp::removedAvahiService(ofxAvahiService & service){
+	ofLogVerbose() << "removing service" << service.ip << ":" << service.port;
+	for(int i=0; i<clients.size(); i++){
+		if(clients[i]->getIp()==service.ip){
+			clients.erase(clients.begin()+i);
+			return;
+		}
 	}
 }
 

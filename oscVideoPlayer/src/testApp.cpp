@@ -6,6 +6,7 @@ void testApp::setup(){
 	ofBackground(0);
 
 	osc.setup(6666);
+	avahi.start("oscvideoplayer","_oscit._udp",6666);
 
 	player.loadMovie("fingers.mov");
 }

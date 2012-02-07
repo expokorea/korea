@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOscSender.h"
+#include "ofxAvahiClient.h"
+#include "OscPlayerClient.h"
 
 class testApp : public ofBaseApp{
 
@@ -20,7 +21,10 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-		ofxOscSender osc;
-		bool playing;
+		void newAvahiService(ofxAvahiService & service);
+		void removedAvahiService(ofxAvahiService & service);
+
+		vector<ofPtr<OscPlayerClient> > clients;
+		ofxAvahiClientBrowser avahi;
 
 };
