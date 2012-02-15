@@ -18,31 +18,55 @@ void testApp::setup(){
 
 	gui.setup("blur");
 	gui.add(blurAmnt.setup("blurAmnt",1,0,5));
-	gui.add(kernelSize.setup("kernelSize",8,1,20));
+	gui.add(kernelSize.setup("kernelSize",6,1,20));
 	gui.add(brightness.setup("brightness",1.4,1,20));
 	gui.add(framerate.setup("framerate",0,0,80));
-	gui.add(r.setup("r",255,0,255));
-	gui.add(g.setup("g",255,0,255));
-	gui.add(b.setup("b",255,0,255));
+	gui.add(speed.setup("speed",8,1,80));
+	gui.add(radius.setup("radius",3,1,10));
+	gui.add(r.setup("r",16,0,255));
+	gui.add(g.setup("g",0,0,255));
+	gui.add(b.setup("b",230,0,255));
+	gui.add(lightOn.setup("light",false));
 
+	lightOn.addListener(this,&testApp::lightOnChanged);
+
+    //light.enable();
+}
+
+void testApp::lightOnChanged(bool & l){
+	if(l){
+		light.enable();
+	}else{
+		light.disable();
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	blurAmnt = ofMap(sin(ofGetElapsedTimef()),-1,1,.75f,1.25f);
+	//blurAmnt = ofMap(sin(ofGetElapsedTimef()),-1,1,.75f,1.25f);
 	framerate = ofGetFrameRate();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	if(lightOn)
+		ofEnableLighting();
+
 	glEnable(GL_DEPTH_TEST);
 	ofSetColor(ofColor(r,g,b));
 	ofSetRectMode(OF_RECTMODE_CENTER);
 	fbo1.begin();
 	ofClear(0);
 	ofSeedRandom(0);
+	float t = ofGetElapsedTimef()*ofMap(speed,1,80,0,1)*ofMap(speed,1,80,0,1);
 	for(int i=0;i<100;i++){
-		ofCircle(ofNoise(i,ofGetElapsedTimef()/5.,ofRandom(1))*ofGetWidth(),ofNoise(ofRandom(1),i,ofGetElapsedTimef()/5.)*ofGetHeight(),3);
+		ofColor color(r,g,b);
+		color.setBrightness(ofMap(ofNoise(i/100.*ofRandom(1),ofGetElapsedTimef()/5.,ofRandom(1)),0,1,20,255));
+		ofSetColor(color);
+		ofSphere(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
+				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
+				ofNoise(i/100.,ofRandom(1),t)*ofGetHeight()*.4,
+				radius);
 	}
 	fbo1.end();
 
@@ -72,7 +96,9 @@ void testApp::draw(){
 	fbo2.draw(0,0);
 	shader.end();
 
+
 	glDisable(GL_DEPTH_TEST);
+	ofDisableLighting();
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	gui.draw();
 }

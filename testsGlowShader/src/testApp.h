@@ -20,6 +20,8 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+		void lightOnChanged(bool & l);
+
 
 		ofShader shader, shaderBokeh;
 		ofFbo fbo1, fbo2;
@@ -29,4 +31,9 @@ class testApp : public ofBaseApp{
 		ofIntSlider kernelSize;
 		ofFloatSlider framerate;
 		ofIntSlider r,g,b;
+		ofFloatSlider speed;
+		ofFloatSlider radius;
+		ofToggle lightOn;
+
+		ofLight light;
 };
