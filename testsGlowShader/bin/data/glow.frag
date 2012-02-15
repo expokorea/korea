@@ -18,13 +18,13 @@ void main()
 		vec4 color;
 		
 		for(int i=1;i<kernelSize;i++){
-			color		+= float(i) * texture2DRect(src_tex_unit0, st + vec2(blurAmnt * -float(kernelSize-i), 0.0));
+			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(-float(kernelSize-i), 0.0));
 		}
 		
-		color		+= kernelSize * texture2DRect(src_tex_unit0, st + vec2(blurAmnt, 0));
+		color += (kernelSize+1) * texture2DRect(src_tex_unit0, st);
 		
 		for(int i=kernelSize-1;i>0;i--){
-			color		+= float(i) * texture2DRect(src_tex_unit0, st + vec2(blurAmnt * float(kernelSize-i), 0.0));
+			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(float(kernelSize-i), 0.0));
 		}
 		
 		color /= kernelSize*kernelSize;
@@ -33,13 +33,13 @@ void main()
 		vec4 color;
 	
 		for(int i=1;i<kernelSize;i++){
-			color		+= float(i) * texture2DRect(src_tex_unit0, st + vec2(0.0, blurAmnt * float(kernelSize-i)));
+			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(0.0, float(kernelSize-i)));
 		}
 		
-		color		+= kernelSize * texture2DRect(src_tex_unit0, st + vec2(0.0, blurAmnt) );
+		color += (kernelSize+1) * texture2DRect(src_tex_unit0, st + vec2(0.0, blurAmnt) );
 		
 		for(int i=kernelSize-1;i>0;i--){
-			color		+= float(i) * texture2DRect(src_tex_unit0, st + vec2(0.0, blurAmnt * -float(kernelSize-i)));
+			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(0.0, -float(kernelSize-i)));
 		}
 		
 		color /= kernelSize*kernelSize;
