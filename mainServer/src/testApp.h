@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "particleSystem.h"
+#include "ofGui.h"
 
 class testApp : public ofBaseApp{
 
@@ -22,5 +24,10 @@ class testApp : public ofBaseApp{
 		
 		ofxOscReceiver osc;
 		vector<ofPolyline> contours;
+		
+		ParticleSystem pSystem;		
+		
+		ofShader shader;
+		ofFbo fbo1,fbo2;
 
 };
