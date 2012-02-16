@@ -1,4 +1,14 @@
-#Tue Feb 07 17:16:14 CET 2012
+#Thu Feb 16 13:09:39 CET 2012
 eclipse.preferences.version=1
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<environment append\="true" appendContributed\="true">\n<variable delimiter\="\:" name\="LC_ALL" operation\="append" value\="C"/>\n</environment>\n
-environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<environment append\="true" appendContributed\="true">\n<variable delimiter\="\:" name\="LC_ALL" operation\="append" value\="C"/>\n</environment>\n
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504=
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504/LC_ALL/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504/LC_ALL/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504/LC_ALL/value=C
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1693303504/appendContributed=true
+environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253=
+environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253/LC_ALL/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253/LC_ALL/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253/LC_ALL/value=C
+environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.release.2044484253/appendContributed=true

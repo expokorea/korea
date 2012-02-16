@@ -4,24 +4,27 @@
 void testApp::setup(){
 	ofSetVerticalSync(true);
 
+	ofSetSphereResolution(10);
+
 	ofBackground(0);
+	pSystem.setup(1000);
 
 	glow.setup();
 	glow.brightness = 1;
 	glow.passes = 2;
 
-	stencil.setup();
-
 	gui.setup("blur");
 	gui.add(passes.setup("passes",glow.passes,1,4));
 	gui.add(brightness.setup("brightness",glow.brightness,1,20));
 	gui.add(framerate.setup("framerate",0,0,80));
-	gui.add(speed.setup("speed",8,1,80));
-	gui.add(radius.setup("radius",3,1,10));
-	gui.add(r.setup("r",16,0,255));
-	gui.add(g.setup("g",0,0,255));
-	gui.add(b.setup("b",230,0,255));
+	gui.add(pSystemDemo.speed.setup("speed",8,1,80));
+	gui.add(pSystemDemo.radius.setup("radius",3,1,10));
+	gui.add(pSystemDemo.r.setup("r",16,0,255));
+	gui.add(pSystemDemo.g.setup("g",0,0,255));
+	gui.add(pSystemDemo.b.setup("b",230,0,255));
 	gui.add(lightOn.setup("light",false));
+	gui.add(demo.setup("demo p system",false));
+	gui.add(&pSystem.gui);
 
 	lightOn.addListener(this,&testApp::lightOnChanged);
 
@@ -42,6 +45,14 @@ void testApp::lightOnChanged(bool & l){
 void testApp::update(){
 	//blurAmnt = ofMap(sin(ofGetElapsedTimef()),-1,1,.75f,1.25f);
 	framerate = ofGetFrameRate();
+
+	if(demo){
+		pSystemDemo.update();
+	}else{
+		pSystem.updateAll(10);
+		pSystem.calculate();
+	}
+
 }
 
 //--------------------------------------------------------------
@@ -49,38 +60,32 @@ void testApp::draw(){
 	if(lightOn)
 		ofEnableLighting();
 
-	float t = ofGetElapsedTimef()*ofMap(speed,1,80,0,1)*ofMap(speed,1,80,0,1);
 
 	glow.begin();
 	ofClear(0,0);
 
 	//glEnable(GL_DEPTH_TEST);
-	ofSeedRandom(0);
-	for(int i=0;i<100;i++){
-		ofColor color(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,20,200));
-		ofSetColor(color);
-		//color.setBrightness();
-		//ofSetColor(r,g,b,a*.5);
-		ofSphere(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
-				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
-				ofNoise(i/100.,ofRandom(1),t)*ofGetHeight()*.4,
-				radius);
+	if(demo){
+		pSystemDemo.drawForGlow();
+	}else{
+		glPushMatrix();
+			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
+			pSystem.drawForGlow();
+		glPopMatrix();
 	}
 
-
 	glow.end();
+
 	ofSetColor(255);
 	glow.draw(0,0);
-	ofSeedRandom(0);
-	for(int i=0;i<100;i++){
-		ofColor color(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,100,200));
-		ofSetColor(color);
-		//color.setBrightness(ofMap(ofNoise(i/100.*ofRandom(1),t,ofRandom(1)),0,1,100,255));
-		//ofSetColor(r,g,b,a);
-		ofSphere(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
-				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
-				ofNoise(i/100.,ofRandom(1),t)*ofGetHeight()*.4,
-				radius*.4);
+
+	if(demo){
+		pSystemDemo.draw();
+	}else{
+		glPushMatrix();
+			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
+			pSystem.drawAll();
+		glPopMatrix();
 	}
 
 	ofSetColor(255);

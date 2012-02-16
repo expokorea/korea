@@ -3,7 +3,8 @@
 #include "ofMain.h"
 #include "ofGui.h"
 #include "Glow.h"
-#include "Stencil.h"
+#include "particleSystem.h"
+#include "ParticleSystemDemo.h"
 
 class testApp : public ofBaseApp{
 
@@ -31,12 +32,11 @@ class testApp : public ofBaseApp{
 		ofFloatSlider brightness;
 		ofIntSlider passes;
 		ofFloatSlider framerate;
-		ofIntSlider r,g,b;
-		ofFloatSlider speed;
-		ofFloatSlider radius;
 		ofToggle lightOn;
+		ofToggle demo;
 
 		ofLight light;
 		Glow glow;
-		Stencil stencil;
+		ParticleSystem pSystem;
+		ParticleSystemDemo pSystemDemo;
 };

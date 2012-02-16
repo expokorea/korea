@@ -80,6 +80,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>common</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/apps/korea/common</location>
+		</link>
+		<link>
 			<name>ofxGui</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxGui</location>
