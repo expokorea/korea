@@ -9,5 +9,7 @@
 obj/
 bin/
 build/
-!data/
+!bin/data
+!bin/data/*
+!bin/data/**/*
 .metadata
