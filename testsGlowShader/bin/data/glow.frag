@@ -4,45 +4,37 @@
 uniform sampler2DRect src_tex_unit0;
 uniform float blurAmnt;
 uniform int direction;
-uniform int kernelSize;
+//uniform int kernelSize;
 uniform float brightness;
+
+float coeffs[3] = float[](0.2270270270, 0.3162162162, 0.0702702703);
 
 void main()
 {
 
-	vec2 st = gl_FragCoord.xy;;
+	vec2 st = gl_TexCoord[0].st;
 	if(direction == 0){
 		//horizontal blur 
 		//from http://www.gamerendering.com/2008/10/11/gaussian-blur-filter-shader/
 		
-		vec4 color;
+		vec3 color = vec3(0.0,0.0,0.0);
 		
-		for(int i=1;i<kernelSize;i++){
-			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(-float(kernelSize-i), 0.0));
-		}
+		color += coeffs[2] * texture2DRect(src_tex_unit0, st - vec2(2.0, 0.0)).rgb;
+		color += coeffs[1] * texture2DRect(src_tex_unit0, st - vec2(1.0, 0.0)).rgb;
+		color += coeffs[0] * texture2DRect(src_tex_unit0, st).rgb;
+		color += coeffs[2] * texture2DRect(src_tex_unit0, st + vec2(2.0, 0.0)).rgb;
+		color += coeffs[1] * texture2DRect(src_tex_unit0, st + vec2(1.0, 0.0)).rgb;
 		
-		color += (kernelSize+1) * texture2DRect(src_tex_unit0, st);
-		
-		for(int i=kernelSize-1;i>0;i--){
-			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(float(kernelSize-i), 0.0));
-		}
-		
-		color /= kernelSize*kernelSize;
-		gl_FragColor = color * brightness;
+		gl_FragColor = vec4((color * brightness),1);
 	}else{
-		vec4 color;
-	
-		for(int i=1;i<kernelSize;i++){
-			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(0.0, float(kernelSize-i)));
-		}
+		vec3 color = vec3(0.0,0.0,0.0);
 		
-		color += (kernelSize+1) * texture2DRect(src_tex_unit0, st + vec2(0.0, blurAmnt) );
+		color += coeffs[2] * texture2DRect(src_tex_unit0, st - vec2(0.0, 2.0)).rgb;
+		color += coeffs[1] * texture2DRect(src_tex_unit0, st - vec2(0.0, 1.0)).rgb;
+		color += coeffs[0] * texture2DRect(src_tex_unit0, st).rgb;
+		color += coeffs[2] * texture2DRect(src_tex_unit0, st + vec2(0.0, 2.0)).rgb;
+		color += coeffs[1] * texture2DRect(src_tex_unit0, st + vec2(0.0, 1.0)).rgb;
 		
-		for(int i=kernelSize-1;i>0;i--){
-			color += float(i) * texture2DRect(src_tex_unit0, st + vec2(0.0, -float(kernelSize-i)));
-		}
-		
-		color /= kernelSize*kernelSize;
-		gl_FragColor = color * brightness;
+		gl_FragColor = vec4((color * brightness),texture2DRect(src_tex_unit0, st).a);
 	}
 }
