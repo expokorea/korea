@@ -5,6 +5,7 @@
 #include "Glow.h"
 #include "particleSystem.h"
 #include "ParticleSystemDemo.h"
+#include "KoreaFlock.h"
 
 class testApp : public ofBaseApp{
 
@@ -39,4 +40,6 @@ class testApp : public ofBaseApp{
 		Glow glow;
 		ParticleSystem pSystem;
 		ParticleSystemDemo pSystemDemo;
+		
+		KoreaFlock kSystem;
 };

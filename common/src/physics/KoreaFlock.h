@@ -11,14 +11,20 @@
 
 #include "ofMain.h"
 #include "KoreaParticle.h"
+#include "vectorField.h"
 
 class KoreaFlock{
 
 	public:
 
 		vector<KoreaParticle> particles;
+		vector<KoreaParticle> vParticles;
 		
 		void setup( int total);
 		void update();
 		void draw();
+		
+		VectorField vectorField;
+		bool bUseVectorField;
+	
 };

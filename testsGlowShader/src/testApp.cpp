@@ -7,8 +7,10 @@ void testApp::setup(){
 	ofSetSphereResolution(10);
 
 	ofBackground(0);
-	pSystem.setup(1000);
-
+	pSystem.setup(200);
+	
+	kSystem.setup(200);
+	
 	glow.setup();
 	glow.brightness = 1;
 	glow.passes = 2;
@@ -49,10 +51,15 @@ void testApp::update(){
 	if(demo){
 		pSystemDemo.update();
 	}else{
-		pSystem.updateAll(10);
-		pSystem.calculate();
+		//pSystem.updateAll(10);
+		//pSystem.calculate();
+		kSystem.update();
+		float circleForce=5;
+		float circleForceRadius=100;
+		//kSystem.vectorField.addInwardCircle((float)mouseX, (float)mouseY, circleForceRadius, circleForce);
+		
 	}
-
+	
 }
 
 //--------------------------------------------------------------
@@ -68,10 +75,11 @@ void testApp::draw(){
 	if(demo){
 		pSystemDemo.drawForGlow();
 	}else{
-		glPushMatrix();
+		/*glPushMatrix();
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawForGlow();
-		glPopMatrix();
+		glPopMatrix();*/
+		kSystem.draw();
 	}
 
 	glow.end();
@@ -82,10 +90,11 @@ void testApp::draw(){
 	if(demo){
 		pSystemDemo.draw();
 	}else{
-		glPushMatrix();
+		/*glPushMatrix();
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawAll();
-		glPopMatrix();
+		glPopMatrix();*/
+		kSystem.draw();
 	}
 
 	ofSetColor(255);
