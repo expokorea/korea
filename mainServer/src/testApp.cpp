@@ -3,23 +3,40 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	contours.setup(6666);
+	
+	pSystem.setup(1000);
+	
+	ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 	contours.update();
+	
+	pSystem.updateAll(10);
+	pSystem.calculate();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+	/*
 	for(int i=0;i<contours.size();i++){
 		contours[i].draw();
 	}
+	*/
+	
+	glPushMatrix();
+		glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
+		pSystem.drawAll();
+	glPopMatrix();
+	
+	pSystem.drawGui();
+	
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
 }
 
 //--------------------------------------------------------------

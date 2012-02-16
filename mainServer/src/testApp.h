@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "OscContoursClient.h"
+#include "particleSystem.h"
+#include "ofGui.h"
 
 class testApp : public ofBaseApp{
 
@@ -19,6 +21,11 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		
+		ParticleSystem pSystem;		
+		
+		ofShader shader;
+		ofFbo fbo1,fbo2;
 
 		OscContoursClient contours;
 };
