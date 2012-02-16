@@ -23,6 +23,7 @@ class KoreaFlock{
 		void setup( int total);
 		void update();
 		void draw();
+		void drawForGlow();
 		
 		VectorField vectorField;
 		bool bUseVectorField;

@@ -86,3 +86,8 @@ void KoreaFlock::draw()
 	ofPopStyle();
 
 }
+
+void KoreaFlock::drawForGlow(){
+	for(int i = 0; i < particles.size(); i++)
+		particles[i].drawForGlow();
+}

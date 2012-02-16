@@ -35,7 +35,8 @@ class KoreaParticle {
 	void setup(ofVec3f pos = ofVec3f(0,0,0),ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();
 	void draw();
-	
+	void drawForGlow();
+
 	void setTarget(ofVec3f targ, float targetForce);
 	
 	void resetFlocking();

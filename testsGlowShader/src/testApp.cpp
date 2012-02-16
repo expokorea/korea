@@ -79,7 +79,7 @@ void testApp::draw(){
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawForGlow();
 		glPopMatrix();*/
-		kSystem.draw();
+		kSystem.drawForGlow();
 	}
 
 	glow.end();

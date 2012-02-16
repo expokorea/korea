@@ -103,6 +103,9 @@ void KoreaParticle::draw()
 }
 
 
+void KoreaParticle::drawForGlow() {
+		ofSphere(pos,10);
+}
 
 void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
 {
