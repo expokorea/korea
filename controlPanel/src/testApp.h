@@ -3,6 +3,9 @@
 #include "ofMain.h"
 #include "ofxAvahiClient.h"
 #include "OscPlayerClient.h"
+#include "OscKinectServer.h"
+#include "ofGui.h"
+#include "OscContoursClient.h"
 
 class testApp : public ofBaseApp{
 
@@ -25,6 +28,12 @@ class testApp : public ofBaseApp{
 		void removedAvahiService(ofxAvahiService & service);
 
 		vector<ofPtr<OscPlayerClient> > videoClients;
+		vector<ofPtr<OscKinectServer> > kinectServers;
 		ofxAvahiClientBrowser avahi;
 
+		ofPanel gui;
+		ofPanel guiMapping;
+		ofToggle startMapping;
+
+		OscContoursClient contours;
 };

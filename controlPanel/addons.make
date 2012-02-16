@@ -1,0 +1,4 @@
+ofxOsc
+ofxAvahiClient
+ofxGui
+ofxXmlSettings
