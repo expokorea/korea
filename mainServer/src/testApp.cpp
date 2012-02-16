@@ -2,30 +2,12 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	osc.setup(6666);
+	contours.setup(6666);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	ofxOscMessage msg;
-	while(osc.hasWaitingMessages()){
-		osc.getNextMessage(&msg);
-		if(msg.getAddress()=="frame"){
-			contours.clear();
-			continue;
-		}
-
-		if(msg.getAddress()=="contour"){
-			int n = msg.getNumArgs();
-			contours.push_back(ofPolyline());
-			ofPolyline & contour = contours[contours.size()-1];
-			for(int i=0;i<n;i+=2){
-				ofPoint p(msg.getArgAsFloat(i),msg.getArgAsFloat(i+1));
-				contour.addVertex(p);
-			}
-			contour.close();
-		}
-	}
+	contours.update();
 }
 
 //--------------------------------------------------------------

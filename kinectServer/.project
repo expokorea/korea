@@ -57,7 +57,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
-					<value>Release</value>
+					<value>Debug</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.stopOnError</key>
@@ -82,6 +82,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
 	<linkedResources>
+		<link>
+			<name>common</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/apps/korea/common</location>
+		</link>
+		<link>
+			<name>ofxAvahiClient</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxAvahiClient</location>
+		</link>
 		<link>
 			<name>ofxCv</name>
 			<type>2</type>

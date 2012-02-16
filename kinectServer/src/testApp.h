@@ -4,6 +4,8 @@
 #include "ofxKinect.h"
 #include "ofxCv.h"
 #include "ofxOsc.h"
+#include "ofxAvahiClient.h"
+#include "OscContourServer.h"
 
 class testApp : public ofBaseApp{
 
@@ -22,9 +24,23 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+
+		void newAvahiService(ofxAvahiService & service);
+		void removedAvahiService(ofxAvahiService & service);
+
 		ofxKinect kinect;
 		ContourFinder contourFinder;
 		vector<ofPolyline> polylines;
-		ofxOscSender osc;
+		vector<ofPtr<OscContourServer> > oscContours;
+		ofxOscReceiver oscConfig;
+		ofxAvahiClientService avahi;
+		ofxAvahiClientBrowser avahiBrowser;
 		int frame;
+
+		int tilt;
+		int farThreshold;
+		int nearThreshold;
+
+		ofPixels nearThresPix, farThresPix;
+		ofImage thresPix;
 };

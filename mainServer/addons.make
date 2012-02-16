@@ -1,7 +1,4 @@
 ofxOsc
-ofxKinect
-ofxOpenCv
-ofxCv
 ofxAvahiClient
 ofxGui
 ofxXmlSettings
