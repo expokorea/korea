@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofGui.h"
+#include "Glow.h"
+#include "Stencil.h"
 
 class testApp : public ofBaseApp{
 
@@ -20,13 +22,21 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+		void lightOnChanged(bool & l);
+
 
 		ofShader shader, shaderBokeh;
 		ofFbo fbo1, fbo2;
 		ofPanel gui;
-		ofFloatSlider blurAmnt;
 		ofFloatSlider brightness;
-		ofIntSlider kernelSize;
+		ofIntSlider passes;
 		ofFloatSlider framerate;
 		ofIntSlider r,g,b;
+		ofFloatSlider speed;
+		ofFloatSlider radius;
+		ofToggle lightOn;
+
+		ofLight light;
+		Glow glow;
+		Stencil stencil;
 };
