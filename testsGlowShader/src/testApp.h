@@ -39,5 +39,4 @@ class testApp : public ofBaseApp{
 		ofLight light;
 		Glow glow;
 		Stencil stencil;
-		vector<float> randomcoeffs;
 };

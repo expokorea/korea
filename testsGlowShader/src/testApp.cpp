@@ -25,7 +25,6 @@ void testApp::setup(){
 
 	lightOn.addListener(this,&testApp::lightOnChanged);
 
-	randomcoeffs.resize(100,ofRandom(1));
 	ofEnableAlphaBlending();
 
     //light.enable();
