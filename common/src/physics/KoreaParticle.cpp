@@ -21,6 +21,7 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	noiseForce = .01;
 	bUseNoise = true;
 	bFlocking = false;
+	bDrawTrails = true;
 
 	rt = ofRandom(0,1);
 	
@@ -31,12 +32,16 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	separation = .51;
     cohesion  =  .351;
     alignment =  .351;
+	
+	trails.reserve(100);
 }
 
 void KoreaParticle::update()
 {
 	
-
+	if(trails.size() > 100) trails.erase(trails.begin());
+	trails.push_back(pos);
+	
 	pos += vel;
 	
 	vel.x -= damping*vel.x;
@@ -50,14 +55,46 @@ void KoreaParticle::update()
 		vel.z += noiseForce*ofSignedNoise(0,0,ofGetElapsedTimef()*rt);
 	}
 	
-	
-	// target attractions
-	// ----------- (1) make a vector of where this position is:
-	
-	if(bUseTarget)
+	t = ofGetElapsedTimef()*ofMap(targetForce,1,80,0,1)*ofMap(targetForce,1,80,0,1);
+
+	if(bUseTarget) applyTargetAttraction();
+
+}
+
+void KoreaParticle::draw()
+{
+	//ofCircle(pos.x, pos.y, 3);
+	if(bDrawTrails)
 	{
+	ofPushStyle();
+	ofEnableAlphaBlending();
+	ofNoFill();
+	glBegin(GL_LINE_STRIP);
+	for(int i = 0; i < trails.size(); i++)
+	{
+		float pct = (float)i / (float)trails.size();
+		glColor4f(1,1,1,pct*.5);
+		glVertex3f(trails[i].x, trails[i].y,0);
+	}
+	glEnd();
+	ofPopStyle();
+	}
+}
+
+
+void KoreaParticle::drawForGlow() {
+		ofSphere(pos,5);
+}
+
+void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
+{
+	target = targ;
+	bUseTarget = true;
+	this->targetForce = targetForce;
+}
 	
-	
+void KoreaParticle::applyTargetAttraction()
+{
 	ofVec2f posOfForce;
 	posOfForce.set(target.x,target.y);
 	
@@ -89,31 +126,11 @@ void KoreaParticle::update()
 		//cout << "ok" <<endl;
     }
 	else{
-		target.set(ofRandom(0,ofGetWidth()), ofRandom(0,ofGetHeight() ), 0);
+		//target.set(ofRandom(0,ofGetWidth()), ofRandom(0,ofGetHeight() ), 0);
+		target.set(ofNoise(rt,t,ofRandom(1))*ofGetWidth(),ofNoise(ofRandom(1),rt,t)*ofGetHeight(),0);
 	}
 	
-	}
-	 
 }
-
-void KoreaParticle::draw()
-{
-	ofCircle(pos.x, pos.y, 3);
-	//ofCircle(target.x, target.y, 1);
-}
-
-
-void KoreaParticle::drawForGlow() {
-		ofSphere(pos,10);
-}
-
-void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
-{
-	target = targ;
-	bUseTarget = true;
-	this->targetForce = targetForce;
-}
-	
 
 void KoreaParticle::addForFlocking(KoreaParticle * sister)
 {

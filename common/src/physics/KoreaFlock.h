@@ -12,6 +12,7 @@
 #include "ofMain.h"
 #include "KoreaParticle.h"
 #include "vectorField.h"
+#include "ofGui.h"
 
 class KoreaFlock{
 
@@ -27,5 +28,10 @@ class KoreaFlock{
 		
 		VectorField vectorField;
 		bool bUseVectorField;
-	
+		
+		ofFloatSlider speed;
+		ofFloatSlider vFieldForce;
+		ofToggle useTrails;
+		ofPanel gui;
+		
 };

@@ -26,12 +26,14 @@ void testApp::setup(){
 	gui.add(pSystemDemo.b.setup("b",230,0,255));
 	gui.add(lightOn.setup("light",false));
 	gui.add(demo.setup("demo p system",false));
-	gui.add(&pSystem.gui);
-
+	//gui.add(&pSystem.gui);
+	gui.add(&kSystem.gui);
+	
 	lightOn.addListener(this,&testApp::lightOnChanged);
 
 	ofEnableAlphaBlending();
-
+	
+	ofSetFrameRate(60);
     //light.enable();
 }
 

@@ -25,19 +25,25 @@ class KoreaParticle {
 	float    noiseForce;
 	bool     bUseNoise;
 	bool     bFlocking;
+	bool	 bDrawTrails;
 	
 	float rt;
+	float t;
 	
+	vector<ofVec3f> trails;
+	
+	// flocking params
 	float sepDist,alnDist,cohDist,separation,cohesion,alignment;
 	float countCoh,countSep,countAlign;
 	ofVec3f sumCoh,sumSep,sumAlign;
 	
-	void setup(ofVec3f pos = ofVec3f(0,0,0),ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
+	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();
 	void draw();
 	void drawForGlow();
 
 	void setTarget(ofVec3f targ, float targetForce);
+	void applyTargetAttraction();
 	
 	void resetFlocking();
 	void applyForces();
