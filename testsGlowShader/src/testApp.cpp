@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	ofSetVerticalSync(true);
+	ofSetFrameRate(30);
 
 	ofSetSphereResolution(10);
 
@@ -24,12 +25,20 @@ void testApp::setup(){
 	gui.add(pSystemDemo.b.setup("b",230,0,255));
 	gui.add(lightOn.setup("light",false));
 	gui.add(demo.setup("demo p system",false));
+	gui.add(lightX.setup("light X",ofGetWidth()/2,0,ofGetWidth()));
+	gui.add(lightY.setup("light Y",ofGetHeight()/2,0,ofGetHeight()));
+	gui.add(lightZ.setup("light Z",0,-ofGetWidth(),ofGetWidth()));
+	gui.add(drawNotBlurred.setup("drawNotBlurred",false));
+	gui.add(record.setup("record",false));
 	gui.add(&pSystem.gui);
 
 	lightOn.addListener(this,&testApp::lightOnChanged);
+	record.addListener(this,&testApp::recordPressed);
+
+	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
 
 	ofEnableAlphaBlending();
-
+	hideGui = false;
     //light.enable();
 }
 
@@ -38,6 +47,14 @@ void testApp::lightOnChanged(bool & l){
 		light.enable();
 	}else{
 		light.disable();
+	}
+}
+
+void testApp::recordPressed(bool & l){
+	if(l && !record){
+		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),30);
+	}else if(!l && record){
+		recorder.encodeVideo();
 	}
 }
 
@@ -53,6 +70,7 @@ void testApp::update(){
 		pSystem.calculate();
 	}
 
+	light.setPosition(lightX,lightY,lightZ);
 }
 
 //--------------------------------------------------------------
@@ -77,26 +95,54 @@ void testApp::draw(){
 	glow.end();
 
 	ofSetColor(255);
+	if(record){
+		fbo.begin();
+		ofClear(0);
+	}
 	glow.draw(0,0);
 
-	if(demo){
-		pSystemDemo.draw();
-	}else{
-		glPushMatrix();
-			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
-			pSystem.drawAll();
-		glPopMatrix();
+	if(drawNotBlurred){
+		if(demo){
+			pSystemDemo.draw();
+		}else{
+			glPushMatrix();
+				glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
+				pSystem.drawAll();
+			glPopMatrix();
+		}
+	}
+	if(record){
+		fbo.end();
+		ofSetColor(255);
+		fbo.draw(0,0);
+		fbo.readToPixels(pixRecord);
+		recorder.addFrame(pixRecord);
 	}
 
-	ofSetColor(255);
-	//glDisable(GL_DEPTH_TEST);
-	ofDisableLighting();
-	gui.draw();
+
+	if(!hideGui){
+		ofSetColor(255);
+		//glDisable(GL_DEPTH_TEST);
+		ofDisableLighting();
+		gui.draw();
+		//light.draw();
+	}
+
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+	if(key=='f'){
+		ofToggleFullscreen();
+	}
+	if(key=='h'){
+		hideGui=!hideGui;
+		if(hideGui){
+			ofHideCursor();
+		}else{
+			ofShowCursor();
+		}
+	}
 }
 
 //--------------------------------------------------------------
@@ -126,7 +172,8 @@ void testApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
-
+	fbo.allocate(w,h,GL_RGB);
+	glow.setup();
 }
 
 //--------------------------------------------------------------

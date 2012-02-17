@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ofGui.h"
+#include "ofxAssimpModelLoader.h"
 
 class ParticleSystemDemo {
 public:
@@ -25,5 +26,7 @@ public:
 
 private:
 	float t;
+	ofxAssimpModelLoader model;
+	ofVboMesh particleMesh;
 };
 

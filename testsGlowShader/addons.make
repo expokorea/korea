@@ -2,3 +2,5 @@ ofxGui
 ofxXmlSettings
 ofxOsc
 ofxAvahiClient
+ofxAssimpModelLoader
+ofxVideoRecorder

@@ -5,6 +5,7 @@
 #include "Glow.h"
 #include "particleSystem.h"
 #include "ParticleSystemDemo.h"
+#include "ofxVideoRecorder.h"
 
 class testApp : public ofBaseApp{
 
@@ -24,19 +25,28 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		void lightOnChanged(bool & l);
+		void recordPressed(bool & l);
 
 
 		ofShader shader, shaderBokeh;
-		ofFbo fbo1, fbo2;
+		ofFbo fbo;
 		ofPanel gui;
 		ofFloatSlider brightness;
 		ofIntSlider passes;
 		ofFloatSlider framerate;
 		ofToggle lightOn;
 		ofToggle demo;
+		ofFloatSlider lightX, lightY, lightZ;
+		ofToggle drawNotBlurred;
+		ofToggle record;
 
 		ofLight light;
 		Glow glow;
 		ParticleSystem pSystem;
 		ParticleSystemDemo pSystemDemo;
+
+		ofxVideoRecorder recorder;
+		ofPixels pixRecord;
+
+		bool hideGui;
 };

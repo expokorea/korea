@@ -85,9 +85,24 @@
 			<location>/home/arturo/Desktop/openFrameworks/apps/korea/common</location>
 		</link>
 		<link>
+			<name>ofxAssimpModelLoader</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxAssimpModelLoader</location>
+		</link>
+		<link>
 			<name>ofxGui</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxGui</location>
+		</link>
+		<link>
+			<name>ofxVideoRecorder</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxVideoRecorder</location>
+		</link>
+		<link>
+			<name>ofxXmlSettings</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxXmlSettings</location>
 		</link>
 	</linkedResources>
 </projectDescription>
