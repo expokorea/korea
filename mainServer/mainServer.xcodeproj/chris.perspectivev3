@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -284,7 +286,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {234, 548}}</string>
+							<string>{{0, 222}, {234, 548}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -312,8 +314,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -328,25 +328,16 @@
 										<string>8316125114E191FD009BF46D</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>Particle.cpp</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>83236B8F14ED3670004220A6</string>
 										<key>history</key>
 										<array>
 											<string>83236A7914ED1A9D004220A6</string>
 											<string>83236A7A14ED1A9D004220A6</string>
 											<string>83236AD914ED217C004220A6</string>
-											<string>83236ADC14ED217C004220A6</string>
-											<string>83236B2B14ED270A004220A6</string>
-											<string>83236B2E14ED270A004220A6</string>
 											<string>83236B4514ED284C004220A6</string>
 											<string>83236B4614ED284C004220A6</string>
 											<string>83236B4714ED284C004220A6</string>
 											<string>83236B4814ED284C004220A6</string>
 											<string>83236B8014ED2AE9004220A6</string>
-											<string>83236B8614ED2B2C004220A6</string>
-											<string>83236B8714ED2B2C004220A6</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -360,18 +351,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {687, 387}}</string>
+								<string>{{0, 0}, {687, 380}}</string>
 								<key>RubberWindowFrame</key>
 								<string>111 122 943 607 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>387pt</string>
+							<string>380pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>174pt</string>
+							<string>181pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -385,7 +376,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {687, 147}}</string>
+										<string>{{10, 27}, {687, 154}}</string>
+										<key>RubberWindowFrame</key>
+										<string>111 122 943 607 0 0 1280 778 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -440,8 +433,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {687, 147}}</string>
-										<key>RubberWindowFrame</key>
-										<string>111 122 943 607 0 0 1280 778 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -469,11 +460,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>83236B0814ED23EA004220A6</string>
+				<string>83236F4614F28930004220A6</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>83236B0914ED23EA004220A6</string>
+				<string>83236F4714F28930004220A6</string>
 				<string>8316125014E191FD009BF46D</string>
-				<string>83236B0A14ED23EA004220A6</string>
+				<string>83236F4814F28930004220A6</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -663,8 +654,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>83236B1214ED23EA004220A6</string>
-		<string>83236B1314ED23EA004220A6</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks/projects_git/korea/mainServer/mainServer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

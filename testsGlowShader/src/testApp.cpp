@@ -56,10 +56,8 @@ void testApp::update(){
 		//pSystem.updateAll(10);
 		//pSystem.calculate();
 		kSystem.update();
-		float circleForce=5;
-		float circleForceRadius=100;
-		//kSystem.vectorField.addInwardCircle((float)mouseX, (float)mouseY, circleForceRadius, circleForce);
-		
+		kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
+
 	}
 	
 }
