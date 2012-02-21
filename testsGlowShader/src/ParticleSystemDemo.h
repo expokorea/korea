@@ -18,11 +18,14 @@ public:
 	void drawForGlow();
 	void draw();
 
+	void drawPath();
+
 	ofIntSlider r,g,b;
 	ofFloatSlider speed;
 	ofFloatSlider radius;
 
 	int minAlpha, maxAlpha;
+	ofPolyline path;
 
 private:
 	float t;

@@ -34,8 +34,8 @@ void Glow::setup(){
 	fbo2.allocate(settings);
 }
 
-void Glow::begin(){
-	fbo1.begin();
+void Glow::begin(bool setPerspective){
+	fbo1.begin(setPerspective);
 }
 
 void Glow::end(){

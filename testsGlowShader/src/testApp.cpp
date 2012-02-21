@@ -1,9 +1,10 @@
 #include "testApp.h"
+#include "ofTween.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
 	ofSetVerticalSync(true);
-	ofSetFrameRate(30);
+	ofSetFrameRate(60);
 
 	ofSetSphereResolution(10);
 
@@ -30,12 +31,21 @@ void testApp::setup(){
 	gui.add(lightX.setup("light X",ofGetWidth()/2,0,ofGetWidth()));
 	gui.add(lightY.setup("light Y",ofGetHeight()/2,0,ofGetHeight()));
 	gui.add(lightZ.setup("light Z",0,-ofGetWidth(),ofGetWidth()));
-	gui.add(drawNotBlurred.setup("drawNotBlurred",false));
+	//gui.add(z.setup("z",665.108,0,ofGetWidth()*4));
+	gui.add(posCameraPct.setup("posCameraPct",0,0,1));
+	gui.add(lookAtPct.setup("lookAtPct",0,0,1));
+	gui.add(drawNotBlurred.setup("drawNotBlurred",true));
 	gui.add(record.setup("record",false));
+	gui.add(useCamera.setup("useCamera",false));
+	gui.add(initCameraMovement.setup("initCameraMovement"));
 	//gui.add(&pSystem.gui);
 	gui.add(&kSystem.gui);
+	gui.loadFromFile("settings.xml");
+	pSystemDemo.speed = 8;
+
 	lightOn.addListener(this,&testApp::lightOnChanged);
 	record.addListener(this,&testApp::recordPressed);
+	initCameraMovement.addListener(this,&testApp::initCameraMovementPressed);
 
 	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
 
@@ -43,7 +53,11 @@ void testApp::setup(){
 	hideGui = false;
 	ofEnableAlphaBlending();
 	
-	ofSetFrameRate(60);
+	camera.setDefaultOFPerspective();
+	prevCameraPos = pSystemDemo.path[0];
+
+	timeInitCamMovement = ofGetElapsedTimef();
+
     //light.enable();
 }
 
@@ -57,9 +71,15 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),30);
+		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),20);
 	}else if(!l && record){
 		recorder.encodeVideo();
+	}
+}
+
+void testApp::initCameraMovementPressed(bool & m){
+	if(!m){
+		timeInitCamMovement = ofGetElapsedTimef();
 	}
 }
 
@@ -74,13 +94,38 @@ void testApp::update(){
 		//pSystem.updateAll(10);
 		//pSystem.calculate();
 		kSystem.update();
-		float circleForce=5;
-		float circleForceRadius=100;
+		//float circleForce=5;
+		//float circleForceRadius=100;
 		//kSystem.vectorField.addInwardCircle((float)mouseX, (float)mouseY, circleForceRadius, circleForce);
 		
 	}
 
 	light.setPosition(lightX,lightY,lightZ);
+
+	//z = ofMap(ofGetElapsedTimef(),0,20,0,pSystemDemo.path.size()-1,true);
+	posCameraPct = ofMap(ofGetElapsedTimef()-timeInitCamMovement,0,20,0,1,&ofEasing::quadOut,true);
+	camera.setDefaultOFPerspective();
+	//camera.setPosition(ofGetWidth()/2, ofGetHeight()/2,  z); //665.108 +
+	//camera.setPosition(pSystemDemo.path[z]);
+	//lookAt.setPosition(ofGetWidth()/2,ofGetHeight()/2,ofLerp(0,ofGetWidth()*4,posCameraPct));
+	//camera.lookAt(ofVec3f(ofGetWidth()/2,ofGetHeight()/2,0));
+	camera.pan(-180+posCameraPct*180);
+
+			/*ofBezierPoint(ofPoint(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4),
+			ofPoint(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*2),
+			ofPoint(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*2),
+			pSystemDemo.path[0],
+			posCameraPct));*/
+	prevCameraPos = ofBezierPoint(pSystemDemo.path[0],
+			ofPoint(ofGetWidth()/6,ofGetHeight()/6,ofGetWidth()*1.5),
+			ofPoint(ofGetWidth()/6,ofGetHeight()/6*3,ofGetWidth()*2.5),
+			ofPoint(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4),
+			posCameraPct);
+	prevCameraPos.x += ofSignedNoise(prevCameraPos.x/100.)*100;
+	prevCameraPos.y += ofSignedNoise(prevCameraPos.y/100.)*100;
+	camera.setPosition(prevCameraPos);
+
+
 }
 
 //--------------------------------------------------------------
@@ -89,7 +134,8 @@ void testApp::draw(){
 		ofEnableLighting();
 
 
-	glow.begin();
+	glow.begin(false);
+	if(useCamera)camera.begin();
 	ofClear(0,0);
 
 	//glEnable(GL_DEPTH_TEST);
@@ -102,7 +148,7 @@ void testApp::draw(){
 		glPopMatrix();*/
 		kSystem.drawForGlow();
 	}
-
+	if(useCamera)camera.end();
 	glow.end();
 
 	ofSetColor(255);
@@ -113,6 +159,7 @@ void testApp::draw(){
 	glow.draw(0,0);
 
 	if(drawNotBlurred){
+		if(useCamera)camera.begin();
 		if(demo){
 			pSystemDemo.draw();
 		}else{
@@ -122,6 +169,7 @@ void testApp::draw(){
 			glPopMatrix();*/
 			kSystem.draw();
 		}
+		if(useCamera)camera.end();
 	}
 	if(record){
 		fbo.end();
@@ -137,7 +185,22 @@ void testApp::draw(){
 		//glDisable(GL_DEPTH_TEST);
 		ofDisableLighting();
 		gui.draw();
+
+		/*if(useCamera)camera.begin();
+		pSystemDemo.drawPath();
+		if(useCamera)camera.end();*/
 		//light.draw();
+
+		/*camera.begin();
+		pSystemDemo.path.draw();
+		camera.end();*/
+
+		stringstream pos;
+		pos << camera.getPosition();
+		ofDrawBitmapString("camera pos:" + pos.str(),ofGetWidth()-500,20);
+		stringstream lookAt;
+		lookAt << camera.getLookAtDir();
+		ofDrawBitmapString("camera look at:" + lookAt.str(),ofGetWidth()-500,40);
 	}
 
 }

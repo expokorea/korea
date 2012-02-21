@@ -27,6 +27,7 @@ class testApp : public ofBaseApp{
 		
 		void lightOnChanged(bool & l);
 		void recordPressed(bool & l);
+		void initCameraMovementPressed(bool & m);
 
 
 		ofShader shader, shaderBokeh;
@@ -38,8 +39,11 @@ class testApp : public ofBaseApp{
 		ofToggle lightOn;
 		ofToggle demo;
 		ofFloatSlider lightX, lightY, lightZ;
+		ofFloatSlider posCameraPct,lookAtPct;
 		ofToggle drawNotBlurred;
 		ofToggle record;
+		ofToggle useCamera;
+		ofButton initCameraMovement;
 
 		ofLight light;
 		Glow glow;
@@ -52,4 +56,8 @@ class testApp : public ofBaseApp{
 		bool hideGui;
 		
 		KoreaFlock kSystem;
+		ofCamera camera;
+		ofPoint prevCameraPos;
+		ofNode lookAt;
+		int timeInitCamMovement;
 };

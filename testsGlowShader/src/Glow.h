@@ -17,7 +17,7 @@ public:
 	virtual ~Glow();
 
 	void setup();
-	void begin();
+	void begin(bool setPerspective);
 	void end();
 
 	void draw(float x, float y);
