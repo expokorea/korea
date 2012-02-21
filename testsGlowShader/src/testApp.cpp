@@ -11,7 +11,7 @@ void testApp::setup(){
 	ofBackground(0);
 	pSystem.setup(200);
 	
-	kSystem.setup(200);
+	kSystem.setup(100);
 	
 	glow.setup();
 	glow.brightness = 1;
@@ -93,11 +93,10 @@ void testApp::update(){
 	}else{
 		//pSystem.updateAll(10);
 		//pSystem.calculate();
+		pSystemDemo.update();
 		kSystem.update();
-		//float circleForce=5;
-		//float circleForceRadius=100;
-		//kSystem.vectorField.addInwardCircle((float)mouseX, (float)mouseY, circleForceRadius, circleForce);
-		
+		kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
+
 	}
 
 	light.setPosition(lightX,lightY,lightZ);
@@ -146,6 +145,8 @@ void testApp::draw(){
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawForGlow();
 		glPopMatrix();*/
+		pSystemDemo.drawForGlow();
+
 		kSystem.drawForGlow();
 	}
 	if(useCamera)camera.end();

@@ -22,8 +22,6 @@ class KoreaParticle {
 	ofVec3f  target;
 	float    targetForce;
 	bool     bUseTarget;
-	float    noiseForce;
-	bool     bUseNoise;
 	bool     bFlocking;
 	bool	 bDrawTrails;
 	
@@ -40,6 +38,7 @@ class KoreaParticle {
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();
 	void draw();
+	void draw3D();
 	void drawForGlow();
 
 	void setTarget(ofVec3f targ, float targetForce);

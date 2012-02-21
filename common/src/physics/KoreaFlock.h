@@ -1,4 +1,13 @@
 /*
+ *  Korea3DFlock.h
+ *  testGlowShader
+ *
+ *  Created by Chris on 2/20/12.
+ *  Copyright 2012 csugrue. All rights reserved.
+ *
+ */
+
+/*
  *  KoreaFlock.h
  *  mainServer
  *
@@ -11,27 +20,21 @@
 
 #include "ofMain.h"
 #include "KoreaParticle.h"
-#include "vectorField.h"
 #include "ofGui.h"
 
 class KoreaFlock{
-
-	public:
-
-		vector<KoreaParticle> particles;
-		vector<KoreaParticle> vParticles;
-		
-		void setup( int total);
-		void update();
-		void draw();
-		void drawForGlow();
-		
-		VectorField vectorField;
-		bool bUseVectorField;
-		
-		ofFloatSlider speed;
-		ofFloatSlider vFieldForce;
-		ofToggle useTrails;
-		ofPanel gui;
-		
+	
+public:
+	
+	vector<KoreaParticle> particles;
+	
+	void setup( int total);
+	void update();
+	void draw();
+	void drawForGlow();
+	
+	ofFloatSlider speed;
+	ofToggle useTrails;
+	ofPanel gui;
+	ofColor color;
 };
