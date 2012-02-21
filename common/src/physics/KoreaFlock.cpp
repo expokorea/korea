@@ -26,7 +26,7 @@ void KoreaFlock::setup( int total)
 	}
 	
 	gui.setup("particles");
-	gui.add(speed.setup("speed",.025,0,.1));
+	gui.add(speed.setup("speed",.010,0,.1));
 	gui.add(useTrails.setup("trails",true));
 	//gui.add(sep.setup("sep",.025,0,.5));
 	

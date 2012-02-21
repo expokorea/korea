@@ -9,7 +9,7 @@ void testApp::setup(){
 	ofBackground(0);
 	pSystem.setup(200);
 	
-	kSystem.setup(200);
+	kSystem.setup(100);
 	
 	glow.setup();
 	glow.brightness = 1;
@@ -55,6 +55,7 @@ void testApp::update(){
 	}else{
 		//pSystem.updateAll(10);
 		//pSystem.calculate();
+		pSystemDemo.update();
 		kSystem.update();
 		kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
 
@@ -79,6 +80,8 @@ void testApp::draw(){
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawForGlow();
 		glPopMatrix();*/
+		pSystemDemo.drawForGlow();
+
 		kSystem.drawForGlow();
 	}
 
@@ -88,13 +91,13 @@ void testApp::draw(){
 	glow.draw(0,0);
 
 	if(demo){
-		pSystemDemo.draw();
+		//pSystemDemo.draw();
 	}else{
 		/*glPushMatrix();
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawAll();
 		glPopMatrix();*/
-		kSystem.draw();
+		//kSystem.draw();
 	}
 
 	ofSetColor(255);

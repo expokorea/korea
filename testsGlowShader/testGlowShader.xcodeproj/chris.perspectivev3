@@ -333,7 +333,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>832370D314F30E6D004220A6</string>
+										<string>8323713714F3C2F4004220A6</string>
 										<key>history</key>
 										<array>
 											<string>8323680A14EC0081004220A6</string>
@@ -356,11 +356,11 @@
 											<string>832370CB14F30E6D004220A6</string>
 											<string>832370CC14F30E6D004220A6</string>
 											<string>832370CD14F30E6D004220A6</string>
-											<string>832370CE14F30E6D004220A6</string>
-											<string>832370CF14F30E6D004220A6</string>
 											<string>832370D014F30E6D004220A6</string>
 											<string>832370D114F30E6D004220A6</string>
-											<string>832370D214F30E6D004220A6</string>
+											<string>8323713414F3C2F4004220A6</string>
+											<string>8323713514F3C2F4004220A6</string>
+											<string>8323713614F3C2F4004220A6</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -374,18 +374,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {862, 460}}</string>
+								<string>{{0, 0}, {862, 456}}</string>
 								<key>RubberWindowFrame</key>
 								<string>148 149 1069 629 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>460pt</string>
+							<string>456pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>123pt</string>
+							<string>127pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -399,7 +399,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {862, 96}}</string>
+										<string>{{10, 27}, {862, 100}}</string>
 										<key>RubberWindowFrame</key>
 										<string>148 149 1069 629 0 0 1280 778 </string>
 									</dict>
@@ -483,11 +483,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>832370D414F30E6D004220A6</string>
+				<string>8323711614F3BF50004220A6</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>832370D514F30E6D004220A6</string>
+				<string>8323711714F3BF50004220A6</string>
 				<string>8323680814EC0081004220A6</string>
-				<string>832370D614F30E6D004220A6</string>
+				<string>8323711814F3BF50004220A6</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -636,14 +636,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>832370D714F30E6D004220A6</string>
+				<string>8323711914F3BF50004220A6</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>832370D814F30E6D004220A6</string>
-				<string>832370D914F30E6D004220A6</string>
-				<string>832370DA14F30E6D004220A6</string>
-				<string>832370DB14F30E6D004220A6</string>
-				<string>832370DC14F30E6D004220A6</string>
+				<string>8323711A14F3BF50004220A6</string>
+				<string>8323711B14F3BF50004220A6</string>
+				<string>8323711C14F3BF50004220A6</string>
+				<string>8323711D14F3BF50004220A6</string>
+				<string>8323711E14F3BF50004220A6</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -677,8 +677,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>832370DD14F30E6D004220A6</string>
-		<string>832370DE14F30E6D004220A6</string>
+		<string>8323713814F3C2F4004220A6</string>
+		<string>8323712014F3BF50004220A6</string>
+		<string>8323712114F3BF50004220A6</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks/projects_git/korea/testsGlowShader/testGlowShader.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

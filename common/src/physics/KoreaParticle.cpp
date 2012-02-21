@@ -45,7 +45,7 @@ void KoreaParticle::update()
 	
 	pos += vel;
 	
-	t = ofGetElapsedTimef()*ofMap(15,1,80,0,1)*ofMap(15,1,80,0,1);
+	t = ofGetElapsedTimef()*ofMap(10,1,80,0,1)*ofMap(10,1,80,0,1);
 
 	if(trails.size() > 100) trails.erase(trails.begin());
 	trails.push_back(pos);
