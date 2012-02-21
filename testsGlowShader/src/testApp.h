@@ -6,6 +6,7 @@
 #include "particleSystem.h"
 #include "ParticleSystemDemo.h"
 #include "ofxVideoRecorder.h"
+#include "KoreaFlock.h"
 
 class testApp : public ofBaseApp{
 
@@ -49,4 +50,6 @@ class testApp : public ofBaseApp{
 		ofPixels pixRecord;
 
 		bool hideGui;
+		
+		KoreaFlock kSystem;
 };

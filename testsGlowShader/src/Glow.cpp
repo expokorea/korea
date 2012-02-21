@@ -22,11 +22,12 @@ void Glow::setup(){
 	shader.load("","glow.frag");
 
 	ofFbo::Settings settings;
-	settings.depthAsTexture = true;
+	//settings.depthAsTexture = true;
+	settings.useDepth = true;
 	settings.width = ofGetWidth();
 	settings.height = ofGetHeight();
 	settings.internalformat = GL_RGBA;
-	settings.dethInternalFormat = GL_DEPTH_COMPONENT32;
+	//settings.dethInternalFormat = GL_DEPTH_COMPONENT32;
 	settings.useStencil = false;
 
 	fbo1.allocate(settings);

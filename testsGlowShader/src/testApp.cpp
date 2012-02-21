@@ -8,8 +8,10 @@ void testApp::setup(){
 	ofSetSphereResolution(10);
 
 	ofBackground(0);
-	pSystem.setup(1000);
-
+	pSystem.setup(200);
+	
+	kSystem.setup(200);
+	
 	glow.setup();
 	glow.brightness = 1;
 	glow.passes = 2;
@@ -30,8 +32,8 @@ void testApp::setup(){
 	gui.add(lightZ.setup("light Z",0,-ofGetWidth(),ofGetWidth()));
 	gui.add(drawNotBlurred.setup("drawNotBlurred",false));
 	gui.add(record.setup("record",false));
-	gui.add(&pSystem.gui);
-
+	//gui.add(&pSystem.gui);
+	gui.add(&kSystem.gui);
 	lightOn.addListener(this,&testApp::lightOnChanged);
 	record.addListener(this,&testApp::recordPressed);
 
@@ -39,6 +41,9 @@ void testApp::setup(){
 
 	ofEnableAlphaBlending();
 	hideGui = false;
+	ofEnableAlphaBlending();
+	
+	ofSetFrameRate(60);
     //light.enable();
 }
 
@@ -66,8 +71,13 @@ void testApp::update(){
 	if(demo){
 		pSystemDemo.update();
 	}else{
-		pSystem.updateAll(10);
-		pSystem.calculate();
+		//pSystem.updateAll(10);
+		//pSystem.calculate();
+		kSystem.update();
+		float circleForce=5;
+		float circleForceRadius=100;
+		//kSystem.vectorField.addInwardCircle((float)mouseX, (float)mouseY, circleForceRadius, circleForce);
+		
 	}
 
 	light.setPosition(lightX,lightY,lightZ);
@@ -86,10 +96,11 @@ void testApp::draw(){
 	if(demo){
 		pSystemDemo.drawForGlow();
 	}else{
-		glPushMatrix();
+		/*glPushMatrix();
 			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 			pSystem.drawForGlow();
-		glPopMatrix();
+		glPopMatrix();*/
+		kSystem.drawForGlow();
 	}
 
 	glow.end();
@@ -105,10 +116,11 @@ void testApp::draw(){
 		if(demo){
 			pSystemDemo.draw();
 		}else{
-			glPushMatrix();
+			/*glPushMatrix();
 				glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
 				pSystem.drawAll();
-			glPopMatrix();
+			glPopMatrix();*/
+			kSystem.draw();
 		}
 	}
 	if(record){

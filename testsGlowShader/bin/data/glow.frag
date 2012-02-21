@@ -7,10 +7,13 @@ uniform int direction;
 //uniform int kernelSize;
 uniform float brightness;
 
-float coeffs[3] = float[](0.2270270270, 0.3162162162, 0.0702702703);
+float coeffs[3]; //= float[](0.2270270270, 0.3162162162, 0.0702702703);
 
 void main()
 {
+	coeffs[0]=0.2270270270;
+	coeffs[1]= 0.3162162162;
+	coeffs[2]=0.0702702703;
 
 	vec2 st = gl_TexCoord[0].st;
 	if(direction == 0){
