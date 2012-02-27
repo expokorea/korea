@@ -30,11 +30,15 @@ void testApp::setup(){
 	gui.add(&kSystem.gui);
 	
 	lightOn.addListener(this,&testApp::lightOnChanged);
-
+	light.setPosition(ofVec3f(ofGetWidth()*.5,ofGetHeight()*.5,0));
+	
 	ofEnableAlphaBlending();
 	
 	ofSetFrameRate(60);
     //light.enable();
+	
+	
+	//cam.disableMouseInput();
 }
 
 void testApp::lightOnChanged(bool & l){
@@ -50,64 +54,87 @@ void testApp::update(){
 	//blurAmnt = ofMap(sin(ofGetElapsedTimef()),-1,1,.75f,1.25f);
 	framerate = ofGetFrameRate();
 
-	if(demo){
-		pSystemDemo.update();
-	}else{
-		//pSystem.updateAll(10);
-		//pSystem.calculate();
-		pSystemDemo.update();
-		kSystem.update();
-		kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
+	pSystemDemo.update();
+	kSystem.update();
+	kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
+	kSystem.debugUserCenter(ofPoint(mouseX,mouseY));
 
-	}
+	
 	
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+	
 	if(lightOn)
 		ofEnableLighting();
 
+	float sizeW = 1024*3;
+	float sizeH = 768;
+	
+		
+	glEnable(GL_DEPTH_TEST);
 
-	glow.begin();
-	ofClear(0,0);
-
-	//glEnable(GL_DEPTH_TEST);
+	
 	if(demo){
-		pSystemDemo.drawForGlow();
+		
+		
+		cam.begin();
+		
+		ofNoFill();
+		ofPushMatrix();
+			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+			ofTranslate(0,0,-1000);
+			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+		ofPopMatrix();
+		
+		
+		ofPushMatrix();
+			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
+			pSystemDemo.drawForGlow();
+			kSystem.drawForGlow();
+		ofPopMatrix();
+		
+		cam.end();
+	
 	}else{
-		/*glPushMatrix();
-			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
-			pSystem.drawForGlow();
-		glPopMatrix();*/
-		pSystemDemo.drawForGlow();
-
-		kSystem.drawForGlow();
+		
+		glow.begin();
+		cam.begin();
+		
+		ofClear(0,0);
+		
+		ofPushMatrix();
+			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
+			pSystemDemo.drawForGlow();
+			kSystem.drawForGlow();
+		ofPopMatrix();
+		
+		cam.end();
+		glow.end();
+		
+		ofSetColor(255);
+		ofPushMatrix();
+			glScalef(1,-1,1);
+			glow.draw(0,-ofGetHeight());
+		ofPopMatrix();
 	}
 
-	glow.end();
-
+	
 	ofSetColor(255);
-	glow.draw(0,0);
-
-	if(demo){
-		//pSystemDemo.draw();
-	}else{
-		/*glPushMatrix();
-			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
-			pSystem.drawAll();
-		glPopMatrix();*/
-		//kSystem.draw();
-	}
-
-	ofSetColor(255);
-	//glDisable(GL_DEPTH_TEST);
 	ofDisableLighting();
+	glDisable(GL_DEPTH_TEST);
 	gui.draw();
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
+
+	switch(key)
+	{
+		case 'c': cam.reset(); break;
+	}
 
 }
 

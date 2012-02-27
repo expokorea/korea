@@ -33,7 +33,12 @@ public:
 	void draw();
 	void drawForGlow();
 	
+	void debugUserCenter(ofPoint p);
+	
 	ofFloatSlider speed;
+	ofFloatSlider sep;
+	ofFloatSlider coh;
+	ofFloatSlider aln;
 	ofToggle useTrails;
 	ofPanel gui;
 	ofColor color;

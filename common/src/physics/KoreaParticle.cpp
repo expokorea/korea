@@ -9,6 +9,11 @@
 
 #include "KoreaParticle.h"
 
+/*float KoreaParticle::targetForce,
+KoreaParticle::separation,
+KoreaParticle::cohesion,
+KoreaParticle::alignment;*/
+
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
 	this->vel = vel;
@@ -20,18 +25,23 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	bUseTarget = false;
 	bFlocking = false;
 	bDrawTrails = true;
-
+	particleState = KPARTICLE_FLOCKING;
+	
 	rt = ofRandom(0,100);
 	
-	sepDist = 20;
-	alnDist = 80;
-	cohDist = 90;
+	sepDist = 40;
+	alnDist = 70;
+	cohDist = 60;
 	
-	separation = .05;
-    cohesion  =  .01;//.1;
-    alignment =  .01;
+	separation = .025;
+    cohesion  =  .005;//.1;
+    alignment =  .005;
+	
+	targetSpeed = 8;
 	
 	trails.reserve(100);
+	
+	node.setScale(1);
 }
 
 void KoreaParticle::update()
@@ -39,17 +49,22 @@ void KoreaParticle::update()
 	
 	vel.x -= damping*vel.x;
 	vel.y -= damping*vel.y;
-	vel.z -= damping*vel.z;	//vel.z = 0;
+	vel.z -= damping*vel.z;
 	
+	// apply attractions
 	if(bUseTarget) applyTargetAttraction();
 	
+	// upadte position
 	pos += vel;
 	
-	t = ofGetElapsedTimef()*ofMap(10,1,80,0,1)*ofMap(10,1,80,0,1);
+	// for targets and trails
+	t = ofGetElapsedTimef()*ofMap(targetSpeed,1,80,0,1)*ofMap(targetSpeed,1,80,0,1);
 
 	if(trails.size() > 100) trails.erase(trails.begin());
 	trails.push_back(pos);
 	
+	node.setPosition(pos);
+	if(trails.size()>0)node.lookAt(trails[0]);
 }
 
 void KoreaParticle::draw3D()
@@ -66,7 +81,12 @@ void KoreaParticle::draw()
 
 void KoreaParticle::drawForGlow() {
 	
-	ofSphere(pos,5);
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(100,100,100);
+	else ofSetColor(255,255,255);
+	
+	//ofFill();
+	ofSphere(pos,10);
+	node.draw();
 		
 	if(bDrawTrails)
 	{
@@ -95,21 +115,16 @@ void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
 	
 void KoreaParticle::applyTargetAttraction()
 {
-	target.set(
+	
+	if(particleState == KPARTICLE_FLOCKING)
+		target.set(
 			   ofNoise(rt/100.,t,ofRandom(1))*ofGetWidth(),
 			   ofNoise(ofRandom(1),rt/100.,t)*ofGetHeight(),
-			   ofNoise(rt/100.,ofRandom(1),t)*ofGetHeight());
+			   ofNoise(rt/100.,500+ofRandom(1),t)*-100);
 	
-	ofVec3f posOfForce;
-	posOfForce.set(target.x,target.y,target.z);
-	
-	// ----------- (2) calculate the difference & length
-	
-	ofVec3f diff	= posOfForce-pos;
-	float length	= diff.length();
-	float radius	= 10;
-	
-	// ----------- (3) check close enough
+	ofVec3f diff	= target-pos;
+	//float length	= diff.length();
+	//float radius	= 10;
 	
 	/*bool bAmCloseEnough = false;
     if (radius > 0){
@@ -118,19 +133,16 @@ void KoreaParticle::applyTargetAttraction()
         }
     }*/
 	
-	// ----------- (4) if so, update force
-	ofVec3f frc;
-	//if (bAmCloseEnough == false){
-		diff.normalize();
-		frc.set(0,0);
-		frc.x = diff.x * targetForce;// * pct;
-        frc.y = diff.y * targetForce;// * pct;
-		frc.z = diff.z * targetForce;// * pct;
-		vel+=frc;
+	ofVec3f frc = ofVec3f(0,0,0);
+	
+	diff.normalize();
 		
-    //}
+	frc.x = diff.x * targetForce;
+	frc.y = diff.y * targetForce;
+	frc.z = diff.z * targetForce;
 	
-	
+	vel+=frc;
+
 }
 
 void KoreaParticle::addForFlocking(KoreaParticle * sister)
@@ -227,4 +239,9 @@ void KoreaParticle::resetFlocking()
 	sumCoh.set(0,0,0);
 	sumSep.set(0,0,0);
 	sumAlign.set(0,0,0);
+}
+
+void KoreaParticle::setState(koreaParticleState state)
+{
+	particleState = state;
 }
