@@ -44,5 +44,5 @@ class testApp : public ofBaseApp{
 		KoreaFlock kSystem;
 		
 		ofEasyCam cam;
-		
+		bool bShowGui;
 };

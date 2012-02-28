@@ -42,6 +42,7 @@ class KoreaParticle {
 	
 	// current state
 	koreaParticleState particleState;
+	float worldWidth,worldHeight,worldDepth;
 	
 	// node debug
 	ofNode node;

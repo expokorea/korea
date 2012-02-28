@@ -9,8 +9,9 @@ void testApp::setup(){
 	ofBackground(0);
 	pSystem.setup(200);
 	
-	kSystem.setup(100);
-	
+	//kSystem.setup(100,(1024*3)-200,768-200);
+	kSystem.setup(100,1024*3,768,600);
+
 	glow.setup();
 	glow.brightness = 1;
 	glow.passes = 2;
@@ -28,6 +29,7 @@ void testApp::setup(){
 	gui.add(demo.setup("demo p system",false));
 	//gui.add(&pSystem.gui);
 	gui.add(&kSystem.gui);
+	bShowGui = true;
 	
 	lightOn.addListener(this,&testApp::lightOnChanged);
 	light.setPosition(ofVec3f(ofGetWidth()*.5,ofGetHeight()*.5,0));
@@ -89,11 +91,11 @@ void testApp::draw(){
 			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
 		ofPopMatrix();
 		
+		kSystem.drawForGlow();
 		
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
 			pSystemDemo.drawForGlow();
-			kSystem.drawForGlow();
 		ofPopMatrix();
 		
 		cam.end();
@@ -105,10 +107,11 @@ void testApp::draw(){
 		
 		ofClear(0,0);
 		
+		kSystem.drawForGlow();
+		
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
 			pSystemDemo.drawForGlow();
-			kSystem.drawForGlow();
 		ofPopMatrix();
 		
 		cam.end();
@@ -125,7 +128,10 @@ void testApp::draw(){
 	ofSetColor(255);
 	ofDisableLighting();
 	glDisable(GL_DEPTH_TEST);
-	gui.draw();
+	if(bShowGui){
+		gui.draw();
+		ofDrawBitmapString("c: reset cam  m: toggle cam mouse  x: toggle gui",10,ofGetHeight()-20);
+	}
 }
 
 //--------------------------------------------------------------
@@ -134,6 +140,16 @@ void testApp::keyPressed(int key){
 	switch(key)
 	{
 		case 'c': cam.reset(); break;
+		case 'm': 
+			if(cam.getMouseInputEnabled()) cam.disableMouseInput();
+			else cam.enableMouseInput();
+			break;
+	    case 'x':
+			bShowGui = !bShowGui;
+			break;
+		case 'f':
+			ofToggleFullscreen();
+			break;
 	}
 
 }

@@ -16,14 +16,15 @@ KoreaParticle::alignment;*/
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
+	
 	this->vel = vel;
 	this->pos = pos;
 	this->damping = damping;
 	
 	target.set(0,0,0);
 	targetForce = .01;
-	bUseTarget = false;
-	bFlocking = false;
+	bUseTarget  = false;
+	bFlocking   = false;
 	bDrawTrails = true;
 	particleState = KPARTICLE_FLOCKING;
 	
@@ -33,9 +34,9 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	alnDist = 70;
 	cohDist = 60;
 	
-	separation = .025;
-    cohesion  =  .005;//.1;
-    alignment =  .005;
+	separation =  .025;
+    cohesion   =  .005;
+    alignment  =  .005;
 	
 	targetSpeed = 8;
 	
@@ -103,6 +104,11 @@ void KoreaParticle::drawForGlow() {
 		glEnd();
 		ofDisableAlphaBlending();
 		ofPopStyle();
+		
+		/*glBegin(GL_LINE_STRIP);
+		glVertex3f(pos.x, pos.y,pos.z);
+		glVertex3f(target.x, target.y,target.z);
+		glEnd();*/
 	}
 }
 
@@ -116,11 +122,6 @@ void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
 void KoreaParticle::applyTargetAttraction()
 {
 	
-	if(particleState == KPARTICLE_FLOCKING)
-		target.set(
-			   ofNoise(rt/100.,t,ofRandom(1))*ofGetWidth(),
-			   ofNoise(ofRandom(1),rt/100.,t)*ofGetHeight(),
-			   ofNoise(rt/100.,500+ofRandom(1),t)*-100);
 	
 	ofVec3f diff	= target-pos;
 	//float length	= diff.length();
