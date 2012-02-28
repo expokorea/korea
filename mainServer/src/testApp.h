@@ -3,7 +3,6 @@
 #include "ofMain.h"
 #include "OscContoursClient.h"
 #include "particleSystem.h"
-#include "ofGui.h"
 
 class testApp : public ofBaseApp{
 

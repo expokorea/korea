@@ -20,7 +20,7 @@
 
 #include "ofMain.h"
 #include "KoreaParticle.h"
-#include "ofGui.h"
+#include "ofxGui.h"
 
 class KoreaFlock{
 	
@@ -33,8 +33,8 @@ public:
 	void draw();
 	void drawForGlow();
 	
-	ofFloatSlider speed;
-	ofToggle useTrails;
-	ofPanel gui;
+	ofxFloatSlider speed;
+	ofxToggle useTrails;
+	ofxPanel gui;
 	ofColor color;
 };

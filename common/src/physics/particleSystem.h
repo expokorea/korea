@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "Particle.h"
-#include "ofGui.h"
+#include "ofxGui.h"
 
 class ParticleSystem {
 	public:
@@ -30,11 +30,11 @@ class ParticleSystem {
 	
 	//gui
 	bool bShowGui;
-	ofPanel gui;
-	ofFloatSlider guiSpread;
-	ofFloatSlider guiSpeed;
-	ofFloatSlider guiVisc;
-	ofFloatSlider radius;
+	ofxPanel gui;
+	ofxFloatSlider guiSpread;
+	ofxFloatSlider guiSpeed;
+	ofxFloatSlider guiVisc;
+	ofxFloatSlider radius;
 	
 	void drawGui();
 	

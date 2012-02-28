@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofGui.h"
+#include "ofxGui.h"
 #include "Glow.h"
 #include "particleSystem.h"
 #include "ParticleSystemDemo.h"
@@ -32,18 +32,18 @@ class testApp : public ofBaseApp{
 
 		ofShader shader, shaderBokeh;
 		ofFbo fbo;
-		ofPanel gui;
-		ofFloatSlider brightness;
-		ofIntSlider passes;
-		ofFloatSlider framerate;
-		ofToggle lightOn;
-		ofToggle demo;
-		ofFloatSlider lightX, lightY, lightZ;
-		ofFloatSlider posCameraPct,lookAtPct;
-		ofToggle drawNotBlurred;
-		ofToggle record;
-		ofToggle useCamera;
-		ofButton initCameraMovement;
+		ofxPanel gui;
+		ofxFloatSlider brightness;
+		ofxIntSlider passes;
+		ofxFloatSlider framerate;
+		ofxToggle lightOn;
+		ofxToggle demo;
+		ofxFloatSlider lightX, lightY, lightZ;
+		ofxFloatSlider posCameraPct,lookAtPct;
+		ofxToggle drawNotBlurred;
+		ofxToggle record;
+		ofxToggle useCamera;
+		ofxButton initCameraMovement;
 
 		ofLight light;
 		Glow glow;

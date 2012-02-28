@@ -22,8 +22,8 @@ public:
 
 	void draw(float x, float y);
 
-	ofParameter<float> brightness;
-	ofParameter<int> passes;
+	ofxParameter<float> brightness;
+	ofxParameter<int> passes;
 
 private:
 	ofFbo fbo1, fbo2;

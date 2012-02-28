@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "ofGui.h"
+#include "ofxGui.h"
 #include "ofxAssimpModelLoader.h"
 
 class ParticleSystemDemo {
@@ -20,9 +20,9 @@ public:
 
 	void drawPath();
 
-	ofIntSlider r,g,b;
-	ofFloatSlider speed;
-	ofFloatSlider radius;
+	ofxIntSlider r,g,b;
+	ofxFloatSlider speed;
+	ofxFloatSlider radius;
 
 	int minAlpha, maxAlpha;
 	ofPolyline path;

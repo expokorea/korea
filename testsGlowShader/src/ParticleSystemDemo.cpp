@@ -20,9 +20,9 @@ ParticleSystemDemo::ParticleSystemDemo() {
 	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,50);
 	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,50);
 	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,50);*/
-	path.bezierTo(ofGetWidth()/2,ofGetHeight()/2,0,ofGetWidth()/2,ofGetHeight()/2,0,ofGetWidth()/2,ofGetHeight()/2,0,1000);
+	/*path.bezierTo(ofGetWidth()/2,ofGetHeight()/2,0,ofGetWidth()/2,ofGetHeight()/2,0,ofGetWidth()/2,ofGetHeight()/2,0,1000);
 	path.bezierTo(0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,1000);
-	path.bezierTo(0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,1000);
+	path.bezierTo(0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,1000);*/
 }
 
 

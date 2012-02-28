@@ -53,8 +53,8 @@ void testApp::setup(){
 	hideGui = false;
 	ofEnableAlphaBlending();
 	
-	camera.setDefaultOFPerspective();
-	prevCameraPos = pSystemDemo.path[0];
+	camera.setupPerspective();
+	//prevCameraPos = pSystemDemo.path[0];
 
 	timeInitCamMovement = ofGetElapsedTimef();
 
@@ -103,7 +103,7 @@ void testApp::update(){
 
 	//z = ofMap(ofGetElapsedTimef(),0,20,0,pSystemDemo.path.size()-1,true);
 	posCameraPct = ofMap(ofGetElapsedTimef()-timeInitCamMovement,0,20,0,1,&ofEasing::quadOut,true);
-	camera.setDefaultOFPerspective();
+	camera.setupPerspective();
 	//camera.setPosition(ofGetWidth()/2, ofGetHeight()/2,  z); //665.108 +
 	//camera.setPosition(pSystemDemo.path[z]);
 	//lookAt.setPosition(ofGetWidth()/2,ofGetHeight()/2,ofLerp(0,ofGetWidth()*4,posCameraPct));
@@ -115,7 +115,7 @@ void testApp::update(){
 			ofPoint(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*2),
 			pSystemDemo.path[0],
 			posCameraPct));*/
-	prevCameraPos = ofBezierPoint(pSystemDemo.path[0],
+	prevCameraPos = ofBezierPoint(ofPoint(ofGetWidth()/2,ofGetHeight()/2,0),
 			ofPoint(ofGetWidth()/6,ofGetHeight()/6,ofGetWidth()*1.5),
 			ofPoint(ofGetWidth()/6,ofGetHeight()/6*3,ofGetWidth()*2.5),
 			ofPoint(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4),

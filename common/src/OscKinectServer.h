@@ -10,8 +10,8 @@
 
 #include "ofConstants.h"
 #include "OscService.h"
-#include "ofPanel.h"
-#include "ofSlider.h"
+#include "ofxPanel.h"
+#include "ofxSlider.h"
 
 class OscKinectServer: public OscService {
 public:
@@ -23,10 +23,10 @@ public:
 	void nearThresholdChanged(int & t);
 	void farThresholdChanged(int & t);
 
-	ofPanel gui;
-	ofIntSlider tilt;
-	ofIntSlider nearThreshold;
-	ofIntSlider farThreshold;
+	ofxPanel gui;
+	ofxIntSlider tilt;
+	ofxIntSlider nearThreshold;
+	ofxIntSlider farThreshold;
 
 private:
 	void init();
