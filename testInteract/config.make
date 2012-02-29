@@ -10,7 +10,7 @@ OF_ROOT = ../../..
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = -I../common/src -I../common/src/physics
+USER_CFLAGS = -I../common/src -I../common/src/physics -Isrc
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker

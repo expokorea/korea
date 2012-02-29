@@ -86,7 +86,7 @@ void testApp::draw(){
 	float sizeH = 768;
 	
 		
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 
 	
 	if(!drawGlow){

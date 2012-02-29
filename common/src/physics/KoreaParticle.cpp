@@ -19,6 +19,8 @@ ofxIntSlider KoreaParticle::g;
 ofxIntSlider KoreaParticle::b;
 ofxToggle KoreaParticle::debug;
 ofxToggle KoreaParticle::useModel;
+ofxFloatSlider KoreaParticle::thickness;
+ofxIntSlider KoreaParticle::length;
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
@@ -48,11 +50,12 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	
 	targetSpeed = 8;
 	
-	trails.reserve(100);
+	//trails.reserve(100);
 	
 	node.setScale(1);
 
 	thickness = 8;
+	length = 100;
 }
 
 void KoreaParticle::update()
@@ -71,11 +74,43 @@ void KoreaParticle::update()
 	// for targets and trails
 	t = ofGetElapsedTimef()*ofMap(targetSpeed,1,80,0,1)*ofMap(targetSpeed,1,80,0,1);
 
-	if(trails.size() > 100) trails.erase(trails.begin());
+	while(trails.size() > length) trails.erase(trails.begin());
 	trails.push_back(pos);
 	
 	node.setPosition(pos);
 	if(trails.size()>10)node.lookAt(trails[trails.size()-10]);
+
+	trailStrip.clear();
+	trailStripForGlow.clear();
+	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+
+	ofVec3f up(0, 0, 1);	// arbitrary up vector
+	for(int i = 0; i < int(trails.size())-1; i++)
+	{
+		//float pct = (float)i / (float)trails.size();
+		ofSetColor(r,g,b,200);
+		ofVec3f &p0 = trails[i];
+		ofVec3f &p1 = trails[i+1];
+
+		ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
+		ofVec3f right = dir.cross(up).normalize();	// right vector
+		right *= ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*sin(float(i)/float(trails.size())*PI)+2,0,thickness);
+		ofVec3f rightNotGlow = right * .5;
+
+		trailStrip.addVertex(trails[i] -rightNotGlow);
+		trailStripForGlow.addVertex(trails[i] -right);
+
+		trailStrip.addVertex(trails[i] +rightNotGlow);
+		trailStripForGlow.addVertex(trails[i] +right);
+
+
+		trailStrip.addVertex(trails[i+1] -rightNotGlow);
+		trailStripForGlow.addVertex(trails[i+1] -right);
+
+		trailStrip.addVertex(trails[i+1] +rightNotGlow);
+		trailStripForGlow.addVertex(trails[i+1] +right);
+	}
 }
 
 void KoreaParticle::draw3D()
@@ -102,7 +137,7 @@ void KoreaParticle::draw()
 		ofPushStyle();
 		ofEnableAlphaBlending();
 		ofNoFill();
-		glBegin(GL_TRIANGLE_STRIP);
+		/*glBegin(GL_TRIANGLE_STRIP);
 		for(int i = 0; i < int(trails.size())-1; i++)
 		{
 			//float pct = (float)i / (float)trails.size();
@@ -129,7 +164,9 @@ void KoreaParticle::draw()
 			p = trails[i+1] + right;
 			glVertex3f(p.x, p.y, p.z);
 		}
-		glEnd();
+		glEnd();*/
+		ofSetColor(r,g,b,200);
+		trailStrip.draw();
 		ofDisableAlphaBlending();
 		ofPopStyle();
 
@@ -179,7 +216,7 @@ void KoreaParticle::drawForGlow() {
 		ofPushStyle();
 		ofEnableAlphaBlending();
 		ofNoFill();
-		glBegin(GL_TRIANGLE_STRIP);
+		/*glBegin(GL_TRIANGLE_STRIP);
 		for(int i = 0; i < int(trails.size())-1; i++)
 		{
 			float pct = (float)i / (float)trails.size();
@@ -206,7 +243,10 @@ void KoreaParticle::drawForGlow() {
 			p = trails[i+1] + right;
 			glVertex3f(p.x, p.y, p.z);
 		}
-		glEnd();
+		glEnd();*/
+
+		ofSetColor(r,g,b,200);
+		trailStrip.draw();
 		ofDisableAlphaBlending();
 		ofPopStyle();
 		
@@ -277,7 +317,7 @@ void KoreaParticle::applyTargetAttraction()
 	frc.x = diff.x * targetForce;
 	frc.y = diff.y * targetForce;
 	frc.z = diff.z * targetForce;
-	
+
 	vel+=frc;
 
 }

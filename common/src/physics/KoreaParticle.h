@@ -34,7 +34,8 @@ class KoreaParticle {
 	float rt;
 	float t;
 	
-	vector<ofVec3f> trails;
+	ofMesh trailStrip,trailStripForGlow;
+	deque<ofVec3f> trails;
 	
 	// flocking params
 	float sepDist,alnDist,cohDist;
@@ -45,16 +46,19 @@ class KoreaParticle {
 	// current state
 	koreaParticleState particleState;
 	float worldWidth,worldHeight,worldDepth;
-	float thickness;
 	
 	// node debug
 	ofNode node;
 	
+
 	static ofxIntSlider r,g,b;
 	static ofxToggle debug;
 	static ofxToggle useModel;
 	
 	ofxAssimpModelLoader model;
+	static ofxFloatSlider thickness;
+	static ofxIntSlider length;
+
 
 
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
