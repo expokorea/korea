@@ -1,4 +1,5 @@
 ofxGui
 ofxXmlSettings
+ofxAssimpModelLoader
 ofxOsc
 ofxAvahiClient

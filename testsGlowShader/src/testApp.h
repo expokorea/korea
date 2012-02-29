@@ -28,6 +28,7 @@ class testApp : public ofBaseApp{
 		void lightOnChanged(bool & l);
 		void recordPressed(bool & l);
 		void initCameraMovementPressed(bool & m);
+		void demoPressed(bool & m);
 
 
 		ofShader shader, shaderBokeh;

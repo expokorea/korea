@@ -15,8 +15,8 @@ void ParticleSystem::setup(int numParticles) {
 	Particle::independence = .75;
 	Particle::neighborhood = 1700;
 	Particle::targetForce = .1;
-	 Particle::noiseScaleInput	= .177;
-	 Particle::noiseScaleOutput	= .5;
+	Particle::noiseScaleInput	= .177;
+	Particle::noiseScaleOutput	= .5;
 	 
 	gui.setup("particles");
 	gui.add(guiSpread.setup("spread",Particle::spread,10,2000));

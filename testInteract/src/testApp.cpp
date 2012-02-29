@@ -25,8 +25,12 @@ void testApp::setup(){
 	gui.add(pSystemDemo.r.setup("r",16,0,255));
 	gui.add(pSystemDemo.g.setup("g",0,0,255));
 	gui.add(pSystemDemo.b.setup("b",230,0,255));
+	gui.add(KoreaParticle::r.setup("r",16,0,255));
+	gui.add(KoreaParticle::g.setup("g",0,0,255));
+	gui.add(KoreaParticle::b.setup("b",230,0,255));
+	gui.add(KoreaParticle::debug.setup("debug",false));
 	gui.add(lightOn.setup("light",false));
-	gui.add(demo.setup("demo p system",false));
+	gui.add(drawGlow.setup("drawGlow",false));
 	//gui.add(&pSystem.gui);
 	gui.add(&kSystem.gui);
 	bShowGui = true;
@@ -76,52 +80,73 @@ void testApp::draw(){
 	float sizeH = 768;
 	
 		
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 
 	
-	if(demo){
-		
-		
+	if(!drawGlow){
+
+
 		cam.begin();
-		
+
 		ofNoFill();
 		ofPushMatrix();
 			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
 			ofTranslate(0,0,-1000);
 			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
 		ofPopMatrix();
-		
-		kSystem.drawForGlow();
-		
+
+		ofFill();
+		kSystem.draw();
+
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
-			pSystemDemo.drawForGlow();
+			pSystemDemo.draw();
 		ofPopMatrix();
-		
+
 		cam.end();
 	
 	}else{
-		
-		glow.begin();
+		ofFill();
+		glow.begin(false);
 		cam.begin();
-		
+
 		ofClear(0,0);
-		
+
 		kSystem.drawForGlow();
-		
+
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
 			pSystemDemo.drawForGlow();
 		ofPopMatrix();
-		
+
 		cam.end();
 		glow.end();
-		
+
 		ofSetColor(255);
 		ofPushMatrix();
 			glScalef(1,-1,1);
 			glow.draw(0,-ofGetHeight());
 		ofPopMatrix();
+
+
+		cam.begin();
+
+		ofNoFill();
+		ofPushMatrix();
+			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+			ofTranslate(0,0,-1000);
+			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+		ofPopMatrix();
+
+		ofFill();
+		kSystem.draw();
+
+		ofPushMatrix();
+			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
+			pSystemDemo.draw();
+		ofPopMatrix();
+
+		cam.end();
 	}
 
 	

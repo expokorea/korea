@@ -26,6 +26,10 @@ void testApp::setup(){
 	gui.add(pSystemDemo.r.setup("r",16,0,255));
 	gui.add(pSystemDemo.g.setup("g",0,0,255));
 	gui.add(pSystemDemo.b.setup("b",230,0,255));
+	gui.add(KoreaParticle::r.setup("r",16,0,255));
+	gui.add(KoreaParticle::g.setup("g",0,0,255));
+	gui.add(KoreaParticle::b.setup("b",230,0,255));
+	gui.add(KoreaParticle::debug.setup("debug",false));
 	gui.add(lightOn.setup("light",false));
 	gui.add(demo.setup("demo p system",false));
 	gui.add(lightX.setup("light X",ofGetWidth()/2,0,ofGetWidth()));
@@ -46,6 +50,7 @@ void testApp::setup(){
 	lightOn.addListener(this,&testApp::lightOnChanged);
 	record.addListener(this,&testApp::recordPressed);
 	initCameraMovement.addListener(this,&testApp::initCameraMovementPressed);
+	demo.addListener(this,&testApp::demoPressed);
 
 	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
 
@@ -81,6 +86,10 @@ void testApp::initCameraMovementPressed(bool & m){
 	if(!m){
 		timeInitCamMovement = ofGetElapsedTimef();
 	}
+}
+
+void testApp::demoPressed(bool & m){
+
 }
 
 //--------------------------------------------------------------
@@ -157,7 +166,10 @@ void testApp::draw(){
 		fbo.begin();
 		ofClear(0);
 	}
-	glow.draw(0,0);
+	ofPushMatrix();
+		glScalef(1,-1,1);
+		glow.draw(0,-ofGetHeight());
+	ofPopMatrix();
 
 	if(drawNotBlurred){
 		if(useCamera)camera.begin();
@@ -169,6 +181,7 @@ void testApp::draw(){
 				pSystem.drawAll();
 			glPopMatrix();*/
 			kSystem.draw();
+			pSystemDemo.draw();
 		}
 		if(useCamera)camera.end();
 	}

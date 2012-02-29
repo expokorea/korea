@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 
 typedef enum{
 	KPARTICLE_TARGET,
@@ -43,15 +44,21 @@ class KoreaParticle {
 	// current state
 	koreaParticleState particleState;
 	float worldWidth,worldHeight,worldDepth;
+	float thickness;
 	
 	// node debug
 	ofNode node;
 	
+	static ofxIntSlider r,g,b;
+	static ofxToggle debug;
+
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();
 	void draw();
 	void draw3D();
 	void drawForGlow();
+
+	void drawDebug();
 
 	void setTarget(ofVec3f targ, float targetForce);
 	void applyTargetAttraction();
