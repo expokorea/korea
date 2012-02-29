@@ -86,9 +86,9 @@ void testApp::draw(){
 	float sizeH = 768;
 	
 		
-	//glEnable(GL_DEPTH_TEST);
-
+	if(KoreaParticle::debug) glEnable(GL_DEPTH_TEST);
 	
+
 	if(!drawGlow){
 
 
