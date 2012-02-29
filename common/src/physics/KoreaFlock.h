@@ -21,6 +21,7 @@
 #include "ofMain.h"
 #include "KoreaParticle.h"
 #include "ofxGui.h"
+#include "userData.h"
 
 class KoreaFlock{
 	
@@ -33,7 +34,8 @@ public:
 	void draw();
 	void drawForGlow();
 	
-	void debugUserCenter(ofPoint p);
+	//void debugUserCenter(ofPoint p);
+	void debugUserCenter(KUserData & myUser);
 	
 	ofxFloatSlider speed;
 	ofxFloatSlider sep;
@@ -47,5 +49,8 @@ public:
 	
 	float worldWidth,worldHeight,worldDepth;
 	ofPoint user1;
+	
+	ofxAssimpModelLoader model;
+
 
 };

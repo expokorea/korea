@@ -1,11 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxGui.h"
 #include "Glow.h"
 #include "particleSystem.h"
 #include "ParticleSystemDemo.h"
 #include "KoreaFlock.h"
+#include "userData.h"
 
 class testApp : public ofBaseApp{
 
@@ -45,4 +45,8 @@ class testApp : public ofBaseApp{
 		
 		ofEasyCam cam;
 		bool bShowGui;
+		
+		
+		KUserData user1;
+		
 };

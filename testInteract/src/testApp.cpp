@@ -4,14 +4,17 @@
 void testApp::setup(){
 	//ofSetVerticalSync(true);
 
-	ofSetSphereResolution(10);
+	ofSetSphereResolution(5);
 
 	ofBackground(0);
 	pSystem.setup(200);
 	
 	//kSystem.setup(100,(1024*3)-200,768-200);
 	kSystem.setup(100,1024*3,768,600);
-
+	
+	user1.setup();
+	
+	
 	glow.setup();
 	glow.brightness = 1;
 	glow.passes = 2;
@@ -31,6 +34,7 @@ void testApp::setup(){
 	gui.add(KoreaParticle::debug.setup("debug",false));
 	gui.add(lightOn.setup("light",false));
 	gui.add(drawGlow.setup("drawGlow",false));
+	gui.add(KoreaParticle::useModel.setup("use model",true));
 	//gui.add(&pSystem.gui);
 	gui.add(&kSystem.gui);
 	bShowGui = true;
@@ -62,16 +66,18 @@ void testApp::update(){
 
 	pSystemDemo.update();
 	kSystem.update();
-	kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
-	kSystem.debugUserCenter(ofPoint(mouseX,mouseY));
+	//kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
+	kSystem.debugUserCenter(user1);
 
-	
-	
+	user1.debugSetUserPosFromMouse(mouseX,mouseY);
+	user1.debugSetUserContour();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 	
+	//gui.draw();
+	//return;
 	
 	if(lightOn)
 		ofEnableLighting();
@@ -80,7 +86,7 @@ void testApp::draw(){
 	float sizeH = 768;
 	
 		
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
 	
 	if(!drawGlow){
@@ -97,6 +103,7 @@ void testApp::draw(){
 
 		ofFill();
 		kSystem.draw();
+		if(KoreaParticle::debug) user1.drawUser();
 
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
@@ -143,7 +150,7 @@ void testApp::draw(){
 
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
-			pSystemDemo.draw();
+			//pSystemDemo.draw();
 		ofPopMatrix();
 
 		cam.end();

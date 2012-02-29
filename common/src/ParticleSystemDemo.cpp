@@ -11,8 +11,8 @@
 ParticleSystemDemo::ParticleSystemDemo() {
 	minAlpha = 20;
 	maxAlpha = 200;
-	model.loadModel("particle.obj");
-	particleMesh = model.getMesh(0);
+	////model.loadModel("particle.obj");
+	////particleMesh = model.getMesh(0);
 	/*path.curveTo(ofGetWidth()/2,ofGetHeight()/2,0,50);
 	path.curveTo(0,0,ofGetWidth()*2,50);
 	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*3.8,50);
@@ -32,7 +32,7 @@ void ParticleSystemDemo::update(){
 
 void ParticleSystemDemo::drawForGlow(){
 	ofSeedRandom(0);
-	for(int i=0;i<4000;i++){
+	for(int i=0;i<500;i++){
 		ofColor color(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,minAlpha,maxAlpha));
 		ofSetColor(color);
 		//color.setBrightness();
@@ -55,7 +55,7 @@ void ParticleSystemDemo::drawForGlow(){
 
 void ParticleSystemDemo::draw(){
 	ofSeedRandom(0);
-	for(int i=0;i<4000;i++){
+	for(int i=0;i<500;i++){
 		ofColor color(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,minAlpha*3,maxAlpha));
 		ofSetColor(color);
 		//color.setBrightness();

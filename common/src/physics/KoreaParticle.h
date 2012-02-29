@@ -10,6 +10,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxAssimpModelLoader.h"
 
 typedef enum{
 	KPARTICLE_TARGET,
@@ -51,6 +52,10 @@ class KoreaParticle {
 	
 	static ofxIntSlider r,g,b;
 	static ofxToggle debug;
+	static ofxToggle useModel;
+	
+	ofxAssimpModelLoader model;
+
 
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();

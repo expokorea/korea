@@ -12,6 +12,8 @@
 void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDepth)
 {
 	
+	//model.loadModel("blobFish.obj");
+	
 	KoreaParticle tempParticle;
 	
 	this->worldWidth  = worldWidth;
@@ -91,8 +93,10 @@ void KoreaFlock::update()
 	
 }
 
-void KoreaFlock::debugUserCenter(ofPoint p)
+//void KoreaFlock::debugUserCenter(ofPoint p)
+void KoreaFlock::debugUserCenter(KUserData & myUser)
 {
+	/*
 	// calculate all that are within range of user
 	p.y  = ofGetHeight()-p.y;
 	
@@ -100,23 +104,31 @@ void KoreaFlock::debugUserCenter(ofPoint p)
 	p.x = ofMap(p.x,0,ofGetWidth(),-270,270);
 	p.y = ofMap(p.y,0,ofGetHeight(),-198,198);
 	p.z = 300;
+	*/
 	
-	user1 = p;
+	user1 = myUser.pos;
+	int tPts = myUser.contour.size()-1;
+	
+	if(tPts > 0 )
+	{
 	
 	float distRange = userRadius;
 	for( int i = 0; i < particles.size(); i++)
 	{	
-		ofVec3f diff = p-particles[i].pos;
+		ofVec3f diff = user1-particles[i].pos;
 		float d = diff.length();
 		if(d < distRange)
 		{
 			particles[i].setState(KPARTICLE_TARGET);
-			particles[i].target = p;
+			int index = i % tPts ;
+			particles[i].target = myUser.contour[index];
 			particles[i].targetForce = speed*4;
 		}else{
 			particles[i].setState(KPARTICLE_FLOCKING);
 		}
 		
+	}
+	
 	}
 }
 
@@ -131,8 +143,22 @@ void KoreaFlock::drawForGlow(){
 	ofSetColor(color);
 	
 	for(int i = 0; i < particles.size(); i++)
-			particles[i].drawForGlow();
-			
+	{
+		particles[i].drawForGlow();
+		
+		/*ofSetColor(0,0,255,255);
+
+		ofPushMatrix();
+			glTranslatef(particles[i].pos.x,particles[i].pos.y,particles[i].pos.z);
+			glRotatef(90,1,0,0);
+			glRotatef(90,0,0,1);
+			//ofRotate(angle, axis.x, axis.y, axis.z);  
+			glScalef(.1,.1,.1);
+			model.draw(OF_MESH_FILL);
+		ofPopMatrix();*/
+		
+		
+	}		
 	//ofSphere(user1,10);
 	
 

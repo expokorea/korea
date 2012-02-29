@@ -18,9 +18,12 @@ ofxIntSlider KoreaParticle::r;
 ofxIntSlider KoreaParticle::g;
 ofxIntSlider KoreaParticle::b;
 ofxToggle KoreaParticle::debug;
+ofxToggle KoreaParticle::useModel;
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
+	
+	model.loadModel("blobFish2.obj");
 	
 	this->vel = vel;
 	this->pos = pos;
@@ -72,7 +75,7 @@ void KoreaParticle::update()
 	trails.push_back(pos);
 	
 	node.setPosition(pos);
-	if(trails.size()>0)node.lookAt(trails[0]);
+	if(trails.size()>10)node.lookAt(trails[trails.size()-10]);
 }
 
 void KoreaParticle::draw3D()
@@ -140,15 +143,36 @@ void KoreaParticle::draw()
 
 
 void KoreaParticle::drawForGlow() {
+	
 	if(debug){
 		return;
 	}
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b);
-	else ofSetColor(r,g,b);
+	
+	float pct = ofMap(pos.z,-200,200,.5,1);
+	
+	if(!KoreaParticle::useModel) pct = 1;
+	
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r*pct,g*pct,b*pct);
+	else ofSetColor(r*pct,g*pct,b*pct);
 	
 	//ofFill();
 	//ofSphere(pos,10);
 	//node.draw();
+	
+	if(KoreaParticle::useModel){
+		ofVec3f axis;
+		float angle;  
+		node.getOrientationQuat().getRotate(angle, axis);  
+		
+		ofPushMatrix();
+			glTranslatef(pos.x,pos.y,pos.z);
+			glRotatef(90,1,0,0);
+			glRotatef(90,0,0,1);
+			ofRotate(angle, axis.x, axis.y, axis.z);  
+			glScalef(.075,.075,.075);
+			model.draw(OF_MESH_FILL);
+		ofPopMatrix();
+	}
 		
 	if(bDrawTrails)
 	{
@@ -158,8 +182,8 @@ void KoreaParticle::drawForGlow() {
 		glBegin(GL_TRIANGLE_STRIP);
 		for(int i = 0; i < int(trails.size())-1; i++)
 		{
-			//float pct = (float)i / (float)trails.size();
-			ofSetColor(r,g,b,200);
+			float pct = (float)i / (float)trails.size();
+			ofSetColor(r,g,b,200*pct);
 			ofVec3f p0 = trails[i];
 			ofVec3f p1 = trails[i+1];
 
