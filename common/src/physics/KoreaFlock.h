@@ -28,13 +28,24 @@ public:
 	
 	vector<KoreaParticle> particles;
 	
-	void setup( int total);
+	void setup( int total, int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
 	void update();
 	void draw();
 	void drawForGlow();
 	
+	void debugUserCenter(ofPoint p);
+	
 	ofxFloatSlider speed;
+	ofxFloatSlider sep;
+	ofxFloatSlider coh;
+	ofxFloatSlider aln;
 	ofxToggle useTrails;
+	ofxIntSlider userRadius;
 	ofxPanel gui;
 	ofColor color;
+	
+	
+	float worldWidth,worldHeight,worldDepth;
+	ofPoint user1;
+
 };

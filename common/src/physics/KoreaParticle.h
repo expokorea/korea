@@ -10,7 +10,10 @@
 
 #include "ofMain.h"
 
-
+typedef enum{
+	KPARTICLE_TARGET,
+	KPARTICLE_FLOCKING
+}koreaParticleState;
 
 class KoreaParticle {
 	
@@ -24,6 +27,7 @@ class KoreaParticle {
 	bool     bUseTarget;
 	bool     bFlocking;
 	bool	 bDrawTrails;
+	float	 targetSpeed;
 	
 	float rt;
 	float t;
@@ -31,9 +35,17 @@ class KoreaParticle {
 	vector<ofVec3f> trails;
 	
 	// flocking params
-	float sepDist,alnDist,cohDist,separation,cohesion,alignment;
+	float sepDist,alnDist,cohDist;
+	float separation,cohesion,alignment;
 	float countCoh,countSep,countAlign;
 	ofVec3f sumCoh,sumSep,sumAlign;
+	
+	// current state
+	koreaParticleState particleState;
+	float worldWidth,worldHeight,worldDepth;
+	
+	// node debug
+	ofNode node;
 	
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();
@@ -47,5 +59,8 @@ class KoreaParticle {
 	void resetFlocking();
 	void applyForces();
 	void addForFlocking(KoreaParticle * sister);
+	
+	void setState(koreaParticleState state);
+	
 	
 };
