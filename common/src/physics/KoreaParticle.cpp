@@ -23,7 +23,7 @@ ofxToggle KoreaParticle::useModel;
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
 	
-	model.loadModel("blobFish2.obj");
+	model.loadModel("blobFish.obj");
 	
 	this->vel = vel;
 	this->pos = pos;

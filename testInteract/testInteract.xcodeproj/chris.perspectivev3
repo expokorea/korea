@@ -322,7 +322,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>8323680814EC0081004220A6</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>KoreaParticle.cpp</string>
+								<string>cmath</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +330,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>8323680914EC0081004220A6</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>KoreaParticle.cpp</string>
+										<string>cmath</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>839677F214FED7F100771A68</string>
+										<string>8396780814FEDBFB00771A68</string>
 										<key>history</key>
 										<array>
 											<string>8323680A14EC0081004220A6</string>
@@ -362,7 +362,6 @@
 											<string>839676D614FE816200771A68</string>
 											<string>839676D714FE816200771A68</string>
 											<string>839676DA14FE816200771A68</string>
-											<string>8396775D14FEA72A00771A68</string>
 											<string>8396778914FECDA800771A68</string>
 											<string>8396778B14FECDA800771A68</string>
 											<string>8396778D14FECDA800771A68</string>
@@ -373,7 +372,8 @@
 											<string>839677DD14FED72000771A68</string>
 											<string>839677E714FED7C700771A68</string>
 											<string>839677F014FED7F100771A68</string>
-											<string>839677F114FED7F100771A68</string>
+											<string>839677FB14FEDB1100771A68</string>
+											<string>8396780514FEDBF900771A68</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -690,7 +690,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>839677F314FED7F100771A68</string>
+		<string>8396780914FEDBFB00771A68</string>
 		<string>8396765214FE71C800771A68</string>
 		<string>8396765314FE71C800771A68</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks/projects_git/korea/testInteract/testInteract.xcodeproj</string>
