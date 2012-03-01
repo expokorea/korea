@@ -43,6 +43,10 @@ void KUserData::debugSetUserPosFromMouse(float mouseX, float mouseY)
 {
 	// calculate all that are within range of user
 	pos.set(mouseX,ofGetHeight()-mouseY,300);
+	targetMovement = targetMovement*.7 + (abs(prevMouseX-mouseX) + abs(prevMouseY-mouseY))*.3;
+	prevMouseX = mouseX;
+	prevMouseY = mouseY;
+	targetForce = float(3-targetMovement)/3.;
 	
 	// mapping mouse
 	pos.x = ofMap(pos.x,0,ofGetWidth(),-270,270);
@@ -54,15 +58,15 @@ void KUserData::drawUser()
 {
 	ofSetColor(255);
 	
-	ofSphere(pos,10);
+	ofSphere(pos,3);
 	
-	glPointSize(10);
+	/*glPointSize(10);
 	glBegin(GL_POINTS);
 	for( int i = 0; i < contour.size(); i++)
 	{
 		glVertex3f(contour[i].x,contour[i].y,contour[i].z);
 	}
 	glEnd();
-	glPointSize(10);
+	glPointSize(10);*/
 }
 

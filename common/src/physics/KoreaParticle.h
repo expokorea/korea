@@ -35,7 +35,9 @@ class KoreaParticle {
 	float t;
 	
 	ofMesh trailStrip,trailStripForGlow;
-	deque<ofVec3f> trails;
+	vector<ofVec3f> trails;
+	vector<float> angles;
+	vector<float> zangles;
 	
 	// flocking params
 	float sepDist,alnDist,cohDist;

@@ -6,6 +6,7 @@
 #include "ParticleSystemDemo.h"
 #include "KoreaFlock.h"
 #include "userData.h"
+#include "ofxVideoRecorder.h"
 
 class testApp : public ofBaseApp{
 
@@ -25,6 +26,7 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		void lightOnChanged(bool & l);
+		void recordPressed(bool & l);
 
 
 		ofShader shader, shaderBokeh;
@@ -35,6 +37,8 @@ class testApp : public ofBaseApp{
 		ofxFloatSlider framerate;
 		ofxToggle lightOn;
 		ofxToggle drawGlow;
+		ofxFloatSlider lightCutoff, lightExponent;
+		ofxFloatSlider lightConstant, lightLinear, lightQuad;
 
 		ofLight light;
 		Glow glow;
@@ -49,4 +53,9 @@ class testApp : public ofBaseApp{
 		
 		KUserData user1;
 		
+		ofxVideoRecorder recorder;
+		ofPixels pixRecord;
+		ofFbo fbo;
+		ofxToggle record;
+
 };

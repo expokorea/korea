@@ -22,6 +22,18 @@ ofxToggle KoreaParticle::useModel;
 ofxFloatSlider KoreaParticle::thickness;
 ofxIntSlider KoreaParticle::length;
 
+ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const ofVec3f &d )
+{
+	ofVec3f n1,n2;
+	ofVec3f v1=(c-a);
+	ofVec3f v2=(d-a);
+	ofVec3f v3=(b-a);
+	n1=v1.cross(v2);
+	n2=v2.cross(v3);
+	return ((n1+n2)*.5).normalized();
+}
+
+
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
 	
@@ -55,7 +67,14 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	node.setScale(1);
 
 	thickness = 8;
-	length = 100;
+	length = 30;
+
+	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+
+	trails.resize(length);
+	angles.resize(length,0);
+	zangles.resize(length,0);
 }
 
 void KoreaParticle::update()
@@ -74,20 +93,78 @@ void KoreaParticle::update()
 	// for targets and trails
 	t = ofGetElapsedTimef()*ofMap(targetSpeed,1,80,0,1)*ofMap(targetSpeed,1,80,0,1);
 
-	while(trails.size() > length) trails.erase(trails.begin());
-	trails.push_back(pos);
+	/*while(trails.size() > length) {
+		trails.erase(trails.begin());
+		for(int i=0;i<4;i++){
+			trailStrip.getVertices().erase(trailStrip.getVertices().begin());
+			trailStripForGlow.getVertices().erase(trailStripForGlow.getVertices().begin());
+		}
+	}*/
+	/*for(int i=0;i<(int)angles.size();i++){
+		angles[i] = 10 * ofSignedNoise(t*ofRandom(2));
+	}*/
+	trails[0] = pos;
+	for(int i=1;i<trails.size();i++){
+		float dx = trails[i-1].x - trails[i].x;
+		float dy = trails[i-1].y - trails[i].y;
+		float dz = trails[i-1].z - trails[i].z;
+		float a  = atan2(dy, dx);
+		float az  = atan2(dz, dy);
+		float dis = 7;
+
+		if(i == 1) {
+			trails[i].x = trails[i-1].x - cos(a) * dis;
+			trails[i].y = trails[i-1].y - sin(a) * dis;
+			trails[i].z = trails[i-1].z - sin(az) * dis;
+		}
+		else {
+		    float range = ofDegToRad(25);
+		    float pa = angles[i-1];
+
+		    float d = a - pa;
+		    float absA = fabs(d);
+		    float s = d>=0?1:-1;
+		    if (absA > PI) {
+		        a = s * (2 * PI - fabs(a)) * -1;
+		    }
+
+		    float c  = ofClamp(a, pa-range, pa+range);
+
+		    trails[i].x = trails[i-1].x - cos(c) * dis;
+		    trails[i].y = trails[i-1].y - sin(c) * dis;
+
+
+
+		    float paz = zangles[i-1];
+		    float dz = az - paz;
+		    float absAz = fabs(dz);
+		    float sz = dz>=0?1:-1;
+		    if (absAz > PI) {
+		        az = sz * (2 * PI - fabs(az)) * -1;
+		    }
+
+		    float cz  = ofClamp(az, paz-range, paz+range);
+
+			trails[i].z = trails[i-1].z - sin(cz) * dis;
+		}
+		//trails[i].z = trails[i-1].z;
+
+		angles[i] = ofWrapRadians(a);
+		zangles[i] = ofWrapRadians(az);
+		//trail[i].z=trail[i-1].z;ofVec3f up(0, 0, 1);
+		//float pct = (float)i / (float)trails.size();
+	}
 	
 	node.setPosition(pos);
-	if(trails.size()>10)node.lookAt(trails[trails.size()-10]);
+	if(trails.size()>10)node.lookAt(trails[0]-trails[trails.size()-10]);
+
+
 
 	trailStrip.clear();
 	trailStripForGlow.clear();
-	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
-	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 
-	ofVec3f up(0, 0, 1);	// arbitrary up vector
-	for(int i = 0; i < int(trails.size())-1; i++)
-	{
+	for(int i=0; i<trails.size()-1;i++){
+		ofVec3f up(0, 0, 1);
 		//float pct = (float)i / (float)trails.size();
 		ofSetColor(r,g,b,200);
 		ofVec3f &p0 = trails[i];
@@ -95,21 +172,44 @@ void KoreaParticle::update()
 
 		ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
 		ofVec3f right = dir.cross(up).normalize();	// right vector
-		right *= ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*sin(float(i)/float(trails.size())*PI)+2,0,thickness);
+		right *= thickness; //ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))+2,0,thickness); //*sin(float(i)/float(trails.size())*PI)
 		ofVec3f rightNotGlow = right * .5;
 
+		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
+
 		trailStrip.addVertex(trails[i] -rightNotGlow);
+		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addVertex(trails[i] -right);
+		trailStripForGlow.addColor(ofColor(r,g,b,pct));
 
 		trailStrip.addVertex(trails[i] +rightNotGlow);
+		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addVertex(trails[i] +right);
+		trailStripForGlow.addColor(ofColor(r,g,b,pct));
 
 
+		pct = float(trails.size()-i-1) / (float)trails.size() * .75 * 255;
 		trailStrip.addVertex(trails[i+1] -rightNotGlow);
+		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addVertex(trails[i+1] -right);
+		trailStripForGlow.addColor(ofColor(r,g,b,pct));
 
 		trailStrip.addVertex(trails[i+1] +rightNotGlow);
+		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addVertex(trails[i+1] +right);
+		trailStripForGlow.addColor(ofColor(r,g,b,pct));
+
+		//ofVec3f normal = calcNormal(trails[i] -rightNotGlow,trails[i] +rightNotGlow,trails[i+1] -rightNotGlow,trails[i+1] +rightNotGlow);
+		//for(int i=0;i<4;i++){
+			/*trailStrip.addNormal(normal);
+			trailStrip.addNormal(normal);
+			trailStrip.addNormal(normal);
+			trailStrip.addNormal(normal);*/
+		//}
+		//normal = calcNormal(trails[i] +rightNotGlow,trails[i+1] -rightNotGlow,trails[i+1] +rightNotGlow);
+		//for(int i=0;i<4;i++){
+		//trailStrip.addNormal(normal);
+		//trailStrip.addNormal(normal);
 	}
 }
 
@@ -122,139 +222,73 @@ void KoreaParticle::draw()
 {
 	if(debug){
 		drawDebug();
-		return;
 	}
 	//ofCircle(pos.x, pos.y, 3);
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b);
-	else ofSetColor(r,g,b);
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
+	else ofSetColor(r,g,b,200);
 
 	//ofFill();
 	//ofSphere(pos,10);
 	//node.draw();
+	if(KoreaParticle::useModel){
+		ofVec3f axis;
+		float angle;
+		node.getOrientationQuat().getRotate(angle, axis);
 
+		ofPushMatrix();
+			glTranslatef(pos.x,pos.y,pos.z);
+			glRotatef(90,1,0,0);
+			glRotatef(90,0,0,1);
+			ofRotate(angle, axis.x, axis.y, axis.z);
+			glScalef(.075,.075,.075);
+			model.draw(OF_MESH_FILL);
+		ofPopMatrix();
+	}
+
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(255,255,255,255);
+	else ofSetColor(255,255,255,200);
 	if(bDrawTrails)
 	{
-		ofPushStyle();
-		ofEnableAlphaBlending();
-		ofNoFill();
-		/*glBegin(GL_TRIANGLE_STRIP);
-		for(int i = 0; i < int(trails.size())-1; i++)
-		{
-			//float pct = (float)i / (float)trails.size();
-			ofSetColor(r,g,b,200);
-			ofVec3f p0 = trails[i];
-			ofVec3f p1 = trails[i+1];
-
-			ofVec3f up(0, 0, 1);	// arbitrary up vector
-
-			ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
-			ofVec3f right = dir.cross(up).normalize();	// right vector
-			ofVec3f norm = dir.cross(up);
-			right *= .5 * ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*sin(float(i)/float(trails.size())*PI)+2,0,thickness);
-
-			ofVec3f p = trails[i] -right;
-			glVertex3f(p.x, p.y, p.z);
-
-			p = trails[i] + right;
-			glVertex3f(p.x, p.y, p.z);
-
-			p = trails[i+1] - right;
-			glVertex3f(p.x, p.y, p.z);
-
-			p = trails[i+1] + right;
-			glVertex3f(p.x, p.y, p.z);
-		}
-		glEnd();*/
-		ofSetColor(r,g,b,200);
 		trailStrip.draw();
-		ofDisableAlphaBlending();
-		ofPopStyle();
-
-		/*glBegin(GL_LINE_STRIP);
-		glVertex3f(pos.x, pos.y,pos.z);
-		glVertex3f(target.x, target.y,target.z);
-		glEnd();*/
 	}
 
 }
 
 
 void KoreaParticle::drawForGlow() {
-	
+
 	if(debug){
-		return;
+		drawDebug();
 	}
-	
-	float pct = ofMap(pos.z,-200,200,.5,1);
-	
-	if(!KoreaParticle::useModel) pct = 1;
-	
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r*pct,g*pct,b*pct);
-	else ofSetColor(r*pct,g*pct,b*pct);
-	
+	//ofCircle(pos.x, pos.y, 3);
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
+	else ofSetColor(r,g,b,200);
+
 	//ofFill();
 	//ofSphere(pos,10);
 	//node.draw();
-	
-	if(KoreaParticle::useModel){
+	if(KoreaParticle::useModel && !KoreaParticle::debug){
 		ofVec3f axis;
-		float angle;  
-		node.getOrientationQuat().getRotate(angle, axis);  
-		
+		float angle;
+		node.getOrientationQuat().getRotate(angle, axis);
+
 		ofPushMatrix();
 			glTranslatef(pos.x,pos.y,pos.z);
 			glRotatef(90,1,0,0);
 			glRotatef(90,0,0,1);
-			ofRotate(angle, axis.x, axis.y, axis.z);  
+			ofRotate(angle, axis.x, axis.y, axis.z);
 			glScalef(.075,.075,.075);
 			model.draw(OF_MESH_FILL);
 		ofPopMatrix();
 	}
-		
+
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(255,255,255,255);
+	else ofSetColor(255,255,255,200);
 	if(bDrawTrails)
 	{
-		ofPushStyle();
-		ofEnableAlphaBlending();
-		ofNoFill();
-		/*glBegin(GL_TRIANGLE_STRIP);
-		for(int i = 0; i < int(trails.size())-1; i++)
-		{
-			float pct = (float)i / (float)trails.size();
-			ofSetColor(r,g,b,200*pct);
-			ofVec3f p0 = trails[i];
-			ofVec3f p1 = trails[i+1];
-
-			ofVec3f up(0, 0, 1);	// arbitrary up vector
-
-			ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
-			ofVec3f right = dir.cross(up).normalize();	// right vector
-			ofVec3f norm = dir.cross(up);
-			right *= ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*sin(float(i)/float(trails.size())*PI)+2,0,thickness);
-
-			ofVec3f p = trails[i] -right;
-			glVertex3f(p.x, p.y, p.z);
-
-			p = trails[i] + right;
-			glVertex3f(p.x, p.y, p.z);
-
-			p = trails[i+1] - right;
-			glVertex3f(p.x, p.y, p.z);
-
-			p = trails[i+1] + right;
-			glVertex3f(p.x, p.y, p.z);
-		}
-		glEnd();*/
-
-		ofSetColor(r,g,b,200);
-		trailStrip.draw();
-		ofDisableAlphaBlending();
-		ofPopStyle();
-		
-		/*glBegin(GL_LINE_STRIP);
-		glVertex3f(pos.x, pos.y,pos.z);
-		glVertex3f(target.x, target.y,target.z);
-		glEnd();*/
+		trailStripForGlow.draw();
 	}
+
 }
 
 void KoreaParticle::drawDebug(){
@@ -262,30 +296,10 @@ void KoreaParticle::drawDebug(){
 		else ofSetColor(255,255,255);
 
 		//ofFill();
+		glEnable(GL_DEPTH_TEST);
 		ofSphere(pos,10);
 		node.draw();
-
-		if(bDrawTrails)
-		{
-			ofPushStyle();
-			ofEnableAlphaBlending();
-			ofNoFill();
-			glBegin(GL_LINE_STRIP);
-			for(int i = 0; i < trails.size(); i++)
-			{
-				float pct = (float)i / (float)trails.size();
-				glColor4f(1,1,1,pct*.75);
-				glVertex3f(trails[i].x, trails[i].y,trails[i].z);
-			}
-			glEnd();
-			ofDisableAlphaBlending();
-			ofPopStyle();
-
-			/*glBegin(GL_LINE_STRIP);
-			glVertex3f(pos.x, pos.y,pos.z);
-			glVertex3f(target.x, target.y,target.z);
-			glEnd();*/
-		}
+		glDisable(GL_DEPTH_TEST);
 }
 
 void KoreaParticle::setTarget(ofVec3f targ, float targetForce)

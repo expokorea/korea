@@ -10,6 +10,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 
 class KUserData{
 
@@ -34,5 +35,8 @@ class KUserData{
 	ofVec3f getPosition(){ return pos; };
 	float getTimeLastSeen(){ return timeLastSeen; }
 	vector<ofPoint> getContour(){ return contour; }
-	
+
+	ofxFloatSlider targetMovement,targetForce;
+	ofVec3f target;
+	float prevMouseX, prevMouseY;
 };

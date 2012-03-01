@@ -138,12 +138,18 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	if(lightOn)
+	if(lightOn){
 		ofEnableLighting();
 
+		light.setSpotlight( 30, 0 );
+	}
 
 	glow.begin(false);
-	if(useCamera)camera.begin();
+	if(useCamera){
+		camera.begin();
+
+		light.setPosition(camera.getPosition());
+	}
 	ofClear(0,0);
 
 	//glEnable(GL_DEPTH_TEST);

@@ -7,17 +7,17 @@ void testApp::setup(){
 	ofSetSphereResolution(5);
 
 	ofBackground(0);
-	pSystem.setup(200);
+	pSystem.setup(100);
 	
 	//kSystem.setup(100,(1024*3)-200,768-200);
-	kSystem.setup(100,1024*3,768,600);
+	kSystem.setup(200,1024*3,768,600);
 	
 	user1.setup();
 	
 	
 	glow.setup();
 	glow.brightness = 1;
-	glow.passes = 2;
+	glow.passes = 1;
 
 	gui.setup("blur");
 	gui.add(passes.setup("passes",glow.passes,1,4));
@@ -32,17 +32,26 @@ void testApp::setup(){
 	gui.add(KoreaParticle::g.setup("g",0,0,255));
 	gui.add(KoreaParticle::b.setup("b",230,0,255));
 	gui.add(KoreaParticle::debug.setup("debug",false));
+	gui.add(KoreaParticle::thickness.setup("thickness",4,0,16));
 	gui.add(lightOn.setup("light",false));
-	gui.add(drawGlow.setup("drawGlow",false));
-	gui.add(KoreaParticle::useModel.setup("use model",true));
+	gui.add(drawGlow.setup("drawGlow",true));
+	gui.add(KoreaParticle::useModel.setup("use model",false));
+	gui.add(lightCutoff.setup("light cutoff",45,0,100));
+	gui.add(lightExponent.setup("light exponent",0,0,3));
+	gui.add(lightConstant.setup("light constant",2,0,10));
+	gui.add(lightLinear.setup("light linear",1,0,10));
+	gui.add(lightQuad.setup("light quad",0.5,0,10));
+	gui.add(record.setup("record",false));
 	//gui.add(&pSystem.gui);
 	gui.add(&kSystem.gui);
 	bShowGui = true;
 	
 	lightOn.addListener(this,&testApp::lightOnChanged);
-	light.setPosition(ofVec3f(ofGetWidth()*.5,ofGetHeight()*.5,0));
+	record.addListener(this,&testApp::recordPressed);
+	light.setPosition(ofVec3f(0,0,0));
+	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB,4);
 	
-	ofEnableAlphaBlending();
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	
 	ofSetFrameRate(60);
     //light.enable();
@@ -56,6 +65,15 @@ void testApp::lightOnChanged(bool & l){
 		light.enable();
 	}else{
 		light.disable();
+	}
+}
+
+
+void testApp::recordPressed(bool & l){
+	if(l && !record){
+		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),30);
+	}else if(!l && record){
+		recorder.encodeVideo();
 	}
 }
 
@@ -78,88 +96,115 @@ void testApp::draw(){
 	
 	//gui.draw();
 	//return;
+	//ofEnableBlendMode(OF_BLENDMODE_ADD);
 	
-	if(lightOn)
+	if(lightOn){
 		ofEnableLighting();
+		//light.setSpotlight( lightCutoff, lightExponent );
+		//light.setDirectional();
+		//light.setAttenuation(lightConstant, lightLinear, lightQuad);
+	}
 
 	float sizeW = 1024*3;
 	float sizeH = 768;
 	
-		
-	if(KoreaParticle::debug) glEnable(GL_DEPTH_TEST);
-	
+
+
+
+	if(record){
+		fbo.begin();
+		ofClear(0);
+	}
 
 	if(!drawGlow){
-
-
 		cam.begin();
-
-		ofNoFill();
-		ofPushMatrix();
-			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
-			ofTranslate(0,0,-1000);
-			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
-		ofPopMatrix();
+		//light.setPosition(cam.getPosition());
+		if(KoreaParticle::debug){
+			ofNoFill();
+			ofPushMatrix();
+				ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+				ofTranslate(0,0,-1000);
+				ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+			ofPopMatrix();
+		}
 
 		ofFill();
 		kSystem.draw();
 		if(KoreaParticle::debug) user1.drawUser();
 
-		ofPushMatrix();
+		/*ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
 			pSystemDemo.draw();
-		ofPopMatrix();
+		ofPopMatrix();*/
 
 		cam.end();
-	
+
+
 	}else{
 		ofFill();
 		glow.begin(false);
 		cam.begin();
+		light.setPosition(cam.getPosition());
 
 		ofClear(0,0);
 
 		kSystem.drawForGlow();
 
-		ofPushMatrix();
+		/*ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
 			pSystemDemo.drawForGlow();
-		ofPopMatrix();
+		ofPopMatrix();*/
 
 		cam.end();
 		glow.end();
 
 		ofSetColor(255);
-		ofPushMatrix();
+		if(!record){
+			ofPushMatrix();
 			glScalef(1,-1,1);
 			glow.draw(0,-ofGetHeight());
-		ofPopMatrix();
+		}else{
+			glow.draw(0,0);
+		}
+
+		if(!record){
+			ofPopMatrix();
+		}
 
 
 		cam.begin();
 
-		ofNoFill();
-		ofPushMatrix();
-			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
-			ofTranslate(0,0,-1000);
-			ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
-		ofPopMatrix();
+		if(KoreaParticle::debug){
+			ofNoFill();
+			ofPushMatrix();
+				ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+				ofTranslate(0,0,-1000);
+				ofRect(-sizeW*.5,-sizeH*.5,sizeW,sizeH);
+			ofPopMatrix();
+		}
 
 		ofFill();
 		kSystem.draw();
+		if(KoreaParticle::debug) user1.drawUser();
 
-		ofPushMatrix();
+		/*ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);
-			//pSystemDemo.draw();
-		ofPopMatrix();
+			pSystemDemo.draw();
+		ofPopMatrix();*/
 
 		cam.end();
 	}
 
+	if(record){
+		fbo.end();
+		ofSetColor(255);
+		fbo.draw(0,0);
+		fbo.readToPixels(pixRecord);
+		recorder.addFrame(pixRecord);
+	}
 	
 	ofSetColor(255);
 	ofDisableLighting();
-	glDisable(GL_DEPTH_TEST);
 	if(bShowGui){
 		gui.draw();
 		ofDrawBitmapString("c: reset cam  m: toggle cam mouse  x: toggle gui",10,ofGetHeight()-20);

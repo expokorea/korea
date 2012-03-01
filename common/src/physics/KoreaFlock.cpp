@@ -112,17 +112,18 @@ void KoreaFlock::debugUserCenter(KUserData & myUser)
 	if(tPts > 0 )
 	{
 	
+	ofSeedRandom(0);
 	float distRange = userRadius;
 	for( int i = 0; i < particles.size(); i++)
 	{	
-		ofVec3f diff = user1-particles[i].pos;
-		float d = diff.length();
-		if(d < distRange)
+		float diff = abs(user1.x-particles[i].pos.x);
+		//float d = diff.length();
+		if(diff < distRange)
 		{
 			particles[i].setState(KPARTICLE_TARGET);
-			int index = i % tPts ;
+			int index = (i + int(ofGetElapsedTimef())) % tPts;
 			particles[i].target = myUser.contour[index];
-			particles[i].targetForce = speed*4;
+			particles[i].targetForce = speed*2*myUser.targetForce;
 		}else{
 			particles[i].setState(KPARTICLE_FLOCKING);
 		}
@@ -145,21 +146,7 @@ void KoreaFlock::drawForGlow(){
 	for(int i = 0; i < particles.size(); i++)
 	{
 		particles[i].drawForGlow();
-		
-		/*ofSetColor(0,0,255,255);
-
-		ofPushMatrix();
-			glTranslatef(particles[i].pos.x,particles[i].pos.y,particles[i].pos.z);
-			glRotatef(90,1,0,0);
-			glRotatef(90,0,0,1);
-			//ofRotate(angle, axis.x, axis.y, axis.z);  
-			glScalef(.1,.1,.1);
-			model.draw(OF_MESH_FILL);
-		ofPopMatrix();*/
-		
-		
 	}		
-	//ofSphere(user1,10);
 	
 
 	

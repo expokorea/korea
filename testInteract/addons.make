@@ -3,3 +3,4 @@ ofxXmlSettings
 ofxAssimpModelLoader
 ofxOsc
 ofxAvahiClient
+ofxVideoRecorder
