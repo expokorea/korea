@@ -67,7 +67,7 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	
 	node.setScale(1);
 
-	length = 30;
+	length = 70;
 
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
@@ -81,7 +81,12 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	trailStrip.setUsage(GL_STREAM_DRAW);
 	trailStripForGlow.setUsage(GL_STREAM_DRAW);
 
-	for(int i=0; i<trails.size()-1;i++){
+	trails[0] = pos;
+	for(int i=0; i<trails.size();i++){
+		if(i>1){
+			trails[i] = trails[i-1];
+			trails[i].x -= 4;
+		}
 
 		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
 		trailStrip.addColor(ofColor(r,g,b,pct));
@@ -107,7 +112,7 @@ void KoreaParticle::update()
 	// for targets and trails
 	t = ofGetElapsedTimef()*speedFactor;
 
-	trails[0] = pos;
+	/*trails[0] = pos;
 	for(int i=1;i<trails.size();i++){
 		float dx = trails[i-1].x - trails[i].x;
 		float dy = trails[i-1].y - trails[i].y;
@@ -157,7 +162,26 @@ void KoreaParticle::update()
 		zangles[i] = ofWrapRadians(az);
 		//trail[i].z=trail[i-1].z;ofVec3f up(0, 0, 1);
 		//float pct = (float)i / (float)trails.size();
+	}*/
+
+	ofVec3f diff,next;
+	next = pos;
+	diff = next-trails[0];
+	ofQuaternion q;
+	float angle;
+	ofVec3f axis;
+	for(int i=0;i<(int)trails.size()-1;i++){
+		diff =  trails[i]-trails[i+1];
+		q.makeRotate(diff,next-trails[i]);
+		//q.getRotate(angle,axis);
+		//angle = ofClamp(angle,-25,25);
+		//q.makeRotate(angle,axis);
+		diff = q * diff;
+		trails[i] = next - diff;
+
+		next = trails[i];
 	}
+	trails[trails.size()-1]=next-diff;
 	
 	node.setPosition(pos);
 	if(trails.size()>10)node.lookAt(trails[0]-trails[trails.size()-10]);
