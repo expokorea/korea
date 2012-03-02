@@ -11,70 +11,50 @@
 ParticleSystemDemo::ParticleSystemDemo() {
 	minAlpha = 20;
 	maxAlpha = 200;
-	////model.loadModel("particle.obj");
-	////particleMesh = model.getMesh(0);
-	/*path.curveTo(ofGetWidth()/2,ofGetHeight()/2,0,50);
-	path.curveTo(0,0,ofGetWidth()*2,50);
-	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*3.8,50);
-	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*3.9,50);
-	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,50);
-	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,50);
-	path.curveTo(ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,50);*/
-	/*path.bezierTo(ofGetWidth()/2,ofGetHeight()/2,0,ofGetWidth()/2,ofGetHeight()/2,0,ofGetWidth()/2,ofGetHeight()/2,0,1000);
-	path.bezierTo(0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,1000);
-	path.bezierTo(0,0,ofGetWidth()*2,0,0,ofGetWidth()*2,ofGetWidth()/2,ofGetHeight()/2,ofGetWidth()*4,1000);*/
+	particles.getVertices().resize(10000);
+	particles.getColors().resize(10000);
+	particles.getNormals().resize(10000);
+	particles.setMode(OF_PRIMITIVE_POINTS);
+	particles.setUsage(GL_STREAM_DRAW);
 }
 
+void ParticleSystemDemo::setup(){
+    ofDisableArbTex();
+    ofLoadImage(tex, "dot.png");
+    ofEnableArbTex();
+}
 
 void ParticleSystemDemo::update(){
 	t = ofGetElapsedTimef()*ofMap(speed,1,80,0,1)*ofMap(speed,1,80,0,1);
+	ofSeedRandom(0);
+	for(int i=0;i<10000;i++){
+		particles.getColors()[i].set(ofColor(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,minAlpha,maxAlpha)));
+		particles.getVertices()[i].set(ofVec3f(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
+				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
+				ofNoise(i/100.,ofRandom(1),t)*ofGetWidth()*4));
+		particles.getNormals()[i].set(ofRandom(5,15),0,0);
+	}
 }
 
 void ParticleSystemDemo::drawForGlow(){
-	ofSeedRandom(0);
-	for(int i=0;i<500;i++){
-		ofColor color(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,minAlpha,maxAlpha));
-		ofSetColor(color);
-		//color.setBrightness();
-		//ofSetColor(r,g,b,a*.5);
-		ofPushMatrix();
-		ofTranslate(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
-				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
-				ofNoise(i/100.,ofRandom(1),t)*ofGetWidth()*4);
-		//ofRotate(ofNoise(i/100.,t,ofRandom(1))*360,1,0,0);
-		//ofScale(radius,radius,radius);
-		//particleMesh.draw();
-		ofSphere(radius);
-		ofPopMatrix();
-		/*ofSphere(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
-				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
-				ofNoise(i/100.,ofRandom(1),t)*ofGetHeight()*.4,
-				radius);*/
-	}
 }
 
 void ParticleSystemDemo::draw(){
-	ofSeedRandom(0);
-	for(int i=0;i<500;i++){
-		ofColor color(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,minAlpha*3,maxAlpha));
-		ofSetColor(color);
-		//color.setBrightness();
-		//ofSetColor(r,g,b,a*.5);
+	//float attenuation[3] = {.5,.5,.5};
+	//glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION,attenuation);
+	//glPointSize(10);
+	//glDepthMask(GL_FALSE);
+	ofEnablePointSprites();
+	tex.bind();
+	particles.draw();
+	tex.unbind();
 
-		ofPushMatrix();
-		ofTranslate(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
-				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
-				ofNoise(i/100.,ofRandom(1),t)*ofGetWidth()*4);
-		//ofRotate(ofNoise(i/100.,t,ofRandom(1))*360,1,0,0);
-		//ofScale(radius*.4,radius*.4,radius*.4);
-		//particleMesh.draw();
-		ofSphere(radius*.4);
-		ofPopMatrix();
-		/*ofSphere(ofNoise(i/100.,t,ofRandom(1))*ofGetWidth(),
-				ofNoise(ofRandom(1),i/100.,t)*ofGetHeight(),
-				ofNoise(i/100.,ofRandom(1),t)*ofGetHeight()*.4,
-				radius*.4);*/
-	}
+
+    glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+	particles.draw();
+
+	ofDisablePointSprites();
+	//glDepthMask(GL_TRUE);
 }
 
 void ParticleSystemDemo::drawPath(){

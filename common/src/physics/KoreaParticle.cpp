@@ -21,6 +21,8 @@ ofxToggle KoreaParticle::debug;
 ofxToggle KoreaParticle::useModel;
 ofxFloatSlider KoreaParticle::thickness;
 ofxIntSlider KoreaParticle::length;
+ofxAssimpModelLoader KoreaParticle::model;
+float KoreaParticle::speedFactor;
 
 ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const ofVec3f &d )
 {
@@ -36,8 +38,6 @@ ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const 
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
-	
-	model.loadModel("blobFish.obj");
 	
 	this->vel = vel;
 	this->pos = pos;
@@ -61,12 +61,12 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
     alignment  =  .005;
 	
 	targetSpeed = 8;
+	speedFactor = ofMap(targetSpeed,1,80,0,1)*ofMap(targetSpeed,1,80,0,1);
 	
 	//trails.reserve(100);
 	
 	node.setScale(1);
 
-	thickness = 8;
 	length = 30;
 
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
@@ -75,6 +75,20 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	trails.resize(length);
 	angles.resize(length,0);
 	zangles.resize(length,0);
+	trailStrip.getVertices().resize((length-1)*2);
+	trailStripForGlow.getVertices().resize((length-1)*2);
+
+	trailStrip.setUsage(GL_STREAM_DRAW);
+	trailStripForGlow.setUsage(GL_STREAM_DRAW);
+
+	for(int i=0; i<trails.size()-1;i++){
+
+		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
+		trailStrip.addColor(ofColor(r,g,b,pct));
+		trailStripForGlow.addColor(ofColor(r,g,b,pct));
+		trailStrip.addColor(ofColor(r,g,b,pct));
+		trailStripForGlow.addColor(ofColor(r,g,b,pct));
+	}
 }
 
 void KoreaParticle::update()
@@ -91,18 +105,8 @@ void KoreaParticle::update()
 	pos += vel;
 	
 	// for targets and trails
-	t = ofGetElapsedTimef()*ofMap(targetSpeed,1,80,0,1)*ofMap(targetSpeed,1,80,0,1);
+	t = ofGetElapsedTimef()*speedFactor;
 
-	/*while(trails.size() > length) {
-		trails.erase(trails.begin());
-		for(int i=0;i<4;i++){
-			trailStrip.getVertices().erase(trailStrip.getVertices().begin());
-			trailStripForGlow.getVertices().erase(trailStripForGlow.getVertices().begin());
-		}
-	}*/
-	/*for(int i=0;i<(int)angles.size();i++){
-		angles[i] = 10 * ofSignedNoise(t*ofRandom(2));
-	}*/
 	trails[0] = pos;
 	for(int i=1;i<trails.size();i++){
 		float dx = trails[i-1].x - trails[i].x;
@@ -159,14 +163,9 @@ void KoreaParticle::update()
 	if(trails.size()>10)node.lookAt(trails[0]-trails[trails.size()-10]);
 
 
-
-	trailStrip.clear();
-	trailStripForGlow.clear();
-
-	for(int i=0; i<trails.size()-1;i++){
+	for(int i=0; i<(int)trails.size()-1;i++){
 		ofVec3f up(0, 0, 1);
 		//float pct = (float)i / (float)trails.size();
-		ofSetColor(r,g,b,200);
 		ofVec3f &p0 = trails[i];
 		ofVec3f &p1 = trails[i+1];
 
@@ -175,29 +174,12 @@ void KoreaParticle::update()
 		right *= thickness; //ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))+2,0,thickness); //*sin(float(i)/float(trails.size())*PI)
 		ofVec3f rightNotGlow = right * .5;
 
-		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
 
-		trailStrip.addVertex(trails[i] -rightNotGlow);
-		trailStrip.addColor(ofColor(r,g,b,pct));
-		trailStripForGlow.addVertex(trails[i] -right);
-		trailStripForGlow.addColor(ofColor(r,g,b,pct));
+		trailStrip.getVertices()[i*2].set(trails[i] -rightNotGlow);
+		trailStripForGlow.getVertices()[i*2].set(trails[i] -right);
 
-		trailStrip.addVertex(trails[i] +rightNotGlow);
-		trailStrip.addColor(ofColor(r,g,b,pct));
-		trailStripForGlow.addVertex(trails[i] +right);
-		trailStripForGlow.addColor(ofColor(r,g,b,pct));
-
-
-		pct = float(trails.size()-i-1) / (float)trails.size() * .75 * 255;
-		trailStrip.addVertex(trails[i+1] -rightNotGlow);
-		trailStrip.addColor(ofColor(r,g,b,pct));
-		trailStripForGlow.addVertex(trails[i+1] -right);
-		trailStripForGlow.addColor(ofColor(r,g,b,pct));
-
-		trailStrip.addVertex(trails[i+1] +rightNotGlow);
-		trailStrip.addColor(ofColor(r,g,b,pct));
-		trailStripForGlow.addVertex(trails[i+1] +right);
-		trailStripForGlow.addColor(ofColor(r,g,b,pct));
+		trailStrip.getVertices()[i*2+1].set(trails[i] +rightNotGlow);
+		trailStripForGlow.getVertices()[i*2+1].set(trails[i] +right);
 
 		//ofVec3f normal = calcNormal(trails[i] -rightNotGlow,trails[i] +rightNotGlow,trails[i+1] -rightNotGlow,trails[i+1] +rightNotGlow);
 		//for(int i=0;i<4;i++){
@@ -223,14 +205,9 @@ void KoreaParticle::draw()
 	if(debug){
 		drawDebug();
 	}
-	//ofCircle(pos.x, pos.y, 3);
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
-	else ofSetColor(r,g,b,200);
-
-	//ofFill();
-	//ofSphere(pos,10);
-	//node.draw();
 	if(KoreaParticle::useModel){
+		if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
+		else ofSetColor(r,g,b,200);
 		ofVec3f axis;
 		float angle;
 		node.getOrientationQuat().getRotate(angle, axis);
@@ -245,8 +222,6 @@ void KoreaParticle::draw()
 		ofPopMatrix();
 	}
 
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(255,255,255,255);
-	else ofSetColor(255,255,255,200);
 	if(bDrawTrails)
 	{
 		trailStrip.draw();
@@ -260,14 +235,9 @@ void KoreaParticle::drawForGlow() {
 	if(debug){
 		drawDebug();
 	}
-	//ofCircle(pos.x, pos.y, 3);
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
-	else ofSetColor(r,g,b,200);
-
-	//ofFill();
-	//ofSphere(pos,10);
-	//node.draw();
 	if(KoreaParticle::useModel && !KoreaParticle::debug){
+		if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
+		else ofSetColor(r,g,b,200);
 		ofVec3f axis;
 		float angle;
 		node.getOrientationQuat().getRotate(angle, axis);
@@ -282,8 +252,6 @@ void KoreaParticle::drawForGlow() {
 		ofPopMatrix();
 	}
 
-	if(particleState == KPARTICLE_FLOCKING) ofSetColor(255,255,255,255);
-	else ofSetColor(255,255,255,200);
 	if(bDrawTrails)
 	{
 		trailStripForGlow.draw();

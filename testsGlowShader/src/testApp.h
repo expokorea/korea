@@ -48,6 +48,7 @@ class testApp : public ofBaseApp{
 
 		ofLight light;
 		Glow glow;
+		ofShader glowMultiply;
 		ParticleSystem pSystem;
 		ParticleSystemDemo pSystemDemo;
 

@@ -4,12 +4,12 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	ofSetVerticalSync(true);
-	ofSetFrameRate(60);
+	ofSetFrameRate(30);
 
 	ofSetSphereResolution(10);
 
 	ofBackground(0);
-	pSystem.setup(200);
+	pSystem.setup(4000);
 	
 	kSystem.setup(100);
 	
@@ -45,6 +45,8 @@ void testApp::setup(){
 	//gui.add(&pSystem.gui);
 	gui.add(&kSystem.gui);
 	gui.loadFromFile("settings.xml");
+
+	pSystemDemo.setup();
 	pSystemDemo.speed = 8;
 
 	lightOn.addListener(this,&testApp::lightOnChanged);
@@ -52,16 +54,19 @@ void testApp::setup(){
 	initCameraMovement.addListener(this,&testApp::initCameraMovementPressed);
 	demo.addListener(this,&testApp::demoPressed);
 
+	record = true;
+
 	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
 
-	ofEnableAlphaBlending();
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	hideGui = false;
-	ofEnableAlphaBlending();
 	
 	camera.setupPerspective();
 	//prevCameraPos = pSystemDemo.path[0];
 
 	timeInitCamMovement = ofGetElapsedTimef();
+
+	glowMultiply.load("shader");
 
     //light.enable();
 }
@@ -76,7 +81,7 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),20);
+		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),30);
 	}else if(!l && record){
 		recorder.encodeVideo();
 	}
@@ -111,7 +116,7 @@ void testApp::update(){
 	light.setPosition(lightX,lightY,lightZ);
 
 	//z = ofMap(ofGetElapsedTimef(),0,20,0,pSystemDemo.path.size()-1,true);
-	posCameraPct = ofMap(ofGetElapsedTimef()-timeInitCamMovement,0,20,0,1,&ofEasing::quadOut,true);
+	posCameraPct = ofMap(ofGetElapsedTimef()-timeInitCamMovement,0,60,0,1,&ofEasing::quadOut,true);
 	camera.setupPerspective();
 	//camera.setPosition(ofGetWidth()/2, ofGetHeight()/2,  z); //665.108 +
 	//camera.setPosition(pSystemDemo.path[z]);
@@ -133,6 +138,7 @@ void testApp::update(){
 	prevCameraPos.y += ofSignedNoise(prevCameraPos.y/100.)*100;
 	camera.setPosition(prevCameraPos);
 
+	if(posCameraPct>=1) record = false;
 
 }
 
@@ -144,53 +150,27 @@ void testApp::draw(){
 		light.setSpotlight( 30, 0 );
 	}
 
-	glow.begin(false);
-	if(useCamera){
-		camera.begin();
-
-		light.setPosition(camera.getPosition());
-	}
-	ofClear(0,0);
-
-	//glEnable(GL_DEPTH_TEST);
-	if(demo){
-		pSystemDemo.drawForGlow();
-	}else{
-		/*glPushMatrix();
-			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
-			pSystem.drawForGlow();
-		glPopMatrix();*/
-		pSystemDemo.drawForGlow();
-
-		kSystem.drawForGlow();
-	}
-	if(useCamera)camera.end();
-	glow.end();
-
 	ofSetColor(255);
 	if(record){
 		fbo.begin();
 		ofClear(0);
 	}
-	ofPushMatrix();
-		glScalef(1,-1,1);
-		glow.draw(0,-ofGetHeight());
-	ofPopMatrix();
 
-	if(drawNotBlurred){
-		if(useCamera)camera.begin();
-		if(demo){
-			pSystemDemo.draw();
-		}else{
-			/*glPushMatrix();
-				glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
-				pSystem.drawAll();
-			glPopMatrix();*/
-			kSystem.draw();
-			pSystemDemo.draw();
-		}
-		if(useCamera)camera.end();
+	if(useCamera)camera.begin();
+	glowMultiply.begin();
+	if(demo){
+		pSystemDemo.draw();
+	}else{
+		/*glPushMatrix();
+			glTranslatef(ofGetWidth()/2.f ,ofGetHeight()/2.f ,0.f);
+			pSystem.drawAll();
+		glPopMatrix();*/
+		kSystem.draw();
+		pSystemDemo.draw();
 	}
+	glowMultiply.end();
+	if(useCamera)camera.end();
+
 	if(record){
 		fbo.end();
 		ofSetColor(255);

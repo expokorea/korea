@@ -14,6 +14,7 @@ class ParticleSystemDemo {
 public:
 	ParticleSystemDemo();
 
+	void setup();
 	void update();
 	void drawForGlow();
 	void draw();
@@ -29,7 +30,7 @@ public:
 
 private:
 	float t;
-	ofxAssimpModelLoader model;
-	ofVboMesh particleMesh;
+	ofVboMesh particles;
+	ofTexture tex;
 };
 

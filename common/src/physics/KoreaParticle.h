@@ -34,7 +34,7 @@ class KoreaParticle {
 	float rt;
 	float t;
 	
-	ofMesh trailStrip,trailStripForGlow;
+	ofVboMesh trailStrip,trailStripForGlow;
 	vector<ofVec3f> trails;
 	vector<float> angles;
 	vector<float> zangles;
@@ -57,10 +57,11 @@ class KoreaParticle {
 	static ofxToggle debug;
 	static ofxToggle useModel;
 	
-	ofxAssimpModelLoader model;
+	static ofxAssimpModelLoader model;
 	static ofxFloatSlider thickness;
 	static ofxIntSlider length;
 
+	static float speedFactor;
 
 
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
