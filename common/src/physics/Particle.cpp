@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include "ofGraphics.h"
+#include "ofxTimeUtils.h"
 
 
 ofVec3f
@@ -83,7 +84,7 @@ void Particle::applyFlockingForce(bool bAccountForTargetForce){
 float Particle::getCurrentTime(){
 	if( ofGetFrameNum() != curFrame ){
 		curFrame = ofGetFrameNum();
-		curTime  = ofGetElapsedTimef();
+		curTime  = ofxTimeUtils::getElapsedTimef();
 	}
 	return curTime;
 }

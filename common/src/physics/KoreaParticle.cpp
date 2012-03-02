@@ -8,6 +8,7 @@
  */
 
 #include "KoreaParticle.h"
+#include "ofxTimeUtils.h"
 
 /*float KoreaParticle::targetForce,
 KoreaParticle::separation,
@@ -67,7 +68,7 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	
 	node.setScale(1);
 
-	length = 70;
+	length = 50;
 
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
@@ -110,7 +111,7 @@ void KoreaParticle::update()
 	pos += vel;
 	
 	// for targets and trails
-	t = ofGetElapsedTimef()*speedFactor;
+	t = ofxTimeUtils::getElapsedTimef()*speedFactor;
 
 	/*trails[0] = pos;
 	for(int i=1;i<trails.size();i++){
@@ -173,9 +174,11 @@ void KoreaParticle::update()
 	for(int i=0;i<(int)trails.size()-1;i++){
 		diff =  trails[i]-trails[i+1];
 		q.makeRotate(diff,next-trails[i]);
-		//q.getRotate(angle,axis);
-		//angle = ofClamp(angle,-25,25);
-		//q.makeRotate(angle,axis);
+
+		/*q.getRotate(angle,axis);
+		if(angle>90) angle = 90;
+		q.makeRotate(angle,axis);*/
+
 		diff = q * diff;
 		trails[i] = next - diff;
 
@@ -184,7 +187,7 @@ void KoreaParticle::update()
 	trails[trails.size()-1]=next-diff;
 	
 	node.setPosition(pos);
-	if(trails.size()>10)node.lookAt(trails[0]-trails[trails.size()-10]);
+	if(trails.size()>10)node.lookAt(trails[0]-trails[1]);
 
 
 	for(int i=0; i<(int)trails.size()-1;i++){

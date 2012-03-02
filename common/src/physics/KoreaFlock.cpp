@@ -8,6 +8,7 @@
  */
 
 #include "KoreaFlock.h"
+#include "ofxTimeUtils.h"
 
 void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDepth)
 {
@@ -121,7 +122,7 @@ void KoreaFlock::debugUserCenter(KUserData & myUser)
 		if(diff < distRange)
 		{
 			particles[i].setState(KPARTICLE_TARGET);
-			int index = (i + int(ofGetElapsedTimef())) % tPts;
+			int index = (i + int(ofxTimeUtils::getElapsedTimef())) % tPts;
 			particles[i].target = myUser.contour[index];
 			particles[i].targetForce = speed*2*myUser.targetForce;
 		}else{

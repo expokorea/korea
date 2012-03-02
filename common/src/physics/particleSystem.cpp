@@ -1,4 +1,5 @@
 #include "particleSystem.h"
+#include "ofxTimeUtils.h"
 
 
 
@@ -135,7 +136,7 @@ void ParticleSystem::updateAll(float turbulence) {
 	Particle::avg.set(0, 0, 0);
 	ofVec3f sum;
 	int nVisible = 0;
-	float timeNow = ofGetElapsedTimef();
+	float timeNow = ofxTimeUtils::getElapsedTimef();
 	for(int i = 0; i < particles.size(); i++) {
 		if (particles[i].bVisible) {
 			particles[i].update();

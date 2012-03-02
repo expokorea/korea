@@ -1,4 +1,5 @@
 #include "testApp.h"
+#include "ofxTimeUtils.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -73,8 +74,12 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),30);
+		ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
+		ofSetFrameRate(60);
+		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
 	}else if(!l && record){
+		ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
+		ofSetFrameRate(60);
 		recorder.encodeVideo();
 	}
 }

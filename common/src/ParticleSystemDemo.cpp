@@ -7,6 +7,7 @@
 
 #include "ParticleSystemDemo.h"
 #include "ofMath.h"
+#include "ofxTimeUtils.h"
 
 ParticleSystemDemo::ParticleSystemDemo() {
 	minAlpha = 20;
@@ -25,7 +26,7 @@ void ParticleSystemDemo::setup(){
 }
 
 void ParticleSystemDemo::update(){
-	t = ofGetElapsedTimef()*ofMap(speed,1,80,0,1)*ofMap(speed,1,80,0,1);
+	t = ofxTimeUtils::getElapsedTimef()*ofMap(speed,1,80,0,1)*ofMap(speed,1,80,0,1);
 	ofSeedRandom(0);
 	for(int i=0;i<10000;i++){
 		particles.getColors()[i].set(ofColor(r,g,b,ofMap(ofNoise(i/100.*ofRandom(1),t*ofRandom(1,500),ofRandom(1)),0,1,minAlpha,maxAlpha)));

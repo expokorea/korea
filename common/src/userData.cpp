@@ -8,6 +8,7 @@
  */
 
 #include "userData.h"
+#include "ofxTimeUtils.h"
 
 void KUserData::setup()
 {
@@ -31,8 +32,8 @@ void KUserData::debugSetUserContour()
 	for( int i = 0; i < 20; i++)
 	{
 		ofPoint p = ofPoint( 
-		pos.x + (radiusX + (ofNoise(ofGetElapsedTimef()*2,i/20.f)*45) )*sin( i*angStep), 
-		pos.y + (radiusY + (ofNoise(i/20.f,ofGetElapsedTimef()*2)*45) )*cos(angStep*i), pos.z);
+		pos.x + (radiusX + (ofNoise(ofxTimeUtils::getElapsedTimef()*2,i/20.f)*45) )*sin( i*angStep),
+		pos.y + (radiusY + (ofNoise(i/20.f,ofxTimeUtils::getElapsedTimef()*2)*45) )*cos(angStep*i), pos.z);
 		contour.push_back(p);
 	}
 	
