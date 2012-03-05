@@ -6,7 +6,6 @@ void testApp::setup(){
 	ofAddListener(avahi.serviceNewE,this,&testApp::newAvahiService);
 	ofAddListener(avahi.serviceRemoveE,this,&testApp::removedAvahiService);
 
-	avahi.lookup("_oscit._udp");
 
 	contours.setup(6668);
 
@@ -18,6 +17,8 @@ void testApp::setup(){
 	guiMapping.add(startMapping.setup("start mapping",false));
 
 	gui.add(&guiMapping);
+
+	avahi.lookup("_oscit._udp");
 }
 
 //--------------------------------------------------------------

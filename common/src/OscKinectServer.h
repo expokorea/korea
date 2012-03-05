@@ -22,12 +22,17 @@ public:
 	void tiltChanged(int & tilt);
 	void nearThresholdChanged(int & t);
 	void farThresholdChanged(int & t);
+	void recordPressed(bool & r);
+	void usePlayer(bool & p);
+	void clipChanged(float & c);
 
 	ofxPanel gui;
 	ofxIntSlider tilt;
 	ofxIntSlider nearThreshold;
 	ofxIntSlider farThreshold;
-
+	ofxFloatSlider nearClip;
+	ofxFloatSlider farClip;
+	ofxToggle	 record, player;
 private:
 	void init();
 };

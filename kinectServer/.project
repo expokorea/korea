@@ -83,34 +83,44 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>addons</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>common</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/apps/korea/common</location>
 		</link>
 		<link>
-			<name>ofxAvahiClient</name>
+			<name>addons/ofxAvahiClient</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxAvahiClient</location>
 		</link>
 		<link>
-			<name>ofxCv</name>
+			<name>addons/ofxCv</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxCv</location>
 		</link>
 		<link>
-			<name>ofxKinect</name>
+			<name>addons/ofxKinect</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxKinect</location>
 		</link>
 		<link>
-			<name>ofxOpenCv</name>
+			<name>addons/ofxOpenCv</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOpenCv</location>
 		</link>
 		<link>
-			<name>ofxOsc</name>
+			<name>addons/ofxOsc</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOsc</location>
+		</link>
+		<link>
+			<name>addons/ofxVideoRecorder</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxVideoRecorder</location>
 		</link>
 	</linkedResources>
 </projectDescription>

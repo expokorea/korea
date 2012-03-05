@@ -2,3 +2,4 @@ ofxOsc
 ofxAvahiClient
 ofxGui
 ofxXmlSettings
+ofxAssimpModelLoader

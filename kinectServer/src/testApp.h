@@ -6,6 +6,8 @@
 #include "ofxOsc.h"
 #include "ofxAvahiClient.h"
 #include "OscContourServer.h"
+#include "ofxVideoRecorder.h"
+#include "ofxKinectSequencePlayer.h"
 
 class testApp : public ofBaseApp{
 
@@ -13,6 +15,9 @@ class testApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+
+		template<class Kinect>
+		void updateAnalisys(Kinect & kinect);
 
 		void keyPressed  (int key);
 		void keyReleased(int key);
@@ -29,18 +34,29 @@ class testApp : public ofBaseApp{
 		void removedAvahiService(ofxAvahiService & service);
 
 		ofxKinect kinect;
-		ContourFinder contourFinder;
+		ofxKinectSequencePlayer player;
+		ofxCv::ContourFinder contourFinder;
 		vector<ofPolyline> polylines;
 		vector<ofPtr<OscContourServer> > oscContours;
 		ofxOscReceiver oscConfig;
 		ofxAvahiClientService avahi;
 		ofxAvahiClientBrowser avahiBrowser;
+		cv::BackgroundSubtractorMOG bgSubstractor;
 		int frame;
 
 		int tilt;
 		int farThreshold;
 		int nearThreshold;
 
-		ofPixels nearThresPix, farThresPix;
-		ofImage thresPix;
+		ofFloatPixels nearThresPix, farThresPix, rgbDepth;
+		ofFloatPixels background, diff;
+		ofFloatPixels thresPix;
+		ofPixels thres8Bit,fg;
+		ofTexture texThres;
+
+		ofxVideoRecorder recorder;
+		bool recording;
+
+		bool usePlayer;
+		int captureBg;
 };
