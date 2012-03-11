@@ -12,10 +12,7 @@
 
 void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDepth)
 {
-	
-	//model.loadModel("blobFish.obj");
-	
-	KoreaParticle tempParticle;
+		
 	
 	this->worldWidth  = worldWidth;
 	this->worldHeight = worldHeight;
@@ -26,6 +23,7 @@ void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDep
 	float halfDepth = worldDepth * .5;
 	
 	// setup random
+	KoreaParticle tempParticle;
 	for( int i = 0; i < total; i++)
 	{
 		ofVec3f pos = ofVec3f( ofRandom(-halfWidth,halfWidth), ofRandom(-halfHeight,halfHeight), ofRandom(-halfDepth,halfDepth));
@@ -47,15 +45,69 @@ void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDep
 	color.set(255,255,255);
 }
 
+void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
+{
+	this->worldWidth  = worldWidth;
+	this->worldHeight = worldHeight;
+	this->worldDepth  = worldDepth;
+	
+	float halfWidth  = worldWidth  * .5;
+	float halfHeight = worldHeight * .5;
+	float halfDepth  = worldDepth  * .5;
+	
+	// create particles in groups with unique identifier
+	int groupMin = 6;
+	int groupMax = 20;
+	int totalGroup = 10;
+		
+	for( int j = 0; j < totalGroup; j++)
+	{
+		int thisGroup = ofRandom(groupMin,groupMax);
+		for( int i = 0; i<thisGroup; i++)
+			particles.push_back(KoreaParticle(j));		 
+	}
+	
+	// set groups up in thirds of the screen
+	float thirdHW = .5 * (worldWidth / 3.0f);
+	
+	for( int i = 0; i < particles.size(); i++)
+	{
+		ofVec3f pos;
+		if( particles[i].groupFlag <= 3 )
+			pos = ofVec3f( ofRandom(-thirdHW-50,-thirdHW+50), ofRandom(-50,50), ofRandom(-50,50));
+		else if( particles[i].groupFlag <= 6 )
+			pos = ofVec3f( ofRandom(-50,50), ofRandom(-50,50), ofRandom(-50,50));
+		else 
+			pos = ofVec3f( ofRandom(thirdHW-50,thirdHW+50), ofRandom(-50,50), ofRandom(-50,50));
+		
+		particles[i].setup( pos, ofVec3f( 0,0,0), .01f );
+		particles[i].bUseTarget = true;
+		particles[i].rt = i;
+	}
+	
+	
+	// set interface
+	gui.setup("particles");
+	gui.add(speed.setup("t force",.010,0,.05));
+	gui.add(useTrails.setup("trails",true));
+	gui.add(sep.setup("sep",.05,0,.1));
+	gui.add(coh.setup("coh",.01,0,.1));
+	gui.add(aln.setup("aln",.01,0,.1));
+	gui.add(userRadius.setup("user radius",200,0,500));
+	
+	color.set(255,255,255);
+	
+}
+
 void KoreaFlock::update()
 {
 	ofSeedRandom(0);
 	
 	for( int i = 0; i < particles.size(); i++)
 	{
-		float halfWidth = worldWidth * .5;
+		float halfWidth  = worldWidth  * .5;
 		float halfHeight = worldHeight * .5;
-		float halfDepth = worldDepth * .5;
+		float halfDepth  = worldDepth  * .5;
 	
 		if(particles[i].particleState == KPARTICLE_FLOCKING)
 			particles[i].target.set(
@@ -97,6 +149,7 @@ void KoreaFlock::update()
 //void KoreaFlock::debugUserCenter(ofPoint p)
 void KoreaFlock::debugUserCenter(KUserData & myUser)
 {
+	return;
 	/*
 	// calculate all that are within range of user
 	p.y  = ofGetHeight()-p.y;

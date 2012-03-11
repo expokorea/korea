@@ -64,8 +64,6 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	targetSpeed = 8;
 	speedFactor = ofMap(targetSpeed,1,80,0,1)*ofMap(targetSpeed,1,80,0,1);
 	
-	//trails.reserve(100);
-	
 	node.setScale(1);
 
 	length = 50;
@@ -99,6 +97,10 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 
 void KoreaParticle::update()
 {
+	
+	vel += ofVec3f(	ofNoise(rt*t,0)*.001-.0005,
+					ofNoise(0,rt*t)*.001-.0005,
+					0);
 	
 	vel.x -= damping*vel.x;
 	vel.y -= damping*vel.y;
@@ -222,11 +224,6 @@ void KoreaParticle::update()
 	}
 }
 
-void KoreaParticle::draw3D()
-{
-	//ofSphere(pos,5);
-}
-
 void KoreaParticle::draw()
 {
 	if(debug){
@@ -295,6 +292,12 @@ void KoreaParticle::drawDebug(){
 		ofSphere(pos,10);
 		node.draw();
 		glDisable(GL_DEPTH_TEST);
+		
+		glBegin(GL_LINES);
+			glVertex3f(pos.x,pos.y,pos.z);
+			glVertex3f(target.x,target.y,target.z);
+		glEnd();
+		
 }
 
 void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
@@ -348,39 +351,48 @@ void KoreaParticle::addForFlocking(KoreaParticle * sister)
 	// attention angle factor
 	direction = vel;
 	direction.normalize();
-	attention_factor = diff.dot( direction );
-	
-	
+	/*attention_factor = diff.dot( direction );
 	const float CUTOFF = .651;//PI;
 	attention_factor -= CUTOFF;
 	attention_factor /= (1.0f-CUTOFF);
+	*/
 	attention_factor = 1;
 	
 	
-	if( attention_factor > 0.0f )
+	if(d > 0)
 	{
-		if( d > 0 && d < sepDist )
-		{
-			sumSep += (diff) * attention_factor;
-			countSep++;
+			if( d < sepDist )
+			{
+				sumSep += (diff) * attention_factor;
+				countSep++;
+			}
+		
+			if( sister->groupFlag != groupFlag){
+				
+				attention_factor = .1;
+				
+				if( d < alnDist )
+				{
+					sumAlign += sister->vel  * attention_factor;
+					countAlign++;
+				}
+				
+				//add for cohesion
+				if( d < cohDist )
+				{
+					sumCoh += sister->pos * attention_factor;
+					countCoh++;
+				}
+			}
+			else{
+		
+				sumAlign += sister->vel  * attention_factor;
+				countAlign++;
+				
+				sumCoh += sister->pos * attention_factor;
+				countCoh++;			
+			}
 		}
-		
-		// add for alignment
-		if( d > 0 && d < alnDist )
-		{
-			sumAlign += sister->vel  * attention_factor;
-			countAlign++;
-		}
-		
-		//add for cohesion
-		if( d > 0 && d < cohDist )
-		{
-			sumCoh += sister->pos * attention_factor;
-			countCoh++;
-        }
-		
-	}
-	
 }
 
 

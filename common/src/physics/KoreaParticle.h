@@ -26,10 +26,10 @@ class KoreaParticle {
 	float    damping;
 	ofVec3f  target;
 	float    targetForce;
+	float	 targetSpeed;
 	bool     bUseTarget;
 	bool     bFlocking;
 	bool	 bDrawTrails;
-	float	 targetSpeed;
 	
 	float rt;
 	float t;
@@ -60,16 +60,18 @@ class KoreaParticle {
 	static ofxAssimpModelLoader model;
 	static ofxFloatSlider thickness;
 	static ofxIntSlider length;
-
 	static float speedFactor;
 
-
+	unsigned int groupFlag;
+	
+	KoreaParticle(){};
+	KoreaParticle(unsigned int flag){ groupFlag = flag; };
+	
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update();
+	
 	void draw();
-	void draw3D();
 	void drawForGlow();
-
 	void drawDebug();
 
 	void setTarget(ofVec3f targ, float targetForce);

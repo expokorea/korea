@@ -30,11 +30,15 @@ public:
 	vector<KoreaParticle> particles;
 	
 	void setup( int total, int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
+	
+	// setup for groups
+	void setupInGroups( int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
+
 	void update();
+	
 	void draw();
 	void drawForGlow();
 	
-	//void debugUserCenter(ofPoint p);
 	void debugUserCenter(KUserData & myUser);
 	
 	ofxFloatSlider speed;
@@ -50,7 +54,5 @@ public:
 	float worldWidth,worldHeight,worldDepth;
 	ofPoint user1;
 	
-	ofxAssimpModelLoader model;
-
 
 };

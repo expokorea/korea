@@ -1,6 +1,8 @@
 #include "testApp.h"
 #include "ofxTimeUtils.h"
 
+GLfloat fogColor[4]= {0.0f, 0.0f, 0.0f, 1.0f};
+
 //--------------------------------------------------------------
 void testApp::setup(){
 	ofSetVerticalSync(true);
@@ -35,6 +37,11 @@ void testApp::setup(){
 	gui.add(lightQuad.setup("light quad",0.5,0,10));
 	gui.add(record.setup("record",false));
 	//gui.add(&pSystem.gui);
+	
+	ofxXmlSettings xml;
+	xml.loadFile("settings.xml");
+	gui.loadFromXml(xml);
+	
 	bShowGui = true;
 	
 	lightOn.addListener(this,&testApp::lightOnChanged);
@@ -46,7 +53,7 @@ void testApp::setup(){
 	pSystem.setup(100);
 
 	//kSystem.setup(100,(1024*3)-200,768-200);
-	kSystem.setup(200,1024*3,768,600);
+	kSystem.setupInGroups(1024*3,768,600);
 	gui.add(&kSystem.gui);
 	
 	user1.setup();
@@ -61,6 +68,13 @@ void testApp::setup(){
 	
 	
 	//cam.disableMouseInput();
+	glFogi(GL_FOG_MODE, GL_LINEAR);        // Fog Mode
+	glFogfv(GL_FOG_COLOR, fogColor);            // Set Fog Color
+	glFogf(GL_FOG_DENSITY, 0.35f);              // How Dense Will The Fog Be
+	glHint(GL_FOG_HINT, GL_DONT_CARE);          // Fog Hint Value
+	//glFogf(GL_FOG_START, fogStart);             // Fog Start Depth
+	//glFogf(GL_FOG_END, fogEnd);  
+	
 }
 
 void testApp::lightOnChanged(bool & l){
