@@ -284,7 +284,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>15</integer>
+									<integer>18</integer>
 									<integer>8</integer>
 									<integer>3</integer>
 									<integer>0</integer>
@@ -326,7 +326,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>8323680814EC0081004220A6</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>KoreaFlock.cpp</string>
+								<string>KoreaParticle.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -334,11 +334,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>8323680914EC0081004220A6</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>KoreaFlock.cpp</string>
+										<string>KoreaParticle.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>83D97EEF150E728400EAB5B1</string>
+										<string>83D97F00150EA3F800EAB5B1</string>
 										<key>history</key>
 										<array>
 											<string>8323680A14EC0081004220A6</string>
@@ -381,17 +381,17 @@
 											<string>83D97E85150DDE7D00EAB5B1</string>
 											<string>83D97E86150DDE7D00EAB5B1</string>
 											<string>83D97E87150DDE7D00EAB5B1</string>
-											<string>83D97E89150DDE7D00EAB5B1</string>
 											<string>83D97EAD150DDF3800EAB5B1</string>
 											<string>83D97EB5150DDF5A00EAB5B1</string>
-											<string>83D97ECB150DE04100EAB5B1</string>
-											<string>83D97ECC150DE04100EAB5B1</string>
 											<string>83D97EE8150E728400EAB5B1</string>
 											<string>83D97EE9150E728400EAB5B1</string>
 											<string>83D97EEA150E728400EAB5B1</string>
-											<string>83D97EEB150E728400EAB5B1</string>
-											<string>83D97EED150E728400EAB5B1</string>
-											<string>83D97EEE150E728400EAB5B1</string>
+											<string>83D97EFA150EA3F800EAB5B1</string>
+											<string>83D97EFB150EA3F800EAB5B1</string>
+											<string>83D97EFC150EA3F800EAB5B1</string>
+											<string>83D97EFD150EA3F800EAB5B1</string>
+											<string>83D97EFE150EA3F800EAB5B1</string>
+											<string>83D97EFF150EA3F800EAB5B1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -708,6 +708,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>83D97F01150EA3F800EAB5B1</string>
 		<string>83D97E9F150DDEC100EAB5B1</string>
 		<string>83D97EA0150DDEC100EAB5B1</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks/projects_git/korea/testInteract/testInteract.xcodeproj</string>

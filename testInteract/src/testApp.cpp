@@ -143,6 +143,7 @@ void testApp::draw(){
 		ofFill();
 		kSystem.draw();
 		if(KoreaParticle::debug) user1.drawUser();
+		if(KoreaParticle::debug) kSystem.drawDebug();
 
 		/*ofPushMatrix();
 			ofTranslate(-ofGetWidth()*.5,-ofGetHeight()*.5,0);

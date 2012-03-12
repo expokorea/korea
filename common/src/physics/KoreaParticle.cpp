@@ -287,14 +287,14 @@ void KoreaParticle::drawDebug(){
 
 		//ofFill();
 		glEnable(GL_DEPTH_TEST);
-		ofSphere(pos,10);
+		ofSphere(pos,5);
 		node.draw();
 		glDisable(GL_DEPTH_TEST);
 		
-		glBegin(GL_LINES);
+		/*glBegin(GL_LINES);
 			glVertex3f(pos.x,pos.y,pos.z);
 			glVertex3f(target.x,target.y,target.z);
-		glEnd();
+		glEnd();*/
 		
 }
 

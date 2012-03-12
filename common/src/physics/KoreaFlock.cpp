@@ -209,6 +209,11 @@ void KoreaFlock::draw()
 	for( int i = 0; i < particles.size(); i++)
 			particles[i].draw();
 			
+	
+}
+
+void KoreaFlock::drawDebug()
+{
 	for( int i = 0; i < groups.size(); i++)
 		ofSphere(groups[i].pos, 5);
 

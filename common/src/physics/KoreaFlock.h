@@ -54,6 +54,7 @@ public:
 	
 	void draw();
 	void drawForGlow();
+	void drawDebug();
 	
 	// user data
 	void assignUserTargets( vector<KUserData> users);
