@@ -10,11 +10,6 @@
 #include "KoreaParticle.h"
 #include "ofxTimeUtils.h"
 
-/*float KoreaParticle::targetForce,
-KoreaParticle::separation,
-KoreaParticle::cohesion,
-KoreaParticle::alignment;*/
-
 ofxIntSlider KoreaParticle::r;
 ofxIntSlider KoreaParticle::g;
 ofxIntSlider KoreaParticle::b;
@@ -36,6 +31,9 @@ ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const 
 	return ((n1+n2)*.5).normalized();
 }
 
+KoreaParticle::KoreaParticle(){
+groupFlag = 0;
+};
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {

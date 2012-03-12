@@ -1,17 +1,16 @@
 #include "testApp.h"
 #include "ofxTimeUtils.h"
 
-GLfloat fogColor[4]= {0.0f, 0.0f, 0.0f, 1.0f};
 
 //--------------------------------------------------------------
 void testApp::setup(){
+
 	ofSetVerticalSync(true);
 	//ofSetFrameRate(60);
-
-	KoreaParticle::model.loadModel("blobFish.obj");
-	ofSetSphereResolution(5);
-
 	ofBackground(0);
+
+	//KoreaParticle::model.loadModel("blobFish.obj");
+	ofSetSphereResolution(5);
 
 	gui.setup("blur");
 	gui.add(passes.setup("passes",glow.passes,1,4));
@@ -44,6 +43,7 @@ void testApp::setup(){
 	
 	bShowGui = true;
 	
+	
 	lightOn.addListener(this,&testApp::lightOnChanged);
 	record.addListener(this,&testApp::recordPressed);
 	light.setPosition(ofVec3f(0,0,0));
@@ -51,29 +51,20 @@ void testApp::setup(){
 
 
 	pSystem.setup(100);
-
 	//kSystem.setup(100,(1024*3)-200,768-200);
 	kSystem.setupInGroups(1024*3,768,600);
 	gui.add(&kSystem.gui);
 	
+	// debugging
 	user1.setup();
+	users.push_back(user1);
 
-
+	// shaders
 	glow.setup();
 	glow.brightness = 1;
 	glow.passes = 4;
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
-	
-    //light.enable();
-	
-	
-	//cam.disableMouseInput();
-	glFogi(GL_FOG_MODE, GL_LINEAR);        // Fog Mode
-	glFogfv(GL_FOG_COLOR, fogColor);            // Set Fog Color
-	glFogf(GL_FOG_DENSITY, 0.35f);              // How Dense Will The Fog Be
-	glHint(GL_FOG_HINT, GL_DONT_CARE);          // Fog Hint Value
-	//glFogf(GL_FOG_START, fogStart);             // Fog Start Depth
-	//glFogf(GL_FOG_END, fogEnd);  
+		
 	
 }
 
@@ -105,8 +96,8 @@ void testApp::update(){
 
 	//pSystemDemo.update();
 	kSystem.update();
-	//kSystem.color.set(pSystemDemo.r,pSystemDemo.g,pSystemDemo.b);
 	kSystem.debugUserCenter(user1);
+	kSystem.assignUserTargets(users);
 
 	user1.debugSetUserPosFromMouse(mouseX,mouseY);
 	user1.debugSetUserContour();

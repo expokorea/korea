@@ -17,6 +17,7 @@ typedef enum{
 	KPARTICLE_FLOCKING
 }koreaParticleState;
 
+
 class KoreaParticle {
 	
 	public:
@@ -31,9 +32,11 @@ class KoreaParticle {
 	bool     bFlocking;
 	bool	 bDrawTrails;
 	
+	// vars for noise / time
 	float rt;
 	float t;
 	
+	// trails
 	ofVboMesh trailStrip,trailStripForGlow;
 	vector<ofVec3f> trails;
 	vector<float> angles;
@@ -52,19 +55,21 @@ class KoreaParticle {
 	// node debug
 	ofNode node;
 	
-
+	
 	static ofxIntSlider r,g,b;
 	static ofxToggle debug;
 	static ofxToggle useModel;
-	
-	static ofxAssimpModelLoader model;
 	static ofxFloatSlider thickness;
 	static ofxIntSlider length;
 	static float speedFactor;
-
+	
+	// for group flocking (only flock with others of my group)
 	unsigned int groupFlag;
 	
-	KoreaParticle(){};
+	static ofxAssimpModelLoader model;
+	
+	
+	KoreaParticle();
 	KoreaParticle(unsigned int flag){ groupFlag = flag; };
 	
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
@@ -74,13 +79,16 @@ class KoreaParticle {
 	void drawForGlow();
 	void drawDebug();
 
+	// target methods
 	void setTarget(ofVec3f targ, float targetForce);
 	void applyTargetAttraction();
 	
+	// flocking methods
 	void resetFlocking();
 	void applyForces();
 	void addForFlocking(KoreaParticle * sister);
 	
+	// states / behaviors
 	void setState(koreaParticleState state);
 	
 	

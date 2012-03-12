@@ -23,15 +23,31 @@
 #include "ofxGui.h"
 #include "userData.h"
 
+typedef struct flockGroup{
+	
+	int groupFlag;
+	int userID;
+	bool bFollowing;
+	ofVec3f pos;
+	
+};
+
+typedef struct distIds{
+	float dist;
+	int id;
+};
+
+
+typedef struct userDistances{
+	vector<distIds> distData;
+};
+
 class KoreaFlock{
 	
 public:
 	
-	vector<KoreaParticle> particles;
-	
+		
 	void setup( int total, int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
-	
-	// setup for groups
 	void setupInGroups( int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
 
 	void update();
@@ -39,7 +55,13 @@ public:
 	void draw();
 	void drawForGlow();
 	
+	// user data
+	void assignUserTargets( vector<KUserData> users);
 	void debugUserCenter(KUserData & myUser);
+	
+	
+	vector<KoreaParticle> particles;
+	vector<flockGroup> groups;
 	
 	ofxFloatSlider speed;
 	ofxFloatSlider sep;
@@ -52,6 +74,9 @@ public:
 	
 	
 	float worldWidth,worldHeight,worldDepth;
+	
+	
+	// debugging 
 	ofPoint user1;
 	
 

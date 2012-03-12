@@ -52,6 +52,7 @@ class testApp : public ofBaseApp{
 		
 		
 		KUserData user1;
+		vector<KUserData> users;
 		
 		ofxVideoRecorder recorder;
 		ofPixels pixRecord;

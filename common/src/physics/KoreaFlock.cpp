@@ -10,6 +10,14 @@
 #include "KoreaFlock.h"
 #include "ofxTimeUtils.h"
 
+
+
+bool sort_dist_compare( distIds a, distIds b ) {
+	
+	return (a.dist < b.dist);
+}
+ 
+
 void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDepth)
 {
 		
@@ -60,11 +68,20 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 	int groupMax = 20;
 	int totalGroup = 10;
 		
+	flockGroup tempGroup;
+	tempGroup.bFollowing = false;
+	tempGroup.userID = -1;
+	
 	for( int j = 0; j < totalGroup; j++)
 	{
 		int thisGroup = ofRandom(groupMin,groupMax);
 		for( int i = 0; i<thisGroup; i++)
-			particles.push_back(KoreaParticle(j));		 
+			particles.push_back(KoreaParticle(j));	
+		
+		tempGroup.groupFlag = j;
+		tempGroup.pos.set(0,0,0);
+		groups.push_back(tempGroup);
+		
 	}
 	
 	// set groups up in thirds of the screen
@@ -191,6 +208,10 @@ void KoreaFlock::draw()
 {
 	for( int i = 0; i < particles.size(); i++)
 			particles[i].draw();
+			
+	for( int i = 0; i < groups.size(); i++)
+		ofSphere(groups[i].pos, 5);
+
 }
 
 void KoreaFlock::drawForGlow(){
@@ -205,3 +226,73 @@ void KoreaFlock::drawForGlow(){
 
 	
 }
+
+
+void KoreaFlock::assignUserTargets( vector<KUserData> users)
+{
+	
+	// create a vector for users with boolean to mark if being followed or not
+	vector<bool> userIsFollowed;
+	for( int i = 0; i < users.size(); i++) userIsFollowed.push_back(false);
+	
+	// for each flock calculate average position
+	for( int i = 0; i < groups.size(); i++)
+	{
+		groups[i].pos.set(0,0,0);
+		int tInGroup = 0;
+		for( int j = 0; j < particles.size(); j++)
+		{
+			if(particles[j].groupFlag == groups[i].groupFlag )
+			{
+				groups[i].pos += particles[j].pos;
+				tInGroup++;
+			}
+			
+			
+			
+		}
+		groups[i].pos.x /= (float)tInGroup;
+		groups[i].pos.y /= (float)tInGroup;
+		groups[i].pos.z /= (float)tInGroup;
+		
+	}
+	
+	vector<userDistances> userDist;
+	userDistances tempDist;
+	
+	// for each user, calc distances to flock groups
+	for( int i = 0; i < users.size(); i++)
+	{
+		userDist.push_back(tempDist);
+		
+		// for each flock, calc distance, if in range record
+		for(int j = 0; j < groups.size(); j++)
+		{
+			distIds tempDistId;
+			float distSq = (groups[j].pos-users[i].pos).lengthSquared();
+			tempDistId.dist = distSq;
+			tempDistId.id = j;
+			userDist[i].distData.push_back(tempDistId);
+		}
+		
+		// sort distances	
+		sort( userDist[i].distData.begin(), userDist[i].distData.end(), sort_dist_compare );
+
+	}
+	
+	
+	// for each user, choose closest not already tagged (if all tagged, pick closest)
+	// mark flock group as tagged
+	
+}
+
+/*
+flockingGroups
+- flag
+- targetID
+- bFollowingTarget
+
+userFollowed
+- bIsFollowed
+
+*/
