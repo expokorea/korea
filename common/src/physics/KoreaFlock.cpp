@@ -70,7 +70,7 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 		
 	flockGroup tempGroup;
 	tempGroup.bFollowing = false;
-	tempGroup.userID = -1;
+	tempGroup.userId = -1;
 	
 	for( int j = 0; j < totalGroup; j++)
 	{
@@ -236,13 +236,16 @@ void KoreaFlock::drawForGlow(){
 void KoreaFlock::assignUserTargets( vector<KUserData> users)
 {
 	
-	// create a vector for users with boolean to mark if being followed or not
-	vector<bool> userIsFollowed;
-	for( int i = 0; i < users.size(); i++) userIsFollowed.push_back(false);
+	// create a vector for groups with boolean to mark if it following a user or not
+	vector<bool> isFollowing;
+	for( int i = 0; i < groups.size(); i++) isFollowing.push_back(false);
 	
 	// for each flock calculate average position
 	for( int i = 0; i < groups.size(); i++)
 	{
+		// reset user id
+		groups[i].userId = -1;
+		
 		groups[i].pos.set(0,0,0);
 		int tInGroup = 0;
 		for( int j = 0; j < particles.size(); j++)
@@ -286,8 +289,40 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 	}
 	
 	
-	// for each user, choose closest not already tagged (if all tagged, pick closest)
-	// mark flock group as tagged
+	// for each user, choose closest flock
+	for( int i = 0; i < users.size(); i++)
+	{
+		//try to pick closest
+		for( int j = 0; j < userDist[i].distData.size(); j++)
+		{
+			int groupId = userDist[i].distData[j].id;
+			if( !isFollowing[groupId] )
+			{
+				isFollowing[groupId] = true;
+				groups[groupId].userId = i; 
+				break;
+			}
+			
+		}
+	}
+	
+		
+	// make all in groups that have follow id, follow that user
+	for( int i = 0; i < particles.size(); i++)
+	{
+		int groupId = particles[i].groupFlag;
+		int userId = groups[groupId].userId;
+		int tPts = users[ userId ].contour.size()-1;
+		if( userId >= 0 && tPts > 0 )
+		{
+			particles[i].setState(KPARTICLE_TARGET);
+			int index = (i + int(ofxTimeUtils::getElapsedTimef())) % tPts;
+			particles[i].target = users[ userId ].contour[index];
+			particles[i].targetForce = speed*2*users[ userId ].targetForce;
+		}else{
+			particles[i].setState(KPARTICLE_FLOCKING);
+		}
+	}
 	
 }
 

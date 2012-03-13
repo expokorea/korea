@@ -26,7 +26,7 @@
 typedef struct flockGroup{
 	
 	int groupFlag;
-	int userID;
+	int userId;
 	bool bFollowing;
 	ofVec3f pos;
 	

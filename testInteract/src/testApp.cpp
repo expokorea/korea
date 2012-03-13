@@ -58,6 +58,7 @@ void testApp::setup(){
 	// debugging
 	user1.setup();
 	users.push_back(user1);
+	users.push_back(user1);
 
 	// shaders
 	glow.setup();
@@ -96,11 +97,16 @@ void testApp::update(){
 
 	//pSystemDemo.update();
 	kSystem.update();
-	kSystem.debugUserCenter(user1);
+	//kSystem.debugUserCenter(user1);
 	kSystem.assignUserTargets(users);
 
 	user1.debugSetUserPosFromMouse(mouseX,mouseY);
 	user1.debugSetUserContour();
+	users[0].debugSetUserPosFromMouse(mouseX,mouseY);
+	users[0].debugSetUserContour();
+	
+	users[1].debugSetUserPosFromMouse(mouseX+400,mouseY);
+	users[1].debugSetUserContour();
 }
 
 //--------------------------------------------------------------
@@ -142,7 +148,11 @@ void testApp::draw(){
 
 		ofFill();
 		kSystem.draw();
-		if(KoreaParticle::debug) user1.drawUser();
+		if(KoreaParticle::debug){
+			for(int i = 0; i < users.size(); i++)
+				users[i].drawUser();
+				//user1.drawUser();
+		}
 		if(KoreaParticle::debug) kSystem.drawDebug();
 
 		/*ofPushMatrix();
