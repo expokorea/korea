@@ -284,7 +284,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>24</integer>
+									<integer>18</integer>
+									<integer>8</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
@@ -307,7 +308,7 @@
 							<real>213</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>84 100 1169 638 0 0 1280 778 </string>
+						<string>53 100 1169 638 0 0 1280 778 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -325,7 +326,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>8323680814EC0081004220A6</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.cpp</string>
+								<string>KoreaParticle.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -333,11 +334,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>8323680914EC0081004220A6</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.cpp</string>
+										<string>KoreaParticle.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>83D97F72150FA11400EAB5B1</string>
+										<string>83D97FAA151238BA00EAB5B1</string>
 										<key>history</key>
 										<array>
 											<string>8323680A14EC0081004220A6</string>
@@ -386,11 +387,11 @@
 											<string>83D97EE9150E728400EAB5B1</string>
 											<string>83D97EEA150E728400EAB5B1</string>
 											<string>83D97EFA150EA3F800EAB5B1</string>
-											<string>83D97EFE150EA3F800EAB5B1</string>
-											<string>83D97F0C150F91DE00EAB5B1</string>
-											<string>83D97F2A150F965700EAB5B1</string>
-											<string>83D97F65150FA07E00EAB5B1</string>
-											<string>83D97F66150FA07E00EAB5B1</string>
+											<string>83D97F89151235E500EAB5B1</string>
+											<string>83D97F911512361800EAB5B1</string>
+											<string>83D97F9D1512372300EAB5B1</string>
+											<string>83D97F9E1512372300EAB5B1</string>
+											<string>83D97F9F1512372300EAB5B1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -406,7 +407,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {934, 437}}</string>
 								<key>RubberWindowFrame</key>
-								<string>84 100 1169 638 0 0 1280 778 </string>
+								<string>53 100 1169 638 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -485,7 +486,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {934, 128}}</string>
 										<key>RubberWindowFrame</key>
-										<string>84 100 1169 638 0 0 1280 778 </string>
+										<string>53 100 1169 638 0 0 1280 778 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -707,13 +708,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>83D97F73150FA11400EAB5B1</string>
+		<string>83D97FAB151238BA00EAB5B1</string>
 		<string>83D97E9F150DDEC100EAB5B1</string>
 		<string>83D97EA0150DDEC100EAB5B1</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks/projects_git/korea/testInteract/testInteract.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>84 100 1169 638 0 0 1280 778 </string>
+	<string>53 100 1169 638 0 0 1280 778 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

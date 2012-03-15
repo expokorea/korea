@@ -23,6 +23,8 @@
 #include "ofxGui.h"
 #include "userData.h"
 
+#define USE_TIME_BASED
+
 typedef struct flockGroup{
 	
 	int groupFlag;
@@ -75,7 +77,7 @@ public:
 	
 	
 	float worldWidth,worldHeight,worldDepth;
-	
+	float timeLastUpdate;
 	
 	// debugging 
 	ofPoint user1;

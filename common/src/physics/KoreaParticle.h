@@ -24,6 +24,7 @@ class KoreaParticle {
 	
 	ofVec3f  pos;
 	ofVec3f  vel;
+	ofVec3f  acc;
 	float    damping;
 	ofVec3f  target;
 	float    targetForce;
@@ -73,7 +74,7 @@ class KoreaParticle {
 	KoreaParticle(unsigned int flag){ groupFlag = flag; };
 	
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
-	void update();
+	void update(float dt = 1);
 	
 	void draw();
 	void drawForGlow();

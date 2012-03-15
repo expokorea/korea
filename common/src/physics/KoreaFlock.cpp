@@ -120,6 +120,10 @@ void KoreaFlock::update()
 {
 	ofSeedRandom(0);
 	
+	float dt = ofGetElapsedTimef() - timeLastUpdate;
+	timeLastUpdate = ofGetElapsedTimef();
+	
+	
 	for( int i = 0; i < particles.size(); i++)
 	{
 		float halfWidth  = worldWidth  * .5;
@@ -137,7 +141,13 @@ void KoreaFlock::update()
 			if(i!=j)particles[i].addForFlocking(&particles[j]);
 		}
 		particles[i].applyForces();
+		
+		#ifdef USE_TIME_BASED
+		particles[i].update(dt*100);
+		#else
 		particles[i].update();
+		#endif
+
 	}
 	
 	

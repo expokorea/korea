@@ -93,7 +93,7 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	}
 }
 
-void KoreaParticle::update()
+void KoreaParticle::update(float dt)
 {
 	
 	vel += ofVec3f(	ofNoise(rt*t,0)*.001-.0005,
@@ -108,7 +108,7 @@ void KoreaParticle::update()
 	if(bUseTarget) applyTargetAttraction();
 	
 	// upadte position
-	pos += vel;
+	pos += vel*dt;
 	
 	// for targets and trails
 	t = ofxTimeUtils::getElapsedTimef()*speedFactor;
