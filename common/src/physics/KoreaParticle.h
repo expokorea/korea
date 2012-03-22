@@ -14,7 +14,8 @@
 
 typedef enum{
 	KPARTICLE_TARGET,
-	KPARTICLE_FLOCKING
+	KPARTICLE_FLOCKING,
+	KPARTICLE_EATING
 }koreaParticleState;
 
 
@@ -32,6 +33,7 @@ class KoreaParticle {
 	bool     bUseTarget;
 	bool     bFlocking;
 	bool	 bDrawTrails;
+	bool	 bEating;
 	
 	// vars for noise / time
 	float rt;
@@ -83,11 +85,13 @@ class KoreaParticle {
 	// target methods
 	void setTarget(ofVec3f targ, float targetForce);
 	void applyTargetAttraction();
-	
+	void repelFrom(ofVec3f pt, float force, float dist);
+
 	// flocking methods
 	void resetFlocking();
 	void applyForces();
 	void addForFlocking(KoreaParticle * sister);
+	void setFlockingParams();
 	
 	// states / behaviors
 	void setState(koreaParticleState state);

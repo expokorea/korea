@@ -47,6 +47,7 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	bUseTarget  = false;
 	bFlocking   = false;
 	bDrawTrails = true;
+	bEating = false;
 	particleState = KPARTICLE_FLOCKING;
 	
 	rt = ofRandom(0,100);
@@ -106,6 +107,9 @@ void KoreaParticle::update(float dt)
 	
 	// apply attractions
 	if(bUseTarget) applyTargetAttraction();
+	
+	// note: check is this working? or doing anything anymore...?
+	if(particleState == KPARTICLE_TARGET) repelFrom(target,targetForce*2,90);
 	
 	// upadte position
 	pos += vel*dt;
@@ -189,8 +193,22 @@ void KoreaParticle::update(float dt)
 	node.setPosition(pos);
 	if(trails.size()>10)node.lookAt(trails[0]-trails[1]);
 
-
+	// create some dpeth shading
+	// not working with shader?
+	float aplhaPct = ofMap(pos.z,-600,100,.25,1,true);
+	
+	for(int i=0; i<(int)trailStrip.getNumColors();i++)
+	{
+		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
+		trailStrip.setColor(i,ofColor(r,g,b,pct*aplhaPct));
+		//if(particleState == KPARTICLE_EATING)
+		//	trailStrip.setColor(i,ofColor(255,0,0,pct*aplhaPct));
+	
+	}
+	
 	for(int i=0; i<(int)trails.size()-1;i++){
+		
+		
 		ofVec3f up(0, 0, 1);
 		//float pct = (float)i / (float)trails.size();
 		ofVec3f &p0 = trails[i];
@@ -228,8 +246,11 @@ void KoreaParticle::draw()
 		drawDebug();
 	}
 	if(KoreaParticle::useModel){
-		if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,255);
-		else ofSetColor(r,g,b,200);
+		
+		float aplhaPct = ofMap(pos.z,-300,300,.45,1);
+		if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,200*aplhaPct);
+		else ofSetColor(r,g,b,200*aplhaPct);
+		
 		ofVec3f axis;
 		float angle;
 		node.getOrientationQuat().getRotate(angle, axis);
@@ -243,12 +264,22 @@ void KoreaParticle::draw()
 			model.draw(OF_MESH_FILL);
 		ofPopMatrix();
 	}
-
+	
+	float aplhaPct = ofMap(pos.z,-200,100,0,1);
+	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,200*aplhaPct);
+	else ofSetColor(r,g,b,240*aplhaPct);
+	
 	if(bDrawTrails)
 	{
 		trailStrip.draw();
 	}
-
+	
+	/*if(particleState == KPARTICLE_EATING){
+	glBegin(GL_LINES);
+	glVertex3f(pos.x,pos.y,pos.z);
+	glVertex3f(target.x,target.y,target.z);
+	glEnd();
+	}*/
 }
 
 
@@ -310,16 +341,16 @@ void KoreaParticle::applyTargetAttraction()
 	
 	
 	ofVec3f diff	= target-pos;
-	//float length	= diff.length();
-	//float radius	= 10;
+	float length	= diff.lengthSquared();
 	
-	/*bool bAmCloseEnough = false;
-    if (radius > 0){
-        if (length > 200){
-            bAmCloseEnough = false;
-        }
-    }*/
+	// don't pull if too close
+	// radius changed based on particle mode so no "bouncing" when chasing prey...
 	
+	float targetRadius = 30;
+	if(particleState == KPARTICLE_EATING) targetRadius = 90;
+	
+	if(length > targetRadius)
+	{
 	ofVec3f frc = ofVec3f(0,0,0);
 	
 	diff.normalize();
@@ -329,8 +360,48 @@ void KoreaParticle::applyTargetAttraction()
 	frc.z = diff.z * targetForce;
 
 	vel+=frc;
-
+	
+	
+	}
+	else{
+		// if in prey/eating mode, and target is reached, go back to flock
+		if(bEating){
+		 setState(KPARTICLE_FLOCKING);
+		}
+	}
 }
+
+void KoreaParticle::repelFrom(ofVec3f pt,float force,float dist)
+{
+	
+	
+	ofVec3f diff	= pos-pt;
+	float length	= diff.lengthSquared();
+	//float radius	= 10;
+	
+	/*bool bAmCloseEnough = false;
+	 if (radius > 0){
+	 if (length > 200){
+	 bAmCloseEnough = false;
+	 }
+	 }*/
+	//if(force < 0 ) force *= -1;
+	
+	if( length < dist)
+	{
+	ofVec3f frc = ofVec3f(0,0,0);
+	
+	diff.normalize();
+	
+	frc.x = diff.x * force * ((dist-length)*.01);
+	frc.y = diff.y * force * ((dist-length)*.01);
+	frc.z = diff.z * force * ((dist-length)*.01);
+	
+	vel+=frc;
+	}
+	
+}
+
 
 void KoreaParticle::addForFlocking(KoreaParticle * sister)
 {
@@ -356,6 +427,8 @@ void KoreaParticle::addForFlocking(KoreaParticle * sister)
 	*/
 	attention_factor = 1;
 	
+	// only groups have chesion and alignment with own group
+	// but separation with everyone
 	
 	if(d > 0)
 	{
@@ -399,6 +472,22 @@ void KoreaParticle::applyForces()
 	float sepFrc 	= separation;
 	float cohFrc 	= cohesion;
 	float alignFrc 	= alignment;
+	
+	// forces changed based on state
+	// note: check how this is affected or not by code in flock class
+	
+	if(particleState == KPARTICLE_TARGET)
+	{
+		   cohFrc	= 0;
+		   alignFrc = 0;
+		   sepFrc *= .125;
+	}else if(  particleState == KPARTICLE_EATING)
+	{
+		cohFrc	= 0;
+		alignFrc = 0;
+		sepFrc *= .25;
+	}
+	
 	// seperation
 	if(countSep > 0)
 	{
@@ -440,4 +529,22 @@ void KoreaParticle::resetFlocking()
 void KoreaParticle::setState(koreaParticleState state)
 {
 	particleState = state;
+	
+	// more damping on prey chase state
+	// note: this is now overwriting the damping set on init
+	
+	if( particleState == KPARTICLE_EATING){
+		damping = .05;
+		bEating = true;
+	}else{
+		 bEating = false;
+		 damping = .02;
+	}
 }
+
+
+void KoreaParticle::setFlockingParams()
+{
+		
+}
+
