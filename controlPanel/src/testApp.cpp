@@ -44,8 +44,8 @@ void testApp::draw(){
 	ofSetColor(0);
 	ofPushMatrix();
 	ofTranslate(320,10);
-	for(int i=0;i<contours.size();i++){
-		contours[i].draw();
+	for(int i=0;i<(int)contours.size();i++){
+		ofCircle(contours[i].pos,contours[i].size);
 	}
 	ofPopMatrix();
 }

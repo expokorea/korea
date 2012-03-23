@@ -10,7 +10,7 @@ OF_ROOT = ../../..
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = -I../common/src
+USER_CFLAGS = -I../common/src/comm
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker
@@ -33,4 +33,4 @@ USER_COMPILER_OPTIMIZATION = -march=native -mtune=native -Os
 
 EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj,.git"
 
-USER_SOURCE_DIR = ../common/src
+USER_SOURCE_DIR = ../common/src/comm
