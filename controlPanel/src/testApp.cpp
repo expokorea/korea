@@ -57,10 +57,10 @@ void testApp::keyPressed(int key){
 
 void testApp::newAvahiService(ofxAvahiService & service){
 	ofLogVerbose() << "new service" << service.name << "in" << service.host_name << service.ip << ":" << service.port;
-	if(service.name=="oscvideoplayer"){
+	if(service.name.find("oscvideoplayer")==0){
 		videoClients.push_back(ofPtr<OscPlayerClient>(new OscPlayerClient(service.ip,service.port,service.host_name)));
 		videoClients.back()->playing = startMapping.value;
-	}else if(service.name=="osckinectserverconfig"){
+	}else if(service.name.find("osckinectserverconfig")==0){
 		kinectServers.push_back(ofPtr<OscKinectServer>(new OscKinectServer(service.ip,service.port,service.host_name)));
 		gui.add(&kinectServers.back()->gui);
 	}

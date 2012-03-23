@@ -5,8 +5,9 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
 
-	osc.setup(6666);
-	avahi.start("oscvideoplayer","_oscit._udp",6666);
+	int port = ofRandom(5555,9999);
+	osc.setup(port);
+	avahi.start("oscvideoplayer","_oscit._udp",port);
 
 	player.loadMovie("fingers.mov");
 }
