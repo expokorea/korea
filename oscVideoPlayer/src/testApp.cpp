@@ -4,6 +4,7 @@
 void testApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
+	ofHideCursor();
 
 	xml.loadFile("settings.xml");
 	string servicename = xml.getValue("settings:service","oscvideoplayer");
