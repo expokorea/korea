@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxAvahiClient.h"
+#include "ofxXmlSettings.h"
 
 class testApp : public ofBaseApp{
 
@@ -24,5 +25,5 @@ class testApp : public ofBaseApp{
 		ofxOscReceiver osc;
 		ofVideoPlayer player;
 		ofxAvahiClientService avahi;
-
+		ofxXmlSettings xml;
 };
