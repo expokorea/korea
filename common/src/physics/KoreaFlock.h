@@ -25,8 +25,7 @@
 
 #define USE_TIME_BASED
 
-typedef struct flockGroup{
-	
+struct flockGroup{
 	int groupFlag;
 	int userId;
 	bool bFollowing;
@@ -36,13 +35,13 @@ typedef struct flockGroup{
 };
 
 // to keep track of which group is closest to user
-typedef struct distIds{
+struct distIds{
 	float dist;
 	int id;
 };
 
 
-typedef struct userDistances{
+struct userDistances{
 	vector<distIds> distData;
 };
 

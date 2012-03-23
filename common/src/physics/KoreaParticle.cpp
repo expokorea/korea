@@ -9,15 +9,16 @@
 
 #include "KoreaParticle.h"
 #include "ofxTimeUtils.h"
+#include "triangulate.h"
+#include "ofxVoronoi.h"
 
 ofxIntSlider KoreaParticle::r;
 ofxIntSlider KoreaParticle::g;
 ofxIntSlider KoreaParticle::b;
 ofxToggle KoreaParticle::debug;
 ofxToggle KoreaParticle::useModel;
-ofxFloatSlider KoreaParticle::thickness;
-ofxIntSlider KoreaParticle::length;
 ofxAssimpModelLoader KoreaParticle::model;
+ofFbo KoreaParticle::tex;
 float KoreaParticle::speedFactor;
 
 ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const ofVec3f &d )
@@ -34,6 +35,86 @@ ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const 
 KoreaParticle::KoreaParticle(){
 groupFlag = 0;
 };
+
+
+bool compareXYZ(const XYZ & p1, const XYZ & p2){
+	if (p1.x < p2.x)
+	   return false;
+	else if (p1.x > p2.x)
+	   return true;
+	else
+	   return false;
+	return p1.x<p2.x;
+}
+
+void KoreaParticle::generateTexture(TexMode mode){
+	ofMesh textureMesh;
+	textureMesh.setMode(OF_PRIMITIVE_LINES);
+
+	int width = 100*4*4;
+	int height = 100;
+	if(!tex.isAllocated()){
+		ofFbo::Settings settings;
+		settings.width = width;
+		settings.height = height;
+		settings.numSamples = 4;
+		settings.internalformat = GL_RGBA;
+		tex.allocate(settings);
+	}
+
+	vector<XYZ> points;
+	int numPoints = 20;
+	points.resize(numPoints);
+
+	for(int i=0;i<numPoints;i++){
+		XYZ p(float(i)/float(numPoints)*float(width),ofRandom(height),0);
+		points[i] = p;
+	}
+	points.push_back(XYZ(0,0,0));
+	points.push_back(XYZ(width,0,0));
+	points.push_back(XYZ(width,height,0));
+	points.push_back(XYZ(0,height,0));
+	sort(points.begin(),points.end(),compareXYZ);
+
+	// KoreaParticle delaunay texture
+	if(mode==Delaunay){
+		vector<ITRIANGLE> triangles;
+		vector<IEDGE> edges;
+		points.resize(points.size()+3);
+		triangles.resize(numPoints*3);
+		int numTriangles;
+		Triangulate(points.size()-3,&points[0],&triangles[0],&numTriangles,edges);
+		triangles.resize(numTriangles);
+		for(int i=0;i<(int)triangles.size();i++){
+			XYZ p = points[triangles[i].p1];
+			textureMesh.addVertex(ofVec3f(p.x,p.y,p.z));
+			p = points[triangles[i].p2];
+			textureMesh.addVertex(ofVec3f(p.x,p.y,p.z));
+			p = points[triangles[i].p3];
+			textureMesh.addVertex(ofVec3f(p.x,p.y,p.z));
+		}
+	}else if(mode==Voronoi){
+		ofxVoronoi voronoiGen;
+
+		for(int i=0;i<(int)points.size();i++){
+			voronoiGen.addPoint(points[i].x,points[i].y);
+		}
+		voronoiGen.generateVoronoi();
+
+		for(int i=0;i<(int)voronoiGen.edges.size();i++){
+			textureMesh.addVertex(voronoiGen.edges[i].a);
+			textureMesh.addVertex(voronoiGen.edges[i].b);
+		}
+	}
+
+	ofSetLineWidth(1.5);
+	tex.begin();
+	ofClear(255,0);
+	ofSetColor(255,255,255,255);
+	textureMesh.draw();
+	tex.end();
+	ofSetLineWidth(1);
+}
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 {
@@ -65,33 +146,48 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	
 	node.setScale(1);
 
-	length = 50;
+	length = ofRandom(50,100);
+	thickness = ofRandom(1,5);
 
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+	texturedStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 
 	trails.resize(length);
-	angles.resize(length,0);
-	zangles.resize(length,0);
+	trailStripLineL.getVertices().resize((length-1));
+	trailStripLineR.getVertices().resize((length-1));
 	trailStrip.getVertices().resize((length-1)*2);
 	trailStripForGlow.getVertices().resize((length-1)*2);
+	texturedStrip.getVertices().resize((length-1)*2);
 
 	trailStrip.setUsage(GL_STREAM_DRAW);
 	trailStripForGlow.setUsage(GL_STREAM_DRAW);
+	texturedStrip.setUsage(GL_STREAM_DRAW);
+	trailStripLineL.setUsage(GL_STREAM_DRAW);
+	trailStripLineR.setUsage(GL_STREAM_DRAW);
 
 	trails[0] = pos;
-	for(int i=0; i<trails.size();i++){
+	for(int i=0; i<(int)trails.size();i++){
 		if(i>1){
 			trails[i] = trails[i-1];
 			trails[i].x -= 4;
 		}
 
-		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
+		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * .75 * 255;
 		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addColor(ofColor(r,g,b,pct));
 		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addColor(ofColor(r,g,b,pct));
+		texturedStrip.addColor(ofColor(r,g,b,pct));
+		texturedStrip.addColor(ofColor(r,g,b,pct));
+		trailStripLineL.addColor(ofColor(255,255,255,pct*.35));
+		trailStripLineR.addColor(ofColor(255,255,255,pct*.35));
+		ofVec2f tc(tex.getWidth()*(float(i)/length),0);
+		texturedStrip.addTexCoord(tc);
+		tc.y = tex.getHeight();
+		texturedStrip.addTexCoord(tc);
 	}
+
 }
 
 void KoreaParticle::update(float dt)
@@ -117,58 +213,6 @@ void KoreaParticle::update(float dt)
 	// for targets and trails
 	t = ofxTimeUtils::getElapsedTimef()*speedFactor;
 
-	/*trails[0] = pos;
-	for(int i=1;i<trails.size();i++){
-		float dx = trails[i-1].x - trails[i].x;
-		float dy = trails[i-1].y - trails[i].y;
-		float dz = trails[i-1].z - trails[i].z;
-		float a  = atan2(dy, dx);
-		float az  = atan2(dz, dy);
-		float dis = 7;
-
-		if(i == 1) {
-			trails[i].x = trails[i-1].x - cos(a) * dis;
-			trails[i].y = trails[i-1].y - sin(a) * dis;
-			trails[i].z = trails[i-1].z - sin(az) * dis;
-		}
-		else {
-		    float range = ofDegToRad(25);
-		    float pa = angles[i-1];
-
-		    float d = a - pa;
-		    float absA = fabs(d);
-		    float s = d>=0?1:-1;
-		    if (absA > PI) {
-		        a = s * (2 * PI - fabs(a)) * -1;
-		    }
-
-		    float c  = ofClamp(a, pa-range, pa+range);
-
-		    trails[i].x = trails[i-1].x - cos(c) * dis;
-		    trails[i].y = trails[i-1].y - sin(c) * dis;
-
-
-
-		    float paz = zangles[i-1];
-		    float dz = az - paz;
-		    float absAz = fabs(dz);
-		    float sz = dz>=0?1:-1;
-		    if (absAz > PI) {
-		        az = sz * (2 * PI - fabs(az)) * -1;
-		    }
-
-		    float cz  = ofClamp(az, paz-range, paz+range);
-
-			trails[i].z = trails[i-1].z - sin(cz) * dis;
-		}
-		//trails[i].z = trails[i-1].z;
-
-		angles[i] = ofWrapRadians(a);
-		zangles[i] = ofWrapRadians(az);
-		//trail[i].z=trail[i-1].z;ofVec3f up(0, 0, 1);
-		//float pct = (float)i / (float)trails.size();
-	}*/
-
 	ofVec3f diff,next;
 	next = pos;
 	diff = next-trails[0];
@@ -178,10 +222,6 @@ void KoreaParticle::update(float dt)
 	for(int i=0;i<(int)trails.size()-1;i++){
 		diff =  trails[i]-trails[i+1];
 		q.makeRotate(diff,next-trails[i]);
-
-		/*q.getRotate(angle,axis);
-		if(angle>90) angle = 90;
-		q.makeRotate(angle,axis);*/
 
 		diff = q * diff;
 		trails[i] = next - diff;
@@ -199,8 +239,10 @@ void KoreaParticle::update(float dt)
 	
 	for(int i=0; i<(int)trailStrip.getNumColors();i++)
 	{
-		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
+		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * .75 * 255;
 		trailStrip.setColor(i,ofColor(r,g,b,pct*aplhaPct));
+		trailStripForGlow.setColor(i,ofColor(r,g,b,pct*aplhaPct));
+		texturedStrip.setColor(i,ofColor(r,g,b,pct*aplhaPct));
 		//if(particleState == KPARTICLE_EATING)
 		//	trailStrip.setColor(i,ofColor(255,0,0,pct*aplhaPct));
 	
@@ -210,33 +252,24 @@ void KoreaParticle::update(float dt)
 		
 		
 		ofVec3f up(0, 0, 1);
-		//float pct = (float)i / (float)trails.size();
 		ofVec3f &p0 = trails[i];
 		ofVec3f &p1 = trails[i+1];
 
 		ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
 		ofVec3f right = dir.cross(up).normalize();	// right vector
-		right *= thickness; //ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))+2,0,thickness); //*sin(float(i)/float(trails.size())*PI)
+		right *= thickness;
 		ofVec3f rightNotGlow = right * .5;
 
 
 		trailStrip.getVertices()[i*2].set(trails[i] -rightNotGlow);
 		trailStripForGlow.getVertices()[i*2].set(trails[i] -right);
+		texturedStrip.getVertices()[i*2].set(trails[i] -rightNotGlow);
+		trailStripLineL.getVertices()[i].set(trails[i] +rightNotGlow);
 
 		trailStrip.getVertices()[i*2+1].set(trails[i] +rightNotGlow);
 		trailStripForGlow.getVertices()[i*2+1].set(trails[i] +right);
-
-		//ofVec3f normal = calcNormal(trails[i] -rightNotGlow,trails[i] +rightNotGlow,trails[i+1] -rightNotGlow,trails[i+1] +rightNotGlow);
-		//for(int i=0;i<4;i++){
-			/*trailStrip.addNormal(normal);
-			trailStrip.addNormal(normal);
-			trailStrip.addNormal(normal);
-			trailStrip.addNormal(normal);*/
-		//}
-		//normal = calcNormal(trails[i] +rightNotGlow,trails[i+1] -rightNotGlow,trails[i+1] +rightNotGlow);
-		//for(int i=0;i<4;i++){
-		//trailStrip.addNormal(normal);
-		//trailStrip.addNormal(normal);
+		texturedStrip.getVertices()[i*2+1].set(trails[i] +rightNotGlow);
+		trailStripLineR.getVertices()[i].set(trails[i] +rightNotGlow);
 	}
 }
 
@@ -272,14 +305,10 @@ void KoreaParticle::draw()
 	if(bDrawTrails)
 	{
 		trailStrip.draw();
+		tex.getTextureReference().bind();
+		texturedStrip.draw();
+		tex.getTextureReference().unbind();
 	}
-	
-	/*if(particleState == KPARTICLE_EATING){
-	glBegin(GL_LINES);
-	glVertex3f(pos.x,pos.y,pos.z);
-	glVertex3f(target.x,target.y,target.z);
-	glEnd();
-	}*/
 }
 
 
@@ -308,6 +337,11 @@ void KoreaParticle::drawForGlow() {
 	if(bDrawTrails)
 	{
 		trailStripForGlow.draw();
+		trailStripLineR.draw();
+		trailStripLineL.draw();
+		tex.getTextureReference().bind();
+		texturedStrip.draw();
+		tex.getTextureReference().unbind();
 	}
 
 }

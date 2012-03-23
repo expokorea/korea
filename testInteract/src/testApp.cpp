@@ -10,7 +10,7 @@ void testApp::setup(){
 #endif
 	
 	ofSetVerticalSync(true);
-	ofSetFrameRate(30);
+	//ofSetFrameRate(30);
 	ofBackground(0);
 
 	//KoreaParticle::model.loadModel("blobFish.obj");
@@ -29,7 +29,6 @@ void testApp::setup(){
 	gui.add(KoreaParticle::g.setup("g",0,0,255));
 	gui.add(KoreaParticle::b.setup("b",230,0,255));
 	gui.add(KoreaParticle::debug.setup("debug",false));
-	gui.add(KoreaParticle::thickness.setup("thickness",3,0,16));
 	gui.add(lightOn.setup("light",false));
 	gui.add(drawGlow.setup("drawGlow",true));
 	gui.add(KoreaParticle::useModel.setup("use model",false));
@@ -56,6 +55,8 @@ void testApp::setup(){
 
 	pSystem.setup(100);
 	//kSystem.setup(100,(1024*3)-200,768-200);
+
+	KoreaParticle::generateTexture(KoreaParticle::Voronoi);
 	kSystem.setupInGroups(1024*3,768,600);
 	gui.add(&kSystem.gui);
 	
@@ -69,6 +70,7 @@ void testApp::setup(){
 	glow.brightness = 1;
 	glow.passes = 4;
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
+
 		
 	
 }

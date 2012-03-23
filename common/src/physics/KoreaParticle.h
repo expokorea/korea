@@ -40,10 +40,8 @@ class KoreaParticle {
 	float t;
 	
 	// trails
-	ofVboMesh trailStrip,trailStripForGlow;
+	ofVboMesh trailStrip,trailStripForGlow,texturedStrip,trailStripLineL,trailStripLineR;
 	vector<ofVec3f> trails;
-	vector<float> angles;
-	vector<float> zangles;
 	
 	// flocking params
 	float sepDist,alnDist,cohDist;
@@ -62,19 +60,26 @@ class KoreaParticle {
 	static ofxIntSlider r,g,b;
 	static ofxToggle debug;
 	static ofxToggle useModel;
-	static ofxFloatSlider thickness;
-	static ofxIntSlider length;
+	float thickness;
+	float length;
 	static float speedFactor;
 	
 	// for group flocking (only flock with others of my group)
 	unsigned int groupFlag;
 	
 	static ofxAssimpModelLoader model;
+	static ofFbo tex;
 	
 	
 	KoreaParticle();
 	KoreaParticle(unsigned int flag){ groupFlag = flag; };
 	
+	enum TexMode{
+		Delaunay,
+		Voronoi
+	};
+	static void generateTexture(TexMode mode);
+
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update(float dt = 1);
 	
