@@ -33,6 +33,11 @@ class testApp : public ofBaseApp{
 		void lightOnChanged(bool & l);
 		void recordPressed(bool & l);
 
+		void particleRGBChanged(int & rgb);
+		void particleTexRGBChanged(int & rgb);
+		void particleLinesRGBChanged(int & rgb);
+		void particleTexModeChanged(bool & mode);
+
 
 		ofShader shader, shaderBokeh;
 		ofFbo fbo1, fbo2;
@@ -44,6 +49,7 @@ class testApp : public ofBaseApp{
 		ofxToggle drawGlow;
 		ofxFloatSlider lightCutoff, lightExponent;
 		ofxFloatSlider lightConstant, lightLinear, lightQuad;
+		ofxToggle particlesTexMode;
 
 		ofLight light;
 		Glow glow;

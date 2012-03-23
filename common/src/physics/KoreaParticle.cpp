@@ -15,6 +15,8 @@
 ofxIntSlider KoreaParticle::r;
 ofxIntSlider KoreaParticle::g;
 ofxIntSlider KoreaParticle::b;
+ofxIntSlider KoreaParticle::rTex,KoreaParticle::gTex,KoreaParticle::bTex;
+ofxIntSlider KoreaParticle::rLines,KoreaParticle::gLines,KoreaParticle::bLines;
 ofxToggle KoreaParticle::debug;
 ofxToggle KoreaParticle::useModel;
 ofxAssimpModelLoader KoreaParticle::model;
@@ -178,10 +180,10 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 		trailStripForGlow.addColor(ofColor(r,g,b,pct));
 		trailStrip.addColor(ofColor(r,g,b,pct));
 		trailStripForGlow.addColor(ofColor(r,g,b,pct));
-		texturedStrip.addColor(ofColor(r,g,b,pct));
-		texturedStrip.addColor(ofColor(r,g,b,pct));
-		trailStripLineL.addColor(ofColor(255,255,255,pct*.35));
-		trailStripLineR.addColor(ofColor(255,255,255,pct*.35));
+		texturedStrip.addColor(ofColor(rTex,gTex,bTex,pct));
+		texturedStrip.addColor(ofColor(rTex,gTex,bTex,pct));
+		trailStripLineL.addColor(ofColor(rLines,gLines,bLines,pct*.35));
+		trailStripLineR.addColor(ofColor(rLines,gLines,bLines,pct*.35));
 		ofVec2f tc(tex.getWidth()*(float(i)/length),0);
 		texturedStrip.addTexCoord(tc);
 		tc.y = tex.getHeight();
@@ -235,14 +237,22 @@ void KoreaParticle::update(float dt)
 
 	// create some dpeth shading
 	// not working with shader?
-	float aplhaPct = ofMap(pos.z,-600,100,.25,1,true);
+	float alphaPct = ofMap(pos.z,-600,100,.25,1,true);
 	
-	for(int i=0; i<(int)trailStrip.getNumColors();i++)
+	for(int i=0; i<(int)trails.size();i++)
 	{
 		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * .75 * 255;
-		trailStrip.setColor(i,ofColor(r,g,b,pct*aplhaPct));
-		trailStripForGlow.setColor(i,ofColor(r,g,b,pct*aplhaPct));
-		texturedStrip.setColor(i,ofColor(r,g,b,pct*aplhaPct));
+		trailStrip.setColor(i*2,ofColor(r,g,b,pct*alphaPct));
+		trailStripForGlow.setColor(i*2,ofColor(r,g,b,pct*alphaPct));
+		texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct));
+
+		trailStrip.setColor(i*2+1,ofColor(r,g,b,pct*alphaPct));
+		trailStripForGlow.setColor(i*2+1,ofColor(r,g,b,pct*alphaPct));
+		texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct));
+
+		trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct));
+		trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct));
+
 		//if(particleState == KPARTICLE_EATING)
 		//	trailStrip.setColor(i,ofColor(255,0,0,pct*aplhaPct));
 	

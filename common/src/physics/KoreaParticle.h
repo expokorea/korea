@@ -58,6 +58,8 @@ class KoreaParticle {
 	
 	
 	static ofxIntSlider r,g,b;
+	static ofxIntSlider rTex,gTex,bTex;
+	static ofxIntSlider rLines,gLines,bLines;
 	static ofxToggle debug;
 	static ofxToggle useModel;
 	float thickness;
@@ -77,7 +79,7 @@ class KoreaParticle {
 	enum TexMode{
 		Delaunay,
 		Voronoi
-	};
+	}texMode;
 	static void generateTexture(TexMode mode);
 
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
