@@ -24,30 +24,42 @@ void KUserData::debugSetUserContour()
 	
 	contour.clear();
 	
-	float radiusX = 30;
-	float radiusY = 70;
+	float radiusX = 1;//15;//30;
+	float radiusY = 20;//35;//70;
+	float radiusZ = 2;
 	
 	float angStep = TWO_PI / 20.f;
 	
 	for( int i = 0; i < 20; i++)
 	{
+		float A = ofRandom(0,TWO_PI);
+		float B = ofRandom(0,TWO_PI);
+		float R = ofRandom(15,25);
 		ofPoint p = ofPoint( 
-		pos.x + (radiusX + (ofNoise(ofxTimeUtils::getElapsedTimef()*2,i/20.f)*45) )*sin( i*angStep),
-		pos.y + (radiusY + (ofNoise(i/20.f,ofxTimeUtils::getElapsedTimef()*2)*45) )*cos(angStep*i), pos.z);
+		//pos.x + (radiusX + (ofNoise(ofxTimeUtils::getElapsedTimef()*4,i/20.f)*25) )*sin( i*angStep),
+		//pos.y + (radiusY + (ofNoise(i/20.f,ofxTimeUtils::getElapsedTimef()*4)*45) )*cos(angStep*i), 
+		//pos.z + (radiusZ + (ofNoise(i/20.f,ofxTimeUtils::getElapsedTimef()*4)*25) ) 
+		pos.x + (R*sin(A)*cos(B)),
+		pos.y + ((1.2*R)*sin(A)*sin(B)),
+		pos.z + (R*cos(A))
+		);
 		contour.push_back(p);
 	}
 	
 	
+	
+	
 }
 
-void KUserData::debugSetUserPosFromMouse(float mouseX, float mouseY)
+void KUserData::debugSetUserPosFromMouse(float mouseX, float mouseY, float z)
 {
 	// calculate all that are within range of user
-	pos.set(mouseX,ofGetHeight()-mouseY,300);
+	pos.set(mouseX,ofGetHeight()-mouseY,z);
 	targetMovement = targetMovement*.7 + (abs(prevMouseX-mouseX) + abs(prevMouseY-mouseY))*.3;
 	prevMouseX = mouseX;
 	prevMouseY = mouseY;
-	targetForce = float(3-targetMovement)/3.;
+	targetForce = 1;//(float(3-targetMovement)/3.);
+	//cout << "targetMovement " <<  targetMovement << endl;
 	
 	// mapping mouse
 	pos.x = ofMap(pos.x,0,ofGetWidth(),-270,270);

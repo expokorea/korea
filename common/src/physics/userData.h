@@ -30,7 +30,7 @@ class KUserData{
 	// void setPosition(ofVec3f pos);
 	
 	void debugSetUserContour();		// sets fake contour points for debugging
-	void debugSetUserPosFromMouse(float mouseX, float mouseY);
+	void debugSetUserPosFromMouse(float mouseX, float mouseY, float z = 0);
 	
 	ofVec3f getPosition(){ return pos; };
 	float getTimeLastSeen(){ return timeLastSeen; }

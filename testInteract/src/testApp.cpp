@@ -4,9 +4,12 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-
+	
+	movieSaver.setup(640,480, "kr"+ofToString(ofRandom(1000,10000))+".mov" );
+	movieSaver.setCodecType( OF_QT_SAVER_CODEC_QUALITY_HIGH );//OF_QT_SAVER_CODEC_QUALITY_NORMAL );
+	
 	ofSetVerticalSync(true);
-	//ofSetFrameRate(60);
+	ofSetFrameRate(30);
 	ofBackground(0);
 
 	//KoreaParticle::model.loadModel("blobFish.obj");
@@ -80,13 +83,14 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-		ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
-		ofSetFrameRate(60);
-		recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
+	//	ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
+	//	ofSetFrameRate(60);
+	//	recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
 	}else if(!l && record){
-		ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
-		ofSetFrameRate(60);
-		recorder.encodeVideo();
+	//	ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
+	//	ofSetFrameRate(60);
+	//	recorder.encodeVideo();
+	movieSaver.finishMovie();
 	}
 }
 
@@ -100,12 +104,12 @@ void testApp::update(){
 	//kSystem.debugUserCenter(user1);
 	kSystem.assignUserTargets(users);
 
-	user1.debugSetUserPosFromMouse(mouseX,mouseY);
-	user1.debugSetUserContour();
-	users[0].debugSetUserPosFromMouse(mouseX,mouseY);
+	//user1.debugSetUserPosFromMouse(mouseX,mouseY);
+	//user1.debugSetUserContour();
+	users[0].debugSetUserPosFromMouse(mouseX,mouseY,300);
 	users[0].debugSetUserContour();
 	
-	users[1].debugSetUserPosFromMouse(mouseX+400,mouseY);
+	users[1].debugSetUserPosFromMouse(mouseX+300,mouseY,-100);
 	users[1].debugSetUserContour();
 }
 
@@ -172,6 +176,9 @@ void testApp::draw(){
 		ofClear(0,0);
 
 		ofFill();
+		for(int i = 0; i < users.size(); i++)
+			users[i].drawUser();
+			
 		kSystem.drawForGlow();
 
 		/*ofPushMatrix();
@@ -223,8 +230,16 @@ void testApp::draw(){
 		fbo.end();
 		ofSetColor(255);
 		fbo.draw(0,0);
-		fbo.readToPixels(pixRecord);
-		recorder.addFrame(pixRecord);
+		//fbo.readToPixels(pixRecord);
+		//recorder.addFrame(pixRecord);
+		
+		
+			int x = ofGetWidth()/2 - (640/2);
+			int y = ofGetHeight()/2 - (480/2);
+			ofImage img;
+			img.grabScreen(x,y,640,480);
+			movieSaver.addFrame(img.getPixels());
+		
 	}
 	
 	ofSetColor(255);
@@ -232,6 +247,12 @@ void testApp::draw(){
 	if(bShowGui){
 		gui.draw();
 		ofDrawBitmapString("c: reset cam  m: toggle cam mouse  x: toggle gui",10,ofGetHeight()-20);
+		
+		/*ofSetRectMode(OF_RECTMODE_CENTER);
+		ofNoFill();
+		ofRect( ofGetWidth()/2-1,ofGetHeight()/2-1,642,482);
+		ofSetRectMode(OF_RECTMODE_CORNER);*/
+
 	}
 }
 
@@ -250,6 +271,9 @@ void testApp::keyPressed(int key){
 			break;
 		case 'f':
 			ofToggleFullscreen();
+			break;
+		case ' ': 
+			kSystem.setRandomEating();
 			break;
 	}
 

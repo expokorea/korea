@@ -7,6 +7,7 @@
 #include "KoreaFlock.h"
 #include "userData.h"
 #include "ofxVideoRecorder.h"
+#include "ofxQtVideoSaver.h"
 
 class testApp : public ofBaseApp{
 
@@ -56,7 +57,11 @@ class testApp : public ofBaseApp{
 		
 		ofxVideoRecorder recorder;
 		ofPixels pixRecord;
+		
+		
 		ofFbo fbo;
 		ofxToggle record;
 
+
+		ofxQtVideoSaver movieSaver;
 };

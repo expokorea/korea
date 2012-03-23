@@ -31,9 +31,11 @@ typedef struct flockGroup{
 	int userId;
 	bool bFollowing;
 	ofVec3f pos;
+	ofVec3f target;
 	
 };
 
+// to keep track of which group is closest to user
 typedef struct distIds{
 	float dist;
 	int id;
@@ -49,7 +51,10 @@ class KoreaFlock{
 public:
 	
 		
+	// not in use (some vars not inited here...)
 	void setup( int total, int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
+	
+	// create the groups
 	void setupInGroups( int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
 
 	void update();
@@ -58,10 +63,14 @@ public:
 	void drawForGlow();
 	void drawDebug();
 	
-	// user data
+	// here is where most of the following is set. searches for closest
+	// group to a user, assigns targets and sets new modes
 	void assignUserTargets( vector<KUserData> users);
+	
 	void debugUserCenter(KUserData & myUser);
 	
+	// called periodically from update to create the illision of chasing prey
+	void setRandomEating();
 	
 	vector<KoreaParticle> particles;
 	vector<flockGroup> groups;
@@ -82,5 +91,7 @@ public:
 	// debugging 
 	ofPoint user1;
 	
+	// vars to create a variable eat event
+	float lastEatTime, eatWaitTime;
 
 };

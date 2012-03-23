@@ -114,6 +114,9 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 	
 	color.set(255,255,255);
 	
+	lastEatTime = 0;
+	eatWaitTime = 0;
+	
 }
 
 void KoreaFlock::update()
@@ -130,12 +133,13 @@ void KoreaFlock::update()
 		float halfHeight = worldHeight * .5;
 		float halfDepth  = worldDepth  * .5;
 	
-		if(particles[i].particleState == KPARTICLE_FLOCKING)
+		if(particles[i].particleState == KPARTICLE_FLOCKING){
 			particles[i].target.set(
 					   ofNoise(particles[i].rt/100.,particles[i].t,ofRandom(1))*worldWidth-halfWidth,
 					   ofNoise(ofRandom(1),particles[i].rt/100.,particles[i].t)*worldHeight-halfHeight,
-					   ofNoise(particles[i].rt/100.,ofRandom(1),particles[i].t)*worldDepth-halfDepth);
-					   
+					   ofNoise(particles[i].rt/100.,ofRandom(1),particles[i].t)*worldDepth-(1.25*halfDepth));
+		}
+		
 		particles[i].resetFlocking();
 		for( int j = 0; j < particles.size(); j++){
 			if(i!=j)particles[i].addForFlocking(&particles[j]);
@@ -154,22 +158,35 @@ void KoreaFlock::update()
 	//KoreaParticle::targetForce = speed;
 	for( int i = 0; i < particles.size(); i++)
 	{	
+		
+		// note: check if this is conflicting with settings in particle
 		if(particles[i].particleState == KPARTICLE_FLOCKING)
 		{
 			particles[i].targetForce = speed;
 			particles[i].separation = sep;
 			particles[i].cohesion = coh;
 			particles[i].alignment = aln;
-		}else{
+		}else if( particles[i].particleState == KPARTICLE_TARGET){
 			particles[i].targetForce = speed;
 			particles[i].separation = sep;
 			particles[i].cohesion = 0;
 			particles[i].alignment = 0;			
+		}else{
+			particles[i].separation = 0;
+			particles[i].cohesion = 0;
+			particles[i].alignment = 0;	
 		}
+		
 		
 		particles[i].bDrawTrails = useTrails;
 	}
 	
+	if( ofGetElapsedTimef() - lastEatTime > eatWaitTime )
+	{
+		setRandomEating();
+		lastEatTime = ofGetElapsedTimef();
+		eatWaitTime = ofRandom(.5,2);
+	}
 	
 }
 
@@ -216,10 +233,12 @@ void KoreaFlock::debugUserCenter(KUserData & myUser)
 
 void KoreaFlock::draw()
 {
+	//glEnable(GL_DEPTH_TEST);
 	for( int i = 0; i < particles.size(); i++)
 			particles[i].draw();
 			
-	
+	//glDisable(GL_DEPTH_TEST);
+
 }
 
 void KoreaFlock::drawDebug()
@@ -237,8 +256,6 @@ void KoreaFlock::drawForGlow(){
 	{
 		particles[i].drawForGlow();
 	}		
-	
-
 	
 }
 
@@ -316,33 +333,78 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 		}
 	}
 	
+	for( int i = 0; i < groups.size(); i++)
+	{
+		int userId = groups[i].userId;
+		if(userId >= 0)
+		{
+			int tPts = users[ userId ].contour.size()-1;
+			if(tPts > 0 ){
+				int index = (i + int(ofxTimeUtils::getElapsedTimef()*1)) % tPts;//(int)(ofRandom(0,tPts));
+				groups[i].target = users[ userId ].contour[index];
+			}
+		}
+	}
 		
 	// make all in groups that have follow id, follow that user
 	for( int i = 0; i < particles.size(); i++)
 	{
+		if(particles[i].particleState == KPARTICLE_EATING) continue;
+		
 		int groupId = particles[i].groupFlag;
 		int userId = groups[groupId].userId;
 		int tPts = users[ userId ].contour.size()-1;
 		if( userId >= 0 && tPts > 0 )
 		{
 			particles[i].setState(KPARTICLE_TARGET);
-			int index = (i + int(ofxTimeUtils::getElapsedTimef())) % tPts;
-			particles[i].target = users[ userId ].contour[index];
+			int index = (groupId + int(ofxTimeUtils::getElapsedTimef()*2)) % tPts;
+			if(users[userId].targetMovement < 2)
+				particles[i].target = groups[groupId].target;//users[ userId ].contour[index];
+			else
+				particles[i].target = users[ userId ].pos;//contour[index];
+			
+			if(users[userId].targetMovement > 10){
+				users[ userId ].targetForce = (float(3-users[ userId ].targetMovement)/6.);
+			}
 			particles[i].targetForce = speed*2*users[ userId ].targetForce;
 		}else{
 			particles[i].setState(KPARTICLE_FLOCKING);
 		}
 	}
 	
+	
+	/*for( int i = 0; i < particles.size(); i++)
+	{
+		if(particles[i].particleState == KPARTICLE_FLOCKING)
+		{
+			for( int j = 0; j < users.size(); j++)
+			{
+				particles[i].repelFrom(  users[ j ].pos, -1, 200100);
+			}
+			
+		}
+	}*/
+	
 }
 
-/*
-flockingGroups
-- flag
-- targetID
-- bFollowingTarget
+void KoreaFlock::setRandomEating()
+{
+	ofSeedRandom();
+	
+	// pick a random particle
+	int i = ofRandom(0,particles.size()-1);
+	
+	// set its state
+	particles[i].setState(KPARTICLE_EATING);
+	
+	// set its targetForce
+	particles[i].targetForce = .1;
+	
+	// pick target in range
+	float radius = ofRandom(30,50);
+	float angle = ofRandom(0,TWO_PI);
+	particles[i].target.set( particles[i].pos.x+radius * cos(angle), particles[i].pos.y+radius * sin(angle), particles[i].pos.z+ ofRandom(-5,5) );
+	
+	
+}
 
-userFollowed
-- bIsFollowed
-
-*/

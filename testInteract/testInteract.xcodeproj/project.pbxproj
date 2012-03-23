@@ -22,6 +22,7 @@
 		8396760914FE6ED800771A68 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8396760314FE6ED800771A68 /* ofxToggle.cpp */; };
 		83D97D56150CD1F800EAB5B1 /* userData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83D97D54150CD1F800EAB5B1 /* userData.cpp */; };
 		83D97D73150CDA7300EAB5B1 /* ofxTimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83D97D71150CDA7300EAB5B1 /* ofxTimeUtils.cpp */; };
+		83D97FC01512B0A200EAB5B1 /* ofxQtVideoSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83D97FBE1512B0A200EAB5B1 /* ofxQtVideoSaver.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -135,6 +136,8 @@
 		83D97D69150CDA2100EAB5B1 /* ofxVideoRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVideoRecorder.h; sourceTree = "<group>"; };
 		83D97D71150CDA7300EAB5B1 /* ofxTimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxTimeUtils.cpp; path = ../common/src/ofxTimeUtils.cpp; sourceTree = SOURCE_ROOT; };
 		83D97D72150CDA7300EAB5B1 /* ofxTimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxTimeUtils.h; path = ../common/src/ofxTimeUtils.h; sourceTree = SOURCE_ROOT; };
+		83D97FBE1512B0A200EAB5B1 /* ofxQtVideoSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxQtVideoSaver.cpp; sourceTree = "<group>"; };
+		83D97FBF1512B0A200EAB5B1 /* ofxQtVideoSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQtVideoSaver.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -314,9 +317,28 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		83D97FBC1512B0A200EAB5B1 /* ofxMovieSaver */ = {
+			isa = PBXGroup;
+			children = (
+				83D97FBD1512B0A200EAB5B1 /* src */,
+			);
+			name = ofxMovieSaver;
+			path = ../../../addons/ofxMovieSaver;
+			sourceTree = SOURCE_ROOT;
+		};
+		83D97FBD1512B0A200EAB5B1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				83D97FBE1512B0A200EAB5B1 /* ofxQtVideoSaver.cpp */,
+				83D97FBF1512B0A200EAB5B1 /* ofxQtVideoSaver.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				83D97FBC1512B0A200EAB5B1 /* ofxMovieSaver */,
 				83D97D5B150CDA2100EAB5B1 /* ofxVideoRecorder */,
 				839675F614FE6ED800771A68 /* ofxGui */,
 				E4C3870413D701BA0043F0B3 /* ofx3DModelLoader */,
@@ -739,6 +761,7 @@
 				8396760914FE6ED800771A68 /* ofxToggle.cpp in Sources */,
 				83D97D56150CD1F800EAB5B1 /* userData.cpp in Sources */,
 				83D97D73150CDA7300EAB5B1 /* ofxTimeUtils.cpp in Sources */,
+				83D97FC01512B0A200EAB5B1 /* ofxQtVideoSaver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
