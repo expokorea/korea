@@ -1,6 +1,7 @@
 <settings>
 <service>oscvideoplayermapping</service>
 <!-- service>oscvideoplayeryogurteras</service-->
+<!-- service>oscvideoplayerbotellas</service-->
 <videofile>video.mov</videofile>
 <loop>0</loop>
 </settings>
