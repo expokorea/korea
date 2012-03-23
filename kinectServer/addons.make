@@ -6,4 +6,4 @@ ofxAvahiClient
 ofxGui
 ofxXmlSettings
 ofxVideoRecorder
-ofxAssimpModelLoader
+#ofxPCL

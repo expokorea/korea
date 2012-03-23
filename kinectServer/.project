@@ -103,6 +103,11 @@
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxCv</location>
 		</link>
 		<link>
+			<name>addons/ofxGui</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxGui</location>
+		</link>
+		<link>
 			<name>addons/ofxKinect</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxKinect</location>
@@ -116,6 +121,11 @@
 			<name>addons/ofxOsc</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOsc</location>
+		</link>
+		<link>
+			<name>addons/ofxPCL</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxPCL</location>
 		</link>
 		<link>
 			<name>addons/ofxVideoRecorder</name>
