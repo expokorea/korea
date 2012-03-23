@@ -18,13 +18,24 @@ public:
 	void setup(int port);
 	void update();
 
-	vector<ofPolyline> & getContours();
+	struct Blob{
+		Blob(unsigned int id, const ofPoint & pos, float size)
+		:id(id)
+		,pos(pos)
+		,size(size){}
+
+		unsigned int id;
+		ofPoint pos;
+		float size;
+	};
+
+	vector<Blob> & getBlobs();
 	unsigned int size();
-	ofPolyline & operator[](int i);
+	Blob & operator[](int i);
 
 private:
 	ofxOscReceiver osc;
 	ofxAvahiClientService avahi;
-	vector<ofPolyline> contours;
+	vector<Blob> blobs;
 };
 
