@@ -1,0 +1,5 @@
+<settings>
+<service>oscvideoplayermapping</service>
+<video>video.mov</video>
+<millistostartloop>2000</millistostartloop>
+</settings>
