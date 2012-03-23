@@ -6,8 +6,12 @@
 #include "ParticleSystemDemo.h"
 #include "KoreaFlock.h"
 #include "userData.h"
-#include "ofxVideoRecorder.h"
+
+#ifdef TARGET_OSX
 #include "ofxQtVideoSaver.h"
+#else
+#include "ofxVideoRecorder.h"
+#endif
 
 class testApp : public ofBaseApp{
 
@@ -55,7 +59,6 @@ class testApp : public ofBaseApp{
 		KUserData user1;
 		vector<KUserData> users;
 		
-		ofxVideoRecorder recorder;
 		ofPixels pixRecord;
 		
 		
@@ -63,5 +66,9 @@ class testApp : public ofBaseApp{
 		ofxToggle record;
 
 
+#ifdef TARGET_OSX
 		ofxQtVideoSaver movieSaver;
+#else
+		ofxVideoRecorder recorder;
+#endif
 };

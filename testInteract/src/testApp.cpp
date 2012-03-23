@@ -4,9 +4,10 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	
+#ifdef TARGET_OSX
 	movieSaver.setup(640,480, "kr"+ofToString(ofRandom(1000,10000))+".mov" );
 	movieSaver.setCodecType( OF_QT_SAVER_CODEC_QUALITY_HIGH );//OF_QT_SAVER_CODEC_QUALITY_NORMAL );
+#endif
 	
 	ofSetVerticalSync(true);
 	ofSetFrameRate(30);
@@ -83,14 +84,19 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-	//	ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
-	//	ofSetFrameRate(60);
-	//	recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
+#ifdef TARGET_LINUX
+	ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
+	ofSetFrameRate(60);
+	recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
+#endif
 	}else if(!l && record){
-	//	ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
-	//	ofSetFrameRate(60);
-	//	recorder.encodeVideo();
+#ifdef TARGET_LINUX
+	ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
+	ofSetFrameRate(60);
+	recorder.encodeVideo();
+#else
 	movieSaver.finishMovie();
+#endif
 	}
 }
 
@@ -153,7 +159,7 @@ void testApp::draw(){
 		ofFill();
 		kSystem.draw();
 		if(KoreaParticle::debug){
-			for(int i = 0; i < users.size(); i++)
+			for(int i = 0; i < (int)users.size(); i++)
 				users[i].drawUser();
 				//user1.drawUser();
 		}
@@ -176,7 +182,7 @@ void testApp::draw(){
 		ofClear(0,0);
 
 		ofFill();
-		for(int i = 0; i < users.size(); i++)
+		for(int i = 0; i < (int)users.size(); i++)
 			users[i].drawUser();
 			
 		kSystem.drawForGlow();
@@ -230,16 +236,16 @@ void testApp::draw(){
 		fbo.end();
 		ofSetColor(255);
 		fbo.draw(0,0);
-		//fbo.readToPixels(pixRecord);
-		//recorder.addFrame(pixRecord);
-		
-		
-			int x = ofGetWidth()/2 - (640/2);
-			int y = ofGetHeight()/2 - (480/2);
-			ofImage img;
-			img.grabScreen(x,y,640,480);
-			movieSaver.addFrame(img.getPixels());
-		
+#ifdef TARGET_LINUX
+		fbo.readToPixels(pixRecord);
+		recorder.addFrame(pixRecord);
+#else
+		int x = ofGetWidth()/2 - (640/2);
+		int y = ofGetHeight()/2 - (480/2);
+		ofImage img;
+		img.grabScreen(x,y,640,480);
+		movieSaver.addFrame(img.getPixels());
+#endif
 	}
 	
 	ofSetColor(255);

@@ -4,3 +4,4 @@ ofxAssimpModelLoader
 ofxOsc
 ofxAvahiClient
 ofxVideoRecorder
+ofxMaxim
