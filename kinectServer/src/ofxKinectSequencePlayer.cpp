@@ -9,7 +9,7 @@
 #include "ofImage.h"
 
 ofxKinectSequencePlayer::ofxKinectSequencePlayer() {
-	// TODO Auto-generated constructor stub
+	loop = false;
 
 }
 
@@ -34,10 +34,15 @@ void ofxKinectSequencePlayer::load(string movie){
 	newFrame=false;
 	lastFrameMillis = ofGetElapsedTimeMillis();
 
+
+}
+
+void ofxKinectSequencePlayer::setLoop(bool _loop){
+	loop = _loop;
 }
 
 void ofxKinectSequencePlayer::update(){
-	if(ofGetElapsedTimeMillis()-lastFrameMillis>=1000./30. && currentImage<folder.size()){
+	if(ofGetElapsedTimeMillis()-lastFrameMillis>=1000./30. && (currentImage<folder.size() || loop)){
 		ofLoadImage(rawPixels,folder.getFile(currentImage,ofFile::Reference).getAbsolutePath());
 
 		int n = 640 * 480;
@@ -50,6 +55,7 @@ void ofxKinectSequencePlayer::update(){
 		texDistance.loadData(distancePixels);
 		newFrame = true;
 		currentImage++;
+		currentImage%=folder.size();
 	}else{
 		newFrame = false;
 	}
@@ -120,10 +126,35 @@ float ofxKinectSequencePlayer::getDistanceAt(const ofPoint & p) {
 	return getDistanceAt(p.x, p.y);
 }
 
+void ofxKinectSequencePlayer::drawDepth(float x, float y, float w, float h){
+	texDepth.draw(x,y, w,h);
+}
+
 void ofxKinectSequencePlayer::drawDepth(float x, float y){
 	texDepth.draw(x,y);
 }
 
 void ofxKinectSequencePlayer::drawDistance(float x, float y){
 	texDistance.draw(x,y);
+}
+
+void ofxKinectSequencePlayer::drawDistance(float x, float y, float w, float h){
+	texDistance.draw(x,y,w,h);
+}
+
+
+//------------------------------------
+ofVec3f ofxKinectSequencePlayer::getWorldCoordinateAt(int x, int y) {
+	return getWorldCoordinateAt(x, y, getDistanceAt(x, y));
+}
+
+//------------------------------------
+ofVec3f ofxKinectSequencePlayer::getWorldCoordinateAt(float cx, float cy, float wz) {
+	double wx, wy;
+	double ref_pix_size = .1042;
+	double ref_distance = 120;
+	double factor = 2 * ref_pix_size * wz / ref_distance;
+	wx = (double)(cx - 640/2) * factor;
+	wy = (double)(cy - 480/2) * factor;
+	return ofVec3f(wx, wy, wz);
 }

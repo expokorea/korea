@@ -7,15 +7,15 @@
 
 #include "OscContourServer.h"
 
-OscContourServer::OscContourServer() {
+OscBlobServer::OscBlobServer() {
 }
 
-OscContourServer::OscContourServer(string ip, int port, string host_name)
+OscBlobServer::OscBlobServer(string ip, int port, string host_name)
 :OscService(ip,port,host_name){
 
 }
 
-void OscContourServer::newFrame(int frame){
+void OscBlobServer::newFrame(int frame){
 	if(!isConnected()) return;
 	ofxOscMessage msg;
 	msg.setAddress("frame");
@@ -23,15 +23,14 @@ void OscContourServer::newFrame(int frame){
 	osc.sendMessage(msg);
 }
 
-void OscContourServer::sendContour(const ofPolyline & contour, float z){
+void OscBlobServer::sendBlob(int id, const ofPoint & pos, float size){
 	if(!isConnected()) return;
 	ofxOscMessage msg;
-	msg.setAddress("contour");
-	msg.addFloatArg(z);
-	for(int j=0;j<(int)contour.size();j++){
-		msg.addFloatArg(contour[j].x);
-		msg.addFloatArg(contour[j].y);
-	}
+	msg.setAddress("blob");
+	msg.addIntArg(id);
+	msg.addFloatArg(pos.x);
+	msg.addFloatArg(pos.y);
+	msg.addFloatArg(size);
 	osc.sendMessage(msg);
 }
 

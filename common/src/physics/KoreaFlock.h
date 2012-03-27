@@ -25,17 +25,9 @@
 
 #define USE_TIME_BASED
 
-/*
-- flocking particles at hover need to follow paths
-- create a path for each using rotated contour? each has same contour but
-  with consistent rotation
-- move around the contour following a moving point?
--   
-*/
 
 
-typedef struct flockGroup{
-	
+struct flockGroup{
 	int groupFlag;
 	int userId;
 	int screenId;
@@ -46,13 +38,13 @@ typedef struct flockGroup{
 };
 
 // to keep track of which group is closest to user
-typedef struct distIds{
+struct distIds{
 	float dist;
 	int id;
 };
 
 
-typedef struct userDistances{
+struct userDistances{
 	vector<distIds> distData;
 };
 

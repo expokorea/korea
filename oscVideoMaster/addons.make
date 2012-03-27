@@ -1,4 +1,4 @@
 ofxOsc
 ofxAvahiClient
-ofxGui
 ofxXmlSettings
+ofxGui

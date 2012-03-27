@@ -1,9 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOsc.h"
-#include "ofxAvahiClient.h"
 #include "ofxXmlSettings.h"
+#include "ofxAvahiClient.h"
+#include "OscPlayerClient.h"
+#include "ofxGui.h"
 
 class testApp : public ofBaseApp{
 
@@ -21,9 +22,17 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
-		ofxOscReceiver osc;
-		ofVideoPlayer player;
-		ofxAvahiClientService avahi;
+
+		void newAvahiService(ofxAvahiService & service);
+		void removedAvahiService(ofxAvahiService & service);
+
 		ofxXmlSettings xml;
+		ofVideoPlayer player;
+		vector<ofPtr<OscPlayerClient> > videoClients;
+		ofxAvahiClientBrowser avahi;
+		ofMutex mutex;
+		int playerFinishedMs;
+		int millistostartloop;
+		string servicename;
+
 };

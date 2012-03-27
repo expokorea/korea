@@ -1,2 +1,3 @@
 ofxOsc
 ofxAvahiClient
+ofxXmlSettings

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>kinectServer</name>
+	<name>oscVideoMaster</name>
 	<comment></comment>
 	<projects>
 		<project>libs</project>
@@ -32,10 +32,6 @@
 					<value>make</value>
 				</dictionary>
 				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/kinectServer}</value>
-				</dictionary>
-				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
 					<value>clean</value>
 				</dictionary>
@@ -57,7 +53,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
-					<value>Debug</value>
+					<value>all</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.stopOnError</key>
@@ -71,6 +67,7 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -81,56 +78,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>addons</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>common</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/apps/korea/common</location>
-		</link>
-		<link>
-			<name>addons/ofxAvahiClient</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxAvahiClient</location>
-		</link>
-		<link>
-			<name>addons/ofxCv</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxCv</location>
-		</link>
-		<link>
-			<name>addons/ofxGui</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxGui</location>
-		</link>
-		<link>
-			<name>addons/ofxKinect</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxKinect</location>
-		</link>
-		<link>
-			<name>addons/ofxOpenCv</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOpenCv</location>
-		</link>
-		<link>
-			<name>addons/ofxOsc</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOsc</location>
-		</link>
-		<link>
-			<name>addons/ofxPCL</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxPCL</location>
-		</link>
-		<link>
-			<name>addons/ofxVideoRecorder</name>
-			<type>2</type>
-			<location>/home/arturo/Desktop/openFrameworks/addons/ofxVideoRecorder</location>
-		</link>
-	</linkedResources>
 </projectDescription>

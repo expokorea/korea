@@ -23,7 +23,7 @@ void Glow::setup(){
 
 	ofFbo::Settings settings;
 	//settings.depthAsTexture = true;
-	settings.useDepth = true;
+	settings.useDepth = false;
 	settings.width = ofGetWidth();
 	settings.height = ofGetHeight();
 	settings.internalformat = GL_RGBA;
@@ -69,4 +69,8 @@ void Glow::end(){
 
 void Glow::draw(float x, float y){
 	fbo1.draw(x,y);
+}
+
+void Glow::draw(float x, float y, float w, float h){
+	fbo1.draw(x,y,w,h);
 }

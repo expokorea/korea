@@ -26,9 +26,9 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 	this->worldDepth  = worldDepth;
 	
 	// create particles in groups with unique identifier
-	int groupMin   = 6;
-	int groupMax   = 20;
-	int totalGroup = 10;
+	int groupMin = 6;
+	int groupMax = 20;
+	int totalGroup = 4;
 		
 	flockGroup tempGroup;
 	tempGroup.bFollowing = false;

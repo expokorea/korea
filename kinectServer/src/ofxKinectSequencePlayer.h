@@ -33,12 +33,23 @@ public:
 	float getNearClipping();
 	float getFarClipping();
 	void setDepthClipping(float nearClip=500, float farClip=4000);
+
+	/// calculates the coordinate in the world for the depth point (perspective calculation)
+    ///
+    /// center of image is (0.0)
+	ofVec3f getWorldCoordinateAt(int cx, int cy);
+	ofVec3f getWorldCoordinateAt(float cx, float cy, float wz);
+
     /// get the calulated distance for a depth point
 	float getDistanceAt(int x, int y);
 	float getDistanceAt(const ofPoint & p);
 
 	void drawDepth(float x, float y);
+	void drawDepth(float x, float y, float w, float h);
 	void drawDistance(float x, float y);
+	void drawDistance(float x, float y, float w, float h);
+
+	void setLoop(bool loop);
 
 private:
 	void updateDepthLookupTable();
@@ -54,6 +65,7 @@ private:
 
 	float nearClipping, farClipping;
 	bool newFrame;
+	bool loop;
 
 	ofTexture texDepth,texDistance;
 };

@@ -4,11 +4,20 @@
 void testApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
+	ofHideCursor();
 
-	osc.setup(6666);
-	avahi.start("oscvideoplayer","_oscit._udp",6666);
+	xml.loadFile("settings.xml");
+	string servicename = xml.getValue("settings:service","oscvideoplayer");
+	string videoname = xml.getValue("settings:videofile","video.mov");
+	bool loop = xml.getValue("settings:loop",0);
+	cout << servicename << endl;
 
-	player.loadMovie("fingers.mov");
+	int port = ofRandom(5555,9999);
+	osc.setup(port);
+	avahi.start(servicename,"_oscit._udp",port);
+
+	player.loadMovie(videoname);
+	if(loop) player.setLoopState(OF_LOOP_NORMAL);
 }
 
 //--------------------------------------------------------------

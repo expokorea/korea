@@ -2,88 +2,83 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	ofSetLogLevel(OF_LOG_VERBOSE);
+	ofSetVerticalSync(true);
+	ofBackground(0);
+	ofHideCursor();
 	ofAddListener(avahi.serviceNewE,this,&testApp::newAvahiService);
 	ofAddListener(avahi.serviceRemoveE,this,&testApp::removedAvahiService);
 
-
-	contours.setup(6668);
-
-	ofSetFrameRate(10);
-	ofBackground(0);
-
-	gui.setup("control panel");
-	guiMapping.setup("mapping players");
-	guiMapping.add(startMapping.setup("start mapping",false));
-
-	gui.add(&guiMapping);
+	xml.loadFile("settings.xml");
+	servicename = xml.getValue("settings:service","oscvideoplayer");
+	string videoname = xml.getValue("settings:videofile","video.mov");
+	bool loop = xml.getValue("settings:loop",0);
+	millistostartloop = xml.getValue("settings:millistostartloop",2000);
+	cout << servicename << endl;
 
 	avahi.lookup("_oscit._udp");
+
+	player.loadMovie(videoname);
+	if(loop) player.setLoopState(OF_LOOP_NORMAL);
+	player.play();
+	playerFinishedMs = 0;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	for(int i=0; i<videoClients.size(); i++){
+	mutex.lock();
+	player.update();
+	if(player.getIsMovieDone()){
+		playerFinishedMs = ofGetElapsedTimeMillis();
+		player.setFrame(0);
+		player.setPaused(true);
+		for(int i=0; i<(int)videoClients.size(); i++){
+			videoClients[i]->playing = false;
+		}
+	}
+	if(player.isPaused() && ofGetElapsedTimeMillis()-playerFinishedMs>=millistostartloop){
+		player.play();
+		for(int i=0; i<(int)videoClients.size(); i++){
+			videoClients[i]->playing = true;
+		}
+	}
+	for(int i=0; i<(int)videoClients.size(); i++){
 		videoClients[i]->update();
 	}
-
-	for(int i=0; i<kinectServers.size(); i++){
-		kinectServers[i]->update();
-	}
-
-	contours.update();
+	mutex.unlock();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
-	ofSetColor(255);
-	gui.draw();
-
-	ofRect(320,10,640,480);
-	ofSetColor(0);
-	ofPushMatrix();
-	ofTranslate(320,10);
-	for(int i=0;i<(int)contours.size();i++){
-		ofCircle(contours[i].pos,contours[i].size);
-	}
-	ofPopMatrix();
+	if(!player.isPaused()) player.draw(0,0);
 }
-
-//--------------------------------------------------------------
-void testApp::keyPressed(int key){
-}
-
 
 void testApp::newAvahiService(ofxAvahiService & service){
 	ofLogVerbose() << "new service" << service.name << "in" << service.host_name << service.ip << ":" << service.port;
-	if(service.name.find("oscvideoplayer")==0){
+	mutex.lock();
+	if(service.name.find(servicename)==0){
 		videoClients.push_back(ofPtr<OscPlayerClient>(new OscPlayerClient(service.ip,service.port,service.host_name)));
-		videoClients.back()->playing = startMapping.value;
-	}else if(service.name.find("osckinectserverconfig")==0){
-		kinectServers.push_back(ofPtr<OscKinectServer>(new OscKinectServer(service.ip,service.port,service.host_name)));
-		gui.add(&kinectServers.back()->gui);
+		videoClients.back()->playing = !player.isPaused();
 	}
+	mutex.unlock();
 }
 
 void testApp::removedAvahiService(ofxAvahiService & service){
 	ofLogVerbose() << "removing service" << service.name << "in" << service.host_name << service.ip << ":" << service.port;
-	if(service.name=="oscvideoplayer"){
-		for(int i=0; i<videoClients.size(); i++){
+	mutex.lock();
+	if(service.name.find(servicename)==0){
+		for(int i=0; i<(int)videoClients.size(); i++){
 			if(videoClients[i]->getHostName()==service.host_name){
 				videoClients.erase(videoClients.begin()+i);
 				return;
 			}
 		}
 	}
-	if(service.name=="osckinectserverconfig"){
-		for(int i=0; i<kinectServers.size(); i++){
-			if(kinectServers[i]->getHostName()==service.host_name){
-				kinectServers.erase(kinectServers.begin()+i);
-				return;
-			}
-		}
-	}
+	mutex.unlock();
+}
+
+//--------------------------------------------------------------
+void testApp::keyPressed(int key){
+
 }
 
 //--------------------------------------------------------------

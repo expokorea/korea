@@ -23,11 +23,18 @@ void OscContoursClient::update(){
 	while(osc.hasWaitingMessages()){
 		osc.getNextMessage(&msg);
 		if(msg.getAddress()=="frame"){
-			contours.clear();
+			blobs.clear();
 			continue;
 		}
 
-		if(msg.getAddress()=="contour"){
+		if(msg.getAddress()=="blob"){
+
+			blobs.push_back(Blob(msg.getArgAsInt32(0),
+				ofPoint(msg.getArgAsFloat(1), msg.getArgAsFloat(2)),
+				msg.getArgAsFloat(3)));
+		}
+
+		/*if(msg.getAddress()=="contour"){
 			int n = msg.getNumArgs();
 			contours.push_back(ofPolyline());
 			ofPolyline & contour = contours.back();
@@ -37,18 +44,18 @@ void OscContoursClient::update(){
 				contour.addVertex(p);
 			}
 			contour.close();
-		}
+		}*/
 	}
 }
 
-vector<ofPolyline> & OscContoursClient::getContours(){
-	return contours;
+vector<OscContoursClient::Blob> & OscContoursClient::getBlobs(){
+	return blobs;
 }
 
 unsigned int OscContoursClient::size(){
-	return contours.size();
+	return blobs.size();
 }
 
-ofPolyline & OscContoursClient::operator[](int i){
-	return contours[i];
+OscContoursClient::Blob & OscContoursClient::operator[](int i){
+	return blobs[i];
 }
