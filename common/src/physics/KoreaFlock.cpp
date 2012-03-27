@@ -18,40 +18,6 @@ bool sort_dist_compare( distIds a, distIds b ) {
 }
  
 
-void KoreaFlock::setup( int total, int worldWidth, int worldHeight, int worldDepth)
-{
-		
-	
-	this->worldWidth  = worldWidth;
-	this->worldHeight = worldHeight;
-	this->worldDepth  = worldDepth;
-	
-	float halfWidth = worldWidth * .5;
-	float halfHeight = worldHeight * .5;
-	float halfDepth = worldDepth * .5;
-	
-	// setup random
-	KoreaParticle tempParticle;
-	for( int i = 0; i < total; i++)
-	{
-		ofVec3f pos = ofVec3f( ofRandom(-halfWidth,halfWidth), ofRandom(-halfHeight,halfHeight), ofRandom(-halfDepth,halfDepth));
-		ofVec3f vel = ofVec3f( 0,0,0);
-		tempParticle.setup( pos, vel, .01f );
-		tempParticle.bUseTarget = true;
-		tempParticle.rt = i;
-		particles.push_back(tempParticle);
-	}
-	
-	gui.setup("particles");
-	gui.add(speed.setup("t force",.010,0,.05));
-	gui.add(useTrails.setup("trails",true));
-	gui.add(sep.setup("sep",.05,0,.1));
-	gui.add(coh.setup("coh",.01,0,.1));
-	gui.add(aln.setup("aln",.01,0,.1));
-	gui.add(userRadius.setup("user radius",200,0,500));
-	
-	color.set(255,255,255);
-}
 
 void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 {
@@ -59,18 +25,16 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 	this->worldHeight = worldHeight;
 	this->worldDepth  = worldDepth;
 	
-	float halfWidth  = worldWidth  * .5;
-	float halfHeight = worldHeight * .5;
-	float halfDepth  = worldDepth  * .5;
-	
 	// create particles in groups with unique identifier
-	int groupMin = 6;
-	int groupMax = 20;
+	int groupMin   = 6;
+	int groupMax   = 20;
 	int totalGroup = 10;
 		
 	flockGroup tempGroup;
 	tempGroup.bFollowing = false;
 	tempGroup.userId = -1;
+	
+	int totalScreens = 3;
 	
 	for( int j = 0; j < totalGroup; j++)
 	{
@@ -80,6 +44,7 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 		
 		tempGroup.groupFlag = j;
 		tempGroup.pos.set(0,0,0);
+		tempGroup.screenId = j % totalScreens;
 		groups.push_back(tempGroup);
 		
 	}
@@ -102,42 +67,50 @@ void KoreaFlock::setupInGroups( int worldWidth, int worldHeight, int worldDepth)
 		particles[i].rt = i;
 	}
 	
+	lastEatTime = 0;
+	eatWaitTime = 0;
+	timeLastUpdate = ofGetElapsedTimef();	
+	bFadeOut = false;
+	
 	
 	// set interface
 	gui.setup("particles");
 	gui.add(speed.setup("t force",.010,0,.05));
 	gui.add(useTrails.setup("trails",true));
 	gui.add(sep.setup("sep",.05,0,.1));
-	gui.add(coh.setup("coh",.01,0,.1));
-	gui.add(aln.setup("aln",.01,0,.1));
+	gui.add(coh.setup("coh",.048,0,.1));
+	gui.add(aln.setup("aln",.0165,0,.1));
 	gui.add(userRadius.setup("user radius",200,0,500));
 	
 	color.set(255,255,255);
 	
-	lastEatTime = 0;
-	eatWaitTime = 0;
 	
 }
 
 void KoreaFlock::update()
 {
-	ofSeedRandom(0);
+	
 	
 	float dt = ofGetElapsedTimef() - timeLastUpdate;
-	timeLastUpdate = ofGetElapsedTimef();
 	
+	
+	/*if( !bFadeOut && ofGetElapsedTimef() - lastEatTime > eatWaitTime )
+	{
+		setRandomEating();
+		setRandomEating();
+		setRandomEating();
+		lastEatTime = ofGetElapsedTimef();
+		eatWaitTime = ofRandom(.1,1);
+	}*/
+	
+	ofSeedRandom(0);
 	
 	for( int i = 0; i < particles.size(); i++)
 	{
-		float halfWidth  = worldWidth  * .5;
-		float halfHeight = worldHeight * .5;
-		float halfDepth  = worldDepth  * .5;
-	
+		
 		if(particles[i].particleState == KPARTICLE_FLOCKING){
-			particles[i].target.set(
-					   ofNoise(particles[i].rt/100.,particles[i].t,ofRandom(1))*worldWidth-halfWidth,
-					   ofNoise(ofRandom(1),particles[i].rt/100.,particles[i].t)*worldHeight-halfHeight,
-					   ofNoise(particles[i].rt/100.,ofRandom(1),particles[i].t)*worldDepth-(1.25*halfDepth));
+			int screenId = groups[particles[i].groupFlag].screenId;
+			particles[i].target.set( getTargetByScreen(screenId,particles[i].rt,particles[i].t) );
 		}
 		
 		particles[i].resetFlocking();
@@ -147,7 +120,8 @@ void KoreaFlock::update()
 		particles[i].applyForces();
 		
 		#ifdef USE_TIME_BASED
-		particles[i].update(dt*100);
+		float rate = (1/60.f);
+		particles[i].update( (dt/rate) );///(1/60.f));
 		#else
 		particles[i].update();
 		#endif
@@ -181,13 +155,8 @@ void KoreaFlock::update()
 		particles[i].bDrawTrails = useTrails;
 	}
 	
-	if( ofGetElapsedTimef() - lastEatTime > eatWaitTime )
-	{
-		setRandomEating();
-		lastEatTime = ofGetElapsedTimef();
-		eatWaitTime = ofRandom(.5,2);
-	}
 	
+	timeLastUpdate = ofGetElapsedTimef();
 }
 
 //void KoreaFlock::debugUserCenter(ofPoint p)
@@ -263,11 +232,13 @@ void KoreaFlock::drawForGlow(){
 void KoreaFlock::assignUserTargets( vector<KUserData> users)
 {
 	
+	if(bFadeOut) return;
+	
 	// create a vector for groups with boolean to mark if it following a user or not
 	vector<bool> isFollowing;
 	for( int i = 0; i < groups.size(); i++) isFollowing.push_back(false);
 	
-	// for each flock calculate average position
+	//----- for each flock calculate average position
 	for( int i = 0; i < groups.size(); i++)
 	{
 		// reset user id
@@ -295,7 +266,7 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 	vector<userDistances> userDist;
 	userDistances tempDist;
 	
-	// for each user, calc distances to flock groups
+	//----- for each user, calc distances to flock groups
 	for( int i = 0; i < users.size(); i++)
 	{
 		userDist.push_back(tempDist);
@@ -316,7 +287,7 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 	}
 	
 	
-	// for each user, choose closest flock
+	//----- for each user, choose closest flock
 	for( int i = 0; i < users.size(); i++)
 	{
 		//try to pick closest
@@ -333,6 +304,7 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 		}
 	}
 	
+	//----- find group targets?
 	for( int i = 0; i < groups.size(); i++)
 	{
 		int userId = groups[i].userId;
@@ -340,50 +312,97 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 		{
 			int tPts = users[ userId ].contour.size()-1;
 			if(tPts > 0 ){
-				int index = (i + int(ofxTimeUtils::getElapsedTimef()*1)) % tPts;//(int)(ofRandom(0,tPts));
+				int index = (i + int(ofxTimeUtils::getElapsedTimef()*.25)) % tPts;//(int)(ofRandom(0,tPts));
 				groups[i].target = users[ userId ].contour[index];
 			}
 		}
 	}
 		
-	// make all in groups that have follow id, follow that user
+		
+	//-----	
+	//-----  set following targets and modes
 	for( int i = 0; i < particles.size(); i++)
 	{
+		
+		// don't do anything if in eating mode
 		if(particles[i].particleState == KPARTICLE_EATING) continue;
 		
 		int groupId = particles[i].groupFlag;
-		int userId = groups[groupId].userId;
-		int tPts = users[ userId ].contour.size()-1;
+		int userId  = groups[groupId].userId;
+		int tPts    = users[ userId ].contour.size()-1;
+		
 		if( userId >= 0 && tPts > 0 )
 		{
-			particles[i].setState(KPARTICLE_TARGET);
-			int index = (groupId + int(ofxTimeUtils::getElapsedTimef()*2)) % tPts;
-			if(users[userId].targetMovement < 2)
-				particles[i].target = groups[groupId].target;//users[ userId ].contour[index];
-			else
-				particles[i].target = users[ userId ].pos;//contour[index];
+			//particles[i].repelFrom(  users[ userId ].pos, 1, 30);
+			//int index = (i + int(ofxTimeUtils::getElapsedTimef()*3)) % tPts;
 			
-			if(users[userId].targetMovement > 10){
-				users[ userId ].targetForce = (float(3-users[ userId ].targetMovement)/6.);
+			particles[i].targetForce = .1;//speed*2*users[ userId ].targetForce;
+			
+			// if user is very still, not moving, set to hover mode
+			if(users[userId].bIsVeryStill && particles[i].bArrivedAtTarget)
+			{
+				particles[i].setState(KPARTICLE_HOVER);
+				
+				if(particles[i].bNeedHoverTarget) 
+				{
+					// go in different directions
+					if(i%2==0)particles[i].contourIndex++;
+					else particles[i].contourIndex--;
+					
+					// advance in contour loop
+					if(particles[i].contourIndex > tPts) particles[i].contourIndex=0;//ofRandom(0,tPts);//0;
+					else if( particles[i].contourIndex < 0)  particles[i].contourIndex=tPts;//ofRandom(0,tPts);//tPts
+											
+					particles[i].target = users[ userId ].contour[particles[i].contourIndex];//groups[groupId].target;//users[ userId ].contour[index];
+					float R  = fabs(users[ userId ].contour[particles[i].contourIndex].x-users[ userId ].pos.x);
+					particles[i].target.x = users[ userId ].pos.x + R*sin(ofGetElapsedTimef()*2);
+					particles[i].target.z = users[ userId ].pos.z + R*cos(ofGetElapsedTimef()*2);
+					particles[i].bNeedHoverTarget = false;
+					particles[i].targetForce = .05;
+				}
+
+			}else{
+				
+				// follow user centroid
+				particles[i].setState(KPARTICLE_TARGET);
+				particles[i].target = users[ userId ].pos;
 			}
-			particles[i].targetForce = speed*2*users[ userId ].targetForce;
+			
+			// create repulsion if user moves too actively
+			if(users[userId].bIsTooActive){
+				
+				// calculate distance from user
+				ofVec3f distUser = users[ userId ].pos-particles[i].pos;
+				float distSq = distUser.lengthSquared();
+				float repelRadius = 200*200;
+				
+				float repelForce = distSq / repelRadius;
+				if(repelForce > 1 ) repelForce = 1;
+				repelForce = 1-repelForce;
+				
+				// apply repulsion based on distance
+				repelForce = repelForce*(users[ userId ].targetMovement/10.f);
+				
+				particles[i].targetForce = 0;//(float(3-users[ userId ].targetMovement)/100.);
+				distUser.normalize();
+				
+				ofVec3f frc;
+				frc.x = distUser.x * -repelForce;
+				frc.y = distUser.y * -repelForce;
+				//frc.z = -repelForce;//
+				frc.z = distUser.z * -repelForce;
+				
+				particles[i].vel+=frc;
+				particles[i].setState(KPARTICLE_FLOCKING);
+			}
+			
 		}else{
+			// reset to flocking state
 			particles[i].setState(KPARTICLE_FLOCKING);
 		}
 	}
 	
-	
-	/*for( int i = 0; i < particles.size(); i++)
-	{
-		if(particles[i].particleState == KPARTICLE_FLOCKING)
-		{
-			for( int j = 0; j < users.size(); j++)
-			{
-				particles[i].repelFrom(  users[ j ].pos, -1, 200100);
-			}
-			
-		}
-	}*/
+
 	
 }
 
@@ -408,3 +427,77 @@ void KoreaFlock::setRandomEating()
 	
 }
 
+ofVec3f KoreaFlock::getTargetByScreen(int screenId, float rt, float t)
+{
+	float halfWidth  = worldWidth  * .5;
+	float halfHeight = worldHeight * .5;
+	float halfDepth  = worldDepth  * .5;
+	float thirdW = (worldWidth / 3.0f);
+	float thirdHW = .5*(worldWidth / 3.0f);
+	
+	switch(screenId){
+	
+		case 0: 
+			return ofVec3f (
+							ofNoise(rt/100.,t,ofRandom(1))*halfWidth-(1.25*halfWidth),
+							ofNoise(ofRandom(1),rt/100.,t)*worldHeight-halfHeight,
+							ofNoise(rt/100.,ofRandom(1),t)*worldDepth-(1*halfDepth)
+							);
+					break;
+		case 1: 
+		
+			return ofVec3f (
+							ofNoise(rt/100.,t,ofRandom(1))*halfWidth-(.5*halfWidth),
+							ofNoise(ofRandom(1),rt/100.,t)*worldHeight-halfHeight,
+							ofNoise(rt/100.,ofRandom(1),t)*worldDepth-(1*halfDepth)
+							);
+					break;
+		case 2: 
+			return ofVec3f (
+							ofNoise(rt/100.,t,ofRandom(1))*(1.25*halfWidth),
+							ofNoise(ofRandom(1),rt/100.,t)*worldHeight-halfHeight,
+							ofNoise(rt/100.,ofRandom(1),t)*worldDepth-(1*halfDepth)
+							);
+					break;
+		default:
+			return ofVec3f(
+							ofNoise(rt/100.,t,ofRandom(1))*ofGetWidth(),
+						   ofNoise(ofRandom(1),rt/100.,t)*ofGetHeight(),
+						   ofNoise(rt/100.,ofRandom(1),t)*ofGetWidth()*4
+						   );
+					break;
+	}
+
+}
+
+void KoreaFlock::setFadeOut()
+{
+	bFadeOut = true;
+	
+	// set targets to far depth
+	for( int i = 0; i < groups.size(); i++)
+	{
+		groups[i].target = groups[i].pos;
+		groups[i].target.z = -1600;
+		if(groups[i].target.x < 0)groups[i].target.x -= 500;
+		else groups[i].target.x += 500;
+	}
+	
+	
+	// set all to fade out state
+	for( int i = 0; i < particles.size(); i++)
+	{
+		particles[i].setState(KPARTICLE_FADE_OUT);
+		particles[i].target = groups[ particles[i].groupFlag ].target;//particles[i].pos;
+		//particles[i].target.z = -1600;//groups[ particles[i].groupFlag ].target;
+	}
+		
+}
+
+void KoreaFlock::setFadeIn(){
+	bFadeOut = false;
+	for( int i = 0; i < particles.size(); i++)
+	{
+		particles[i].setState(KPARTICLE_FLOCKING);
+	}
+}

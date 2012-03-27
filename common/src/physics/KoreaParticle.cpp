@@ -19,6 +19,7 @@ ofxFloatSlider KoreaParticle::thickness;
 ofxIntSlider KoreaParticle::length;
 ofxAssimpModelLoader KoreaParticle::model;
 float KoreaParticle::speedFactor;
+ofxFloatSlider KoreaParticle::flockAlpha; // less transparent when not following
 
 ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const ofVec3f &d )
 {
@@ -32,7 +33,29 @@ ofVec3f calcNormal( const ofVec3f &a, const ofVec3f &b, const ofVec3f &c, const 
 }
 
 KoreaParticle::KoreaParticle(){
-groupFlag = 0;
+	
+	groupFlag = 0;
+	vel.set(0,0,0);
+	pos.set(0,0,0);
+	target.set(0,0,0);
+	
+	damping = .1;
+	targetForce = 1;
+	targetSpeed = 1;
+	bUseTarget  = false;
+	bFlocking   = false;
+	bDrawTrails = false;
+	bEating     = false;
+	bNeedHoverTarget = true;
+	contourIndex = 0;
+	bArrivedAtTarget = false;
+	
+	rt = 0;
+	t = 0;
+	
+	lastEatTime = 0;
+	eatWaitTime = 0;
+	fadeAlpha = 1;
 };
 
 void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
@@ -42,7 +65,7 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	this->pos = pos;
 	this->damping = damping;
 	
-	target.set(0,0,0);
+	target = pos;//.set(0,0,0);
 	targetForce = .01;
 	bUseTarget  = false;
 	bFlocking   = false;
@@ -66,7 +89,9 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 	node.setScale(1);
 
 	length = 50;
-
+	fadeAlpha = 1;
+	stateStartTime = 0;
+	
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 
@@ -97,23 +122,47 @@ void KoreaParticle::setup(ofVec3f pos, ofVec3f vel, float damping)
 void KoreaParticle::update(float dt)
 {
 	
-	vel += ofVec3f(	ofNoise(rt*t,0)*.001-.0005,
-					ofNoise(0,rt*t)*.001-.0005,
-					0);
+	// alpha fades in and out
+	switch(particleState)
+	{
+		case KPARTICLE_FADE_OUT: 
+			if( fadeAlpha > 0 ) fadeAlpha -= .002*dt; break;
+		case KPARTICLE_FLOCKING: 
+			if( fadeAlpha < flockAlpha ) fadeAlpha += .001*dt;
+			else if( fadeAlpha > flockAlpha ) fadeAlpha -= .001*dt;
+			break;
+		default:
+			if( fadeAlpha < 1 ) fadeAlpha += .005*dt;
+	}
+	ofClamp(fadeAlpha, 0, 1);
+	
+	// random eating
+	if( particleState != KPARTICLE_FADE_OUT && ofGetElapsedTimef() - lastEatTime > eatWaitTime )
+	{
+		setState(KPARTICLE_EATING);
+		targetForce = .1;
+		float radius = ofRandom(10,50);
+		float angle = ofRandom(0,TWO_PI);
+		target.set( pos.x+radius * cos(angle), pos.y+radius * sin(angle), pos.z+ ofRandom(-5,5) );
+		lastEatTime = ofGetElapsedTimef();
+		eatWaitTime = ofRandom(5,20);
+	}
+	
+	// apply attractions
+	if(bUseTarget) applyTargetAttraction();
+	
+	// damping
+	if(particleState == KPARTICLE_EATING) damping = .05* dt;
+	else if(particleState == KPARTICLE_HOVER) damping = .05* dt;
+	else damping = .01* dt;
 	
 	vel.x -= damping*vel.x;
 	vel.y -= damping*vel.y;
 	vel.z -= damping*vel.z;
 	
-	// apply attractions
-	if(bUseTarget) applyTargetAttraction();
-	
-	// note: check is this working? or doing anything anymore...?
-	if(particleState == KPARTICLE_TARGET) repelFrom(target,targetForce*2,90);
-	
 	// upadte position
-	pos += vel*dt;
-	
+	pos += (vel*dt);
+		
 	// for targets and trails
 	t = ofxTimeUtils::getElapsedTimef()*speedFactor;
 
@@ -170,7 +219,7 @@ void KoreaParticle::update(float dt)
 	}*/
 
 	ofVec3f diff,next;
-	next = pos;
+	next = pos;//ofVec3f(pos.x+10*ofSignedNoise(0,ofGetElapsedTimef()*.5),pos.y+10*ofSignedNoise(ofGetElapsedTimef()*.5,0),pos.z);//pos;
 	diff = next-trails[0];
 	ofQuaternion q;
 	float angle;
@@ -195,22 +244,21 @@ void KoreaParticle::update(float dt)
 
 	// create some dpeth shading
 	// not working with shader?
-	float aplhaPct = ofMap(pos.z,-600,100,.25,1,true);
+	float aplhaPct = ofMap(pos.z,-300,100,0,1,true);
+	float nColors = (float)trailStrip.getNumColors();
 	
-	for(int i=0; i<(int)trailStrip.getNumColors();i++)
+	for(int i=0; i<(int)nColors;i++)
 	{
-		float pct = float(trails.size()-i) / (float)trails.size() * .75 * 255;
-		trailStrip.setColor(i,ofColor(r,g,b,pct*aplhaPct));
-		//if(particleState == KPARTICLE_EATING)
-		//	trailStrip.setColor(i,ofColor(255,0,0,pct*aplhaPct));
-	
+		float pct = float(nColors-i) / (nColors*2) * .75;// * 255;
+		float finalAlpha = ( (pct*aplhaPct)*255 )*fadeAlpha;
+		trailStrip.setColor(i,ofColor(r,g,b, finalAlpha));
+		trailStripForGlow.setColor(i,ofColor(r,g,b, finalAlpha));	
 	}
 	
 	for(int i=0; i<(int)trails.size()-1;i++){
 		
 		
 		ofVec3f up(0, 0, 1);
-		//float pct = (float)i / (float)trails.size();
 		ofVec3f &p0 = trails[i];
 		ofVec3f &p1 = trails[i+1];
 
@@ -218,7 +266,6 @@ void KoreaParticle::update(float dt)
 		ofVec3f right = dir.cross(up).normalize();	// right vector
 		right *= thickness; //ofClamp(thickness*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))*ofNoise(float(i)/float(trails.size()))+2,0,thickness); //*sin(float(i)/float(trails.size())*PI)
 		ofVec3f rightNotGlow = right * .5;
-
 
 		trailStrip.getVertices()[i*2].set(trails[i] -rightNotGlow);
 		trailStripForGlow.getVertices()[i*2].set(trails[i] -right);
@@ -265,9 +312,9 @@ void KoreaParticle::draw()
 		ofPopMatrix();
 	}
 	
-	float aplhaPct = ofMap(pos.z,-200,100,0,1);
+	/*float aplhaPct = ofMap(pos.z,-200,100,0,1);
 	if(particleState == KPARTICLE_FLOCKING) ofSetColor(r,g,b,200*aplhaPct);
-	else ofSetColor(r,g,b,240*aplhaPct);
+	else ofSetColor(r,g,b,240*aplhaPct);*/
 	
 	if(bDrawTrails)
 	{
@@ -313,8 +360,10 @@ void KoreaParticle::drawForGlow() {
 }
 
 void KoreaParticle::drawDebug(){
+	
 	if(particleState == KPARTICLE_FLOCKING) ofSetColor(100,100,100);
-		else ofSetColor(255,255,255);
+	else if(particleState == KPARTICLE_HOVER) ofSetColor(255,0,0);
+	else ofSetColor(255,255,255);
 
 		//ofFill();
 		glEnable(GL_DEPTH_TEST);
@@ -322,11 +371,23 @@ void KoreaParticle::drawDebug(){
 		node.draw();
 		glDisable(GL_DEPTH_TEST);
 		
-		/*glBegin(GL_LINES);
+		if(particleState==KPARTICLE_HOVER)
+		{
+		glBegin(GL_LINES);
 			glVertex3f(pos.x,pos.y,pos.z);
 			glVertex3f(target.x,target.y,target.z);
-		glEnd();*/
+		glEnd();
+		}
 		
+	glBegin(GL_LINES);
+	glVertex3f(pos.x,pos.y,pos.z);
+	glVertex3f(pos.x+(10*vel.x+5*ofSignedNoise(0,ofGetElapsedTimef())),
+			   pos.y+(10*vel.y+5*ofSignedNoise(ofGetElapsedTimef(),0)),
+			   pos.z+(10*vel.z)
+	);
+	glVertex3f(pos.x,pos.y,pos.z);
+	glVertex3f(pos.x+10*vel.x,pos.y+10*vel.y,pos.z+10*vel.z);
+	glEnd();//ofSphere(target,10);
 }
 
 void KoreaParticle::setTarget(ofVec3f targ, float targetForce)
@@ -346,8 +407,9 @@ void KoreaParticle::applyTargetAttraction()
 	// don't pull if too close
 	// radius changed based on particle mode so no "bouncing" when chasing prey...
 	
-	float targetRadius = 30;
-	if(particleState == KPARTICLE_EATING) targetRadius = 90;
+	float targetRadius = 90;
+	if(particleState == KPARTICLE_EATING ) targetRadius = 90;
+	else if( particleState == KPARTICLE_HOVER) targetRadius = 90;
 	
 	if(length > targetRadius)
 	{
@@ -365,8 +427,14 @@ void KoreaParticle::applyTargetAttraction()
 	}
 	else{
 		// if in prey/eating mode, and target is reached, go back to flock
+		bArrivedAtTarget = true;
+		
 		if(bEating){
 		 setState(KPARTICLE_FLOCKING);
+		}
+		if(particleState==KPARTICLE_HOVER)
+		{
+			bNeedHoverTarget = true;
 		}
 	}
 }
@@ -430,14 +498,24 @@ void KoreaParticle::addForFlocking(KoreaParticle * sister)
 	// only groups have chesion and alignment with own group
 	// but separation with everyone
 	
+	/*ofVec3f diffTarg = pos-sister->target;// - pos;
+	float dTarg 	 = diffTarg.length();
+	diffTarg.normalize();
+	if(dTarg > 0 && dTarg<sepDist)
+	{
+		sumSep += (diffTarg) * attention_factor;
+		countSep++;
+	}*/
+	
 	if(d > 0)
 	{
 			if( d < sepDist )
 			{
 				sumSep += (diff) * attention_factor;
 				countSep++;
+				
 			}
-		
+			
 			if( sister->groupFlag != groupFlag){
 				
 				attention_factor = .1;
@@ -486,6 +564,15 @@ void KoreaParticle::applyForces()
 		cohFrc	= 0;
 		alignFrc = 0;
 		sepFrc *= .25;
+	}else if(  particleState == KPARTICLE_FADE_OUT)
+	{
+		//cohFrc	= 0;
+		//alignFrc = 0;
+	}else if(  particleState == KPARTICLE_HOVER)
+	{
+		cohFrc	= 0;
+		alignFrc = 0;
+		sepFrc *= 1.25;
 	}
 	
 	// seperation
@@ -533,18 +620,16 @@ void KoreaParticle::setState(koreaParticleState state)
 	// more damping on prey chase state
 	// note: this is now overwriting the damping set on init
 	
-	if( particleState == KPARTICLE_EATING){
-		damping = .05;
-		bEating = true;
-	}else{
-		 bEating = false;
-		 damping = .02;
-	}
+	if( particleState == KPARTICLE_EATING) bEating = true;
+	else bEating = false;
+	
+	
+	if( particleState == KPARTICLE_TARGET) bArrivedAtTarget = false;
+	
+	stateStartTime = ofGetElapsedTimef();
+	
+	
 }
 
 
-void KoreaParticle::setFlockingParams()
-{
-		
-}
 

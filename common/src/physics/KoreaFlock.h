@@ -25,10 +25,20 @@
 
 #define USE_TIME_BASED
 
+/*
+- flocking particles at hover need to follow paths
+- create a path for each using rotated contour? each has same contour but
+  with consistent rotation
+- move around the contour following a moving point?
+-   
+*/
+
+
 typedef struct flockGroup{
 	
 	int groupFlag;
 	int userId;
+	int screenId;
 	bool bFollowing;
 	ofVec3f pos;
 	ofVec3f target;
@@ -51,9 +61,6 @@ class KoreaFlock{
 public:
 	
 		
-	// not in use (some vars not inited here...)
-	void setup( int total, int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
-	
 	// create the groups
 	void setupInGroups( int worldWidth = 1024, int worldHeight = 768, int worldDepth = 600);
 
@@ -69,8 +76,15 @@ public:
 	
 	void debugUserCenter(KUserData & myUser);
 	
-	// called periodically from update to create the illision of chasing prey
+	// called periodically from update to create the illusion of chasing prey
 	void setRandomEating();
+	
+	// get noise target on a particular screen
+	ofVec3f getTargetByScreen(int screenId, float t, float rt);
+	
+	// tell everyone to get out of screen or come back
+	void setFadeOut();
+	void setFadeIn();
 	
 	vector<KoreaParticle> particles;
 	vector<flockGroup> groups;
@@ -84,7 +98,6 @@ public:
 	ofxPanel gui;
 	ofColor color;
 	
-	
 	float worldWidth,worldHeight,worldDepth;
 	float timeLastUpdate;
 	
@@ -93,5 +106,8 @@ public:
 	
 	// vars to create a variable eat event
 	float lastEatTime, eatWaitTime;
+	
+	// mode to fade all out for transitions
+	bool bFadeOut;
 
 };

@@ -15,7 +15,9 @@
 typedef enum{
 	KPARTICLE_TARGET,
 	KPARTICLE_FLOCKING,
-	KPARTICLE_EATING
+	KPARTICLE_EATING,
+	KPARTICLE_HOVER,
+	KPARTICLE_FADE_OUT
 }koreaParticleState;
 
 
@@ -25,7 +27,7 @@ class KoreaParticle {
 	
 	ofVec3f  pos;
 	ofVec3f  vel;
-	ofVec3f  acc;
+
 	float    damping;
 	ofVec3f  target;
 	float    targetForce;
@@ -34,6 +36,9 @@ class KoreaParticle {
 	bool     bFlocking;
 	bool	 bDrawTrails;
 	bool	 bEating;
+	bool	 bNeedHoverTarget;
+	bool	 bArrivedAtTarget;
+	
 	
 	// vars for noise / time
 	float rt;
@@ -58,6 +63,21 @@ class KoreaParticle {
 	// node debug
 	ofNode node;
 	
+	// hovering
+	int contourIndex;
+	
+	// eating
+	float lastEatTime, eatWaitTime;
+	
+	// alpha changes
+	float fadeAlpha; // for fadingaway at transition
+	
+	// state stats (not using yet...)
+	float stateStartTime;
+	
+	// variation in form
+	float myThickness;
+	float myLength;
 	
 	static ofxIntSlider r,g,b;
 	static ofxToggle debug;
@@ -65,6 +85,7 @@ class KoreaParticle {
 	static ofxFloatSlider thickness;
 	static ofxIntSlider length;
 	static float speedFactor;
+	static ofxFloatSlider flockAlpha; // less transparent when not following
 	
 	// for group flocking (only flock with others of my group)
 	unsigned int groupFlag;
@@ -91,7 +112,6 @@ class KoreaParticle {
 	void resetFlocking();
 	void applyForces();
 	void addForFlocking(KoreaParticle * sister);
-	void setFlockingParams();
 	
 	// states / behaviors
 	void setState(koreaParticleState state);

@@ -5,11 +5,11 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	movieSaver.setup(640,480, "kr"+ofToString(ofRandom(1000,10000))+".mov" );
-	movieSaver.setCodecType( OF_QT_SAVER_CODEC_QUALITY_HIGH );//OF_QT_SAVER_CODEC_QUALITY_NORMAL );
+	//movieSaver.setup(640,480, "kr"+ofToString(ofRandom(1000,10000))+".mov" );
+	//movieSaver.setCodecType( OF_QT_SAVER_CODEC_QUALITY_LOSSLESS );//OF_QT_SAVER_CODEC_QUALITY_NORMAL );
 	
 	ofSetVerticalSync(true);
-	ofSetFrameRate(30);
+	//ofSetFrameRate(30);
 	ofBackground(0);
 
 	//KoreaParticle::model.loadModel("blobFish.obj");
@@ -29,6 +29,7 @@ void testApp::setup(){
 	gui.add(KoreaParticle::b.setup("b",230,0,255));
 	gui.add(KoreaParticle::debug.setup("debug",false));
 	gui.add(KoreaParticle::thickness.setup("thickness",3,0,16));
+	gui.add(KoreaParticle::flockAlpha.setup("flock alpha",.3,0,1));
 	gui.add(lightOn.setup("light",false));
 	gui.add(drawGlow.setup("drawGlow",true));
 	gui.add(KoreaParticle::useModel.setup("use model",false));
@@ -61,7 +62,7 @@ void testApp::setup(){
 	// debugging
 	user1.setup();
 	users.push_back(user1);
-	users.push_back(user1);
+	//users.push_back(user1);
 
 	// shaders
 	glow.setup();
@@ -83,14 +84,15 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-	//	ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
-	//	ofSetFrameRate(60);
-	//	recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
+		ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
+		ofSetFrameRate(60);
+		string filename = ofToDataPath(ofGetTimestampString());
+		recorder.setup(filename,ofGetWidth(),ofGetHeight(),30);
 	}else if(!l && record){
-	//	ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
-	//	ofSetFrameRate(60);
-	//	recorder.encodeVideo();
-	movieSaver.finishMovie();
+		ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
+		ofSetFrameRate(60);
+		recorder.encodeVideo();
+	//movieSaver.finishMovie();
 	}
 }
 
@@ -100,17 +102,18 @@ void testApp::update(){
 	framerate = ofGetFrameRate();
 
 	//pSystemDemo.update();
+	kSystem.assignUserTargets(users);
 	kSystem.update();
 	//kSystem.debugUserCenter(user1);
-	kSystem.assignUserTargets(users);
+	
 
 	//user1.debugSetUserPosFromMouse(mouseX,mouseY);
 	//user1.debugSetUserContour();
 	users[0].debugSetUserPosFromMouse(mouseX,mouseY,300);
 	users[0].debugSetUserContour();
 	
-	users[1].debugSetUserPosFromMouse(mouseX+300,mouseY,-100);
-	users[1].debugSetUserContour();
+	//users[1].debugSetUserPosFromMouse(mouseX+300,mouseY,-100);
+	//users[1].debugSetUserContour();
 }
 
 //--------------------------------------------------------------
@@ -176,8 +179,8 @@ void testApp::draw(){
 		ofClear(0,0);
 
 		ofFill();
-		for(int i = 0; i < users.size(); i++)
-			users[i].drawUser();
+		//for(int i = 0; i < users.size(); i++)
+		//	users[i].drawUser();
 			
 		kSystem.drawForGlow();
 
@@ -230,15 +233,16 @@ void testApp::draw(){
 		fbo.end();
 		ofSetColor(255);
 		fbo.draw(0,0);
-		//fbo.readToPixels(pixRecord);
-		//recorder.addFrame(pixRecord);
+		fbo.readToPixels(pixRecord);
+		recorder.addFrame(pixRecord);
+		/*	int wvd = 640;
+			int hvd = 480;
 		
-		
-			int x = ofGetWidth()/2 - (640/2);
-			int y = ofGetHeight()/2 - (480/2);
+			int x = ofGetWidth()/2 - (wvd/2.0);
+			int y = ofGetHeight()/2 - (hvd/2.0);
 			ofImage img;
-			img.grabScreen(x,y,640,480);
-			movieSaver.addFrame(img.getPixels());
+			img.grabScreen(x,y,wvd,hvd);
+			movieSaver.addFrame(img.getPixels());*/
 		
 	}
 	
@@ -273,7 +277,8 @@ void testApp::keyPressed(int key){
 			ofToggleFullscreen();
 			break;
 		case ' ': 
-			kSystem.setRandomEating();
+			if(!kSystem.bFadeOut) kSystem.setFadeOut();
+			else kSystem.setFadeIn();
 			break;
 	}
 

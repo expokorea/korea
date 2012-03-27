@@ -39,4 +39,10 @@ class KUserData{
 	ofxFloatSlider targetMovement,targetForce;
 	ofVec3f target;
 	float prevMouseX, prevMouseY;
+	
+	// states
+	bool bIsTooActive;
+	bool bIsVeryStill;
+	
+
 };

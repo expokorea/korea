@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		83236BC214ED36DB004220A6 /* KoreaFlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83236BBA14ED36DB004220A6 /* KoreaFlock.cpp */; };
 		83236BC314ED36DB004220A6 /* KoreaParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83236BBC14ED36DB004220A6 /* KoreaParticle.cpp */; };
-		83236BC414ED36DB004220A6 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83236BBE14ED36DB004220A6 /* Particle.cpp */; };
-		83236BC514ED36DB004220A6 /* particleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83236BC014ED36DB004220A6 /* particleSystem.cpp */; };
-		83236C4414ED438F004220A6 /* vectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83236C4214ED438F004220A6 /* vectorField.cpp */; };
 		835ABB6B14FBBB3C000ABC07 /* viewManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 835ABB6A14FBBB3C000ABC07 /* viewManager.cpp */; };
 		8396755114FE686500771A68 /* Glow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8396754D14FE686500771A68 /* Glow.cpp */; };
 		8396755214FE686500771A68 /* ParticleSystemDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8396754F14FE686500771A68 /* ParticleSystemDemo.cpp */; };
@@ -104,12 +101,6 @@
 		83236BBB14ED36DB004220A6 /* KoreaFlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KoreaFlock.h; sourceTree = "<group>"; };
 		83236BBC14ED36DB004220A6 /* KoreaParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KoreaParticle.cpp; sourceTree = "<group>"; };
 		83236BBD14ED36DB004220A6 /* KoreaParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KoreaParticle.h; sourceTree = "<group>"; };
-		83236BBE14ED36DB004220A6 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
-		83236BBF14ED36DB004220A6 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
-		83236BC014ED36DB004220A6 /* particleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particleSystem.cpp; sourceTree = "<group>"; };
-		83236BC114ED36DB004220A6 /* particleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particleSystem.h; sourceTree = "<group>"; };
-		83236C4214ED438F004220A6 /* vectorField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vectorField.cpp; sourceTree = "<group>"; };
-		83236C4314ED438F004220A6 /* vectorField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectorField.h; sourceTree = "<group>"; };
 		835ABB6914FBBB3C000ABC07 /* viewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewManager.h; sourceTree = "<group>"; };
 		835ABB6A14FBBB3C000ABC07 /* viewManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewManager.cpp; sourceTree = "<group>"; };
 		8396754D14FE686500771A68 /* Glow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Glow.cpp; path = ../common/src/Glow.cpp; sourceTree = SOURCE_ROOT; };
@@ -254,16 +245,10 @@
 				8396754E14FE686500771A68 /* Glow.h */,
 				8396754F14FE686500771A68 /* ParticleSystemDemo.cpp */,
 				8396755014FE686500771A68 /* ParticleSystemDemo.h */,
-				83236C4214ED438F004220A6 /* vectorField.cpp */,
-				83236C4314ED438F004220A6 /* vectorField.h */,
-				83236BBA14ED36DB004220A6 /* KoreaFlock.cpp */,
 				83236BBB14ED36DB004220A6 /* KoreaFlock.h */,
+				83236BBA14ED36DB004220A6 /* KoreaFlock.cpp */,
 				83236BBD14ED36DB004220A6 /* KoreaParticle.h */,
 				83236BBC14ED36DB004220A6 /* KoreaParticle.cpp */,
-				83236BBE14ED36DB004220A6 /* Particle.cpp */,
-				83236BBF14ED36DB004220A6 /* Particle.h */,
-				83236BC014ED36DB004220A6 /* particleSystem.cpp */,
-				83236BC114ED36DB004220A6 /* particleSystem.h */,
 			);
 			name = physics;
 			path = ../common/src/physics;
@@ -748,9 +733,6 @@
 				E4C3876B13D701BA0043F0B3 /* tinyxmlparser.cpp in Sources */,
 				83236BC214ED36DB004220A6 /* KoreaFlock.cpp in Sources */,
 				83236BC314ED36DB004220A6 /* KoreaParticle.cpp in Sources */,
-				83236BC414ED36DB004220A6 /* Particle.cpp in Sources */,
-				83236BC514ED36DB004220A6 /* particleSystem.cpp in Sources */,
-				83236C4414ED438F004220A6 /* vectorField.cpp in Sources */,
 				835ABB6B14FBBB3C000ABC07 /* viewManager.cpp in Sources */,
 				8396755114FE686500771A68 /* Glow.cpp in Sources */,
 				8396755214FE686500771A68 /* ParticleSystemDemo.cpp in Sources */,
