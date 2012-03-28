@@ -4,11 +4,8 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-#ifdef TARGET_OSX
-	movieSaver.setup(640,480, "kr"+ofToString(ofRandom(1000,10000))+".mov" );
-	movieSaver.setCodecType( OF_QT_SAVER_CODEC_QUALITY_HIGH );//OF_QT_SAVER_CODEC_QUALITY_NORMAL );
-#endif
 	
+
 	ofSetVerticalSync(true);
 	//ofSetFrameRate(30);
 	ofBackground(0);
@@ -20,8 +17,8 @@ void testApp::setup(){
 	gui.add(passes.setup("passes",glow.passes,1,4));
 	gui.add(brightness.setup("brightness",glow.brightness,1,20));
 	gui.add(framerate.setup("framerate",0,0,80));
-	gui.add(pSystemDemo.speed.setup("speed",8,1,80));
-	gui.add(pSystemDemo.radius.setup("radius",3,1,10));
+	//gui.add(pSystemDemo.speed.setup("speed",8,1,80));
+	//gui.add(pSystemDemo.radius.setup("radius",3,1,10));
 	/*gui.add(pSystemDemo.r.setup("r",16,0,255));
 	gui.add(pSystemDemo.g.setup("g",0,0,255));
 	gui.add(pSystemDemo.b.setup("b",230,0,255));*/
@@ -36,6 +33,8 @@ void testApp::setup(){
 	gui.add(KoreaParticle::bLines.setup("b lines",255,0,255));
 	gui.add(particlesTexMode.setup("delaunay/voronoi",true));
 	gui.add(KoreaParticle::debug.setup("debug",false));
+	//gui.add(KoreaParticle::thickness.setup("thickness",3,0,16));
+	gui.add(KoreaParticle::flockAlpha.setup("flock alpha",.3,0,1));
 	gui.add(lightOn.setup("light",false));
 	gui.add(drawGlow.setup("drawGlow",true));
 	gui.add(KoreaParticle::useModel.setup("use model",false));
@@ -74,7 +73,7 @@ void testApp::setup(){
 	particlesTexMode.addListener(this,&testApp::particleTexModeChanged);
 
 
-	pSystem.setup(100);
+	//pSystem.setup(100);
 	//kSystem.setup(100,(1024*3)-200,768-200);
 
 	KoreaParticle::generateTexture(KoreaParticle::Voronoi);
@@ -84,7 +83,7 @@ void testApp::setup(){
 	// debugging
 	user1.setup();
 	users.push_back(user1);
-	users.push_back(user1);
+	//users.push_back(user1);
 
 	// shaders
 	glow.setup();
@@ -125,19 +124,14 @@ void testApp::lightOnChanged(bool & l){
 
 void testApp::recordPressed(bool & l){
 	if(l && !record){
-#ifdef TARGET_LINUX
-	ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
-	ofSetFrameRate(60);
-	recorder.setup(ofGetTimestampString()+".mp4",ofGetWidth(),ofGetHeight(),60);
-#endif
+		ofxTimeUtils::setMode(ofxTimeUtils::Frame,60);
+		ofSetFrameRate(60);
+		string filename = ofToDataPath(ofGetTimestampString());
+		recorder.setup(filename,ofGetWidth(),ofGetHeight(),30);
 	}else if(!l && record){
-#ifdef TARGET_LINUX
 	ofxTimeUtils::setMode(ofxTimeUtils::Time,60);
 	ofSetFrameRate(60);
 	recorder.encodeVideo();
-#else
-	movieSaver.finishMovie();
-#endif
 	}
 }
 
@@ -147,17 +141,18 @@ void testApp::update(){
 	framerate = ofGetFrameRate();
 
 	//pSystemDemo.update();
+	kSystem.assignUserTargets(users);
 	kSystem.update();
 	//kSystem.debugUserCenter(user1);
-	kSystem.assignUserTargets(users);
+	
 
 	//user1.debugSetUserPosFromMouse(mouseX,mouseY);
 	//user1.debugSetUserContour();
 	users[0].debugSetUserPosFromMouse(mouseX,mouseY,300);
 	users[0].debugSetUserContour();
 	
-	users[1].debugSetUserPosFromMouse(mouseX+300,mouseY,-100);
-	users[1].debugSetUserContour();
+	//users[1].debugSetUserPosFromMouse(mouseX+300,mouseY,-100);
+	//users[1].debugSetUserContour();
 }
 
 //--------------------------------------------------------------
@@ -223,8 +218,8 @@ void testApp::draw(){
 		ofClear(0,0);
 
 		ofFill();
-		for(int i = 0; i < (int)users.size(); i++)
-			users[i].drawUser();
+		//for(int i = 0; i < users.size(); i++)
+		//	users[i].drawUser();
 			
 		kSystem.drawForGlow();
 
@@ -277,16 +272,9 @@ void testApp::draw(){
 		fbo.end();
 		ofSetColor(255);
 		fbo.draw(0,0);
-#ifdef TARGET_LINUX
 		fbo.readToPixels(pixRecord);
 		recorder.addFrame(pixRecord);
-#else
-		int x = ofGetWidth()/2 - (640/2);
-		int y = ofGetHeight()/2 - (480/2);
-		ofImage img;
-		img.grabScreen(x,y,640,480);
-		movieSaver.addFrame(img.getPixels());
-#endif
+
 	}
 	
 	ofSetColor(255);
@@ -320,7 +308,8 @@ void testApp::keyPressed(int key){
 			ofToggleFullscreen();
 			break;
 		case ' ': 
-			kSystem.setRandomEating();
+			if(!kSystem.bFadeOut) kSystem.setFadeOut();
+			else kSystem.setFadeIn();
 			break;
 	}
 
