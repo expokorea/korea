@@ -6,12 +6,7 @@
 #include "ParticleSystemDemo.h"
 #include "KoreaFlock.h"
 #include "userData.h"
-
-#ifdef TARGET_OSX
-#include "ofxQtVideoSaver.h"
-#else
 #include "ofxVideoRecorder.h"
-#endif
 
 class testApp : public ofBaseApp{
 
@@ -53,8 +48,8 @@ class testApp : public ofBaseApp{
 
 		ofLight light;
 		Glow glow;
-		ParticleSystem pSystem;
-		ParticleSystemDemo pSystemDemo;
+		//ParticleSystem pSystem;
+		//ParticleSystemDemo pSystemDemo;
 		
 		KoreaFlock kSystem;
 		
@@ -71,10 +66,5 @@ class testApp : public ofBaseApp{
 		ofFbo fbo;
 		ofxToggle record;
 
-
-#ifdef TARGET_OSX
-		ofxQtVideoSaver movieSaver;
-#else
 		ofxVideoRecorder recorder;
-#endif
 };
