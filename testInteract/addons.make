@@ -1,7 +1,7 @@
+ofxKinect
+ofxAvahiClient
 ofxGui
 ofxXmlSettings
-ofxAssimpModelLoader
-ofxOsc
-ofxAvahiClient
 ofxVideoRecorder
-ofxMaxim
+ofxPCL
+ofxOsc
