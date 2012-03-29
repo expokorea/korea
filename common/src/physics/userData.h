@@ -44,5 +44,7 @@ class KUserData{
 	bool bIsTooActive;
 	bool bIsVeryStill;
 	
+	vector<ofPoint> particleFood;
+	
 
 };

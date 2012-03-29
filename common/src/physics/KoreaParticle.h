@@ -10,7 +10,6 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "ofxAssimpModelLoader.h"
 
 typedef enum{
 	KPARTICLE_TARGET,
@@ -70,18 +69,12 @@ class KoreaParticle {
 	// alpha changes
 	float fadeAlpha; // for fadingaway at transition
 	
-	// state stats (not using yet...)
-	float stateStartTime;
-	
 	// variation in form
-	float myThickness;
-	float myLength;
 	
 	static ofxIntSlider r,g,b;
 	static ofxIntSlider rTex,gTex,bTex;
 	static ofxIntSlider rLines,gLines,bLines;
 	static ofxToggle debug;
-	static ofxToggle useModel;
 	float thickness;
 	float length;
 	static float speedFactor;
@@ -90,18 +83,17 @@ class KoreaParticle {
 	// for group flocking (only flock with others of my group)
 	unsigned int groupFlag;
 	
-	static ofxAssimpModelLoader model;
-	static ofFbo tex;
+	//static ofFbo tex;
 	
 	
 	KoreaParticle();
 	KoreaParticle(unsigned int flag){ groupFlag = flag; };
 	
-	enum TexMode{
+	/*enum TexMode{
 		Delaunay,
 		Voronoi
 	}texMode;
-	static void generateTexture(TexMode mode);
+	static void generateTexture(TexMode mode);*/
 
 	void setup(ofVec3f pos = ofVec3f(0,0,0), ofVec3f vel = ofVec3f(0,0,0), float damping = .99f );
 	void update(float dt = 1);

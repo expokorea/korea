@@ -109,9 +109,9 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
 
-	for(int i=0;i<particles.size();i++){
+	/*for(int i=0;i<particles.size();i++){
 		particles[i].runAway();
-	}
+	}*/
 }
 
 //--------------------------------------------------------------

@@ -253,9 +253,6 @@ void KoreaFlock::assignUserTargets( vector<KUserData> users)
 				groups[i].pos += particles[j].pos;
 				tInGroup++;
 			}
-			
-			
-			
 		}
 		groups[i].pos.x /= (float)tInGroup;
 		groups[i].pos.y /= (float)tInGroup;
