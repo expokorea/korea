@@ -27,6 +27,11 @@ void testApp::setup(){
 	gui.add(RibbonParticle::maxDistanceRunAway.set("maxDistanceRunAway",2000,0,3000));
 	gui.add(RibbonParticle::jitterFreq.set("jitterFreq (Hz)",1,0,10));
 	gui.add(RibbonParticle::jitterAmp.set("jitterAmp",.015,0,.1));
+	gui.add(RibbonParticle::headSize.set("headSize",4,0,10));
+	gui.add(RibbonParticle::thicknessMin.set("thicknessMin",3,1,10));
+	gui.add(RibbonParticle::thicknessMax.set("thicknessMax",5,5,20));
+	gui.add(RibbonParticle::lengthMin.set("lengthMin",50,1,100));
+	gui.add(RibbonParticle::lengthMax.set("lengthMax",110,1,200));
 
 
 	field.setup();

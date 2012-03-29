@@ -21,7 +21,15 @@ ofxParameter<float> RibbonParticle::maxDistanceRunAway;
 ofxParameter<float> RibbonParticle::jitterFreq;
 ofxParameter<float> RibbonParticle::jitterAmp;
 ofxParameter<float> RibbonParticle::accelFactor;
+ofxParameter<float> RibbonParticle::headSize;
+ofxParameter<float> RibbonParticle::thicknessMin;
+ofxParameter<float> RibbonParticle::thicknessMax;
+ofxParameter<int> RibbonParticle::lengthMin;
+ofxParameter<int> RibbonParticle::lengthMax;
 ofFbo RibbonParticle::tex;
+ofImage RibbonParticle::head;
+int RibbonParticle::headRibbonCoordsWidth = 40;
+ofPoint RibbonParticle::headRibbonCoordsZero(138,212);
 
 static ofVec3f lerp(const ofVec3f & origin, const ofVec3f & dst, float t){
 	return ofVec3f(ofLerp(origin.x,dst.x,t),ofLerp(origin.y,dst.y,t),ofLerp(origin.z,dst.z,t));
@@ -125,57 +133,81 @@ void RibbonParticle::generateTexture(TexMode mode){
 	tex.end();
 	ofDisableSmoothing();
 	ofSetLineWidth(1);
+
+	head.loadImage("head.png");
+}
+
+void RibbonParticle::setupTrails(){
+	length = ofRandom(lengthMin,lengthMax);
+
+	trails.resize(length);
+	trailStripLineL.getVertices().resize((length));
+	trailStripLineR.getVertices().resize((length));
+	trailStrip.getVertices().resize((length-1)*2);
+	trailStripForGlow.getVertices().resize((length-1)*2);
+	texturedStrip.getVertices().resize((length-1)*2);
+
+	trailStripLineL.getColors().resize((length));
+	trailStripLineR.getColors().resize((length));
+	trailStrip.getColors().resize((length-1)*2);
+	trailStripForGlow.getColors().resize((length-1)*2);
+	texturedStrip.getColors().resize((length-1)*2);
+
+	texturedStrip.getTexCoords().resize((length-1)*2);
+
+	trails[0] = pos;
+	for(int i=1; i<(int)trails.size();i++){
+		trails[i] = trails[i-1];
+		trails[i].x -= 4;
+	}
+
+	for(int i=0; i<((int)trails.size())-1;i++){
+		float pct = float(trails.size()-i) / ((float)trails.size()*2) * .75 * 255;
+		trailStrip.setColor(i*2,ofColor(r,g,b,pct));
+		trailStrip.setColor(i*2+1,ofColor(r,g,b,pct));
+
+		trailStripForGlow.setColor(i*2,ofColor(r,g,b,pct));
+		trailStripForGlow.setColor(i*2+1,ofColor(r,g,b,pct));
+
+		texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct));
+		texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct));
+
+		trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*.35));
+		trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*.35));
+
+		ofVec2f tc((float(i)*4),0);
+		texturedStrip.setTexCoord(i*2,tc);
+		tc.y = tex.getHeight();
+		texturedStrip.setTexCoord(i*2+1,tc);
+	}
 }
 
 void RibbonParticle::setup(){
 
-	length = ofRandom(50,110);
-	thickness = ofRandom(3,5);
+	thisThickness = ofRandom(thicknessMin,thicknessMax);
 
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	texturedStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripLineL.setMode(OF_PRIMITIVE_LINE_STRIP);
 	trailStripLineR.setMode(OF_PRIMITIVE_LINE_STRIP);
+	headMesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
 
-	trails.resize(length);
-	trailStripLineL.getVertices().resize((length));
-	trailStripLineR.getVertices().resize((length));
-	trailStrip.getVertices().resize((length)*2);
-	trailStripForGlow.getVertices().resize((length)*2);
-	texturedStrip.getVertices().resize((length)*2);
+	headMesh.getVertices().resize(4);
 
 	trailStrip.setUsage(GL_STREAM_DRAW);
 	trailStripForGlow.setUsage(GL_STREAM_DRAW);
 	texturedStrip.setUsage(GL_STREAM_DRAW);
 	trailStripLineL.setUsage(GL_STREAM_DRAW);
 	trailStripLineR.setUsage(GL_STREAM_DRAW);
+	headMesh.setUsage(GL_STREAM_DRAW);
 
-	trails[0] = pos;
-	for(int i=0; i<(int)trails.size();i++){
-		if(i>1){
-			trails[i] = trails[i-1];
-			trails[i].x -= 4;
-		}
+	setupTrails();
 
-		float pct = float(trails.size()-i) / ((float)trails.size()*2) * .75 * 255;
-		trailStrip.addColor(ofColor(r,g,b,pct));
-		trailStrip.addColor(ofColor(r,g,b,pct));
-
-		trailStripForGlow.addColor(ofColor(r,g,b,pct));
-		trailStripForGlow.addColor(ofColor(r,g,b,pct));
-
-		texturedStrip.addColor(ofColor(rTex,gTex,bTex,pct));
-		texturedStrip.addColor(ofColor(rTex,gTex,bTex,pct));
-
-		trailStripLineL.addColor(ofColor(rLines,gLines,bLines,pct*.35));
-		trailStripLineR.addColor(ofColor(rLines,gLines,bLines,pct*.35));
-
-		ofVec2f tc((float(i)*4),0);
-		texturedStrip.addTexCoord(tc);
-		tc.y = tex.getHeight();
-		texturedStrip.addTexCoord(tc);
-	}
+	headMesh.addTexCoord(ofVec2f(0,0));
+	headMesh.addTexCoord(ofVec2f(head.getWidth(),0));
+	headMesh.addTexCoord(ofVec2f(head.getWidth(),head.getHeight()));
+	headMesh.addTexCoord(ofVec3f(0,head.getHeight()));
 
 	noiseSeed = ofRandom(1);
 
@@ -183,6 +215,20 @@ void RibbonParticle::setup(){
 	targetColor = thisRGB;
 	state = ReachingTarget;
 	speedState = Fast;
+
+	lengthMin.addListener(this,&RibbonParticle::lengthChanged);
+	lengthMax.addListener(this,&RibbonParticle::lengthChanged);
+
+	thicknessMin.addListener(this,&RibbonParticle::thicknessChanged);
+	thicknessMax.addListener(this,&RibbonParticle::thicknessChanged);
+}
+
+void RibbonParticle::lengthChanged(int & length){
+	setupTrails();
+}
+
+void RibbonParticle::thicknessChanged(float & thickness){
+	thisThickness = ofRandom(thicknessMin,thicknessMax);
 }
 
 void RibbonParticle::runAway(){
@@ -217,8 +263,8 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 
 
 	ofVec3f left(1, 0, 0);
-	ofVec3f &p0 = pos;
-	ofVec3f &p1 = trails[0];
+	ofVec3f p0 = pos;
+	ofVec3f p1 = trails[0];
 
 	ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
 	ofVec3f up = dir.cross(left).normalize();	// right vector
@@ -287,9 +333,6 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		diff =  trails[i]-trails[i+1];
 		q.makeRotate(diff,next-trails[i]);
 		q.getRotate(angle,axis);
-		if(angle*axis.x>20) axis.x*=20./angle;
-		if(angle*axis.y>20) axis.y*=20./angle;
-		if(angle*axis.z>20) axis.z*=20./angle;
 		q.makeRotate(angle,axis);
 		q.normalize();
 
@@ -304,7 +347,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	// not working with shader?
 	float alphaPct = ofMap(pos.z,-600,100,.25,1,true);
 
-	for(int i=0; i<(int)trails.size();i++)
+	for(int i=0; i<((int)trails.size())-1;i++)
 	{
 		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
 		trailStrip.setColor(i*2,ofColor(thisRGB,pct*alphaPct));
@@ -323,7 +366,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 
 	}
 
-	for(int i=0; i<(int)trails.size();i++){
+	for(int i=0; i<((int)trails.size())-1;i++){
 
 
 		ofVec3f up(0, 0, 1);
@@ -332,7 +375,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 
 		ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
 		ofVec3f right = dir.cross(up).normalize();	// right vector
-		right *= thickness;
+		right *= thisThickness;
 		ofVec3f rightNotGlow = right * .5;
 
 
@@ -346,6 +389,24 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		texturedStrip.getVertices()[i*2+1].set(trails[i] +rightNotGlow);
 		trailStripLineR.getVertices()[i].set(trails[i] +rightNotGlow);
 	}
+
+
+
+	up.set(0, 0, 1);
+	p0 = trails[0];
+	p1 = trails[5];
+
+	dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
+	ofVec3f right = dir.getCrossed(up).normalize();	// right vector
+	right *= headSize * thisThickness;
+	dir *= (headSize * thisThickness * head.getWidth()/head.getHeight());
+
+	headMesh.getVertices()[0].set(trails[0] - right );
+	headMesh.getVertices()[1].set(trails[0] + right );
+
+	headMesh.getVertices()[2].set(trails[0] + right + dir);
+	headMesh.getVertices()[3].set(trails[0] - right + dir);
+
 }
 
 void RibbonParticle::draw(){
@@ -358,6 +419,11 @@ void RibbonParticle::draw(){
 	tex.getTextureReference().bind();
 	texturedStrip.draw();
 	tex.getTextureReference().unbind();
+
+	ofSetColor(thisRGB);
+	head.getTextureReference().bind();
+	headMesh.draw();
+	head.getTextureReference().unbind();
 }
 
 void RibbonParticle::drawForGlow(){
@@ -372,4 +438,8 @@ void RibbonParticle::drawForGlow(){
 	tex.getTextureReference().bind();
 	texturedStrip.draw();
 	tex.getTextureReference().unbind();
+	ofSetColor(255);
+	head.getTextureReference().bind();
+	headMesh.draw();
+	head.getTextureReference().unbind();
 }

@@ -38,6 +38,8 @@ public:
 
 	ofVec3f getPos(){ return pos; }
 
+	ofVec3f 	target;
+
 
 
 	static ofxParameter<int> r,g,b;
@@ -50,19 +52,27 @@ public:
 	static ofxParameter<float> jitterFreq;
 	static ofxParameter<float> jitterAmp;
 	static ofxParameter<float> accelFactor;
-
-	ofVec3f 	target;
+	static ofxParameter<float> headSize;
+	static ofxParameter<float> thicknessMin;
+	static ofxParameter<float> thicknessMax;
+	static ofxParameter<int> lengthMin;
+	static ofxParameter<int> lengthMax;
 
 	static ofFbo tex;
+	static ofImage head;
 private:
+	void setupTrails();
+	void lengthChanged(int & length);
+	void thicknessChanged(float & thickness);
+
 	// trails
-	ofVboMesh trailStrip,trailStripForGlow,texturedStrip,trailStripLineL,trailStripLineR;
+	ofVboMesh trailStrip,trailStripForGlow,texturedStrip,trailStripLineL,trailStripLineR, headMesh;
 	vector<ofVec3f> trails;
 	// node debug
 	ofVec3f		vel, accel;
 	ofVec3f  	pos;
-	float thickness;
-	float length;
+	float thisThickness;
+	int length;
 	float thisSpeedFactor, thisFriction;
 	float noiseSeed;
 	ofVec3f prevTarget;
@@ -76,4 +86,8 @@ private:
 		Fast,
 		Slow
 	}speedState;
+
+	static int headRibbonCoordsWidth;
+	static ofPoint headRibbonCoordsZero;
+
 };
