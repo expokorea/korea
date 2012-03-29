@@ -7,6 +7,7 @@
 
 #include "EatableParticleField.h"
 
+ofxParameter<float> EatableParticleField::eatDistance=100;
 ofxParameter<int> EatableParticleField::r,EatableParticleField::g,EatableParticleField::b;
 ofxParameter<float> EatableParticleField::sameQuadrantProbability;
 
@@ -22,7 +23,6 @@ static int randomDifferent(int low, int high, int old) {
 
 
 void EatableParticleField::setup(){
-	eatDistance = 100;
 	quadrants.resize(8);
 	state = Distributed;
 }

@@ -34,17 +34,12 @@ void testApp::setup(){
 	gui.add(RibbonParticle::lengthMax.set("lengthMax",110,1,200));
 
 
-	field.setup();
-	gui.add(field.eatDistance.set("eatDistance",300,0,500));
+	particles.setup(20);
+
+	gui.add(EatableParticleField::eatDistance.set("eatDistance",300,0,500));
 	gui.add(bbW.set("bb width",350,0,2000));
 	gui.add(bbH.set("bb height",540,0,2000));
 	gui.add(bbD.set("bb depth",600,0,2000));
-
-
-	particles.resize(20);
-	for(int i=0;i<particles.size();i++){
-		particles[i].setup();
-	}
 
 	glow.setup();
 	gui.add(glow.passes.set("glow passes",4,0,6));
@@ -53,13 +48,7 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	BoundingBox3D bb(mouseX-bbW*.5,mouseY-bbH*.5,-bbD*.5,bbW,bbH,bbD);
-	field.update(ofGetLastFrameTime(),bb);
-	for(int i=0;i<particles.size();i++){
-		particles[i].target.set(field.getParticle(&particles[i]));
-		particles[i].update(ofGetLastFrameTime(),bb);
-	}
-
+	particles.update(BoundingBox3D(mouseX-bbW*.5,mouseY-bbH*.5,-bbD*.5,bbW,bbH,bbD));
 }
 
 //--------------------------------------------------------------
@@ -67,22 +56,10 @@ void testApp::draw(){
 	ofSetColor(255);
 	gui.draw();
 	glow.begin(true);
-	ofPushMatrix();
-	//cam.begin();
-	for(int i=0;i<particles.size();i++){
-		particles[i].drawForGlow();
-	}
-	ofSetColor(RibbonParticle::r,RibbonParticle::g,RibbonParticle::b);
-	field.draw();
-	ofPopMatrix();
+	particles.drawForGlow();
 	glow.end();
 	glow.draw(0,0);
-	for(int i=0;i<particles.size();i++){
-		particles[i].draw();
-	}
-	ofSetColor(RibbonParticle::r,RibbonParticle::g,RibbonParticle::b);
-	field.draw();
-	//cam.end();
+	particles.draw();
 	//RibbonParticle::tex.draw(0,0);
 }
 
@@ -113,18 +90,12 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-
-	for(int i=0;i<particles.size();i++){
-		particles[i].runAway();
-	}
+	particles.runAway();
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
-	for(int i=0;i<particles.size();i++){
-		particles[i].goBack();
-	}
+	particles.goBack();
 }
 
 //--------------------------------------------------------------

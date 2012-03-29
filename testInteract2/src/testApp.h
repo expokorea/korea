@@ -1,10 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-#include "RibbonParticle.h"
-#include "EatableParticleField.h"
 #include "ofxGui.h"
 #include "Glow.h"
+#include "PSystem.h"
 
 class testApp : public ofBaseApp{
 
@@ -23,8 +22,7 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-		vector<RibbonParticle> particles;
-		EatableParticleField field;
+		PSystem particles;
 		ofxPanel gui;
 		ofxParameter<float> bbW,bbH,bbD;
 		ofCamera cam;
