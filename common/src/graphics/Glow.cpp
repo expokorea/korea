@@ -20,10 +20,12 @@ Glow::~Glow() {
 
 void Glow::setup(){
 	shader.load("","glow.frag");
+	brightness = 1;
+	passes = 1;
 
 	ofFbo::Settings settings;
 	//settings.depthAsTexture = true;
-	settings.useDepth = false;
+	settings.useDepth = true;
 	settings.width = ofGetWidth();
 	settings.height = ofGetHeight();
 	settings.internalformat = GL_RGBA;
@@ -36,6 +38,7 @@ void Glow::setup(){
 
 void Glow::begin(bool setPerspective){
 	fbo1.begin(setPerspective);
+	ofClear(0);
 }
 
 void Glow::end(){
