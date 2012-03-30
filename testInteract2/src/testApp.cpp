@@ -69,9 +69,9 @@ void testApp::setup(){
 
 void testApp::record(bool & record){
 	if(record){
-		recorder.setup(ofGetTimestampString()+".mov",ofGetWidth(),ofGetHeight(),30);
-		ofSetFrameRate(30);
-	}else{
+		recorder.setup(ofGetTimestampString()+".mov",ofGetWidth(),ofGetHeight(),25);
+		ofSetFrameRate(25);
+	}else if(recording){
 		recorder.encodeVideo();
 		ofSetFrameRate(60);
 	}
@@ -81,7 +81,9 @@ void testApp::record(bool & record){
 void testApp::update(){
 	fps = ofGetFrameRate();
 	particles.update(BoundingBox3D(mouseX-bbW*.5,mouseY-bbH*.5,bbZ+bbD*.5,bbW,bbH,bbD));
+#ifdef USE_SOUND
 	soundManager.update();
+#endif
 }
 
 //--------------------------------------------------------------
@@ -120,6 +122,10 @@ void testApp::keyPressed(int key){
 void testApp::keyReleased(int key){
 	if(key==' '){
 		RibbonParticle::speedFactor=prevSpeedFactor;
+	}
+
+	if(key=='r'){
+		recording = !recording;
 	}
 }
 

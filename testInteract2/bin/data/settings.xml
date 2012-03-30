@@ -27,5 +27,8 @@
 <lengthMax>76</lengthMax>
 <highlightDuration__s_>3</highlightDuration__s_>
 <fastSpeedFactor>3.16</fastSpeedFactor>
-<fastSpeedProbability>0.015</fastSpeedProbability>
-<bb_z>-810</bb_z>
+<fastSpeedProbability>0.065</fastSpeedProbability>
+<bb_z>-580</bb_z>
+<highlightLenPct>0.613</highlightLenPct>
+<recording>0</recording>
+<fps>60.1181</fps>
