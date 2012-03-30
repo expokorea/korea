@@ -3,6 +3,7 @@
 #include "ofConstants.h"
 #include "RibbonParticle.h"
 #include "EatableParticleField.h"
+#include "ParticleFlocker.h"
 
 class PSystem{
 public:
@@ -18,4 +19,6 @@ public:
 
 private:
 	EatableParticleField field;
+	ParticleFlocker flocker;
+	
 };

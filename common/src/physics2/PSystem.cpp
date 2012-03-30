@@ -8,6 +8,7 @@ void PSystem::setup(int numParticles)
 	for(int i=0;i<particles.size();i++){
 		particles[i].setup();
 	}
+	flocker.setup(particles.size());
 }
 
 
@@ -15,8 +16,10 @@ void PSystem::setup(int numParticles)
 void PSystem::update(const BoundingBox3D & bb)
 {
 	field.update(ofGetLastFrameTime(),bb);
+	flocker.update(ofGetLastFrameTime(),particles);
 	for(int i=0;i<particles.size();i++){
-		particles[i].target.set(field.getParticle(&particles[i]));
+		if(!flocker.getIsFollowing(i))
+			particles[i].target.set(field.getParticle(&particles[i]));
 		particles[i].update(ofGetLastFrameTime(),bb);
 	}
 }
@@ -30,6 +33,7 @@ void PSystem::draw()
 	}
 	ofSetColor(RibbonParticle::r,RibbonParticle::g,RibbonParticle::b);
 	field.draw();
+	//flocker.draw(particles);
 }
 
 void PSystem::drawForGlow()
