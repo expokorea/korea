@@ -369,7 +369,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		q.makeRotate(diff,next-trails[i]);
 		q.getRotate(angle,axis);
 		q.makeRotate(angle,axis);
-		//q.normalize();
+		q.normalize();
 		diff = q * diff;
 		trails[i] = next - diff;
 

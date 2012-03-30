@@ -276,7 +276,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>29</integer>
+									<integer>12</integer>
+									<integer>4</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
@@ -317,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>8323680814EC0081004220A6</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.cpp</string>
+								<string>RibbonParticle.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>8323680914EC0081004220A6</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.cpp</string>
+										<string>RibbonParticle.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>831A5CE0152645F8007DA76A</string>
+										<string>831A5CE415264666007DA76A</string>
 										<key>history</key>
 										<array>
 											<string>83236C6314ED4583004220A6</string>
@@ -377,7 +378,6 @@
 											<string>831A5B0B1525ED25007DA76A</string>
 											<string>831A5C8C15264404007DA76A</string>
 											<string>831A5C8D15264404007DA76A</string>
-											<string>831A5C8E15264404007DA76A</string>
 											<string>831A5C8F15264404007DA76A</string>
 											<string>831A5C9D1526445A007DA76A</string>
 											<string>831A5C9F1526445A007DA76A</string>
@@ -385,7 +385,8 @@
 											<string>831A5CDC152645F8007DA76A</string>
 											<string>831A5CDD152645F8007DA76A</string>
 											<string>831A5CDE152645F8007DA76A</string>
-											<string>831A5CDF152645F8007DA76A</string>
+											<string>831A5CE215264666007DA76A</string>
+											<string>831A5CE315264666007DA76A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -702,7 +703,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>831A5CE1152645F8007DA76A</string>
 		<string>831A5CAD1526445A007DA76A</string>
 		<string>831A5CAE1526445A007DA76A</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks_dev/openFrameworks/projects_git/korea/testInteract2/testInteract.xcodeproj</string>
