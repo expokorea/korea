@@ -9,6 +9,8 @@
 
 #include "ParticleFlocker.h"
 
+ofxParameter<int>ParticleFlocker::totalToFlock;
+
 void ParticleFlocker::setup( int nParticles )
 {
 	for(int i = 0; i < nParticles; i++) isFollowing.push_back(false);

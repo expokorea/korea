@@ -24,7 +24,7 @@ class ParticleFlocker{
 			return isFollowing[id];
 		}
 		
-		ofxParameter<int> totalToFlock;
+		static ofxParameter<int> totalToFlock;
 		
 	private:
 		

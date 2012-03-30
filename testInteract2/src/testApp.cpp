@@ -49,7 +49,9 @@ void testApp::setup(){
 	gui.add(bbH.set("bb height",540,0,2000));
 	gui.add(bbD.set("bb depth",600,0,2000));
 	gui.add(bbZ.set("bb z",-bbD*.5,-1000,1000));
-
+	
+	gui.add(ParticleFlocker::totalToFlock.set("total folllowing",5,0,20) );
+	
 	glow.setup();
 	gui.add(glow.passes.set("glow passes",4,0,6));
 
