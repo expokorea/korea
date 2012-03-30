@@ -234,7 +234,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		if(prevTarget!=target){
 			if(ofRandom(1)>.8){
 				speedState = Fast;
-				targetColor.set(255,255,255);
+				targetColor.set(34,180,200);//255,255,255);
 			}else{
 				speedState = Slow;
 				targetColor.set(r,g,b);
@@ -309,19 +309,26 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	float highlightLen = 30.f;
 	int higlightPosition = (int)( ofMap(higlightCounter,0,1,-highlightLen, (int)trails.size()+highlightLen) );
 		
-	for(int i=0; i<(int)trails.size();i++)
+	for(int i=0; i<(int)trails.size()-1;i++)
 	{
+		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
+		
 		ofColor myRGB = ofColor(r,g,b);
 		float dist = fabs(higlightPosition-i);
 		if( dist < highlightLen) {
 			float hPct = 1- MIN( (dist/highlightLen),1);
 			float val = 1-hPct;
 			myRGB = ofColor(val*r+hPct*thisRGB.r,val*g+hPct*thisRGB.g,val*b+hPct*thisRGB.b);
+			// ofColor(val*r+hPct*34,val*g+hPct*180,val*b+hPct*200);
+			pct = hPct*255.0;
 		}
 			
-		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
+		// try to highlight just top, working?
 		trailStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct));
+		
+		pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
 		trailStripForGlow.setColor(i*2,ofColor(myRGB,pct*alphaPct));
+		
 		texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
 		trailStrip.setColor(i*2+1,ofColor(myRGB,pct*alphaPct));
