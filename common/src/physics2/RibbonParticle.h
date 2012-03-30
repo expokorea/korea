@@ -81,7 +81,10 @@ private:
 	ofColor targetColor;
 	float jitterPhase;
 	float tTargetChanged;
-
+	
+	// highlight color
+	float higlightCounter;
+	
 	enum SpeedState{
 		Fast,
 		Slow

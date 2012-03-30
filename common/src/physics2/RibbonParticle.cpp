@@ -215,6 +215,7 @@ void RibbonParticle::setup(){
 	targetColor = thisRGB;
 	state = ReachingTarget;
 	speedState = Fast;
+	higlightCounter = 0;
 
 	lengthMin.addListener(this,&RibbonParticle::lengthChanged);
 	lengthMax.addListener(this,&RibbonParticle::lengthChanged);
@@ -334,8 +335,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		q.makeRotate(diff,next-trails[i]);
 		q.getRotate(angle,axis);
 		q.makeRotate(angle,axis);
-		q.normalize();
-
+		//q.normalize();
 		diff = q * diff;
 		trails[i] = next - diff;
 
@@ -343,19 +343,32 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	}
 	trails.back()=next-diff;
 
-	// create some dpeth shading
-	// not working with shader?
+	// create some depth shading
 	float alphaPct = ofMap(pos.z,-600,100,.25,1,true);
-
-	for(int i=0; i<((int)trails.size())-1;i++)
+	
+	// hghlight effect
+	higlightCounter += .25*dt;
+	if( higlightCounter > 1) higlightCounter = 0;
+	float highlightLen = 30.f;
+	int higlightPosition = (int)( ofMap(higlightCounter,0,1,-highlightLen, (int)trails.size()+highlightLen) );
+		
+	for(int i=0; i<(int)trails.size()-1;i++)
 	{
+		ofColor myRGB = ofColor(r,g,b);
+		float dist = fabs(higlightPosition-i);
+		if( dist < highlightLen) {
+			float hPct = 1- MIN( (dist/highlightLen),1);
+			float val = 1-hPct;
+			myRGB = ofColor(val*r+hPct*thisRGB.r,val*g+hPct*thisRGB.g,val*b+hPct*thisRGB.b);
+		}
+			
 		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
-		trailStrip.setColor(i*2,ofColor(thisRGB,pct*alphaPct));
-		trailStripForGlow.setColor(i*2,ofColor(thisRGB,pct*alphaPct));
+		trailStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct));
+		trailStripForGlow.setColor(i*2,ofColor(myRGB,pct*alphaPct));
 		texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
-		trailStrip.setColor(i*2+1,ofColor(thisRGB,pct*alphaPct));
-		trailStripForGlow.setColor(i*2+1,ofColor(thisRGB,pct*alphaPct));
+		trailStrip.setColor(i*2+1,ofColor(myRGB,pct*alphaPct));
+		trailStripForGlow.setColor(i*2+1,ofColor(myRGB,pct*alphaPct));
 		texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
 		trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct));

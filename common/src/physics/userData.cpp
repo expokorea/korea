@@ -17,6 +17,23 @@ void KUserData::setup()
 	contour.reserve(20);
 	bIsTooActive = false;
 	bIsVeryStill = false;
+	
+	// create sphere of food
+	float total = 300.f;
+	float angStep = TWO_PI / total;
+	
+	/*for( int i = 0; i < (int)total; i++)
+	{
+		float A = ofRandom(0,TWO_PI);
+		float B = ofRandom(0,TWO_PI);
+		float R = ofRandom(30,50);
+		ofPoint p = ofPoint( 
+							(R*sin(A)*cos(B)),
+							((1.2*R)*sin(A)*sin(B)),
+							(R*cos(A) );
+		particleFood.push_back(p);
+	}
+	*/
 }
 
 

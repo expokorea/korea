@@ -17,11 +17,11 @@ void testApp::setup(){
 	gui.add(passes.setup("passes",glow.passes,1,4));
 	gui.add(brightness.setup("brightness",glow.brightness,1,20));
 	gui.add(framerate.setup("framerate",0,0,80));
-	//gui.add(pSystemDemo.speed.setup("speed",8,1,80));
-	//gui.add(pSystemDemo.radius.setup("radius",3,1,10));
-	/*gui.add(pSystemDemo.r.setup("r",16,0,255));
-	gui.add(pSystemDemo.g.setup("g",0,0,255));
-	gui.add(pSystemDemo.b.setup("b",230,0,255));*/
+	///gui.add(pSystemDemo.speed.setup("speed",8,1,80));
+	///gui.add(pSystemDemo.radius.setup("radius",3,1,10));
+	///gui.add(pSystemDemo.r.setup("r",16,0,255));
+	///gui.add(pSystemDemo.g.setup("g",0,0,255));
+	///gui.add(pSystemDemo.b.setup("b",230,0,255));
 	gui.add(KoreaParticle::r.setup("r",16,0,255));
 	gui.add(KoreaParticle::g.setup("g",0,0,255));
 	gui.add(KoreaParticle::b.setup("b",230,0,255));
@@ -33,18 +33,18 @@ void testApp::setup(){
 	gui.add(KoreaParticle::bLines.setup("b lines",255,0,255));
 	gui.add(particlesTexMode.setup("delaunay/voronoi",true));
 	gui.add(KoreaParticle::debug.setup("debug",false));
-	//gui.add(KoreaParticle::thickness.setup("thickness",3,0,16));
+	////gui.add(KoreaParticle::thickness.setup("thickness",3,0,16));
 	gui.add(KoreaParticle::flockAlpha.setup("flock alpha",.3,0,1));
 	gui.add(lightOn.setup("light",false));
 	gui.add(drawGlow.setup("drawGlow",true));
-	gui.add(KoreaParticle::useModel.setup("use model",false));
+	///gui.add(KoreaParticle::useModel.setup("use model",false));
 	gui.add(lightCutoff.setup("light cutoff",45,0,100));
 	gui.add(lightExponent.setup("light exponent",0,0,3));
 	gui.add(lightConstant.setup("light constant",2,0,10));
 	gui.add(lightLinear.setup("light linear",1,0,10));
 	gui.add(lightQuad.setup("light quad",0.5,0,10));
 	gui.add(record.setup("record",false));
-	//gui.add(&pSystem.gui);
+	///gui.add(&pSystem.gui);
 	
 	ofxXmlSettings xml;
 	xml.loadFile("settings.xml");
@@ -72,18 +72,14 @@ void testApp::setup(){
 
 	particlesTexMode.addListener(this,&testApp::particleTexModeChanged);
 
-
-	//pSystem.setup(100);
-	//kSystem.setup(100,(1024*3)-200,768-200);
-
-	KoreaParticle::generateTexture(KoreaParticle::Voronoi);
+	//KoreaParticle::generateTexture(KoreaParticle::Voronoi);
 	kSystem.setupInGroups(1024*3,768,600);
 	gui.add(&kSystem.gui);
 	
 	// debugging
 	user1.setup();
 	users.push_back(user1);
-	//users.push_back(user1);
+	///users.push_back(user1);
 
 	// shaders
 	glow.setup();
@@ -106,11 +102,11 @@ void testApp::particleLinesRGBChanged(int & rgb){
 }
 
 void testApp::particleTexModeChanged(bool & mode){
-	if(mode){
+	/*if(mode){
 		KoreaParticle::generateTexture(KoreaParticle::Voronoi);
 	}else{
 		KoreaParticle::generateTexture(KoreaParticle::Delaunay);
-	}
+	}*/
 }
 
 void testApp::lightOnChanged(bool & l){
@@ -137,6 +133,7 @@ void testApp::recordPressed(bool & l){
 
 //--------------------------------------------------------------
 void testApp::update(){
+	
 	//blurAmnt = ofMap(sin(ofGetElapsedTimef()),-1,1,.75f,1.25f);
 	framerate = ofGetFrameRate();
 
@@ -157,6 +154,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
 	
 	//gui.draw();
 	//return;

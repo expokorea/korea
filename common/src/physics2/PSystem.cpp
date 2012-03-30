@@ -1,10 +1,3 @@
-/*
- * PSystem.cpp
- *
- *  Created on: 30/03/2012
- *      Author: arturo
- */
-
 #include "PSystem.h"
 
 
