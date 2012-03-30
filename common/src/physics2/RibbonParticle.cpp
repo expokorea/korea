@@ -303,8 +303,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		if(prevTarget!=target){
 			if(ofRandom(1)<fastSpeedProbability || huntting){
 				speedState = Fast;
-				targetColor.set(255,255,255);
-				higlightCounter = 0;
+				targetColor.set(34,180,200);//255,255,255);
 			}else{
 				speedState = Slow;
 				targetColor.set(r,g,b);
@@ -391,42 +390,25 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		
 	for(int i=0; i<(int)trails.size()-1;i++)
 	{
-		float pct;
-		ofColor myRGB(r,g,b);
-		if(speedState==Fast){
-			float dist = fabs(higlightPosition-i);
-			if( dist < highlightLen) {
-				float hPct = 1- MIN( (dist/highlightLen),1);
-				float val = 1-hPct;
-				pct = float(trails.size()-i) / ((float)trails.size() * 2.) * 255.;
-				myRGB = ofColor(val*gLines+hPct*255.,val*gLines+hPct*255.,val*gLines+hPct*255.);
-				trailStripLineL.setColor(i,ofColor(myRGB,pct*alphaPct*.5));
-				trailStripLineR.setColor(i,ofColor(myRGB,pct*alphaPct*.5));
-
-				myRGB = ofColor(val*rTex+hPct*255.,val*gTex+hPct*255.,val*bTex+hPct*255.);
-				texturedStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct*1.2));
-				texturedStrip.setColor(i*2+1,ofColor(myRGB,pct*alphaPct*1.2));
-
-				myRGB = ofColor(val*r+hPct*255.,val*g+hPct*255.,val*b+hPct*255.);
-			}else{
-				pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
-				trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
-				trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
-				texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
-				texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
-			}
-		}else{
-			pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
-			trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
-			trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
-			texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
-			texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
+		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
+		
+		ofColor myRGB = ofColor(r,g,b);
+		float dist = fabs(higlightPosition-i);
+		if( dist < highlightLen) {
+			float hPct = 1- MIN( (dist/highlightLen),1);
+			float val = 1-hPct;
+			myRGB = ofColor(val*r+hPct*thisRGB.r,val*g+hPct*thisRGB.g,val*b+hPct*thisRGB.b);
+			// ofColor(val*r+hPct*34,val*g+hPct*180,val*b+hPct*200);
+			pct = hPct*255.0;
 		}
-
-
-
-		trailStrip.setColor(i*2,ofColor(r,g,b,pct*alphaPct));
+			
+		// try to highlight just top, working?
+		trailStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct));
+		
+		pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
 		trailStripForGlow.setColor(i*2,ofColor(myRGB,pct*alphaPct));
+		
+		texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
 		trailStrip.setColor(i*2+1,ofColor(r,g,b,pct*alphaPct));
 		trailStripForGlow.setColor(i*2+1,ofColor(myRGB,pct*alphaPct));
