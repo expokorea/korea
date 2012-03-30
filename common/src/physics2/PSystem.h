@@ -14,7 +14,8 @@ public:
 	void runAway();
 	void goBack();
 
-private:
 	vector<RibbonParticle> particles;
+
+private:
 	EatableParticleField field;
 };

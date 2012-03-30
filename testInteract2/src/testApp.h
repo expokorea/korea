@@ -6,6 +6,12 @@
 #include "PSystem.h"
 #include "ofxVideoRecorder.h"
 
+//#define USE_AUDIO
+
+#ifdef USE_AUDIO
+#include "SoundManager.h"
+#endif
+
 class testApp : public ofBaseApp{
 
 	public:
@@ -41,4 +47,8 @@ class testApp : public ofBaseApp{
 		ofFbo fbo;
 		ofxParameter<bool> recording;
 		ofPixels pixels;
+
+#ifdef USE_AUDIO
+		SoundManager soundManager;
+#endif
 };

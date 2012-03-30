@@ -18,7 +18,7 @@ Glow::~Glow() {
 	// TODO Auto-generated destructor stub
 }
 
-void Glow::setup(){
+void Glow::setup(float w, float h){
 	shader.load("","glow.frag");
 	brightness = 1;
 	passes = 1;
@@ -26,8 +26,8 @@ void Glow::setup(){
 	ofFbo::Settings settings;
 	//settings.depthAsTexture = true;
 	settings.useDepth = true;
-	settings.width = ofGetWidth();
-	settings.height = ofGetHeight();
+	settings.width = w;
+	settings.height = h;
 	settings.internalformat = GL_RGBA;
 	//settings.dethInternalFormat = GL_DEPTH_COMPONENT32;
 	settings.useStencil = false;

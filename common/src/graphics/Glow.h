@@ -10,13 +10,14 @@
 #include "ofFbo.h"
 #include "ofShader.h"
 #include "ofParameter.h"
+#include "ofAppRunner.h"
 
 class Glow {
 public:
 	Glow();
 	virtual ~Glow();
 
-	void setup();
+	void setup(float w=ofGetWidth(), float h=ofGetHeight());
 	void begin(bool setPerspective);
 	void end();
 

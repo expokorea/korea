@@ -61,6 +61,10 @@ void testApp::setup(){
 
 	gui.add(fps.set("fps",60,0,120));
 
+#ifdef USE_AUDIO
+	soundManager.setup(particles);
+#endif
+
 }
 
 void testApp::record(bool & record){
@@ -77,6 +81,7 @@ void testApp::record(bool & record){
 void testApp::update(){
 	fps = ofGetFrameRate();
 	particles.update(BoundingBox3D(mouseX-bbW*.5,mouseY-bbH*.5,bbZ+bbD*.5,bbW,bbH,bbD));
+	soundManager.update();
 }
 
 //--------------------------------------------------------------
@@ -92,12 +97,14 @@ void testApp::draw(){
 	glow.end();
 	glow.draw(0,0);
 	particles.draw();
+
+	ofSetColor(255);
 	if(recording){
 		fbo.end();
 		fbo.readToPixels(pixels);
 		recorder.addFrame(pixels);
+		fbo.draw(0,0);
 	}
-	fbo.draw(0,0);
 	//RibbonParticle::tex.draw(0,0);
 }
 

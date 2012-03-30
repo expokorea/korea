@@ -9,6 +9,7 @@
 #include "ofxVoronoi.h"
 #include "BoundingBox3D.h"
 #include "ofTween.h"
+#include "Glow.h"
 
 ofxParameter<int> RibbonParticle::r;
 ofxParameter<int> RibbonParticle::g;
@@ -72,7 +73,7 @@ void RibbonParticle::generateTexture(TexMode mode){
 	ofMesh textureMesh;
 	textureMesh.setMode(OF_PRIMITIVE_LINES);
 
-	int width = 200*4;
+	int width = 500*4;
 	int height = 100;
 	if(!tex.isAllocated()){
 		ofFbo::Settings settings;
@@ -84,7 +85,7 @@ void RibbonParticle::generateTexture(TexMode mode){
 	}
 
 	vector<XYZ> points;
-	int numPoints = 20;
+	int numPoints = 30;
 	points.resize(numPoints);
 
 	for(int i=0;i<numPoints;i++){
@@ -127,15 +128,23 @@ void RibbonParticle::generateTexture(TexMode mode){
 			textureMesh.addVertex(voronoiGen.edges[i].b);
 		}
 	}
-
-	ofSetLineWidth(1.5);
-	ofEnableSmoothing();
-	tex.begin();
-	ofClear(255,0);
+	Glow glow;
+	glow.setup(500*4,100);
+	glow.passes = 4;
+	ofSetLineWidth(3);
+	//ofEnableSmoothing();
+	glow.begin(true);
+	ofClear(0,0);
 	ofSetColor(255,255,255,255);
 	textureMesh.draw();
+	glow.end();
+
+	tex.begin();
+	ofSetColor(255,255,255,255);
+	ofClear(0,0);
+	glow.draw(0,0);
 	tex.end();
-	ofDisableSmoothing();
+	//ofDisableSmoothing();
 	ofSetLineWidth(1);
 
 	head.loadImage("head.png");
@@ -179,7 +188,7 @@ void RibbonParticle::setupTrails(){
 		trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*.35));
 		trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*.35));
 
-		ofVec2f tc((float(i)*4),0);
+		ofVec2f tc((float(i)*40),0);
 		texturedStrip.setTexCoord(i*2,tc);
 		tc.y = tex.getHeight();
 		texturedStrip.setTexCoord(i*2+1,tc);
@@ -228,6 +237,10 @@ void RibbonParticle::setup(){
 
 	thicknessMin.addListener(this,&RibbonParticle::thicknessChanged);
 	thicknessMax.addListener(this,&RibbonParticle::thicknessChanged);
+
+#ifdef USE_AUDIO
+	audioGenerator.setup();
+#endif
 }
 
 void RibbonParticle::lengthChanged(int & length){
@@ -332,6 +345,13 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	//accel
 
 	vel += accel + vel*-thisFriction ;  // accel + friction
+
+#ifdef USE_AUDIO
+	float freqPct = ofMap(ofClamp(vel.length()*thisSpeedFactor/20.f,0,1),0,1,0,1,&ofEasing::cubicOut);
+	float ampPct = ofMap(ofClamp(vel.length()*thisSpeedFactor/10.f,0,1),0,1,0,1,&ofEasing::cubicOut);
+	audioGenerator.freqIn = freqPct;
+	audioGenerator.amp = freqPct;
+#endif
 
 
 	// upadte position

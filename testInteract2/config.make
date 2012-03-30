@@ -10,7 +10,7 @@ OF_ROOT = ../../..
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = -I../common/src/graphics -I../common/src/utils -I../common/src/physics2
+USER_CFLAGS = -I../common/src/graphics -I../common/src/utils -I../common/src/physics2 -I../common/src/audio
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker
@@ -26,7 +26,7 @@ EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj"
 
 USER_COMPILER_OPTIMIZATION = -march=native -mtune=native -Os
 
-USER_SOURCE_DIR = ../common/src/graphics ../common/src/utils ../common/src/physics2
+USER_SOURCE_DIR = ../common/src/graphics ../common/src/utils ../common/src/physics2 ../common/src/audio
 
 # android specific, in case you want to use different optimizations
 USER_LIBS_ARM = 

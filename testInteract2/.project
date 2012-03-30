@@ -89,5 +89,10 @@
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxGui</location>
 		</link>
+		<link>
+			<name>ofxMaxim</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxMaxim</location>
+		</link>
 	</linkedResources>
 </projectDescription>

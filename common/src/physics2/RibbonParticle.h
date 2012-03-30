@@ -4,6 +4,12 @@
 #include "ofxGui.h"
 #include "ofNode.h"
 
+//#define USE_AUDIO
+
+#ifdef USE_AUDIO
+#include "FlockAudioGenerator.h"
+#endif
+
 class BoundingBox3D;
 
 class RibbonParticle{
@@ -65,6 +71,14 @@ public:
 
 	static ofFbo tex;
 	static ofImage head;
+
+
+
+#ifdef USE_AUDIO
+	FlockAudioGenerator audioGenerator;
+#endif
+
+
 private:
 	void setupTrails();
 	void lengthChanged(int & length);
@@ -101,5 +115,6 @@ private:
 
 	static int headRibbonCoordsWidth;
 	static ofPoint headRibbonCoordsZero;
+
 
 };
