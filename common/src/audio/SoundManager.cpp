@@ -8,6 +8,8 @@
 #include "SoundManager.h"
 #include "ofConstants.h"
 
+//#define USE_SOUND
+#ifdef USE_SOUND
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alext.h>
@@ -217,4 +219,4 @@ void SoundManager::SourcesUpdater::threadedFunction(){
 		ofSleepMillis(1);
 	}
 }
-
+#endif
