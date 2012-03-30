@@ -5,6 +5,9 @@
 void testApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
+
+
 	RibbonParticle::generateTexture(RibbonParticle::Voronoi);
 	gui.setup();
 	gui.add(RibbonParticle::r.set("r",16,0,255));
@@ -30,8 +33,13 @@ void testApp::setup(){
 	gui.add(RibbonParticle::headSize.set("headSize",4,0,10));
 	gui.add(RibbonParticle::thicknessMin.set("thicknessMin",3,1,10));
 	gui.add(RibbonParticle::thicknessMax.set("thicknessMax",5,5,20));
-	gui.add(RibbonParticle::lengthMin.set("lengthMin",50,1,100));
-	gui.add(RibbonParticle::lengthMax.set("lengthMax",110,1,200));
+	gui.add(RibbonParticle::lengthMin.set("lengthMin",40,1,100));
+	gui.add(RibbonParticle::lengthMax.set("lengthMax",70,1,200));
+	gui.add(RibbonParticle::highlightDuration.set("highlightDuration (s)",3,.1,10));
+	gui.add(RibbonParticle::highlightLenPct.set("highlightLenPct",.3,.1,1));
+	gui.add(RibbonParticle::fastSpeedFactor.set("fastSpeedFactor",2,1,10));
+	gui.add(RibbonParticle::fastSpeedProbability.set("fastSpeedProbability",.1,0,1));
+
 
 
 	particles.setup(20);
@@ -40,26 +48,56 @@ void testApp::setup(){
 	gui.add(bbW.set("bb width",350,0,2000));
 	gui.add(bbH.set("bb height",540,0,2000));
 	gui.add(bbD.set("bb depth",600,0,2000));
+	gui.add(bbZ.set("bb z",-bbD*.5,-1000,1000));
 
 	glow.setup();
 	gui.add(glow.passes.set("glow passes",4,0,6));
-	ofEnableBlendMode(OF_BLENDMODE_ADD);
+
+	gui.loadFromFile("settings.xml");
+
+	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
+	gui.add(recording.set("recording",false));
+	recording.addListener(this,&testApp::record);
+
+	gui.add(fps.set("fps",60,0,120));
+
+}
+
+void testApp::record(bool & record){
+	if(record){
+		recorder.setup(ofGetTimestampString()+".mov",ofGetWidth(),ofGetHeight(),30);
+		ofSetFrameRate(30);
+	}else{
+		recorder.encodeVideo();
+		ofSetFrameRate(60);
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	particles.update(BoundingBox3D(mouseX-bbW*.5,mouseY-bbH*.5,-bbD*.5,bbW,bbH,bbD));
+	fps = ofGetFrameRate();
+	particles.update(BoundingBox3D(mouseX-bbW*.5,mouseY-bbH*.5,bbZ+bbD*.5,bbW,bbH,bbD));
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 	ofSetColor(255);
 	gui.draw();
+	if(recording){
+		fbo.begin();
+		ofClear(0);
+	}
 	glow.begin(true);
 	particles.drawForGlow();
 	glow.end();
 	glow.draw(0,0);
 	particles.draw();
+	if(recording){
+		fbo.end();
+		fbo.readToPixels(pixels);
+		recorder.addFrame(pixels);
+	}
+	fbo.draw(0,0);
 	//RibbonParticle::tex.draw(0,0);
 }
 

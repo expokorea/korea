@@ -8,6 +8,7 @@
 #include "triangulate.h"
 #include "ofxVoronoi.h"
 #include "BoundingBox3D.h"
+#include "ofTween.h"
 
 ofxParameter<int> RibbonParticle::r;
 ofxParameter<int> RibbonParticle::g;
@@ -26,10 +27,13 @@ ofxParameter<float> RibbonParticle::thicknessMin;
 ofxParameter<float> RibbonParticle::thicknessMax;
 ofxParameter<int> RibbonParticle::lengthMin;
 ofxParameter<int> RibbonParticle::lengthMax;
+ofxParameter<float> RibbonParticle::highlightDuration;
+ofxParameter<float> RibbonParticle::fastSpeedFactor;
+ofxParameter<float> RibbonParticle::fastSpeedProbability;
+ofxParameter<float> RibbonParticle::highlightLenPct;
 ofFbo RibbonParticle::tex;
 ofImage RibbonParticle::head;
 int RibbonParticle::headRibbonCoordsWidth = 40;
-ofPoint RibbonParticle::headRibbonCoordsZero(138,212);
 
 static ofVec3f lerp(const ofVec3f & origin, const ofVec3f & dst, float t){
 	return ofVec3f(ofLerp(origin.x,dst.x,t),ofLerp(origin.y,dst.y,t),ofLerp(origin.z,dst.z,t));
@@ -141,14 +145,14 @@ void RibbonParticle::setupTrails(){
 	length = ofRandom(lengthMin,lengthMax);
 
 	trails.resize(length);
-	trailStripLineL.getVertices().resize((length));
-	trailStripLineR.getVertices().resize((length));
+	trailStripLineL.getVertices().resize((length-1));
+	trailStripLineR.getVertices().resize((length-1));
 	trailStrip.getVertices().resize((length-1)*2);
 	trailStripForGlow.getVertices().resize((length-1)*2);
 	texturedStrip.getVertices().resize((length-1)*2);
 
-	trailStripLineL.getColors().resize((length));
-	trailStripLineR.getColors().resize((length));
+	trailStripLineL.getColors().resize((length-1));
+	trailStripLineR.getColors().resize((length-1));
 	trailStrip.getColors().resize((length-1)*2);
 	trailStripForGlow.getColors().resize((length-1)*2);
 	texturedStrip.getColors().resize((length-1)*2);
@@ -209,13 +213,15 @@ void RibbonParticle::setup(){
 	headMesh.addTexCoord(ofVec2f(head.getWidth(),head.getHeight()));
 	headMesh.addTexCoord(ofVec3f(0,head.getHeight()));
 
-	noiseSeed = ofRandom(1);
+	noiseSeed = ofRandom(100);
 
 	thisRGB.set(r,g,b);
 	targetColor = thisRGB;
 	state = ReachingTarget;
 	speedState = Fast;
 	higlightCounter = 0;
+	jitterPhase = ofRandom(TWO_PI);
+	huntting = false;
 
 	lengthMin.addListener(this,&RibbonParticle::lengthChanged);
 	lengthMax.addListener(this,&RibbonParticle::lengthChanged);
@@ -242,6 +248,10 @@ void RibbonParticle::goBack(){
 
 void RibbonParticle::flock(){
 	state = Flocking;
+}
+
+void RibbonParticle::setHuntting(bool _huntting){
+	huntting = _huntting;
 }
 
 void RibbonParticle::update(float dt,const BoundingBox3D & bb){
@@ -271,16 +281,17 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	ofVec3f up = dir.cross(left).normalize();	// right vector
 	jitterPhase += dt*TWO_PI;
 	if(jitterPhase>TWO_PI) jitterPhase -= TWO_PI;
-	float currJitterFreq = (ofNoise(noiseSeed,ofGetElapsedTimef()*.3)+.3) * jitterFreq;
+	float currJitterFreq = (ofNoise(noiseSeed,ofGetElapsedTimef()*.3+noiseSeed)+.3) * jitterFreq;
 	ofVec3f jitter = up * sin(jitterPhase*currJitterFreq)*jitterAmp;
 
 	switch(state){
 	case TargetReached:{
-		jitter *= .5;
+		jitter *= .75;
 		if(prevTarget!=target){
-			if(ofRandom(1)>.8){
+			if(ofRandom(1)<fastSpeedProbability || huntting){
 				speedState = Fast;
 				targetColor.set(255,255,255);
+				higlightCounter = 0;
 			}else{
 				speedState = Slow;
 				targetColor.set(r,g,b);
@@ -289,16 +300,20 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 			prevTarget = target;
 		}
 		if(speedState==Fast){
-			thisSpeedFactor = filter(thisSpeedFactor, speedFactor*2.f,.2f);//ofMap(ofNoise(ofGetElapsedTimef(),noiseSeed),0,1,speedFactor*.2,speedFactor*1.8);
+			thisSpeedFactor = filter(thisSpeedFactor, speedFactor*fastSpeedFactor,.2f);//ofMap(ofNoise(ofGetElapsedTimef(),noiseSeed),0,1,speedFactor*.2,speedFactor*1.8);
 			if(thisSpeedFactor-speedFactor*.2<.1 || ofGetElapsedTimef()-tTargetChanged>.5){
 				targetColor.set(r,g,b);
 			}
 		}else{
-			thisSpeedFactor = filter(thisSpeedFactor, speedFactor*1.f, .2f);
+			thisSpeedFactor = filter(thisSpeedFactor, speedFactor*1.f, .1f);
 		}
 	}break;
 	case ReachingTarget:{
-		thisSpeedFactor = filter(thisSpeedFactor, speedFactor * 1.5f, .2f);
+		thisSpeedFactor = filter(thisSpeedFactor, speedFactor * 1.5f, .1f);
+		targetColor.set(r,g,b);
+	}break;
+	case GoingBack:{
+		thisSpeedFactor = filter(thisSpeedFactor, speedFactor * 1.5f, .1f);
 		targetColor.set(r,g,b);
 	}break;
 	case RunningAway:{
@@ -310,7 +325,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	}break;
 	}
 
-	thisRGB = filter(thisRGB,targetColor,.1);
+	thisRGB = targetColor;//filter(thisRGB,targetColor,.3);
 
 	accel += jitter;
 
@@ -335,7 +350,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		q.makeRotate(diff,next-trails[i]);
 		q.getRotate(angle,axis);
 		q.makeRotate(angle,axis);
-		//q.normalize();
+		q.normalize();
 		diff = q * diff;
 		trails[i] = next - diff;
 
@@ -347,32 +362,55 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	float alphaPct = ofMap(pos.z,-600,100,.25,1,true);
 	
 	// hghlight effect
-	higlightCounter += .25*dt;
-	if( higlightCounter > 1) higlightCounter = 0;
-	float highlightLen = 30.f;
-	int higlightPosition = (int)( ofMap(higlightCounter,0,1,-highlightLen, (int)trails.size()+highlightLen) );
+	if(speedState==Fast){
+		higlightCounter += 1.f/highlightDuration*dt;
+		if( higlightCounter > 1) higlightCounter = 0;
+		highlightLen = length*highlightLenPct*ofNoise(noiseSeed+ofGetElapsedTimef());
+		higlightPosition = (int)( ofMap(higlightCounter,0,1,0, ((int)trails.size()),&ofEasing::expoOut) );
+	}
 		
 	for(int i=0; i<(int)trails.size()-1;i++)
 	{
-		ofColor myRGB = ofColor(r,g,b);
-		float dist = fabs(higlightPosition-i);
-		if( dist < highlightLen) {
-			float hPct = 1- MIN( (dist/highlightLen),1);
-			float val = 1-hPct;
-			myRGB = ofColor(val*r+hPct*thisRGB.r,val*g+hPct*thisRGB.g,val*b+hPct*thisRGB.b);
+		float pct;
+		ofColor myRGB(r,g,b);
+		if(speedState==Fast){
+			float dist = fabs(higlightPosition-i);
+			if( dist < highlightLen) {
+				float hPct = 1- MIN( (dist/highlightLen),1);
+				float val = 1-hPct;
+				pct = float(trails.size()-i) / ((float)trails.size() * 2.) * 255.;
+				myRGB = ofColor(val*gLines+hPct*255.,val*gLines+hPct*255.,val*gLines+hPct*255.);
+				trailStripLineL.setColor(i,ofColor(myRGB,pct*alphaPct*.5));
+				trailStripLineR.setColor(i,ofColor(myRGB,pct*alphaPct*.5));
+
+				myRGB = ofColor(val*rTex+hPct*255.,val*gTex+hPct*255.,val*bTex+hPct*255.);
+				texturedStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct*1.2));
+				texturedStrip.setColor(i*2+1,ofColor(myRGB,pct*alphaPct*1.2));
+
+				myRGB = ofColor(val*r+hPct*255.,val*g+hPct*255.,val*b+hPct*255.);
+			}else{
+				pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
+				trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
+				trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
+				texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
+				texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
+			}
+		}else{
+			pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
+			trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
+			trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
+			texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
+			texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 		}
-			
-		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
-		trailStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct));
+
+
+
+		trailStrip.setColor(i*2,ofColor(r,g,b,pct*alphaPct));
 		trailStripForGlow.setColor(i*2,ofColor(myRGB,pct*alphaPct));
-		texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
-		trailStrip.setColor(i*2+1,ofColor(myRGB,pct*alphaPct));
+		trailStrip.setColor(i*2+1,ofColor(r,g,b,pct*alphaPct));
 		trailStripForGlow.setColor(i*2+1,ofColor(myRGB,pct*alphaPct));
-		texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
-		trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct));
-		trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct));
 
 		//if(particleState == KPARTICLE_EATING)
 		//	trailStrip.setColor(i,ofColor(255,0,0,pct*aplhaPct));
@@ -395,7 +433,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		trailStrip.getVertices()[i*2].set(trails[i] -rightNotGlow);
 		trailStripForGlow.getVertices()[i*2].set(trails[i] -right);
 		texturedStrip.getVertices()[i*2].set(trails[i] -rightNotGlow);
-		trailStripLineL.getVertices()[i].set(trails[i] +rightNotGlow);
+		trailStripLineL.getVertices()[i].set(trails[i] -rightNotGlow);
 
 		trailStrip.getVertices()[i*2+1].set(trails[i] +rightNotGlow);
 		trailStripForGlow.getVertices()[i*2+1].set(trails[i] +right);
@@ -428,6 +466,8 @@ void RibbonParticle::draw(){
 	ofSetColor(r,g,b,240*aplhaPct);
 
 	trailStrip.draw();
+	trailStripLineL.draw();
+	trailStripLineR.draw();
 	//ofSetColor(40);
 	tex.getTextureReference().bind();
 	texturedStrip.draw();
@@ -446,8 +486,8 @@ void RibbonParticle::drawForGlow(){
 
 	trailStripForGlow.draw();
 	ofSetColor(20);
-	//trailStripLineL.draw();
-	//trailStripLineR.draw();
+	trailStripLineL.draw();
+	trailStripLineR.draw();
 	tex.getTextureReference().bind();
 	texturedStrip.draw();
 	tex.getTextureReference().unbind();

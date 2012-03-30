@@ -25,6 +25,7 @@ public:
 	void flock();
 	void runAway();
 	void goBack();
+	void setHuntting(bool huntting);
 	State getState(){
 		return state;
 	}
@@ -57,6 +58,10 @@ public:
 	static ofxParameter<float> thicknessMax;
 	static ofxParameter<int> lengthMin;
 	static ofxParameter<int> lengthMax;
+	static ofxParameter<float> highlightDuration;
+	static ofxParameter<float> fastSpeedFactor;
+	static ofxParameter<float> fastSpeedProbability;
+	static ofxParameter<float> highlightLenPct;
 
 	static ofFbo tex;
 	static ofImage head;
@@ -81,9 +86,13 @@ private:
 	ofColor targetColor;
 	float jitterPhase;
 	float tTargetChanged;
+	bool huntting;
+
 	
 	// highlight color
 	float higlightCounter;
+	int higlightPosition;
+	float highlightLen;
 	
 	enum SpeedState{
 		Fast,

@@ -73,6 +73,7 @@ void EatableParticleField::update(float dt, const BoundingBox3D & bb){
 			for(it=particles.begin();it!=particles.end();it++){
 				prevParticles[it->first] = it->second;
 				it->second.set(p);
+				it->first->setHuntting(true);
 			}
 			particlesReachedSameQuadrant = 0;
 		}
@@ -128,8 +129,10 @@ ofVec3f EatableParticleField::getParticle(RibbonParticle * p){
 		particles[p].set(ofRandom(quadrants[nextQuadrant].x,quadrants[nextQuadrant].x+quadrants[nextQuadrant].width),
 				ofRandom(quadrants[nextQuadrant].y,quadrants[nextQuadrant].y+quadrants[nextQuadrant].height),
 				ofRandom(quadrants[nextQuadrant].z,quadrants[nextQuadrant].z+quadrants[nextQuadrant].depth));
-
-		particlesReachedSameQuadrant++;
+		if(state==SameQuadrant){
+			particlesReachedSameQuadrant++;
+			p->setHuntting(false);
+		}
 	}
 	return particles[p];
 }

@@ -4,6 +4,7 @@
 #include "ofxGui.h"
 #include "Glow.h"
 #include "PSystem.h"
+#include "ofxVideoRecorder.h"
 
 class testApp : public ofBaseApp{
 
@@ -22,10 +23,22 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-		PSystem particles;
+		void record(bool & record);
+
+
 		ofxPanel gui;
-		ofxParameter<float> bbW,bbH,bbD;
+
+		PSystem particles;
+		ofxParameter<float> bbW,bbH,bbD,bbZ;
 		ofCamera cam;
 		Glow glow;
+
 		float prevSpeedFactor;
+
+		ofxParameter<float> fps;
+
+		ofxVideoRecorder recorder;
+		ofFbo fbo;
+		ofxParameter<bool> recording;
+		ofPixels pixels;
 };
