@@ -20,7 +20,7 @@ FlockAudioGenerator::~FlockAudioGenerator() {
 }
 
 void FlockAudioGenerator::setup(){
-	sampleRate 			= 96500; /* Sampling Rate */
+	sampleRate 			= 44100; /* Sampling Rate */
 	initialBufferSize	= 256;	/* Buffer Size. you have to fill this buffer with sound*/
 	//lAudio.resize(initialBufferSize,0);/* outputs */
 	//rAudio.resize(initialBufferSize,0);/* outputs */
@@ -60,7 +60,7 @@ void FlockAudioGenerator::process(){
 		tempf=mySwitchableOsc.noise();
 
 		tempf=myFilter.lores(myFilter.hires(tempf,freq,resonance),freq,resonance) * amp;
-		sinef = sineOsc.sinewave(sinefreq) *	envelopeBeep.line(6,envelope);
+		//sinef = sineOsc.sinewave(sinefreq) *	envelopeBeep.line(6,envelope);
 		/*if(beepTriggered){
 			sinef = sineOsc.saw(sinefreq) * sineamp;
 			if(targetSineFreq-sinefreq<FLT_EPSILON){
@@ -74,13 +74,13 @@ void FlockAudioGenerator::process(){
 				beepTriggered=false;
 			}
 		}*/
-		buffer[i] = ((tempf+sinef) * 32767.5f) -.5f;
+		buffer[i] = ((tempf) * 32767.5f) -.5f;
 	}
 	tickCount++;
 }
 
 void  FlockAudioGenerator::update(){
-	float trigger = ofNoise(ofGetElapsedTimef()/100.,randomSineAmp);
+	/*float trigger = ofNoise(ofGetElapsedTimef()/100.,randomSineAmp);
 	if((trigger>.7 && prevTrigger<=.7) || (trigger<.3 && prevTrigger>=.3) || (trigger<.2 && prevTrigger>=.2) || (trigger<.8 && prevTrigger>=.8)){
 		triggerBeep = true;
 		cout << "trigger" << endl;
@@ -90,7 +90,7 @@ void  FlockAudioGenerator::update(){
 	prevTrigger = trigger;
 	if(envelopeBeep.amplitude>0){
 		cout << envelopeBeep.amplitude << endl;
-	}
+	}*/
 }
 
 //--------------------------------------------------------------

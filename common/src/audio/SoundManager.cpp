@@ -38,108 +38,12 @@ SoundManager::~SoundManager() {
 	// TODO Auto-generated destructor stub
 }
 
-void SoundManager::setup(KoreaFlock & flock){
-	if(!alDevice){
-		if (alGetString(AL_VERSION))
-			cout << "OpenAL version: "    << alGetString(AL_VERSION)    << endl;
-		if (alGetString(AL_RENDERER))
-			cout << "OpenAL renderer: "   << alGetString(AL_RENDERER)   << endl;
-		if (alGetString(AL_VENDOR))
-			cout << "OpenAL vendor: "     << alGetString(AL_VENDOR)     << endl;
-		if (alGetString(ALC_EXTENSIONS))
-			cout << "OpenAL extensions: " << alGetString(ALC_EXTENSIONS) << endl;
-		if(alcIsExtensionPresent(NULL,"ALC_ENUMERATION_EXT")){
-			const char *s = (const char *) alcGetString(NULL, ALC_DEVICE_SPECIFIER);
-			while (*s != '\0')
-			{
-				cout << "OpenAL available device: " << s << endl;
-				while (*s++ != '\0');
-			};
-		}
-		// Print default device name
-		cout << "OpenAL default device: "
-		     << (const char *)alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER)
-			 << endl;
-
-		alDevice = alcOpenDevice("ALSA Default"	);
-
-		//maxiSettings::sampleRate = 156000;
-		//int samplerate;
-		alcGetIntegerv(alDevice, ALC_FREQUENCY, 1, &maxiSettings::sampleRate);
-		cout << "OpenAL device samplerate: "
-		     << maxiSettings::sampleRate
-			 << endl;
-
-		alContext = alcCreateContext(alDevice,NULL);
-		alcMakeContextCurrent (alContext);
-		alListener3f(AL_POSITION, 0,0,300);
-		alListenerf(AL_METERS_PER_UNIT,.005);
-
-		if (alcIsExtensionPresent(alDevice, "ALC_EXT_EFX") == ALC_FALSE)
-		{
-			ofLog(OF_LOG_ERROR,"EFX extention is not found");
-		}
-
-		p_alGenFilters = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alGenFilters");
-		p_alDeleteFilters = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alDeleteFilters");
-		p_alFilteri = (ALvoid (*)(ALuint,ALenum,ALint)) alGetProcAddress("alFilteri");
-		p_alGenEffects = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alGenEffects");
-		p_alGenAuxiliaryEffectSlots = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alGenAuxiliaryEffectSlots");
-		p_alDeleteAuxiliaryEffectSlots = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alDeleteAuxiliaryEffectSlots");
-		p_alAuxiliaryEffectSloti = (ALvoid (*)(ALuint,ALenum,ALint)) alGetProcAddress("alAuxiliaryEffectSloti");
-		p_alAuxiliaryEffectSlotf = (ALvoid (*)(ALuint,ALenum,ALfloat)) alGetProcAddress("alAuxiliaryEffectSlotf");
-		p_alDeleteEffects = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alDeleteEffects");
-		p_alEffecti = (ALvoid (*)(ALuint,ALenum, ALint)) alGetProcAddress("alEffecti");
-		p_alEffectf = (ALvoid (*)(ALuint,ALenum, ALfloat)) alGetProcAddress("alEffectf");
-	}
-
-
-
-	//ofLogNotice() << "creating reverb";
-	//createEffect(AL_EFFECT_REVERB);
-	for(int i=0;i<flock.particles.size();i++){
-		flock.particles[i].audioGenerator.bufferIDs.resize(4);
-		alGenBuffers(flock.particles[i].audioGenerator.bufferIDs.size(),&flock.particles[i].audioGenerator.bufferIDs[0]);
-		alGenSources(1,&flock.particles[i].audioGenerator.sourceID);
-
-
-		alSourcef (flock.particles[i].audioGenerator.sourceID, AL_PITCH,    1.0f);
-		alSourcef (flock.particles[i].audioGenerator.sourceID, AL_GAIN,     1.0f);
-	    alSourcef (flock.particles[i].audioGenerator.sourceID, AL_ROLLOFF_FACTOR,  .01);
-	    alSourcei (flock.particles[i].audioGenerator.sourceID, AL_SOURCE_RELATIVE, AL_TRUE);
-	    //alSourcef (flock.particles[i].audioGenerator.sourceID, AL_REFERENCE_DISTANCE,  5);
-	    alSourcei (flock.particles[i].audioGenerator.sourceID, AL_DISTANCE_MODEL, AL_INVERSE_DISTANCE);
-
-		alSourcefv(flock.particles[i].audioGenerator.sourceID, AL_POSITION,(flock.particles[i].pos-ofVec3f(0,0,300)).getPtr());
-
-		flock.particles[i].audioGenerator.buffer.resize(1024);
-		for(int j=0;j<flock.particles[i].audioGenerator.bufferIDs.size();j++){
-			flock.particles[i].audioGenerator.process();
-			alBufferData(flock.particles[i].audioGenerator.bufferIDs[j],AL_FORMAT_MONO16,&flock.particles[i].audioGenerator.buffer[0],flock.particles[i].audioGenerator.buffer.size()*2,maxiSettings::sampleRate);
-			ALenum err = alGetError();
-			if ( err != AL_NO_ERROR){
-				ofLogError()<< "ofOpenALSoundPlayer: error creating buffer " << err;
-				//return;
-			}
-		}
-		alSourceQueueBuffers(flock.particles[i].audioGenerator.sourceID,flock.particles[i].audioGenerator.bufferIDs.size(),&flock.particles[i].audioGenerator.bufferIDs[0]);
-
-		//alSource3i(flock.particles[i].audioGenerator.sourceID, AL_AUXILIARY_SEND_FILTER, uiEffectSlot, 0, AL_FILTER_NULL);
-		alSourcePlayv(1,&flock.particles[i].audioGenerator.sourceID);
-	}
-
-
-	/*ofLogNotice() << "creating equalizer";
-	createEffect(AL_EFFECT_ECHO);
-	ofLogNotice() << "creating compressor";
-	createEffect(AL_EFFECT_COMPRESSOR);*/
-	/*Effect fx2;
-    fx2.addEffect(AL_EFFECT_ECHO);
-    fx2.setEffectGain(1.0f);
-    gunshot.assignEffect(fx2.getEffect(),fx2.getEffectID());*/
-
+void SoundManager::setup(PSystem & flock){
 	this->flock = &flock;
+	mutex.lock();
 	startThread(true,false);
+	started.wait(mutex);
+	soundUpdater.setup(flock);
 }
 
 void SoundManager::createEffect(int effect){
@@ -173,12 +77,114 @@ void SoundManager::createEffect(int effect){
 void SoundManager::update(){
 
 	for(int i=0;i<flock->particles.size();i++){
-		alSourcefv(flock->particles[i].audioGenerator.sourceID,AL_POSITION,(flock->particles[i].pos-ofVec3f(0,0,300)).getPtr());
+		alSourcefv(flock->particles[i].audioGenerator.sourceID,AL_POSITION,(flock->particles[i].getPos()-ofVec3f(0,0,300)).getPtr());
 		flock->particles[i].audioGenerator.update();
 	}
 }
 
 void SoundManager::threadedFunction(){
+	lock();
+	if(!alDevice){
+		if (alGetString(AL_VERSION))
+			cout << "OpenAL version: "    << alGetString(AL_VERSION)    << endl;
+		if (alGetString(AL_RENDERER))
+			cout << "OpenAL renderer: "   << alGetString(AL_RENDERER)   << endl;
+		if (alGetString(AL_VENDOR))
+			cout << "OpenAL vendor: "     << alGetString(AL_VENDOR)     << endl;
+		if (alGetString(ALC_EXTENSIONS))
+			cout << "OpenAL extensions: " << alGetString(ALC_EXTENSIONS) << endl;
+		if(alcIsExtensionPresent(NULL,"ALC_ENUMERATION_EXT")){
+			const char *s = (const char *) alcGetString(NULL, ALC_DEVICE_SPECIFIER);
+			while (*s != '\0')
+			{
+				cout << "OpenAL available device: " << s << endl;
+				while (*s++ != '\0');
+			};
+		}
+		// Print default device name
+		cout << "OpenAL default device: "
+			 << (const char *)alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER)
+			 << endl;
+
+		alDevice = alcOpenDevice(NULL);
+
+		//maxiSettings::sampleRate = 156000;
+		//int samplerate;
+		alcGetIntegerv(alDevice, ALC_FREQUENCY, 1, &maxiSettings::sampleRate);
+		cout << "OpenAL device samplerate: "
+			 << maxiSettings::sampleRate
+			 << endl;
+
+		alContext = alcCreateContext(alDevice,NULL);
+		alcMakeContextCurrent (alContext);
+		alListener3f(AL_POSITION, 0,0,300);
+		alListenerf(AL_METERS_PER_UNIT,.005);
+
+		if (alcIsExtensionPresent(alDevice, "ALC_EXT_EFX") == ALC_FALSE)
+		{
+			ofLog(OF_LOG_ERROR,"EFX extention is not found");
+		}
+
+		p_alGenFilters = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alGenFilters");
+		p_alDeleteFilters = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alDeleteFilters");
+		p_alFilteri = (ALvoid (*)(ALuint,ALenum,ALint)) alGetProcAddress("alFilteri");
+		p_alGenEffects = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alGenEffects");
+		p_alGenAuxiliaryEffectSlots = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alGenAuxiliaryEffectSlots");
+		p_alDeleteAuxiliaryEffectSlots = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alDeleteAuxiliaryEffectSlots");
+		p_alAuxiliaryEffectSloti = (ALvoid (*)(ALuint,ALenum,ALint)) alGetProcAddress("alAuxiliaryEffectSloti");
+		p_alAuxiliaryEffectSlotf = (ALvoid (*)(ALuint,ALenum,ALfloat)) alGetProcAddress("alAuxiliaryEffectSlotf");
+		p_alDeleteEffects = (ALvoid (*)(ALsizei,ALuint*)) alGetProcAddress("alDeleteEffects");
+		p_alEffecti = (ALvoid (*)(ALuint,ALenum, ALint)) alGetProcAddress("alEffecti");
+		p_alEffectf = (ALvoid (*)(ALuint,ALenum, ALfloat)) alGetProcAddress("alEffectf");
+	}
+
+
+
+	//ofLogNotice() << "creating reverb";
+	//createEffect(AL_EFFECT_REVERB);
+	for(int i=0;i<flock->particles.size();i++){
+		flock->particles[i].audioGenerator.bufferIDs.resize(2);
+		alGenBuffers(flock->particles[i].audioGenerator.bufferIDs.size(),&flock->particles[i].audioGenerator.bufferIDs[0]);
+		alGenSources(1,&flock->particles[i].audioGenerator.sourceID);
+
+
+		alSourcef (flock->particles[i].audioGenerator.sourceID, AL_PITCH,    1.0f);
+		alSourcef (flock->particles[i].audioGenerator.sourceID, AL_GAIN,     1.0f);
+		alSourcef (flock->particles[i].audioGenerator.sourceID, AL_ROLLOFF_FACTOR,  .01);
+		alSourcei (flock->particles[i].audioGenerator.sourceID, AL_SOURCE_RELATIVE, AL_TRUE);
+		//alSourcef (flock->particles[i].audioGenerator.sourceID, AL_REFERENCE_DISTANCE,  5);
+		alSourcei (flock->particles[i].audioGenerator.sourceID, AL_DISTANCE_MODEL, AL_INVERSE_DISTANCE);
+
+		alSourcefv(flock->particles[i].audioGenerator.sourceID, AL_POSITION,(flock->particles[i].getPos()-ofVec3f(0,0,300)).getPtr());
+
+		flock->particles[i].audioGenerator.buffer.resize(2048);
+		for(int j=0;j<flock->particles[i].audioGenerator.bufferIDs.size();j++){
+			flock->particles[i].audioGenerator.process();
+			alBufferData(flock->particles[i].audioGenerator.bufferIDs[j],AL_FORMAT_MONO16,&flock->particles[i].audioGenerator.buffer[0],flock->particles[i].audioGenerator.buffer.size()*2,maxiSettings::sampleRate);
+			ALenum err = alGetError();
+			if ( err != AL_NO_ERROR){
+				ofLogError()<< "ofOpenALSoundPlayer: error creating buffer " << err;
+				//return;
+			}
+		}
+		alSourceQueueBuffers(flock->particles[i].audioGenerator.sourceID,flock->particles[i].audioGenerator.bufferIDs.size(),&flock->particles[i].audioGenerator.bufferIDs[0]);
+
+		//alSource3i(flock->particles[i].audioGenerator.sourceID, AL_AUXILIARY_SEND_FILTER, uiEffectSlot, 0, AL_FILTER_NULL);
+		alSourcePlayv(1,&flock->particles[i].audioGenerator.sourceID);
+	}
+	unlock();
+	started.signal();
+
+}
+
+void SoundManager::SourcesUpdater::setup(PSystem & _flock){
+	flock = &_flock;
+	startThread(true,false);
+}
+
+void SoundManager::SourcesUpdater::threadedFunction(){
+
+
 	while(isThreadRunning()){
 		for(int i=0; i<flock->particles.size(); i++){
 			int processed;
@@ -194,21 +200,21 @@ void SoundManager::threadedFunction(){
 				alSourceQueueBuffers(flock->particles[i].audioGenerator.sourceID, 1, &albuffer);
 				ALenum err = alGetError();
 				if ( err != AL_NO_ERROR){
-                    ofLogError() << "Error buffering " << err;
-                }
+					ofLogError() << "Error buffering " << err;
+				}
 				processed--;
 			}
 			ALint state;
 			alGetSourcei(flock->particles[i].audioGenerator.sourceID,AL_SOURCE_STATE,&state);
 			if(state != AL_PLAYING){
-				alSourcePlayv(1,&flock->particles[i].audioGenerator.sourceID);
+				alSourcePlay(flock->particles[i].audioGenerator.sourceID);
 				cout << "underrun" << endl;
 				//cout << flock->particles[i].audioGenerator.sourceID << " playing" << endl;
 			}
 
 
 		}
-		//ofSleepMillis(1);
+		ofSleepMillis(1);
 	}
 }
 
