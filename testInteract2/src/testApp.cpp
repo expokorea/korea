@@ -15,6 +15,8 @@ void testApp::setup(){
 	RibbonParticle::generateTexture(RibbonParticle::Voronoi);
 	particles.setup(20);
 
+	
+	
 
 #ifdef USE_AUDIO
 	soundManager.setup(particles);

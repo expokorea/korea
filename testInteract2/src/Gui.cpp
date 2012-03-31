@@ -9,6 +9,7 @@
 #include "RibbonParticle.h"
 #include "PSystem.h"
 #include "EatableParticleField.h"
+#include "ParticleFlocker.h"
 
 void Gui::setGlow(Glow & _glow){
 	glow = &_glow;
@@ -52,6 +53,7 @@ void Gui::setup(int x, int y){
 	guiPSystem.add(PSystem::bbD.set("bb depth",600,0,2000));
 	guiPSystem.add(PSystem::bbZ.set("bb z",-PSystem::bbD*.5,-1000,1000));
 	guiPSystem.add(PSystem::drawBB.set("drawBB",false));
+	guiPSystem.add(ParticleFlocker::totalToFlock.set("total folllowing",5,0,20) );
 
 	guiField.setup("p. field","settings.xml",x+guiParticles.getWidth()+10,y + guiPSystem.getHeight()+10);
 	guiField.add(EatableParticleField::r.set("r",16,0,255));

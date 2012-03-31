@@ -10,6 +10,8 @@
 		831A5A2D1524A6BC007DA76A /* EatableParticleField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 831A5A281524A6BC007DA76A /* EatableParticleField.cpp */; };
 		831A5A2E1524A6BC007DA76A /* RibbonParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 831A5A2B1524A6BC007DA76A /* RibbonParticle.cpp */; };
 		831A5ABC1524EB6D007DA76A /* PSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 831A5ABB1524EB6D007DA76A /* PSystem.cpp */; };
+		831A5C7015264188007DA76A /* ofTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 831A5C6E15264188007DA76A /* ofTween.cpp */; };
+		831A5C77152641CC007DA76A /* ParticleFlocker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 831A5C75152641CC007DA76A /* ParticleFlocker.cpp */; };
 		8396760514FE6ED800771A68 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 839675FA14FE6ED800771A68 /* ofxBaseGui.cpp */; };
 		8396760614FE6ED800771A68 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 839675FC14FE6ED800771A68 /* ofxButton.cpp */; };
 		8396760714FE6ED800771A68 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 839675FF14FE6ED800771A68 /* ofxPanel.cpp */; };
@@ -106,6 +108,10 @@
 		831A5A2B1524A6BC007DA76A /* RibbonParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RibbonParticle.cpp; sourceTree = "<group>"; };
 		831A5A2C1524A6BC007DA76A /* RibbonParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RibbonParticle.h; sourceTree = "<group>"; };
 		831A5ABB1524EB6D007DA76A /* PSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PSystem.cpp; sourceTree = "<group>"; };
+		831A5C6E15264188007DA76A /* ofTween.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofTween.cpp; path = ../common/src/graphics/ofTween.cpp; sourceTree = SOURCE_ROOT; };
+		831A5C6F15264188007DA76A /* ofTween.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofTween.h; path = ../common/src/graphics/ofTween.h; sourceTree = SOURCE_ROOT; };
+		831A5C75152641CC007DA76A /* ParticleFlocker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleFlocker.cpp; sourceTree = "<group>"; };
+		831A5C76152641CC007DA76A /* ParticleFlocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleFlocker.h; sourceTree = "<group>"; };
 		839675F814FE6ED800771A68 /* ofOscParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofOscParameter.h; sourceTree = "<group>"; };
 		839675F914FE6ED800771A68 /* ofParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofParameter.h; sourceTree = "<group>"; };
 		839675FA14FE6ED800771A68 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
@@ -248,6 +254,8 @@
 		831A5A261524A6BC007DA76A /* physics2 */ = {
 			isa = PBXGroup;
 			children = (
+				831A5C75152641CC007DA76A /* ParticleFlocker.cpp */,
+				831A5C76152641CC007DA76A /* ParticleFlocker.h */,
 				831A5A271524A6BC007DA76A /* BoundingBox3D.h */,
 				831A5A281524A6BC007DA76A /* EatableParticleField.cpp */,
 				831A5A291524A6BC007DA76A /* EatableParticleField.h */,
@@ -407,6 +415,8 @@
 				831A5A261524A6BC007DA76A /* physics2 */,
 				83D98B4C1522871A00EAB5B1 /* triangulate.cpp */,
 				83D98B4D1522871A00EAB5B1 /* triangulate.h */,
+				831A5C6E15264188007DA76A /* ofTween.cpp */,
+				831A5C6F15264188007DA76A /* ofTween.h */,
 				83D98B4E1522871A00EAB5B1 /* VoronoiDiagramGenerator.cpp */,
 				83D98B4F1522871A00EAB5B1 /* VoronoiDiagramGenerator.h */,
 				83D98B471522870700EAB5B1 /* ofxVoronoi.cpp */,
@@ -758,6 +768,8 @@
 				831A5A2D1524A6BC007DA76A /* EatableParticleField.cpp in Sources */,
 				831A5A2E1524A6BC007DA76A /* RibbonParticle.cpp in Sources */,
 				831A5ABC1524EB6D007DA76A /* PSystem.cpp in Sources */,
+				831A5C7015264188007DA76A /* ofTween.cpp in Sources */,
+				831A5C77152641CC007DA76A /* ParticleFlocker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ void PSystem::setup(int numParticles)
 	for(int i=0;i<particles.size();i++){
 		particles[i].setup();
 	}
+	flocker.setup(particles.size());
 }
 
 
@@ -18,8 +19,10 @@ void PSystem::update(const ofVec3f & userPosition)
 {
 	bb = BoundingBox3D(userPosition.x,userPosition.y,userPosition.z,bbW,bbH,bbD);
 	field.update(ofGetLastFrameTime(),bb);
+	flocker.update(ofGetLastFrameTime(),particles);
 	for(int i=0;i<particles.size();i++){
-		particles[i].target.set(field.getParticle(&particles[i]));
+		if(!flocker.getIsFollowing(i))
+			particles[i].target.set(field.getParticle(&particles[i]));
 		particles[i].update(ofGetLastFrameTime(),bb);
 	}
 }
@@ -40,6 +43,7 @@ void PSystem::draw()
 		bb.draw();
 	}
 	ofFill();
+	//flocker.draw(particles);
 }
 
 void PSystem::drawForGlow()
