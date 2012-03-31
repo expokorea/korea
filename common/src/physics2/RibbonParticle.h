@@ -68,6 +68,8 @@ public:
 	static ofxParameter<float> fastSpeedFactor;
 	static ofxParameter<float> fastSpeedProbability;
 	static ofxParameter<float> highlightLenPct;
+	static ofxParameter<float> depthAlphaMin;
+	static ofxParameter<float> depthAlphaMax;
 
 	static ofFbo tex;
 	static ofImage head;

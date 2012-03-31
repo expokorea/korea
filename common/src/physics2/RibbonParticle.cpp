@@ -32,6 +32,8 @@ ofxParameter<float> RibbonParticle::highlightDuration;
 ofxParameter<float> RibbonParticle::fastSpeedFactor;
 ofxParameter<float> RibbonParticle::fastSpeedProbability;
 ofxParameter<float> RibbonParticle::highlightLenPct;
+ofxParameter<float> RibbonParticle::depthAlphaMin;
+ofxParameter<float> RibbonParticle::depthAlphaMax;
 ofFbo RibbonParticle::tex;
 ofImage RibbonParticle::head;
 int RibbonParticle::headRibbonCoordsWidth = 40;
@@ -378,7 +380,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	trails.back()=next-diff;
 
 	// create some depth shading
-	float alphaPct = ofMap(pos.z,-600,100,.25,1,true);
+	float alphaPct = ofMap(pos.z,depthAlphaMin,depthAlphaMax,.25,1,true);
 	
 	// hghlight effect
 	if(speedState==Fast){

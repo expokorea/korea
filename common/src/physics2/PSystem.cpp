@@ -1,5 +1,7 @@
 #include "PSystem.h"
 
+ofxParameter<float> PSystem::bbW,PSystem::bbH,PSystem::bbD,PSystem::bbZ;
+ofxParameter<bool> PSystem::drawBB;
 
 void PSystem::setup(int numParticles)
 {
@@ -12,8 +14,9 @@ void PSystem::setup(int numParticles)
 
 
 
-void PSystem::update(const BoundingBox3D & bb)
+void PSystem::update(const ofVec3f & userPosition)
 {
+	bb = BoundingBox3D(userPosition.x,userPosition.y,userPosition.z,bbW,bbH,bbD);
 	field.update(ofGetLastFrameTime(),bb);
 	for(int i=0;i<particles.size();i++){
 		particles[i].target.set(field.getParticle(&particles[i]));
@@ -30,6 +33,13 @@ void PSystem::draw()
 	}
 	ofSetColor(RibbonParticle::r,RibbonParticle::g,RibbonParticle::b);
 	field.draw();
+
+	ofSetColor(255);
+	ofNoFill();
+	if(drawBB){
+		bb.draw();
+	}
+	ofFill();
 }
 
 void PSystem::drawForGlow()

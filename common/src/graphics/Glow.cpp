@@ -10,7 +10,7 @@
 #include "ofGraphics.h"
 
 Glow::Glow() {
-	// TODO Auto-generated constructor stub
+	passes = 1;
 
 }
 
@@ -20,17 +20,16 @@ Glow::~Glow() {
 
 void Glow::setup(float w, float h){
 	shader.load("","glow.frag");
-	brightness = 1;
-	passes = 1;
 
 	ofFbo::Settings settings;
 	//settings.depthAsTexture = true;
-	settings.useDepth = true;
+	settings.useDepth = false;
 	settings.width = w;
 	settings.height = h;
 	settings.internalformat = GL_RGBA;
 	//settings.dethInternalFormat = GL_DEPTH_COMPONENT32;
 	settings.useStencil = false;
+	//settings.numSamples = 4;
 
 	fbo1.allocate(settings);
 	fbo2.allocate(settings);
@@ -51,8 +50,6 @@ void Glow::end(){
 		shader.begin();
 		shader.setUniformTexture("src_tex_unit0",fbo1.getTextureReference(),0);
 		shader.setUniform1i("direction",0);
-		//shader.setUniform1i("kernelSize",kernelSize);
-		shader.setUniform1f("brightness",brightness);
 		fbo1.draw(0,0);
 		shader.end();
 		fbo2.end();
@@ -62,8 +59,6 @@ void Glow::end(){
 		shader.begin();
 		shader.setUniformTexture("src_tex_unit0",fbo2.getTextureReference(),0);
 		shader.setUniform1i("direction",1);
-		//shader.setUniform1i("kernelSize",kernelSize);
-		shader.setUniform1f("brightness",brightness);
 		fbo2.draw(0,0);
 		shader.end();
 		fbo1.end();

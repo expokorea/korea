@@ -24,7 +24,6 @@ public:
 	void draw(float x, float y);
 	void draw(float x, float y, float w, float h);
 
-	ofxParameter<float> brightness;
 	ofxParameter<int> passes;
 
 private:

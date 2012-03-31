@@ -7,71 +7,69 @@ void testApp::setup(){
 	ofBackground(0);
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 
+	ratio = 1600./float(1024*3);
+	gui.setGlow(glow);
+	gui.setup(10, 768*ratio + 10);
+	gui.load("settings.xml");
 
 	RibbonParticle::generateTexture(RibbonParticle::Voronoi);
-	gui.setup();
-	gui.add(RibbonParticle::r.set("r",16,0,255));
-	gui.add(RibbonParticle::g.set("g",0,0,255));
-	gui.add(RibbonParticle::b.set("b",230,0,255));
-	gui.add(RibbonParticle::rTex.set("r texture",16,0,255));
-	gui.add(RibbonParticle::gTex.set("g texture",0,0,255));
-	gui.add(RibbonParticle::bTex.set("b texture",230,0,255));
-	gui.add(RibbonParticle::rLines.set("r lines",255,0,255));
-	gui.add(RibbonParticle::gLines.set("g lines",255,0,255));
-	gui.add(RibbonParticle::bLines.set("b lines",255,0,255));
-	gui.add(EatableParticleField::r.set("r",16,0,255));
-	gui.add(EatableParticleField::g.set("g",0,0,255));
-	gui.add(EatableParticleField::b.set("b",230,0,255));
-	gui.add(EatableParticleField::sameQuadrantProbability.set("sameQuadrantProbability",.001,0,.1));
-	gui.add(RibbonParticle::speedFactor.set("speed factor",25,0,200));
-	gui.add(RibbonParticle::accelFactor.set("accel factor",1,0,2));
-	gui.add(RibbonParticle::friction.set("friction",.08,0,1));
-	gui.add(RibbonParticle::strengthRunnawayForce.set("strengthRunnawayForce",10,0,30));
-	gui.add(RibbonParticle::maxDistanceRunAway.set("maxDistanceRunAway",2000,0,3000));
-	gui.add(RibbonParticle::jitterFreq.set("jitterFreq (Hz)",1,0,10));
-	gui.add(RibbonParticle::jitterAmp.set("jitterAmp",.015,0,.1));
-	gui.add(RibbonParticle::headSize.set("headSize",4,0,10));
-	gui.add(RibbonParticle::thicknessMin.set("thicknessMin",3,1,10));
-	gui.add(RibbonParticle::thicknessMax.set("thicknessMax",5,5,20));
-	gui.add(RibbonParticle::lengthMin.set("lengthMin",40,1,100));
-	gui.add(RibbonParticle::lengthMax.set("lengthMax",70,1,200));
-	gui.add(RibbonParticle::highlightDuration.set("highlightDuration (s)",3,.1,10));
-	gui.add(RibbonParticle::highlightLenPct.set("highlightLenPct",.3,.1,1));
-	gui.add(RibbonParticle::fastSpeedFactor.set("fastSpeedFactor",2,1,10));
-	gui.add(RibbonParticle::fastSpeedProbability.set("fastSpeedProbability",.1,0,1));
-
-
-
 	particles.setup(20);
 
-	gui.add(EatableParticleField::eatDistance.set("eatDistance",300,0,500));
-	gui.add(bbW.set("bb width",350,0,2000));
-	gui.add(bbH.set("bb height",540,0,2000));
-	gui.add(bbD.set("bb depth",600,0,2000));
-	gui.add(bbZ.set("bb z",-bbD*.5,-1000,1000));
-
-	glow.setup();
-	gui.add(glow.passes.set("glow passes",4,0,6));
-
-	gui.loadFromFile("settings.xml");
-
-	fbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
-	gui.add(recording.set("recording",false));
-	recording.addListener(this,&testApp::record);
-
-	gui.add(fps.set("fps",60,0,120));
 
 #ifdef USE_AUDIO
 	soundManager.setup(particles);
 #endif
 
+	cam.setFov(60);
+	gui.overlap = 152;
+	viewport.set(0,0,1024*3-gui.overlap*2,768);
+	ofFbo::Settings settings;
+	settings.width = 1024*3-gui.overlap*2;
+	settings.height = 768;
+	settings.internalformat = GL_RGBA;
+	settings.numSamples = 4;
+	settings.useDepth = false;
+	settings.useStencil = false;
+	fbo.allocate(1024*3-gui.overlap*2,768,GL_RGBA);
+
+	if(gui.viewportsInFbo)
+		glow.setup(1024*3-gui.overlap*2,768);
+	else
+		glow.setup(1024,768);
+
+	viewportQuads.resize(3);
+	for(int i=0;i<3;i++){
+		viewportQuads[i].addVertex(ofVec3f(i*1024*ratio,0));
+		viewportQuads[i].addVertex(ofVec3f((i*1024+1024)*ratio,0));
+		viewportQuads[i].addVertex(ofVec3f((i*1024+1024)*ratio,768*ratio));
+		viewportQuads[i].addVertex(ofVec3f((i*1024)*ratio,768*ratio));
+
+		viewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap,0));
+		viewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap+1024,0));
+		viewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap+1024,768));
+		viewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap,768));
+	}
+
+	eachViewportQuads.resize(3);
+	for(int i=0;i<3;i++){
+		eachViewportQuads[i].addVertex(ofVec3f(0,0));
+		eachViewportQuads[i].addVertex(ofVec3f(1024,0));
+		eachViewportQuads[i].addVertex(ofVec3f(1024,768));
+		eachViewportQuads[i].addVertex(ofVec3f(0,768));
+
+		eachViewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap,0));
+		eachViewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap+1024,0));
+		eachViewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap+1024,768));
+		eachViewportQuads[i].addTexCoord(ofVec3f(i*1024-i*gui.overlap,768));
+	}
+	gui.recording.addListener(this,&testApp::record);
 }
 
 void testApp::record(bool & record){
 	if(record){
 		recorder.setup(ofGetTimestampString()+".mov",ofGetWidth(),ofGetHeight(),25);
 		ofSetFrameRate(25);
-	}else if(recording){
+	}else if(gui.recording){
 		recorder.encodeVideo();
 		ofSetFrameRate(60);
 	}
@@ -79,8 +77,25 @@ void testApp::record(bool & record){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	fps = ofGetFrameRate();
-	particles.update(BoundingBox3D(mouseX-bbW*.5,mouseY-bbH*.5,bbZ+bbD*.5,bbW,bbH,bbD));
+	cam.setFov(gui.fov);
+	gui.fps = ofGetFrameRate();
+	ofVec3f userPos;
+	if(!gui.viewportsInFbo){
+		int viewportDisplacement=0;
+		viewport.x = -gui.viewportNum*1024+gui.viewportNum*gui.overlap;
+		if(gui.viewportNum==0) viewportDisplacement = -1024;
+		if(gui.viewportNum==1) viewportDisplacement = -gui.overlap;
+		if(gui.viewportNum==2) viewportDisplacement = 1024-gui.overlap*2;
+		userPos.set(mouseX-PSystem::bbW*.5-ofGetWidth()*.5+viewportDisplacement,
+					mouseY-PSystem::bbH*.5-ofGetHeight()*.5,
+					PSystem::bbZ+PSystem::bbD*.5-ofGetWidth());
+	}else{
+		gui.virtualMouseX = float(mouseX)/ratio - fbo.getWidth()*.5;
+		gui.virtualMouseY = - fbo.getHeight()*.5;//float(mouseY)/ratio - fbo.getHeight()*.5;
+		userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-ofGetWidth());
+	}
+
+	particles.update(userPos);
 #ifdef USE_SOUND
 	soundManager.update();
 #endif
@@ -90,22 +105,73 @@ void testApp::update(){
 void testApp::draw(){
 	ofSetColor(255);
 	gui.draw();
-	if(recording){
-		fbo.begin();
+	glow.begin(false);
+	cam.begin(viewport);
+	particles.drawForGlow();
+	cam.end();
+	glow.end();
+
+	if(gui.viewportsInFbo){
+		fbo.begin(true);
 		ofClear(0);
 	}
-	glow.begin(true);
-	particles.drawForGlow();
-	glow.end();
-	glow.draw(0,0);
-	particles.draw();
+		glow.draw(0,0);
+
+		cam.begin(viewport);
+		particles.draw();
+		cam.end();
+
+	if(gui.viewportsInFbo){
+		fbo.end();
+		//fbo.readToPixels(pixels);
+		//recorder.addFrame(pixels);
+		//fbo.draw(-viewportNum*1024+viewportNum*overlap,0);
+	}
 
 	ofSetColor(255);
-	if(recording){
-		fbo.end();
-		fbo.readToPixels(pixels);
-		recorder.addFrame(pixels);
-		fbo.draw(0,0);
+	if(gui.drawAllViewports){
+		if(gui.drawOverlap){
+			fbo.getTextureReference().bind();
+			for(int i=0;i<3;i++){
+				viewportQuads[i].setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+				viewportQuads[i].draw();
+			}
+			fbo.getTextureReference().unbind();
+		}else{
+			fbo.draw(0,0,fbo.getWidth()*ratio,fbo.getHeight()*ratio);
+		}
+
+		if(gui.drawViewports){
+			for(int i=0;i<3;i++){
+				viewportQuads[i].setMode(OF_PRIMITIVE_LINE_LOOP);
+				viewportQuads[i].drawWireframe();
+			}
+		}
+
+		if(gui.drawOverlapMarks){
+			ofSetColor(255,0,0,100);
+			for(int i=1; i<3; i++){
+				float x = (1024*i-gui.overlap)*ratio;
+				ofLine(x,0,x,fbo.getHeight()*ratio);
+			}
+			ofSetColor(0,255,0,100);
+			for(int i=1; i<3; i++){
+				float x = (1024*i+gui.overlap)*ratio;
+				ofLine(x,0,x,fbo.getHeight()*ratio);
+			}
+		}
+	}else{
+		ofPushMatrix();
+		ofTranslate(gui.guiRender.getPosition().x+gui.guiRender.getWidth()+10,0);
+		fbo.getTextureReference().bind();
+		eachViewportQuads[gui.viewportNum].setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+		eachViewportQuads[gui.viewportNum].draw();
+		fbo.getTextureReference().unbind();
+		if(gui.drawViewports){
+			eachViewportQuads[gui.viewportNum].setMode(OF_PRIMITIVE_LINE_LOOP);
+			eachViewportQuads[gui.viewportNum].drawWireframe();
+		}
+		ofPopMatrix();
 	}
 	//RibbonParticle::tex.draw(0,0);
 }
@@ -125,8 +191,11 @@ void testApp::keyReleased(int key){
 	}
 
 	if(key=='r'){
-		recording = !recording;
+		gui.recording = !gui.recording;
 	}
+
+	if(key==OF_KEY_RIGHT) gui.viewportNum++;
+	if(key==OF_KEY_LEFT) gui.viewportNum--;
 }
 
 //--------------------------------------------------------------

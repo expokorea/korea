@@ -5,6 +5,7 @@
 #include "Glow.h"
 #include "PSystem.h"
 #include "ofxVideoRecorder.h"
+#include "Gui.h"
 
 //#define USE_AUDIO
 
@@ -32,21 +33,24 @@ class testApp : public ofBaseApp{
 		void record(bool & record);
 
 
-		ofxPanel gui;
+		Gui gui;
 
 		PSystem particles;
-		ofxParameter<float> bbW,bbH,bbD,bbZ;
 		ofCamera cam;
 		Glow glow;
 
 		float prevSpeedFactor;
 
-		ofxParameter<float> fps;
 
 		ofxVideoRecorder recorder;
 		ofFbo fbo;
-		ofxParameter<bool> recording;
 		ofPixels pixels;
+
+		ofRectangle viewport;
+
+		float ratio;
+		vector<ofMesh> viewportQuads;
+		vector<ofMesh> eachViewportQuads;
 
 #ifdef USE_AUDIO
 		SoundManager soundManager;
