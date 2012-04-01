@@ -106,15 +106,20 @@ void EatableParticleField::draw(){
 	list<EatenParticle>::iterator it;
 	for(it=eatenParticles.begin();it!=eatenParticles.end();it++){
 		float alpha = it->life/it->maxLife * 255;
-		ofSetColor(r,g,b,alpha);
+		ofSetColor(r,g,b,alpha); 
 		ofCircle(it->pos,it->radius);
 	}
-	ofSetColor(255,0,0);
+	//ofSetColor(255,0,0);
+	//ofNoFill();
+	//bb3d.draw();
 }
 
 
 ofVec3f EatableParticleField::getParticle(RibbonParticle * p){
-	if(particles.find(p)==particles.end() || p->getPos().squareDistance(particles[p])<eatDistance || p->getState()==RibbonParticle::GoingBack){
+	
+	bool bTargetInside = bb3d.inside(particles[p]);
+	
+	if(!bTargetInside || particles.find(p)==particles.end() || p->getPos().squareDistance(particles[p])<eatDistance || p->getState()==RibbonParticle::GoingBack){
 		int nextQuadrant = ofRandom(0,quadrants.size()-1);
 		if(prevParticles.find(p)!=particles.end()){
 			for(int i=0;i<quadrants.size();i++){
@@ -136,3 +141,4 @@ ofVec3f EatableParticleField::getParticle(RibbonParticle * p){
 	}
 	return particles[p];
 }
+

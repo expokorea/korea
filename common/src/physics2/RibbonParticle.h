@@ -110,6 +110,9 @@ private:
 	int higlightPosition;
 	float highlightLen;
 	
+	// trail size changes
+	vector<float> trailThickness;
+	
 	enum SpeedState{
 		Fast,
 		Slow

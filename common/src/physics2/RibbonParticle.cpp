@@ -174,8 +174,14 @@ void RibbonParticle::setupTrails(){
 	for(int i=1; i<(int)trails.size();i++){
 		trails[i] = trails[i-1];
 		trails[i].x -= 4;
+		
 	}
-
+	
+	for(int i=0; i<(int)trails.size();i++){
+		float newThick = MIN( (float)thicknessMin,thisThickness + ofSignedNoise(i*.1)*thicknessMax);
+		trailThickness.push_back(newThick);
+	}
+	
 	for(int i=0; i<((int)trails.size())-1;i++){
 		float pct = float(trails.size()-i) / ((float)trails.size()*2) * .75 * 255;
 		trailStrip.setColor(i*2,ofColor(r,g,b,pct));
@@ -456,7 +462,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 
 		ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
 		ofVec3f right = dir.cross(up).normalize();	// right vector
-		right *= thisThickness;
+		right *= trailThickness[i];//thisThickness;
 		ofVec3f rightNotGlow = right * .5;
 
 

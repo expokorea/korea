@@ -110,11 +110,11 @@ void ParticleFlocker::draw( vector<RibbonParticle> & particles ){
 	
 	for( int i = 0; i < particles.size(); i++)
 	{
-		if( isFollowing[i] )
-		{
+		//if( isFollowing[i] )
+		//{
 			int mom = whoIFollow[i];
 			ofPoint meP = particles[i].getPos();
-			ofPoint momP = particles[mom].getPos();//particles[i].target;//
+			ofPoint momP = particles[i].target;//particles[mom].getPos();//
 			
 			//ofSetColor(255,0,0);
 			//ofSphere(meP,2);
@@ -126,7 +126,7 @@ void ParticleFlocker::draw( vector<RibbonParticle> & particles ){
 				glVertex3f(meP.x,meP.y,meP.z);
 				glVertex3f(momP.x,momP.y,momP.z);
 			glEnd();
-		}
+		//}
 	}
 }
 
