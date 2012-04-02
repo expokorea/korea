@@ -25,12 +25,14 @@ public:
 		ReachingTarget,
 		TargetReached,
 		RunningAway,
-		GoingBack
+		GoingBack,
+		Hiding
 	} state;
 
 	void flock();
 	void runAway();
 	void goBack();
+	void hide();
 	void setHuntting(bool huntting);
 	State getState(){
 		return state;
@@ -103,7 +105,7 @@ private:
 	float jitterPhase;
 	float tTargetChanged;
 	bool huntting;
-
+	float hideAlpha;
 	
 	// highlight color
 	float higlightCounter;

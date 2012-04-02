@@ -276,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>12</integer>
 									<integer>4</integer>
 									<integer>3</integer>
 									<integer>0</integer>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>8323680814EC0081004220A6</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>EatableParticleField.cpp</string>
+								<string>RibbonParticle.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>8323680914EC0081004220A6</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>EatableParticleField.cpp</string>
+										<string>RibbonParticle.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>831A5D9615286A1E007DA76A</string>
+										<string>831A5EC11529CD19007DA76A</string>
 										<key>history</key>
 										<array>
 											<string>83236C6314ED4583004220A6</string>
@@ -377,17 +377,17 @@
 											<string>831A5B0B1525ED25007DA76A</string>
 											<string>831A5C9D1526445A007DA76A</string>
 											<string>831A5D0B1527320F007DA76A</string>
-											<string>831A5D1E15273EDE007DA76A</string>
-											<string>831A5D2115273EDE007DA76A</string>
-											<string>831A5D66152793B2007DA76A</string>
-											<string>831A5D67152793B2007DA76A</string>
-											<string>831A5D68152793B2007DA76A</string>
 											<string>831A5D7F152795E9007DA76A</string>
-											<string>831A5D8A152869CB007DA76A</string>
-											<string>831A5D8B152869CB007DA76A</string>
 											<string>831A5D8C152869CB007DA76A</string>
-											<string>831A5D9415286A1E007DA76A</string>
-											<string>831A5D9515286A1E007DA76A</string>
+											<string>831A5D9815287DBB007DA76A</string>
+											<string>831A5D9915287DBB007DA76A</string>
+											<string>831A5E531529C4D8007DA76A</string>
+											<string>831A5E671529C5B3007DA76A</string>
+											<string>831A5E681529C5B3007DA76A</string>
+											<string>831A5E6A1529C5B3007DA76A</string>
+											<string>831A5E6B1529C5B3007DA76A</string>
+											<string>831A5E831529C7EE007DA76A</string>
+											<string>831A5EA51529CBD2007DA76A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -401,18 +401,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {903, 394}}</string>
+								<string>{{0, 0}, {903, 386}}</string>
 								<key>RubberWindowFrame</key>
 								<string>75 59 1138 675 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>394pt</string>
+							<string>386pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>235pt</string>
+							<string>243pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -426,7 +426,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {903, 208}}</string>
+										<string>{{10, 27}, {903, 216}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -480,7 +480,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {903, 208}}</string>
+										<string>{{10, 27}, {903, 216}}</string>
 										<key>RubberWindowFrame</key>
 										<string>75 59 1138 675 0 0 1280 778 </string>
 									</dict>
@@ -510,11 +510,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>831A5D0E1527320F007DA76A</string>
+				<string>831A5E421529B308007DA76A</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>831A5D0F1527320F007DA76A</string>
+				<string>831A5E431529B308007DA76A</string>
 				<string>8323680814EC0081004220A6</string>
-				<string>831A5D101527320F007DA76A</string>
+				<string>831A5E441529B308007DA76A</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -663,14 +663,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>831A5D2715273EDE007DA76A</string>
+				<string>831A5E571529C4D8007DA76A</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>831A5D2815273EDE007DA76A</string>
-				<string>831A5D2915273EDE007DA76A</string>
-				<string>831A5D2A15273EDE007DA76A</string>
-				<string>831A5D2B15273EDE007DA76A</string>
-				<string>831A5D2C15273EDE007DA76A</string>
+				<string>831A5E581529C4D8007DA76A</string>
+				<string>831A5E591529C4D8007DA76A</string>
+				<string>831A5E5A1529C4D8007DA76A</string>
+				<string>831A5E5B1529C4D8007DA76A</string>
+				<string>831A5E5C1529C4D8007DA76A</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -704,9 +704,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>831A5D9715286A1E007DA76A</string>
-		<string>831A5D2E15273EDE007DA76A</string>
-		<string>831A5D2F15273EDE007DA76A</string>
+		<string>831A5EC21529CD19007DA76A</string>
+		<string>831A5E5D1529C4D8007DA76A</string>
+		<string>831A5E5E1529C4D8007DA76A</string>
 		<string>/Users/chris/Desktop/ofGIT_007/openFrameworks_dev/openFrameworks/projects_git/korea/testInteract2/testInteract.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

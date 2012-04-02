@@ -198,6 +198,13 @@ void testApp::keyReleased(int key){
 
 	if(key==OF_KEY_RIGHT) gui.viewportNum++;
 	if(key==OF_KEY_LEFT) gui.viewportNum--;
+	
+	if( key == 'h')
+	{
+		particles.hide();
+	}
+	if( key == 'H') particles.goBack();
+	
 }
 
 //--------------------------------------------------------------

@@ -14,6 +14,7 @@ public:
 
 	void runAway();
 	void goBack();
+	void hide();
 
 	vector<RibbonParticle> particles;
 	static ofxParameter<float> bbW,bbH,bbD,bbZ;

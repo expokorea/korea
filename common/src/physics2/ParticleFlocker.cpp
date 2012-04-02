@@ -53,7 +53,7 @@ void ParticleFlocker::update( float dt, vector<RibbonParticle> & particles )
 	
 	vector<int>availables;
 	for( int i = 0; i < particles.size(); i++)
-		if(!isLeader[i] && !isFollowing[i]) availables.push_back(i);
+		if(!isLeader[i] && !isFollowing[i] && particles[i].state != RibbonParticle::RunningAway) availables.push_back(i);
 	
 	if(availables.size() > 1)
 	{
