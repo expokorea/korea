@@ -17,6 +17,9 @@ void PSystem::setup(int numParticles)
 
 void PSystem::update(const ofVec3f & userPosition)
 {
+	cout << ofGetLastFrameTime() << endl;
+	RibbonParticle::depthAlphaMax = -99999;
+	RibbonParticle::depthAlphaMin = 99999;
 	bb = BoundingBox3D(userPosition.x,userPosition.y,userPosition.z,bbW,bbH,bbD);
 	field.update(ofGetLastFrameTime(),bb);
 	flocker.update(ofGetLastFrameTime(),particles);

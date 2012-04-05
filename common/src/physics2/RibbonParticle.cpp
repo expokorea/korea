@@ -488,12 +488,16 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	headMesh.getVertices()[2].set(trails[0] + right + dir);
 	headMesh.getVertices()[3].set(trails[0] - right + dir);
 
+	if (pos.z > depthAlphaMax) depthAlphaMax = pos.z;
+	if (pos.z < depthAlphaMin) depthAlphaMin = pos.z;
+	//cout << pos << endl;
+
 }
 
 void RibbonParticle::draw(){
 
-	float aplhaPct = ofMap(pos.z,-200,100,0,1);
-	ofSetColor(r,g,b,240*aplhaPct);
+	//float aplhaPct = ofMap(pos.z,depthAlphaMin,depthAlphaMax,0,1);
+	ofSetColor(255);
 
 	trailStrip.draw();
 	trailStripLineL.draw();
@@ -511,11 +515,10 @@ void RibbonParticle::draw(){
 
 void RibbonParticle::drawForGlow(){
 
-	float aplhaPct = ofMap(pos.z,-200,100,0,1);
-	ofSetColor(r,g,b,240*aplhaPct);
+	//float aplhaPct = ofMap(pos.z,-200,100,0,1);
+	ofSetColor(255);
 
 	trailStripForGlow.draw();
-	ofSetColor(20);
 	trailStripLineL.draw();
 	trailStripLineR.draw();
 	tex.getTextureReference().bind();
