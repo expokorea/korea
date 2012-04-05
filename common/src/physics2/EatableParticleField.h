@@ -15,7 +15,7 @@ public:
 	void draw();
 
 	ofVec3f getParticle(RibbonParticle * p);
-
+	
 	static ofxParameter<float> eatDistance;
 	static ofxParameter<int> r,g,b;
 	static ofxParameter<float> sameQuadrantProbability;

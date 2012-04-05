@@ -174,8 +174,14 @@ void RibbonParticle::setupTrails(){
 	for(int i=1; i<(int)trails.size();i++){
 		trails[i] = trails[i-1];
 		trails[i].x -= 4;
+		
 	}
-
+	
+	for(int i=0; i<(int)trails.size();i++){
+		float newThick = MIN( (float)thicknessMin,thisThickness + ofSignedNoise(i*.1)*thicknessMax);
+		trailThickness.push_back(newThick);
+	}
+	
 	for(int i=0; i<((int)trails.size())-1;i++){
 		float pct = float(trails.size()-i) / ((float)trails.size()*2) * .75 * 255;
 		trailStrip.setColor(i*2,ofColor(r,g,b,pct));
@@ -233,6 +239,7 @@ void RibbonParticle::setup(){
 	higlightCounter = 0;
 	jitterPhase = ofRandom(TWO_PI);
 	huntting = false;
+	hideAlpha = 1;
 
 	lengthMin.addListener(this,&RibbonParticle::lengthChanged);
 	lengthMax.addListener(this,&RibbonParticle::lengthChanged);
@@ -265,16 +272,24 @@ void RibbonParticle::flock(){
 	state = Flocking;
 }
 
+void RibbonParticle::hide(){
+	state = Hiding;
+}
+
 void RibbonParticle::setHuntting(bool _huntting){
 	huntting = _huntting;
 }
 
 void RibbonParticle::update(float dt,const BoundingBox3D & bb){
+	
+	
+	if(state != Hiding) hideAlpha = filter(hideAlpha,1.f,.1);
+	
 	if(state==RunningAway && target.distance(pos)>maxDistanceRunAway){
 		goBack();
 	}
 
-	if(state != RunningAway && state != Flocking){
+	if(state != RunningAway && state != Flocking && state != Hiding){
 		if(bb.inside(pos)){
 			state = TargetReached;
 		}else{
@@ -337,6 +352,14 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	case Flocking:{
 		accel = (target-pos).normalize() *-1 * dt * strengthRunnawayForce;
 	}break;
+	case Hiding:{
+		hideAlpha = filter(hideAlpha,0.f,.01);
+		if(target.distance(pos)<maxDistanceRunAway){
+			accel = (target-pos).normalize() *-1 * dt * strengthRunnawayForce;
+			accel.z = 0;//if(accel.z > 0 ) accel.z*=-1;
+			targetColor.set(255,255,255);
+		}
+	}break;
 	}
 
 	thisRGB = filter(thisRGB,targetColor,.3);
@@ -380,7 +403,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	trails.back()=next-diff;
 
 	// create some depth shading
-	float alphaPct = ofMap(pos.z,depthAlphaMin,depthAlphaMax,.25,1,true);
+	float alphaPct = ofMap(pos.z,depthAlphaMin,depthAlphaMax,.25,1,true) * hideAlpha;
 	
 	// hghlight effect
 	if(speedState==Fast){
@@ -456,7 +479,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 
 		ofVec3f dir = (p1 - p0).normalize();			// normalized direction vector from p0 to p1
 		ofVec3f right = dir.cross(up).normalize();	// right vector
-		right *= thisThickness;
+		right *= trailThickness[i];//thisThickness;
 		ofVec3f rightNotGlow = right * .5;
 
 
@@ -507,7 +530,7 @@ void RibbonParticle::draw(){
 	texturedStrip.draw();
 	tex.getTextureReference().unbind();
 
-	ofSetColor(thisRGB);
+	ofSetColor(thisRGB.r,thisRGB.g,thisRGB.b,thisRGB.a*hideAlpha);
 	head.getTextureReference().bind();
 	headMesh.draw();
 	head.getTextureReference().unbind();
@@ -524,7 +547,7 @@ void RibbonParticle::drawForGlow(){
 	tex.getTextureReference().bind();
 	texturedStrip.draw();
 	tex.getTextureReference().unbind();
-	ofSetColor(255);
+	ofSetColor(255,255,255,255*hideAlpha);
 	head.getTextureReference().bind();
 	headMesh.draw();
 	head.getTextureReference().unbind();

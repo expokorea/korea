@@ -53,7 +53,7 @@ void ParticleFlocker::update( float dt, vector<RibbonParticle> & particles )
 	
 	vector<int>availables;
 	for( int i = 0; i < particles.size(); i++)
-		if(!isLeader[i] && !isFollowing[i]) availables.push_back(i);
+		if(!isLeader[i] && !isFollowing[i] && particles[i].state != RibbonParticle::RunningAway) availables.push_back(i);
 	
 	if(availables.size() > 1)
 	{
@@ -110,11 +110,11 @@ void ParticleFlocker::draw( vector<RibbonParticle> & particles ){
 	
 	for( int i = 0; i < particles.size(); i++)
 	{
-		if( isFollowing[i] )
-		{
+		//if( isFollowing[i] )
+		//{
 			int mom = whoIFollow[i];
 			ofPoint meP = particles[i].getPos();
-			ofPoint momP = particles[mom].getPos();//particles[i].target;//
+			ofPoint momP = particles[i].target;//particles[mom].getPos();//
 			
 			//ofSetColor(255,0,0);
 			//ofSphere(meP,2);
@@ -126,7 +126,7 @@ void ParticleFlocker::draw( vector<RibbonParticle> & particles ){
 				glVertex3f(meP.x,meP.y,meP.z);
 				glVertex3f(momP.x,momP.y,momP.z);
 			glEnd();
-		}
+		//}
 	}
 }
 

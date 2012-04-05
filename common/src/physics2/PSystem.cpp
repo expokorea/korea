@@ -71,3 +71,8 @@ void PSystem::goBack(){
 	}
 }
 
+void PSystem::hide(){
+	for(int i=0;i<particles.size();i++){
+		particles[i].hide();
+	}
+}
