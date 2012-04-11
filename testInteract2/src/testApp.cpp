@@ -153,11 +153,11 @@ void testApp::update(){
 		for(int server=0;server<2;server++){
 			for(int i=0;i<1 && i<contoursClient.size(server);i++){
 				if(server){
-					gui.virtualMouseX = (1024-contoursClient.getBlobs(server)[i].pos.x)*fbo.getWidth()*.5/1024. + gui.offsetRight;
+					gui.virtualMouseX = (1-contoursClient.getBlobs(server)[i].pos.x)*fbo.getWidth()*.5 + gui.offsetRight;
 				}else{
-					gui.virtualMouseX = (1024-contoursClient.getBlobs(server)[i].pos.x)*fbo.getWidth()*.5/1024. - fbo.getWidth()*.5 + gui.offsetLeft;
+					gui.virtualMouseX = (1-contoursClient.getBlobs(server)[i].pos.x)*fbo.getWidth()*.5 - fbo.getWidth()*.5 + gui.offsetLeft;
 				}
-				gui.virtualMouseY = - fbo.getHeight()*.5;
+				gui.virtualMouseY = (contoursClient.getBlobs(server)[i].pos.y - .5) * - fbo.getHeight();
 				userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-1024);
 				if(contoursClient.getBlobs(server)[i].suddenChange){
 					particles[server].runAway();
