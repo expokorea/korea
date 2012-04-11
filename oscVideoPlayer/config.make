@@ -23,12 +23,12 @@ USER_LDFLAGS =
 # use this to add system libraries for example:
 # USER_LIBS = -lpango
  
-USER_LIBS = $(shell pkg-config avahi-client --libs)
+USER_LIBS = $(shell pkg-config avahi-client gstreamer-net-0.10 --libs)
 
 
 # change this to add different compiler optimizations to your project
 
-USER_COMPILER_OPTIMIZATION = -march=native -mtune=native -Os
+USER_COMPILER_OPTIMIZATION = -march=atom -mtune=atom -Os
 
 
 EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj,.git"

@@ -1,5 +1,8 @@
 <settings>
-<service>oscvideoplayermapping</service>
-<video>video.mov</video>
+<service>oscvideoplayerbotellas</service>
+<videofile>black-25fps.avi</videofile>
 <millistostartloop>2000</millistostartloop>
+<syncport>6667</syncport>
+<clockport>9999</clockport>
+<broadcast>192.168.1.255</broadcast>
 </settings>

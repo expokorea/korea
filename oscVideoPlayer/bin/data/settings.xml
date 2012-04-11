@@ -1,7 +1,9 @@
 <settings>
-<service>oscvideoplayermapping</service>
+<service>oscvideoplayerbotellas</service>
 <!-- service>oscvideoplayeryogurteras</service-->
 <!-- service>oscvideoplayerbotellas</service-->
-<videofile>video.mov</videofile>
+<videofile>black-25fps.avi</videofile>
+<syncport>6667</syncport>
+<netclock>0</netclock>
 <loop>0</loop>
 </settings>

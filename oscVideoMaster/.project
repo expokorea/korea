@@ -78,4 +78,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>ofxAvahiClient</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxAvahiClient</location>
+		</link>
+		<link>
+			<name>ofxOsc</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxOsc</location>
+		</link>
+	</linkedResources>
 </projectDescription>

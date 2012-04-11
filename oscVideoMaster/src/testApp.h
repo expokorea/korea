@@ -5,6 +5,8 @@
 #include "ofxAvahiClient.h"
 #include "OscPlayerClient.h"
 #include "ofxGui.h"
+#include "ofxOsc.h"
+#include <gst/net/gstnet.h>
 
 class testApp : public ofBaseApp{
 
@@ -25,14 +27,28 @@ class testApp : public ofBaseApp{
 
 		void newAvahiService(ofxAvahiService & service);
 		void removedAvahiService(ofxAvahiService & service);
+		void movieEOS(ofEventArgs & eos);
+
+		void initPipeline();
+		void resetPipeline();
+		void resetClock();
 
 		ofxXmlSettings xml;
 		ofVideoPlayer player;
 		vector<ofPtr<OscPlayerClient> > videoClients;
+		ofxOscSender oscSender;
+		ofxOscMessage stopMsg,playMsg;
 		ofxAvahiClientBrowser avahi;
+		ofxAvahiClientService avahiClock;
 		ofMutex mutex;
 		int playerFinishedMs;
 		int millistostartloop;
 		string servicename;
-
+		GstClock* clock;
+		GstElement * pipeline;
+		GstNetTimeProvider * netClock;
+		bool restartPipelineNextFrame;
+		string videoname;
+		ofPtr<ofGstVideoPlayer> gstPlayer;
+		int syncport, clockport;
 };

@@ -17,14 +17,14 @@ USER_CFLAGS = -I../common/src/comm
 # for example libraries like:
 # USER_LDFLAGS = libs/libawesomelib.a
 
-USER_LDFLAGS = $(shell pkg-config avahi-client --libs)
+USER_LDFLAGS = $(shell pkg-config avahi-client gstreamer-net-0.10 --libs)
 
 
 EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj"
 
 # change this to add different compiler optimizations to your project
 
-USER_COMPILER_OPTIMIZATION = -march=native -mtune=native -Os
+USER_COMPILER_OPTIMIZATION = -march=atom -mtune=atom -Os
 
 
 # android specific, in case you want to use different optimizations

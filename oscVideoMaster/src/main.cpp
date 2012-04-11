@@ -4,7 +4,7 @@
 
 //========================================================================
 int main( ){
-
+	ofSleepMillis(2000);
     ofAppGlutWindow window;
 	ofSetupOpenGL(&window, 1024,768, OF_GAME_MODE);			// <-------- setup the GL context
 
