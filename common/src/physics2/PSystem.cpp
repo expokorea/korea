@@ -1,6 +1,6 @@
 #include "PSystem.h"
 
-ofxParameter<float> PSystem::bbW,PSystem::bbH,PSystem::bbD,PSystem::bbZ;
+ofxParameter<float> PSystem::bbW,PSystem::bbH,PSystem::bbD,PSystem::bbZ,PSystem::bbY;
 ofxParameter<bool> PSystem::drawBB;
 
 void PSystem::setup(int numParticles)
@@ -13,14 +13,15 @@ void PSystem::setup(int numParticles)
 	flocker.setup(particles.size());
 }
 
+void PSystem::setUserPosition(const ofVec3f & _userPosition){
+	userPosition = _userPosition;
+}
 
 
-void PSystem::update(const ofVec3f & userPosition)
+void PSystem::update()
 {
-	cout << ofGetLastFrameTime() << endl;
-	RibbonParticle::depthAlphaMax = -99999;
-	RibbonParticle::depthAlphaMin = 99999;
-	bb = BoundingBox3D(userPosition.x,userPosition.y,userPosition.z,bbW,bbH,bbD);
+	//cout << ofGetLastFrameTime() << endl;
+	bb = BoundingBox3D(userPosition.x,bbY,userPosition.z,bbW,bbH,bbD);
 	field.update(ofGetLastFrameTime(),bb);
 	flocker.update(ofGetLastFrameTime(),particles);
 	for(int i=0;i<particles.size();i++){
@@ -55,7 +56,7 @@ void PSystem::drawForGlow()
 		particles[i].drawForGlow();
 	}
 	ofSetColor(RibbonParticle::r,RibbonParticle::g,RibbonParticle::b);
-	field.draw();
+	field.drawForGlow();
 }
 
 

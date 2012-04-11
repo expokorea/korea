@@ -25,6 +25,10 @@ static int randomDifferent(int low, int high, int old) {
 void EatableParticleField::setup(){
 	quadrants.resize(8);
 	state = Distributed;
+	//ofDisableArbTex();
+	dot.loadImage("dot.png");
+	//ofEnableArbTex();
+	//cout << "dot target" << dot.getTextureReference().getTextureData().textureTarget << endl;
 }
 
 void EatableParticleField::update(float dt, const BoundingBox3D & bb){
@@ -103,17 +107,66 @@ void EatableParticleField::update(float dt, const BoundingBox3D & bb){
 
 
 void EatableParticleField::draw(){
+	/*glEnable(GL_POINT_SPRITE);
+	glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+	//glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT);
+	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+	glPointSize(30);
+	dot.getTextureReference().bind();
+	//ofEnablePointSprites();
+	glBegin(GL_POINTS);
+	glVertex3f(ofGetMouseX(),ofGetMouseY(),0);*/
 	list<EatenParticle>::iterator it;
 	for(it=eatenParticles.begin();it!=eatenParticles.end();it++){
 		float alpha = it->life/it->maxLife * 255;
-		ofSetColor(r,g,b,alpha); 
-		ofCircle(it->pos,it->radius);
+		ofSetColor(r,g,b,alpha*.8);
+		//glVertex3f(it->pos.x,it->pos.y,0);//it->pos.z);
+		ofCircle(it->pos,it->radius*.8);
 	}
+	/*glEnd();
+	dot.getTextureReference().unbind();
+	ofDisablePointSprites();*/
+
+	/*for(it=eatenParticles.begin();it!=eatenParticles.end();it++){
+		float alpha = it->life/it->maxLife * 255;
+		ofSetColor(r,g,b,alpha);
+		ofCircle(it->pos,it->radius);
+	}*/
 	//ofSetColor(255,0,0);
 	//ofNoFill();
 	//bb3d.draw();
 }
 
+void EatableParticleField::drawForGlow(){
+	/*glEnable(GL_POINT_SPRITE);
+	glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+	//glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT);
+	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+	glPointSize(30);
+	dot.getTextureReference().bind();
+	//ofEnablePointSprites();
+	glBegin(GL_POINTS);
+	glVertex3f(ofGetMouseX(),ofGetMouseY(),0);*/
+	list<EatenParticle>::iterator it;
+	for(it=eatenParticles.begin();it!=eatenParticles.end();it++){
+		float alpha = it->life/it->maxLife * 255;
+		ofSetColor(r,g,b,alpha);
+		//glVertex3f(it->pos.x,it->pos.y,0);//it->pos.z);
+		ofCircle(it->pos,it->radius*1.3);
+	}
+	/*glEnd();
+	dot.getTextureReference().unbind();
+	ofDisablePointSprites();*/
+
+	/*for(it=eatenParticles.begin();it!=eatenParticles.end();it++){
+		float alpha = it->life/it->maxLife * 255;
+		ofSetColor(r,g,b,alpha);
+		ofCircle(it->pos,it->radius);
+	}*/
+	//ofSetColor(255,0,0);
+	//ofNoFill();
+	//bb3d.draw();
+}
 
 ofVec3f EatableParticleField::getParticle(RibbonParticle * p){
 	

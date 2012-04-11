@@ -2,3 +2,6 @@ ofxGui
 ofxXmlSettings
 ofxVideoRecorder
 ofxMaxim
+ofxFenster
+ofxOsc
+ofxAvahiClient

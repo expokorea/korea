@@ -206,6 +206,8 @@ void RibbonParticle::setupTrails(){
 void RibbonParticle::setup(){
 
 	thisThickness = ofRandom(thicknessMin,thicknessMax);
+	tTargetChanged = ofGetElapsedTimef();
+	thisSpeedFactor = 0;
 
 	trailStrip.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 	trailStripForGlow.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
@@ -261,7 +263,7 @@ void RibbonParticle::thicknessChanged(float & thickness){
 }
 
 void RibbonParticle::runAway(){
-	state = RunningAway;
+	if(state!=Hiding) state = RunningAway;
 }
 
 void RibbonParticle::goBack(){
@@ -403,7 +405,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	trails.back()=next-diff;
 
 	// create some depth shading
-	float alphaPct = ofMap(pos.z,depthAlphaMin,depthAlphaMax,.25,1,true) * hideAlpha;
+	float alphaPct = .75 * ofMap(pos.z,depthAlphaMin,depthAlphaMax,.80,1,true) * hideAlpha;
 	
 	// hghlight effect
 	if(speedState==Fast){
@@ -511,8 +513,8 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	headMesh.getVertices()[2].set(trails[0] + right + dir);
 	headMesh.getVertices()[3].set(trails[0] - right + dir);
 
-	if (pos.z > depthAlphaMax) depthAlphaMax = pos.z;
-	if (pos.z < depthAlphaMin) depthAlphaMin = pos.z;
+	/*if (pos.z > depthAlphaMax) depthAlphaMax = pos.z;
+	if (pos.z < depthAlphaMin) depthAlphaMin = pos.z;*/
 	//cout << pos << endl;
 
 }

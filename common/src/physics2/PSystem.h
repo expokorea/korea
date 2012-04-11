@@ -8,7 +8,8 @@
 class PSystem{
 public:
 	void setup(int numParticles);
-	void update(const ofVec3f & userPosition);
+	void setUserPosition(const ofVec3f & userPosition);
+	void update();
 	void draw();
 	void drawForGlow();
 
@@ -17,11 +18,12 @@ public:
 	void hide();
 
 	vector<RibbonParticle> particles;
-	static ofxParameter<float> bbW,bbH,bbD,bbZ;
+	static ofxParameter<float> bbW,bbH,bbD,bbZ,bbY;
 	static ofxParameter<bool> drawBB;
 
 private:
 	EatableParticleField field;
 	BoundingBox3D bb;
 	ParticleFlocker flocker;
+	ofVec3f userPosition;
 };

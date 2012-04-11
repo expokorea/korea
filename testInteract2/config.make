@@ -10,14 +10,18 @@ OF_ROOT = ../../..
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = -I../common/src/graphics -I../common/src/utils -I../common/src/physics2 -I../common/src/audio
+USER_CFLAGS = -I../common/src/graphics -I../common/src/utils -I../common/src/physics2 -I../common/src/audio  -I../common/src/comm
+
+#-I../glfw/include
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker
 # for example libraries like:
 # USER_LDFLAGS = libs/libawesomelib.a
 
-USER_LDFLAGS =
+USER_LDFLAGS = $(shell pkg-config avahi-client --libs)
+
+#../glfw/src/libglfw.a -lX11 -lXrandr -lXxf86vm 
 
 
 EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj"
@@ -26,7 +30,7 @@ EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj"
 
 USER_COMPILER_OPTIMIZATION = -march=native -mtune=native -Os
 
-USER_SOURCE_DIR = ../common/src/graphics ../common/src/utils ../common/src/physics2 ../common/src/audio
+USER_SOURCE_DIR = ../common/src/graphics ../common/src/utils ../common/src/physics2 ../common/src/audio ../common/src/comm
 
 # android specific, in case you want to use different optimizations
 USER_LIBS_ARM = 

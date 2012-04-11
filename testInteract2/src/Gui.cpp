@@ -15,6 +15,10 @@ void Gui::setGlow(Glow & _glow){
 	glow = &_glow;
 }
 
+void Gui::setContoursClient(OscContoursClient & _contoursClient){
+	contoursClient = &_contoursClient;
+}
+
 void Gui::setup(int x, int y){
 
 	guiParticles.setup("particles","settings.xml",x,y);
@@ -52,8 +56,12 @@ void Gui::setup(int x, int y){
 	guiPSystem.add(PSystem::bbH.set("bb height",540,0,2000));
 	guiPSystem.add(PSystem::bbD.set("bb depth",600,0,2000));
 	guiPSystem.add(PSystem::bbZ.set("bb z",-PSystem::bbD*.5,-1000,1000));
+	guiPSystem.add(PSystem::bbY.set("bb y",-768*.5,-1000,1000));
 	guiPSystem.add(PSystem::drawBB.set("drawBB",false));
+	guiPSystem.add(contoursClient->runAwaySensitivity.set("runAwaySensitivity",.90,.1,.99));
+	guiPSystem.add(contoursClient->runAwayFramesThreshold.set("runAwayFramesThreshold",30,5,60));
 	guiPSystem.add(ParticleFlocker::totalToFlock.set("total folllowing",5,0,20) );
+	guiPSystem.add(runawayEvents.set("runawayEvents",false));
 
 	guiField.setup("p. field","settings.xml",x+guiParticles.getWidth()+10,y + guiPSystem.getHeight()+10);
 	guiField.add(EatableParticleField::r.set("r",16,0,255));
@@ -67,8 +75,13 @@ void Gui::setup(int x, int y){
 	guiRender.add(viewportsInFbo.set("viewportsInFbo",true));
 	guiRender.add(drawViewports.set("drawViewports",true));
 	guiRender.add(drawOverlap.set("drawOverlap",true));
-	guiRender.add(drawOverlap.set("drawOverlapMarks",false));
+	guiRender.add(drawOverlapMarks.set("drawOverlapMarks",false));
 	guiRender.add(drawAllViewports.set("drawAllViewports",true));
+	guiRender.add(drawGrid.set("drawGrid",false));
+	guiRender.add(showVideo.set("showVideo",true));
+	guiRender.add(overlapVideo.set("overlapVideo",true));
+	guiRender.add(mouseUser.set("mouseUser",true));
+	guiRender.add(ratio.set("ratio",1600./(1024.*3.),.1,1));
 	guiRender.add(glow->passes.set("glow passes",4,0,6));
 	guiRender.add(viewportNum.set("viewport",0,0,2));
 	guiRender.add(overlap.set("overlap",152,0,200));
@@ -77,6 +90,8 @@ void Gui::setup(int x, int y){
 	guiRender.add(virtualMouseX.set("virtualMouseX",0,-2000,2000));
 	guiRender.add(virtualMouseY.set("virtualMouseY",60,-2000,2000));
 	guiRender.add(fov.set("fov",60,1,130));
+	guiRender.add(offsetLeft.set("offsetLeft",0,-1024,1024));
+	guiRender.add(offsetRight.set("offsetRight",0,-1024,1024));
 
 }
 

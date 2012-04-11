@@ -9,10 +9,12 @@
 #include "ofConstants.h"
 #include "ofxGui.h"
 #include "Glow.h"
+#include "OscContoursClient.h"
 
 class Gui {
 public:
 	void setGlow(Glow & glow);
+	void setContoursClient(OscContoursClient & contoursClient);
 	void setup(int x, int y);
 	void load(string file);
 	void draw();
@@ -32,10 +34,17 @@ public:
 	ofxParameter<bool> drawOverlap;
 	ofxParameter<bool> drawOverlapMarks;
 	ofxParameter<bool> drawAllViewports;
+	ofxParameter<bool> showVideo;
+	ofxParameter<bool> overlapVideo;
+	ofxParameter<float> ratio;
 	ofxParameter<float> virtualMouseX,virtualMouseY;
+	ofxParameter<float> offsetLeft,offsetRight;
 	ofxParameter<int> fov;
+	ofxParameter<bool> runawayEvents;
+	ofxParameter<bool> mouseUser;
 
 private:
 	Glow * glow;
+	OscContoursClient * contoursClient;
 };
 

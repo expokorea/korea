@@ -13,6 +13,7 @@ public:
 	void setup();
 	void update(float t, const BoundingBox3D & bb);
 	void draw();
+	void drawForGlow();
 
 	ofVec3f getParticle(RibbonParticle * p);
 	
@@ -41,6 +42,7 @@ private:
 
 	// 3d bounding box, 2 points: x,y,z  w,h,d
 	BoundingBox3D bb3d;
+	ofImage dot;
 
 	enum State{
 		Distributed,

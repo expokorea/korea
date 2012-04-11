@@ -6,6 +6,10 @@
 #include "PSystem.h"
 #include "ofxVideoRecorder.h"
 #include "Gui.h"
+#include "OscContoursClient.h"
+#include "VideoPlayer.h"
+#include "ofxOscSender.h"
+#include "Timming.h"
 
 //#define USE_AUDIO
 
@@ -31,11 +35,17 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		void record(bool & record);
+		void setupMeshes(float & ratio);
+
+		void particlesIn(bool & p);
+		void particlesOut(bool & p);
+		void mappingIn(bool & m);
 
 
 		Gui gui;
+		bool showGui;
 
-		PSystem particles;
+		vector<PSystem> particles;
 		ofCamera cam;
 		Glow glow;
 
@@ -48,11 +58,17 @@ class testApp : public ofBaseApp{
 
 		ofRectangle viewport;
 
-		float ratio;
 		vector<ofMesh> viewportQuads;
 		vector<ofMesh> eachViewportQuads;
+
+		VideoPlayer player;
 
 #ifdef USE_AUDIO
 		SoundManager soundManager;
 #endif
+
+		OscContoursClient contoursClient;
+
+		Timming timming;
+		ofxOscSender mappingOsc;
 };

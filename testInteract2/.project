@@ -85,6 +85,16 @@
 			<location>/home/arturo/Desktop/openFrameworks/apps/korea/common</location>
 		</link>
 		<link>
+			<name>glfw</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/apps/korea/glfw</location>
+		</link>
+		<link>
+			<name>ofxFenster</name>
+			<type>2</type>
+			<location>/home/arturo/Desktop/openFrameworks/addons/ofxFenster</location>
+		</link>
+		<link>
 			<name>ofxGui</name>
 			<type>2</type>
 			<location>/home/arturo/Desktop/openFrameworks/addons/ofxGui</location>
