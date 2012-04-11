@@ -16,8 +16,8 @@ public:
 	OscBlobServer();
 	OscBlobServer(string ip, int port, string host_name);
 
-	void newFrame(int frame);
-	void sendBlob(int id, const ofPoint & pos, float size);
+	void newFrame(int servernum, int frame);
+	void sendBlob(int servernum, int id, const ofPoint & pos, float size);
 
 };
 

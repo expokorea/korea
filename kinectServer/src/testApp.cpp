@@ -1,25 +1,8 @@
 #include "testApp.h"
 
 
-#define ANGLE_FROM_ACCEL 1
-
-#if ANGLE_FROM_PCL_GROUND_PLANE
-#undef Success
-#include "segmentation.h"
-#include "ofxPCL.h"
-#endif
-
 using namespace ofxCv;
-
-static ofMesh vertexData;
-
-
-bool insideBB3D(const ofPoint & p, const ofPoint & position, const ofPoint & size){
-	return p.x > position.x - size.x * .5 && p.x < position.x + size.x * .5 &&
-			p.y > position.y - size.y * .5 && p.y < position.y + size.y * .5 &&
-			p.z > position.z - size.z * .5 && p.z < position.z + size.z * .5;
-}
-
+ofMesh vertexData;
 //----------------------------------------
 void ofBox(ofVec3f size){
 	ofPushMatrix();
@@ -140,18 +123,13 @@ void MeshToPointCloud(const ofMesh & pc, int w, int h, ofMesh & mesh){
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	//ofSetLogLevel(OF_LOG_VERBOSE);
-	kinect.init(false,true,true);
-	kinect.setRegistration(true);
-	kinect.open();
+	ofSetLogLevel(OF_LOG_VERBOSE);
 
-	kinect.setDepthClipping(3000,6500);
+	kinects.push_back(new KinectController(0));
+	//kinects.push_back(new KinectController(1));
 
 	contourFinder.setMinAreaRadius(5);
 	contourFinder.setMaxAreaRadius(160*120/3);
-
-	oscConfig.setup(6667);
-	avahi.start("osckinectserverconfig","_oscit._udp",6667);
 
 
 	ofAddListener(avahiBrowser.serviceNewE,this,&testApp::newAvahiService);
@@ -159,72 +137,52 @@ void testApp::setup(){
 
 	avahiBrowser.lookup("_oscit._udp");
 
-	//ofSetFrameRate(40);
-	ofSetVerticalSync(true);
+	ofSetFrameRate(60);
+	ofSetVerticalSync(false);
 	frame = 0;
 
-	gui.setup("","settings.xml",1034,10);
-	gui.add(tilt.set("tilt",0,-31,31));
-	gui.add(farThreshold.set("farThreshold",0,0,1));
-	gui.add(nearThreshold.set("nearThreshold",1,0,1));
+	gui.setup("","settings.xml",1000,10);
 	gui.add(bbW.set("bbW",1024,0,10000));
 	gui.add(bbH.set("bbH",768,0,10000));
 	gui.add(bbD.set("bbD",1024,0,10000));
 	gui.add(bbX.set("bbX",512,0,6000));
 	gui.add(bbY.set("bbY",512,-3000,3000));
 	gui.add(bbZ.set("bbZ",512,0,6000));
-	gui.add(correctAngle.set("correctAngle",false));
-	gui.add(usePlayer.set("usePlayer",false));
-	gui.add(paused.set("paused",false));
-	gui.add(ortho.set("ortho",false));
-	gui.add(useFbo.set("useFbo",false));
-	gui.add(applyBB.set("applyBB",false));
-	gui.add(pitch.set("pitch",0,-180,180));
-	gui.add(roll.set("roll",0,-180,180));
-	gui.add(yaw.set("yaw",0,-180,180));
-	gui.add(rollZero.set("rollZero",0,-180,180));
-	gui.add(tiltZero.set("tiltZero",0,-180,180));
-	gui.add(cameraX.set("cameraX",0,-6000,2000));
-	gui.add(cameraY.set("cameraY",-3000,-6000,2000));
-	gui.add(cameraZ.set("cameraZ",-2500,-6000,2000));
+	//gui.add(ortho.set("ortho",false));
+	ortho = false;
+	gui.add(cameraX.set("cameraX",0,-10000,10000));
+	gui.add(cameraY.set("cameraY",-3000,-10000,2000));
+	gui.add(cameraZ.set("cameraZ",-2500,-10000,2000));
 	gui.add(vCameraTilt.set("cameraTilt",90,-180,180));
+	gui.add(useFbo.set("useFbo",false));
 	/*gui.add(minX.set("minX",2000,-2000,2000));
 	gui.add(minY.set("minY",2000,-2000,2000));
 	gui.add(minZ.set("minZ",2000,-2000,2000));
 	gui.add(maxX.set("maxX",0,-2000,2000));
 	gui.add(maxY.set("maxY",0,-2000,2000));
 	gui.add(maxZ.set("maxZ",0,-2000,2000));*/
-	gui.add(mainViewport.set("mainViewport",0,0,3));
-	gui.add(positionFilter.set("positionFilter",.2,0,1));
-	gui.add(sizeFilter.set("sizeFilter",.3,0,1));
-	gui.add(gpuFilterPasses.set("gpuFilterPasses",3,0,10));
+	//gui.add(mainViewport.set("mainViewport",0,0,3));
+	//gui.add(positionFilter.set("positionFilter",.2,0,1));
+	//gui.add(sizeFilter.set("sizeFilter",.3,0,1));
+	mainViewport = 0;
+	//gui.add(gpuFilterPasses.set("gpuFilterPasses",3,0,10));
+	gui.add(servernum.set("left/right",0,0,1));
 	gui.add(drawViewports.set("drawViewports",false));
+	gui.add(drawRGB.set("drawRGB",false));
+	gui.add(drawDepth.set("drawDepth",false));
+	gui.add(drawFbo.set("drawFbo",false));
 	gui.add(captureBgBtn.setup("captureBg"));
-	gui.add(rotZeroBtn.setup("set zero rotation"));
 	gui.add(fps.set("fps",60,0,120));
+	gui.loadFromFile("settings.xml");
 
-	recording = false;
-	usePlayer = false;
-	player.load("2012-03-05-16-50-52-613");
-
-	/*nearThresPix.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	farThresPix.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	thresPix.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	background.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	diff.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	thres8Bit.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	fg.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	gaussCurrent.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_GRAYSCALE);
-	rgbDepth.allocate(kinect.getWidth(), kinect.getHeight(), OF_IMAGE_COLOR);*/
 
 	captureBg = true;
 
-	tilt.addListener(this,&testApp::tiltChanged);
 	captureBgBtn.addListener(this,&testApp::captureBgPressed);
-	rotZeroBtn.addListener(this,&testApp::rotZeroPressed);
 
 
-	player.setLoop(true);
+	/*recording = false;
+	player.setLoop(true);*/
 
 	background.allocate(320,240, OF_IMAGE_GRAYSCALE);
 	thres8Bit.allocate(320,240, OF_IMAGE_GRAYSCALE);
@@ -239,44 +197,39 @@ void testApp::setup(){
 	ofBackground(0);
 
 
-	tracker.setMaximumAge(2);
+	//tracker.setMaximumAge(2);
 	/*bgSubstractor.history=10;
 	bgSubstractor.nmixtures=8;
 	bgSubstractor.backgroundRatio=.3;
 	bgSubstractor.noiseSigma = .1;*/
 
-	camTransform.setFov(58);
 	camTop.setFov(58);
 	camLeft.setFov(58);
 	camFront.setFov(58);
 
+	camTop.setNearClip(0);
+	camTop.setFarClip(15000);
 
-	mesh.setMode(OF_PRIMITIVE_POINTS);
-	mesh.setUsage(GL_STREAM_DRAW);
-	int step = 3;
-	for(int y = 0; y < 480; y +=step) {
-		for(int x = 0; x < 640; x +=step) {
-			mesh.addVertex(ofVec3f());
-			mesh.addTexCoord(ofVec2f(x,y));
-		}
-	}
+	camLeft.setNearClip(0);
+	camLeft.setFarClip(15000);
 
+	camFront.setNearClip(0);
+	camFront.setFarClip(15000);
+
+	bb3dShader.load("bb3d.vert","");
+	isFrameNew = false;
+
+	ofxXmlSettings settings;
+	settings.loadFile("settings.xml");
+	string serverip = settings.getValue("serverip","192.168.3.1");
+	int serverport = settings.getValue("serverport",5555);
+	oscContours.push_back(ofPtr<OscBlobServer>(new OscBlobServer(serverip,serverport,"yeosuserver1")));
 }
 
 void testApp::captureBgPressed(bool & pressed){
 	//background.set(0);
 	captureBg = true;
 }
-
-void testApp::rotZeroPressed(bool & pressed){
-	rollZero = roll.getValue();
-	tiltZero = pitch.getValue();
-}
-
-void testApp::tiltChanged(int & tilt){
-	kinect.setCameraTiltAngle(tilt);
-}
-
 
 void testApp::newAvahiService(ofxAvahiService & service){
 	ofLogVerbose() << "new service" << service.name << "at" << service.host_name << service.ip + ":" << service.port;
@@ -353,214 +306,21 @@ void testApp::removedAvahiService(ofxAvahiService & service){
 	}
 }*/
 
-template<class Kinect>
-void testApp::updateAnalisys(Kinect & kinect){
-
-	if(!paused) kinect.update();
-	if(paused || kinect.isFrameNew()){
-		static int counter = 0;
-		int w = 640;
-		int h = 480;
-
-#if ANGLE_FROM_ACCEL
-		//ofVec3f worldOffset(worldX,worldY,worldZ);
-		ofMatrix4x4 m = camTransform.getModelViewMatrix();;
-		int i = 0;
-		int step = 3;
-		for(int y = 0; y < h; y +=step) {
-			for(int x = 0; x < w; x +=step) {
-				const short & distance = kinect.getRawDepthPixelsRef()[x+y*w];
-				//if(distance > 0) {
-					ofVec3f v = kinect.getWorldCoordinateAt(x, y, distance);
-					if(correctAngle){
-						v = m*v;
-						//v += worldOffset;
-						/*v += ofVec3f(-ofGetViewportWidth()*.5,-ofGetViewportHeight()*.5,0);
-						v.rotate(pitch-tiltZero,ofVec3f(1,0,0));
-						v.rotate(roll-rollZero,ofVec3f(0,0,1));
-						v.rotate(yaw,ofVec3f(0,1,0));
-						v += ofVec3f(ofGetViewportWidth()*.5,ofGetViewportHeight()*.5,0);*/
-						/*if(v.x<minX) minX = v.x;
-						if(v.y<minY) minY = v.y;
-						if(v.z<minZ) minZ = v.z;
-						if(v.x>maxX) maxX = v.x;
-						if(v.y>maxY) maxY = v.y;
-						if(v.z>maxZ) maxZ = v.z;*/
-					}
-					if(!applyBB || insideBB3D(v,ofVec3f(bbX,bbY,bbZ), ofVec3f(bbW, bbH, bbD))){
-						mesh.getVertices()[i] = v;
-					}else{
-						mesh.getVertices()[i].set(0,0,0);
-					}
-				//}
-				i++;
-			}
-		}
-#elif ANGLE_FROM_PCL_GROUND_PLANE
-		pcl::PointCloud<pcl::PointXYZ>::Ptr pcPtr = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud<pcl::PointXYZ>);
-		for(int y = 0; y < h; y += step) {
-			for(int x = 0; x < w; x += step) {
-				//if(kinect.getDistanceAt(x, y) > 0) {
-					float z = kinect.getDistanceAt(x, y);
-					pcPtr->push_back(pcl::PointXYZ(x,y,z));
-				//}
-			}
-		}
-		pcPtr->width=640;
-		pcPtr->height=480;
-
-		pcl::ModelCoefficients::Ptr planeCoeffs = fitPlane<pcl::PointXYZ>(pcPtr,10,5);
-		plane.set(planeCoeffs->values[0],planeCoeffs->values[1],planeCoeffs->values[2],planeCoeffs->values[3]);
-
-		for(int i=0;i<pcPtr->points.size();i++){
-			ofVec3f v(pcPtr->points[i].x,pcPtr->points[i].y,pcPtr->points[i].z);
-			if(plane.distanceToPoint(v)>60)
-				mesh.addVertex( kinect.getWorldCoordinateAt(v.x, v.y, v.z) );
-		}
-
-		//pcPtr = findAndSubtractPlane<pcl::PointXYZ>(pcPtr,60,5);
-		//ofxPCL::toOf(pcPtr,mesh,1,1,1);
-#elif CV_ANALISYS
-		cv::Mat backgroundMat = toCv(background);
-		if(captureBg>0){
-			backgroundMat += toCv(kinect.getDistancePixelsRef());
-			captureBg--;
-		}else if(captureBg==0){
-			backgroundMat /= 10;
-			cv::GaussianBlur(backgroundMat,backgroundMat,Size(11,11),10);
-			captureBg=-1;
-		}else{
-			// difference threshold
-			cv::Mat diffMat = toCv(diff);
-			cv::Mat currentMat = toCv(kinect.getDistancePixelsRef());
-			cv::Mat gaussCurrentMat = toCv(gaussCurrent);
-			cv::GaussianBlur(currentMat,gaussCurrentMat,Size(11,11),10);
-			cv::absdiff(backgroundMat, gaussCurrentMat, diffMat);
-			//diffMat = toCv(background) - toCv(kinect.getDistancePixelsRef());
-			threshold(diff,thresPix,.001);
-			thres8Bit = thresPix;
-
-			cv::Mat kernel;
-			cv::Mat thresMat = toCv(thres8Bit);
-			cv::Point anchor(-1,-1);
-			erode(toCv(thres8Bit),thresMat,kernel,anchor,10);
-
-			dilate(toCv(thres8Bit),thresMat,kernel,anchor,5);
-
-
-			cv::Mat fgMat = toCv(fg);
-			bgSubstractor(toCv(thres8Bit),fgMat);
-			contourFinder.findContours(fg);
-
-			for(int i=0;i<oscContours.size();i++){
-				oscContours[i]->newFrame(frame);
-			}
-
-
-			polylines = contourFinder.getPolylines();
-			for(int i=0;i<(int)polylines.size();i++){
-				ofPoint centroid = polylines[i].getCentroid2D();
-				polylines[i] = polylines[i].getResampledByCount(16);
-				float z = kinect.getDistanceAt(centroid);
-				for(int j=0;j<oscContours.size();j++){
-					oscContours[j]->sendBlob(polylines[i],z);
-				}
-			}
-			frame++;
-
-			if(recording){
-
-				//convertColor(kinect.getDepthPixelsRef(),rgbDepth,CV_GRAY2RGB);
-				recorder.addFrame(kinect.getRawDepthPixelsRef());
-			}
-		}
-#endif
-	}
-}
 
 //--------------------------------------------------------------
 void testApp::update(){
+	isFrameNew  = false;
 	fps = ofGetFrameRate();
-	camTransform.resetTransform();
-	camTransform.tilt(pitch-tiltZero);
-	camTransform.roll(roll-rollZero);
-	camTransform.pan(yaw);
-
-	if(usePlayer){
-		updateAnalisys(player);
-	}else{
-		updateAnalisys(kinect);
-		pitch = pitch*.9 + .1*kinect.getPitch();
-		roll = roll*.9 + .1*kinect.getRoll();
+	for(int i=0;i<kinects.size();i++){
+		kinects[i]->update(bbX,  bbY,  bbZ,  bbW,  bbH,  bbD);
+		isFrameNew |= kinects[i]->isFrameNew();
 	}
-
-	while(oscConfig.hasWaitingMessages()){
-		ofxOscMessage msg;
-		oscConfig.getNextMessage(&msg);
-
-		if(msg.getAddress()=="tilt" && tilt!=msg.getArgAsInt32(0)){
-			tilt=msg.getArgAsInt32(0);
-			kinect.setCameraTiltAngle(tilt);
-		}else if(msg.getAddress()=="farThreshold"){
-			farThreshold=msg.getArgAsInt32(0);
-		}else if(msg.getAddress()=="nearThreshold"){
-			nearThreshold=msg.getArgAsInt32(0);
-		}else if(msg.getAddress()=="record"){
-			recording = msg.getArgAsInt32(0);
-			if(recording && !usePlayer){
-				recorder.setup(ofGetTimestampString(),kinect.getWidth(),kinect.getHeight(),30,true,OF_IMAGE_FORMAT_PNG,16);
-			}else{
-				//recorder.encodeVideo();
-			}
-		}else if(msg.getAddress()=="player"){
-			usePlayer = msg.getArgAsInt32(0);
-			if(usePlayer){
-				player.load("2012-03-05-16-50-52-613");
-			}
-		}else if(msg.getAddress()=="clipping"){
-			float nearClip = msg.getArgAsFloat(0);
-			float farClip = msg.getArgAsFloat(1);
-			if(usePlayer) player.setDepthClipping(nearClip,farClip);
-			else kinect.setDepthClipping(nearClip,farClip);
-		}
-	}
-}
-
-void testApp::drawPointCloud() {
-	glPointSize(3);
-	ofPushMatrix();
-	// the projected points are 'upside down' and 'backwards'
-	ofScale(1, 1, -1);
-	//ofTranslate(0, 0, -1000); // center the points a bit
-	if(!useFbo)
-		kinect.getTextureReference().bind();
-	mesh.draw();
-	if(!useFbo)
-		kinect.getTextureReference().unbind();
-	ofPopMatrix();
-}
-
-float trackingDistance(const testApp::Blob& a, const testApp::Blob& b) {
-	float dx = a.pos.x - b.pos.x;
-	float dy = a.pos.y - b.pos.y;
-	return sqrtf(dx * dx + dy * dy);
-}
-
-void testApp::drawScene(float xRot, bool drawBB){
-	glEnable(GL_DEPTH_TEST);
-	drawPointCloud();
-	glDisable(GL_DEPTH_TEST);
-
-}
-
-//--------------------------------------------------------------
-void testApp::draw(){
-
 	float w=1024,h=768;
 
 	//camTransform.setupPerspective(true,58);
 
-	if(drawViewports){
+	if(isFrameNew && drawViewports){
+
 		glEnable(GL_DEPTH_TEST);
 		ofPushView();
 		fboViewportFront.begin(false);
@@ -576,14 +336,31 @@ void testApp::draw(){
 			ofSetColor(255);
 		}
 		//glMultMatrixf(camTransform.getModelViewMatrix().getPtr());
-		drawPointCloud();
+		for(int i=0;i<(int)kinects.size();i++){
+			if(kinects[i]->applyBB){
+				bb3dShader.begin();
+				bb3dShader.setUniformMatrix4f("m",kinects[i]->camTransform.getModelViewMatrix());
+				bb3dShader.setUniform1f("x1",bbX-bbW*.5);
+				bb3dShader.setUniform1f("y1",bbY-bbH*.5);
+				bb3dShader.setUniform1f("z1",bbZ-bbD*.5);
+				bb3dShader.setUniform1f("x2",bbX+bbW*.5);
+				bb3dShader.setUniform1f("y2",bbY+bbH*.5);
+				bb3dShader.setUniform1f("z2",bbZ+bbD*.5);
+				bb3dShader.setUniform1i("useColor",kinects[i]->useColor);
+			}
+			kinects[i]->drawPointCloud();
+			if(kinects[i]->applyBB){
+				bb3dShader.end();
+			}
+
+		}
 		camFront.end();
 		fboViewportFront.end();
 		ofPopView();
 		glDisable(GL_DEPTH_TEST);
 
 
-		if(mainViewport==1) fboViewportFront.draw(0,0,1024,768);
+
 
 		glEnable(GL_DEPTH_TEST);
 		ofPushView();
@@ -602,8 +379,8 @@ void testApp::draw(){
 		camLeft.truck(-6000);
 		camLeft.pan(-vCameraTilt);
 		camLeft.begin();
-		camTop.draw();
-		camFront.draw();
+		//camTop.draw();
+		//camFront.draw();
 		if(!useFbo){
 			ofSetColor(255,0,0);
 			ofNoFill();
@@ -613,16 +390,30 @@ void testApp::draw(){
 		//glMultMatrixf(camTransform.getModelViewMatrix().getPtr());
 		//ofTranslate(camFront.getPosition());
 		ofBox(30);
-		drawPointCloud();
+		for(int i=0;i<kinects.size();i++){
+			if(kinects[i]->applyBB){
+				bb3dShader.begin();
+				bb3dShader.setUniformMatrix4f("m",kinects[i]->camTransform.getModelViewMatrix());
+				bb3dShader.setUniform1f("x1",bbX-bbW*.5);
+				bb3dShader.setUniform1f("y1",bbY-bbH*.5);
+				bb3dShader.setUniform1f("z1",bbZ-bbD*.5);
+				bb3dShader.setUniform1f("x2",bbX+bbW*.5);
+				bb3dShader.setUniform1f("y2",bbY+bbH*.5);
+				bb3dShader.setUniform1f("z2",bbZ+bbD*.5);
+				bb3dShader.setUniform1i("useColor",kinects[i]->useColor);
+			}
+			kinects[i]->drawPointCloud();
+			if(kinects[i]->applyBB){
+				bb3dShader.end();
+			}
+		}
 		camLeft.end();
 		fboViewportLeft.end();
 		ofPopView();
 		glDisable(GL_DEPTH_TEST);
 
-		if(mainViewport==3) fboViewportLeft.draw(0,0,1024,768);
-	}
 
-	if(drawViewports || useFbo){
+
 
 		glEnable(GL_DEPTH_TEST);
 		ofPushView();
@@ -642,8 +433,8 @@ void testApp::draw(){
 		camTop.truck(cameraX);
 		camTop.tilt(-vCameraTilt);
 		camTop.begin();
-		camLeft.draw();
-		camFront.draw();
+		//camLeft.draw();
+		//camFront.draw();
 		if(!useFbo){
 			ofSetColor(255,0,0);
 			ofNoFill();
@@ -653,20 +444,36 @@ void testApp::draw(){
 		//glMultMatrixf(camTransform.getModelViewMatrix().getPtr());
 		//ofTranslate(camFront.getPosition());
 		ofBox(30);
-		drawPointCloud();
+		for(int i=0;i<kinects.size();i++){
+			if(kinects[i]->applyBB){
+				bb3dShader.begin();
+				bb3dShader.setUniformMatrix4f("m",kinects[i]->camTransform.getModelViewMatrix());
+				bb3dShader.setUniform1f("x1",bbX-bbW*.5);
+				bb3dShader.setUniform1f("y1",bbY-bbH*.5);
+				bb3dShader.setUniform1f("z1",bbZ-bbD*.5);
+				bb3dShader.setUniform1f("x2",bbX+bbW*.5);
+				bb3dShader.setUniform1f("y2",bbY+bbH*.5);
+				bb3dShader.setUniform1f("z2",bbZ+bbD*.5);
+				bb3dShader.setUniform1i("useColor",kinects[i]->useColor);
+			}
+			kinects[i]->drawPointCloud();
+			if(kinects[i]->applyBB){
+				bb3dShader.end();
+			}
+		}
 		camTop.end();
 		fboViewportTop.end();
 		ofPopView();
 		glDisable(GL_DEPTH_TEST);
 
-		if(mainViewport==2) fboViewportTop.draw(0,0,1024,768);
 	}
+
 
 
 	ofSetColor(255);
 
-	if(useFbo){
-		for(int i=1;i<gpuFilterPasses;i++){
+	if(isFrameNew && useFbo && drawViewports){
+		/*for(int i=1;i<gpuFilterPasses;i++){
 			fbo.begin(true);
 			ofClear(0);
 			fboViewportTop.draw(0,0,fbo.getWidth(),fbo.getHeight());
@@ -682,7 +489,7 @@ void testApp::draw(){
 
 
 		cv::Mat backgroundMat = toCv(background);
-		if(captureBg && !paused){
+		if(captureBg){
 			cv::Mat kernel;
 			cv::Mat thresMat = toCv(thres8Bit);
 			cv::Point anchor(-1,-1);
@@ -690,16 +497,59 @@ void testApp::draw(){
 			dilate(thresMat,thresMat,kernel,anchor,4);
 			cv::threshold(thresMat,backgroundMat, 1, 255, THRESH_BINARY);
 			captureBg = false;
-		}
+		}*/
 
-		cv::Mat kernel;
+		/*cv::Mat kernel;
 		cv::Mat thresMat = toCv(thres8Bit);
 		/*cv::Point anchor(-1,-1);
 		erode(thresMat,thresMat,kernel,anchor,1);
 		dilate(thresMat,thresMat,kernel,anchor,3);*/
-		thresMat = thresMat - backgroundMat;
-		cv::threshold(thresMat,thresMat, 1, 255, THRESH_BINARY);
+		/*thresMat = thresMat - backgroundMat;
+		cv::threshold(thresMat,thresMat, 1, 255, THRESH_BINARY);*/
 
+		fbo2.begin();
+		fboViewportFront.draw(0,0,fbo2.getWidth(),fbo2.getHeight());
+		fbo2.end();
+	}
+
+	if(isFrameNew && useFbo && !drawViewports){
+		glEnable(GL_DEPTH_TEST);
+		ofPushView();
+		fbo2.begin(false);
+		ofClear(0);
+		ofViewport(0,0,320,240);
+		//camFront.disableOrtho();
+		//camFront.setupPerspective(true,58);
+		camFront.begin();
+		/*ofTranslate(512,384);
+		ofScale(fbo2.getWidth()/w,fbo2.getHeight()/h,1);
+		ofTranslate(-512,-384);*/
+		//glMultMatrixf(camTransform.getModelViewMatrix().getPtr());
+		for(int i=0;i<(int)kinects.size();i++){
+			if(kinects[i]->applyBB){
+				bb3dShader.begin();
+				bb3dShader.setUniformMatrix4f("m",kinects[i]->camTransform.getModelViewMatrix());
+				bb3dShader.setUniform1f("x1",bbX-bbW*.5);
+				bb3dShader.setUniform1f("y1",bbY-bbH*.5);
+				bb3dShader.setUniform1f("z1",bbZ-bbD*.5);
+				bb3dShader.setUniform1f("x2",bbX+bbW*.5);
+				bb3dShader.setUniform1f("y2",bbY+bbH*.5);
+				bb3dShader.setUniform1f("z2",bbZ+bbD*.5);
+				bb3dShader.setUniform1i("useColor",kinects[i]->useColor);
+			}
+			kinects[i]->drawPointCloud();
+			if(kinects[i]->applyBB){
+				bb3dShader.end();
+			}
+		}
+		camFront.end();
+		fbo2.end();
+		ofPopView();
+		glDisable(GL_DEPTH_TEST);
+	}
+
+	if(isFrameNew && useFbo){
+		fbo2.readToPixels(thres8Bit);
 
 		contourFinder.findContours(thres8Bit);
 
@@ -707,31 +557,65 @@ void testApp::draw(){
 		polylines = contourFinder.getPolylines();
 		blobs.resize(polylines.size());
 		for(int i=0;i<(int)polylines.size();i++){
-			blobs[i].pos = polylines[i].getCentroid2D()*ofVec2f(1024/320,768/240);
-			blobs[i].size = polylines[i].getPerimeter()/TWO_PI;
+			blobs[i].pos = polylines[i].getCentroid2D();
+			blobs[i].size = polylines[i].getBoundingBox().height;///TWO_PI;
+			blobs[i].index = i;
 		}
 		tracker.track(blobs);
-		for(int i=0;i<(int)polylines.size();i++){
+		/*for(int i=0;i<(int)polylines.size();i++){
 			if(tracker.existsPrevious(tracker.getLabelFromIndex(i))){
 				tracker.getCurrent(tracker.getLabelFromIndex(i)).pos = tracker.getPrevious(tracker.getLabelFromIndex(i)).pos *(1-positionFilter) + tracker.getCurrent(tracker.getLabelFromIndex(i)).pos *positionFilter;
 				tracker.getCurrent(tracker.getLabelFromIndex(i)).size = tracker.getPrevious(tracker.getLabelFromIndex(i)).size *(1-sizeFilter) + tracker.getCurrent(tracker.getLabelFromIndex(i)).size *sizeFilter;
 			}
-		}
+		}*/
 
-
+		ofNoFill();
 		for(int i=0;i<oscContours.size();i++){
-			oscContours[i]->newFrame(frame);
+			oscContours[i]->newFrame(servernum,frame);
 		}
 
 		const vector<unsigned int> & labels = tracker.getCurrentLabels();
-		for(int i=0;i<(int)labels.size();i++){
-			const Blob & blob = tracker.getCurrent(tracker.getLabelFromIndex(i));
-			for(int j=0;j<oscContours.size();j++){
-				oscContours[j]->sendBlob(labels[i], blob.pos, blob.size);
+		if(!labels.empty()){
+			int label=9999;
+			for(int i=0;i<labels.size();i++){
+				if(labels[i]<label && tracker.getAge(labels[i])>2) label=labels[i];
+			}
+			if(label!=9999){
+				const Blob & blob = tracker.getCurrent(label);
+				int index = tracker.getIndexFromLabel(label);
+
+				ofPoint centroid = blob.pos;
+				float x = centroid.x;
+				float diff = 0;
+				for(int j=0;j<polylines[index].size();j++){
+					if(fabs(polylines[index][j].x-centroid.x)>diff){
+						diff =fabs(polylines[index][j].x-centroid.x);
+						x = polylines[index][j].x;
+					}
+				}
+				centroid = ofPoint(x,centroid.y)*ofVec2f(1024/320,768/240);
+				for(int j=0;j<oscContours.size();j++){
+					oscContours[j]->sendBlob(servernum, label, centroid, blob.size);
+				}
 			}
 		}
 		frame++;
 
+	}
+}
+
+float trackingDistance(const testApp::Blob& a, const testApp::Blob& b) {
+	float dx = a.pos.x - b.pos.x;
+	float dy = a.pos.y - b.pos.y;
+	return sqrtf(dx * dx + dy * dy);
+}
+
+
+//--------------------------------------------------------------
+void testApp::draw(){
+
+
+	if(useFbo){
 		for(int i=0;i<(int)polylines.size();i++){
 			if(tracker.getAge(tracker.getLabelFromIndex(i))>2){
 				const Blob & blob = tracker.getCurrent(tracker.getLabelFromIndex(i));
@@ -740,30 +624,34 @@ void testApp::draw(){
 				ofDrawBitmapString(ofToString(tracker.getLabelFromIndex(i)),blob.pos);
 			}
 		}
-
-		ofSetColor(255);
 	}
-
 	ofSetColor(255);
 
 	if(drawViewports){
-		ofFill();
+		/*ofFill();
 		ofEnableAlphaBlending();
 		ofSetColor(255,150);
 		ofRect(ofGetWidth()-340,0,340,ofGetHeight());
 		ofDisableAlphaBlending();
-		ofNoFill();
+		ofNoFill();*/
 
 		ofSetColor(255);
-		ofDrawBitmapString("front",ofGetWidth()-330,15);
-		ofRect(ofGetWidth()-330,20,320,240);
-		fboViewportFront.draw(ofGetWidth()-330,20,320,240);
+		ofDrawBitmapString("front",20,15);
+		ofRect(19,19,482,322);
+		fboViewportFront.draw(20,20,480,320);
 
-		ofDrawBitmapString("top",ofGetWidth()-330,275);
-		ofRect(ofGetWidth()-330,280,320,240);
-		fboViewportTop.draw(ofGetWidth()-330,280,320,240);
+		ofDrawBitmapString("top",510,15);
+		ofRect(509,19,482,322);
+		fboViewportTop.draw(510,20,480,320);
 
-		ofDrawBitmapString("fbo",ofGetWidth()-330,550);
+		ofDrawBitmapString("left",20,355);
+		ofRect(19,359,482,322);
+		fboViewportLeft.draw(20,360,480,320);
+		if(mainViewport==1) fboViewportFront.draw(0,0,1024,768);
+		if(mainViewport==3) fboViewportLeft.draw(0,0,1024,768);
+		if(mainViewport==2) fboViewportTop.draw(0,0,1024,768);
+
+		/*ofDrawBitmapString("fbo",ofGetWidth()-330,550);
 		fbo2.draw(ofGetWidth()-330,550,fbo.getWidth(),fbo.getHeight());
 
 
@@ -774,18 +662,47 @@ void testApp::draw(){
 
 		ofDrawBitmapString("diff thresh",ofGetWidth()-330+fbo.getWidth()+10,550);
 		texThres.loadData(thres8Bit);
-		texThres.draw(ofGetWidth()-330+fbo.getWidth()+10,550,fbo.getWidth(),fbo.getHeight());
+		texThres.draw(ofGetWidth()-330+fbo.getWidth()+10,550,fbo.getWidth(),fbo.getHeight());*/
 
 
-		ofDrawBitmapString("depth img",ofGetWidth()-330+fbo.getWidth()+10,550+fbo.getHeight()+20);
-		if(usePlayer){
-			player.drawDepth(ofGetWidth()-330+fbo.getWidth()+10,550+fbo.getHeight()+20,fbo.getWidth(),fbo.getHeight());
-		}else{
-			kinect.drawDepth(ofGetWidth()-330+fbo.getWidth()+10,550+fbo.getHeight()+20,fbo.getWidth(),fbo.getHeight());
-		}
+		/*ofDrawBitmapString("depth img",ofGetWidth()-330+fbo.getWidth()+10,550+fbo.getHeight()+20);
+		for(int i=0;i<kinects.size();i++){
+			kinects[i]->drawDepth(ofGetWidth()-330+fbo.getWidth()+10,550+(fbo.getHeight()+20)*(i+1),fbo.getWidth(),fbo.getHeight());
+		}*/
+	}
+
+	if(drawFbo){
+		ofDrawBitmapString("kinect0 fbo",510,355);
+		ofRect(509,359,322,242);
+		fbo2.draw(510,360);
+	}
+
+	if(drawRGB){
+		ofSetColor(255);
+		ofDrawBitmapString("kinect0",20,15);
+		ofRect(19,19,482,322);
+		kinects[0]->drawRGB(20,20,480,320);
+
+		ofDrawBitmapString("kinect1",510,15);
+		ofRect(509,19,482,322);
+		kinects[1]->drawRGB(510,20,480,320);
+	}
+
+	if(drawDepth){
+		ofSetColor(255);
+		ofDrawBitmapString("kinect0",20,355);
+		ofRect(19,359,482,322);
+		kinects[0]->drawDepth(20,360,480,320);
+
+		ofDrawBitmapString("kinect1",510,355);
+		ofRect(509,359,482,322);
+		kinects[1]->drawDepth(510,360,480,320);
 	}
 
 	gui.draw();
+	for(int i=0;i<kinects.size();i++){
+		kinects[i]->drawGui();
+	}
 }
 
 //--------------------------------------------------------------

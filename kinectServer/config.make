@@ -10,7 +10,7 @@ OF_ROOT = ../../..
 # for example search paths like:
 # USER_CFLAGS = -I src/objects
 
-USER_CFLAGS = -I../common/src/comm $(shell pkg-config pcl_common-1.5 pcl_surface-1.5 pcl_filters-1.5 openni-dev eigen3 --cflags)
+USER_CFLAGS = -I../common/src/comm -I../common/src/kinect $(shell pkg-config pcl_common-1.5 pcl_surface-1.5 pcl_filters-1.5 openni-dev eigen3 --cflags)
 
 
 # USER_LDFLAGS allows to pass custom flags to the linker
@@ -28,9 +28,9 @@ USER_LIBS = $(shell pkg-config avahi-client --libs) -lusb-1.0 -lpcl_surface -lpc
 
 # change this to add different compiler optimizations to your project
 
-USER_COMPILER_OPTIMIZATION = -march=native -mtune=native -Os -ffast-math
+USER_COMPILER_OPTIMIZATION = -march=atom -mtune=atom -Os -ffast-math
 
 
 EXCLUDE_FROM_SOURCE="bin,.xcodeproj,obj,.git"
 
-USER_SOURCE_DIR = ../common/src/comm
+USER_SOURCE_DIR = ../common/src/comm ../common/src/kinect

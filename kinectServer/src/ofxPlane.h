@@ -165,6 +165,19 @@ public:
 	ofxPlane getTranslated(const ofVec3f & t){
 		return *this + t;
 	}
+
+	ofQuaternion getRotation(const ofxPlane & p2) const{
+		ofVec3f N1 = getNormal();
+		ofVec3f N2 = p2.getNormal();
+		N1.normalize(), N2.normalize();
+		ofVec3f M = N1+N2;
+		M.normalize();
+		ofVec3f axis = M.cross(N2);
+		float angle = M.dot(N2);
+		ofQuaternion q(angle, ofVec3f(axis.x, axis.y, axis.x));
+		q.normalize();
+		return q;
+	}
 };
 
 #endif /* OFXPLANE_H_ */

@@ -1,15 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxKinect.h"
 #include "ofxCv.h"
-#include "ofxOsc.h"
-#include "ofxAvahiClient.h"
 #include "OscContourServer.h"
 #include "ofxVideoRecorder.h"
-#include "ofxKinectSequencePlayer.h"
 #include "ofxGui.h"
 #include "ofxPlane.h"
+#include "KinectController.h"
 
 class testApp : public ofBaseApp{
 
@@ -17,10 +14,7 @@ class testApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-		void drawPointCloud();
 
-		template<class Kinect>
-		void updateAnalisys(Kinect & kinect);
 
 		void keyPressed  (int key);
 		void keyReleased(int key);
@@ -33,69 +27,51 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 
+		void captureBgPressed(bool & pressed);
+
 		void newAvahiService(ofxAvahiService & service);
 		void removedAvahiService(ofxAvahiService & service);
 
-		void tiltChanged(int & tilt);
-		void captureBgPressed(bool & pressed);
-		void rotZeroPressed(bool & pressed);
+		/*ofxKinectSequencePlayer player;
+		ofxVideoRecorder recorder;
+		bool recording;*/
 
-		void drawScene(float xRot,bool drawBB);
+		vector<KinectController*> kinects;
 
-		ofxKinect kinect;
-		ofxKinectSequencePlayer player;
 		vector<ofPolyline> polylines;
 		vector<ofPtr<OscBlobServer> > oscContours;
-		ofxOscReceiver oscConfig;
-		ofxAvahiClientService avahi;
 		ofxAvahiClientBrowser avahiBrowser;
 
 		ofxCv::ContourFinder contourFinder;
 
 		/*cv::BackgroundSubtractorMOG bgSubstractor;*/
 		int frame;
-
-		ofxParameter<int> tilt;
-		ofxParameter<float> farThreshold;
-		ofxParameter<float> nearThreshold;
 		ofxParameter<float> bbW, bbH, bbD, bbX, bbY, bbZ;
-		ofxParameter<bool> correctAngle;
-		ofxParameter<bool> usePlayer;
-		ofxParameter<bool> paused;
 		ofxParameter<bool> ortho;
-		ofxParameter<float> pitch, roll, yaw;
-		ofxParameter<float> cameraX, cameraY, cameraZ;
-		ofxParameter<int> vCameraTilt;
-		ofxParameter<float> maxX, maxY, maxZ;
-		ofxParameter<float> minX, minY, minZ;
-		ofxParameter<bool> useFbo;
-		ofxParameter<bool> applyBB;
 		ofxParameter<int> gpuFilterPasses;
 		ofxParameter<float> positionFilter, sizeFilter;
-		ofxParameter<float> rollZero, tiltZero;
+		ofxParameter<float> cameraX, cameraY, cameraZ;
+		ofxParameter<int> vCameraTilt;
 		ofxParameter<bool> drawViewports;
+		ofxParameter<bool> drawRGB;
+		ofxParameter<bool> drawDepth;
+		ofxParameter<bool> drawFbo;
+		ofxParameter<bool> drawContours;
 		ofxParameter<int> mainViewport;
+		ofxParameter<bool> useFbo;
 		ofxParameter<int> fps;
-		ofxButton captureBgBtn, rotZeroBtn;
+		ofxParameter<int> servernum;
+		ofxButton captureBgBtn;
 		ofxPanel gui;
-
-
 
 		ofPixels nearThresPix, farThresPix, rgbDepth;
 		ofPixels background, diff, gaussCurrent;
 		ofPixels thres8Bit;
 		ofTexture texThres, bgTex;
 
-
-		ofxVideoRecorder recorder;
-		bool recording;
-
 		bool captureBg;
 
-		ofCamera camFront,camTop,camLeft,camTransform;
-		ofVboMesh mesh;
-		ofxPlane plane;
-		bool planeFound;
+		ofCamera camFront,camTop,camLeft;
 
 		ofFbo fbo, fbo2, fboViewportFront, fboViewportTop, fboViewportLeft;
 
@@ -103,8 +79,13 @@ class testApp : public ofBaseApp{
 		struct Blob{
 			ofPoint pos;
 			float size;
+			int index;
+			int getIndex(){return index;}
 		};
 		ofxCv::Tracker<Blob> tracker;
 		vector<Blob> blobs;
+
+		ofShader bb3dShader;
+		bool isFrameNew;
 
 };
