@@ -8,6 +8,7 @@
  */
 
 #include "ParticleFlocker.h"
+#include "EatableParticleField.h"
 
 ofxParameter<int>ParticleFlocker::totalToFlock;
 
@@ -32,6 +33,13 @@ void ParticleFlocker::update( float dt, vector<RibbonParticle> & particles )
 		else isFollowing[i] = false;
 	}
 	
+	for(int i=0;i<particles.size();i++){
+		if(isFollowing[i] && particles[i].getPos().squareDistance(particles[i].target)<EatableParticleField::eatDistance){
+			isFollowing[i] = false;
+			followingTime[i] = 0;
+		}
+	}
+
 	for( int i = 0; i < isLeader.size(); i++) isLeader[i] = false;
 	
 	for( int i = 0; i < isFollowing.size(); i++)
@@ -112,6 +120,7 @@ void ParticleFlocker::draw( vector<RibbonParticle> & particles ){
 	{
 		//if( isFollowing[i] )
 		//{
+		if(!isFollowing[i]) continue;
 			int mom = whoIFollow[i];
 			ofPoint meP = particles[i].getPos();
 			ofPoint momP = particles[i].target;//particles[mom].getPos();//
@@ -122,10 +131,7 @@ void ParticleFlocker::draw( vector<RibbonParticle> & particles ){
 			//ofSphere(momP,2);
 			
 			ofSetColor(255,255,255);
-			glBegin(GL_LINES);
-				glVertex3f(meP.x,meP.y,meP.z);
-				glVertex3f(momP.x,momP.y,momP.z);
-			glEnd();
+			ofLine(meP,momP);
 		//}
 	}
 }
