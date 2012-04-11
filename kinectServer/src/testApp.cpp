@@ -593,7 +593,7 @@ void testApp::update(){
 						x = polylines[index][j].x;
 					}
 				}
-				centroid = ofPoint(x,centroid.y)*ofVec2f(1024/320,768/240);
+				centroid = ofPoint(x,centroid.y)*ofVec2f(1./320.,1./240.);
 				for(int j=0;j<oscContours.size();j++){
 					oscContours[j]->sendBlob(servernum, label, centroid, blob.size);
 				}
