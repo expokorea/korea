@@ -38,7 +38,7 @@ class testApp : public ofBaseApp{
 		void setupMeshes(float & ratio);
 
 		void particlesIn(bool & p);
-		void particlesOut(bool & p);
+		void particlesOut(int & t);
 		void mappingIn(bool & m);
 
 

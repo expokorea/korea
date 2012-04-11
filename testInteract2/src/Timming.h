@@ -19,14 +19,26 @@ public:
 	void update();
 
 	ofEvent<bool> particlesIn;
-	ofEvent<bool> particlesOut;
+	ofEvent<int> particlesOut;
 	ofEvent<bool> mappingIn;
 
+	struct ParticlesOutEvent{
+		ParticlesOutEvent(int s, int t):seconds(s),target(t){}
+		int seconds;
+		int target;
+
+		bool operator>=(int t){
+			return seconds>=t;
+		}
+		bool operator<(int t){
+			return seconds<t;
+		}
+	};
 private:
 	VideoPlayer * player;
 	ofxXmlSettings times;
 	vector<int> timesParticlesin;
-	vector<int> timesParticlesout;
+	vector<ParticlesOutEvent> timesParticlesout;
 	vector<int> timesMappingin;
 	float prevTime;
 };

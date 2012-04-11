@@ -32,7 +32,7 @@ public:
 	void flock();
 	void runAway();
 	void goBack();
-	void hide();
+	void hide(const ofVec3f & target);
 	void setHuntting(bool huntting);
 	State getState(){
 		return state;

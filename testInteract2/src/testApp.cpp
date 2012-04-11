@@ -56,7 +56,7 @@ void testApp::setup(){
 
 
 	for(int i=0;i<particles.size();i++){
-		particles[i].hide();
+		//particles[i].hide(ofVec3f(0,0-2000));
 	}
 
 	showGui = true;
@@ -120,9 +120,15 @@ void testApp::particlesIn(bool & p){
 	}
 }
 
-void testApp::particlesOut(bool & p){
-	for(int i=0;i<particles.size();i++){
-		particles[i].hide();
+void testApp::particlesOut(int & t){
+	if(t==1){
+		for(int i=0;i<particles.size();i++){
+			particles[i].hide(ofVec3f(500*(i*2-1),0,-300));
+		}
+	}else{
+		for(int i=0;i<particles.size();i++){
+			particles[i].hide(ofVec3f(500*(i*2-1),0,300));
+		}
 	}
 }
 
@@ -144,8 +150,8 @@ void testApp::update(){
 	ofVec3f userPos;
 	if(gui.mouseUser){
 		gui.virtualMouseX = float(mouseX)/gui.ratio - fbo.getWidth()*.5;
-				gui.virtualMouseY = - fbo.getHeight()*.5;//float(mouseY)/ratio - fbo.getHeight()*.5;
-				userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-1024);
+		gui.virtualMouseY = - fbo.getHeight()*.5;//float(mouseY)/ratio - fbo.getHeight()*.5;
+		userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-1024);
 		particles[0].setUserPosition(userPos);
 		particles[1].setUserPosition(userPos);
 	}else{
@@ -325,7 +331,7 @@ void testApp::keyReleased(int key){
 	{
 
 		for(int i=0;i<particles.size();i++){
-			particles[i].hide();
+			particles[i].hide(ofVec3f(500*(i*2-1),0,-300));
 		}
 	}
 	if( key == 'H')

@@ -204,7 +204,6 @@ void RibbonParticle::setupTrails(){
 }
 
 void RibbonParticle::setup(){
-
 	thisThickness = ofRandom(thicknessMin,thicknessMax);
 	tTargetChanged = ofGetElapsedTimef();
 	thisSpeedFactor = 0;
@@ -274,7 +273,8 @@ void RibbonParticle::flock(){
 	state = Flocking;
 }
 
-void RibbonParticle::hide(){
+void RibbonParticle::hide(const ofVec3f & _target){
+	target = _target;
 	state = Hiding;
 }
 
@@ -283,7 +283,7 @@ void RibbonParticle::setHuntting(bool _huntting){
 }
 
 void RibbonParticle::update(float dt,const BoundingBox3D & bb){
-	
+	//cout << state << endl;
 	
 	if(state != Hiding) hideAlpha = filter(hideAlpha,1.f,.1);
 	
@@ -352,15 +352,16 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		targetColor.set(255,255,255);
 	}break;
 	case Flocking:{
-		accel = (target-pos).normalize() *-1 * dt * strengthRunnawayForce;
+		//accel = (target-pos).normalize() * dt * strengthRunnawayForce;
 	}break;
 	case Hiding:{
-		hideAlpha = filter(hideAlpha,0.f,.01);
-		if(target.distance(pos)<maxDistanceRunAway){
+		hideAlpha = filter(hideAlpha,0.f,.06);
+		accel = (target-pos).normalize() * dt * strengthRunnawayForce;
+		targetColor.set(255,255,255);
+		/*if(target.distance(pos)<maxDistanceRunAway){
 			accel = (target-pos).normalize() *-1 * dt * strengthRunnawayForce;
 			accel.z = 0;//if(accel.z > 0 ) accel.z*=-1;
-			targetColor.set(255,255,255);
-		}
+		}*/
 	}break;
 	}
 

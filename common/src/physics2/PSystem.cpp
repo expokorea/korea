@@ -21,11 +21,11 @@ void PSystem::setUserPosition(const ofVec3f & _userPosition){
 void PSystem::update()
 {
 	//cout << ofGetLastFrameTime() << endl;
-	bb = BoundingBox3D(userPosition.x,bbY,userPosition.z,bbW,bbH,bbD);
+	bb = BoundingBox3D(userPosition.x,userPosition.y,userPosition.z,bbW,bbH,bbD);
 	field.update(ofGetLastFrameTime(),bb);
 	flocker.update(ofGetLastFrameTime(),particles);
 	for(int i=0;i<particles.size();i++){
-		if(!flocker.getIsFollowing(i))
+		if(!flocker.getIsFollowing(i) && !(particles[i].state==RibbonParticle::Hiding))
 			particles[i].target.set(field.getParticle(&particles[i]));
 		particles[i].update(ofGetLastFrameTime(),bb);
 	}
@@ -72,8 +72,8 @@ void PSystem::goBack(){
 	}
 }
 
-void PSystem::hide(){
+void PSystem::hide(const ofVec3f & target){
 	for(int i=0;i<particles.size();i++){
-		particles[i].hide();
+		particles[i].hide(target);
 	}
 }
