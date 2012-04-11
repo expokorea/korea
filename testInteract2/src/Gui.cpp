@@ -90,8 +90,10 @@ void Gui::setup(int x, int y){
 	guiRender.add(virtualMouseX.set("virtualMouseX",0,-2000,2000));
 	guiRender.add(virtualMouseY.set("virtualMouseY",60,-2000,2000));
 	guiRender.add(fov.set("fov",60,1,130));
-	guiRender.add(offsetLeft.set("offsetLeft",0,-1024,1024));
-	guiRender.add(offsetRight.set("offsetRight",0,-1024,1024));
+	guiRender.add(minLeft.set("minLeft",0,-3000,0));
+	guiRender.add(maxLeft.set("maxLeft",0,-500,1024));
+	guiRender.add(minRight.set("minRight",0,-500,1024));
+	guiRender.add(maxRight.set("maxRight",0,0,3000));
 
 }
 

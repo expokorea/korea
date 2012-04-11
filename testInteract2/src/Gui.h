@@ -38,7 +38,7 @@ public:
 	ofxParameter<bool> overlapVideo;
 	ofxParameter<float> ratio;
 	ofxParameter<float> virtualMouseX,virtualMouseY;
-	ofxParameter<float> offsetLeft,offsetRight;
+	ofxParameter<float> minLeft,maxLeft,minRight,maxRight;
 	ofxParameter<int> fov;
 	ofxParameter<bool> runawayEvents;
 	ofxParameter<bool> mouseUser;

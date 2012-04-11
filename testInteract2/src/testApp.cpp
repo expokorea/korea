@@ -153,9 +153,9 @@ void testApp::update(){
 		for(int server=0;server<2;server++){
 			for(int i=0;i<1 && i<contoursClient.size(server);i++){
 				if(server){
-					gui.virtualMouseX = (1-contoursClient.getBlobs(server)[i].pos.x)*fbo.getWidth()*.5 + gui.offsetRight;
+					gui.virtualMouseX = ofMap((1-contoursClient.getBlobs(server)[i].pos.x),0,1,gui.minRight,gui.maxRight);//*fbo.getWidth()*.5 + gui.offsetRight;
 				}else{
-					gui.virtualMouseX = (1-contoursClient.getBlobs(server)[i].pos.x)*fbo.getWidth()*.5 - fbo.getWidth()*.5 + gui.offsetLeft;
+					gui.virtualMouseX = ofMap((1-contoursClient.getBlobs(server)[i].pos.x),0,1,gui.minLeft,gui.maxLeft);//*fbo.getWidth()*.5 - fbo.getWidth()*.5 + gui.offsetLeft;
 				}
 				gui.virtualMouseY = (contoursClient.getBlobs(server)[i].pos.y - .5) * - fbo.getHeight();
 				userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-1024);
