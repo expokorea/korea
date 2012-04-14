@@ -1,0 +1,7 @@
+ofxKinect
+ofxAvahiClient
+ofxGui
+ofxXmlSettings
+ofxVideoRecorder
+ofxPCL
+ofxOsc

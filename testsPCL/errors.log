@@ -1,0 +1,1574 @@
+In file included from /usr/include/eigen3/Eigen/Core:250:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:375:2: error: #error The preprocessor symbol 'Success' is defined, possibly by the X11 header file X.h
+In file included from /usr/include/eigen3/Eigen/Core:250:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:382:3: error: expected identifier before numeric constant
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:382:3: error: expected ‘}’ before numeric constant
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:382:3: error: expected unqualified-id before numeric constant
+In file included from /usr/include/eigen3/Eigen/Core:251:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:41:42: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:41:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:46:56: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:46:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:47:55: error: ‘LvalueBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:47:55: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:139:20: nota:   ‘Eigen::LvalueBit’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:48:58: error: ‘DirectWriteAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:48:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:322:3: nota:   ‘Eigen::DirectWriteAccessors’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:48:81: error: ‘DirectAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:48:81: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:320:3: nota:   ‘Eigen::DirectAccessors’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:49:58: error: ‘WriteAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:49:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:318:3: nota:   ‘Eigen::WriteAccessors’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:49:81: error: ‘ReadOnlyAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:49:81: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:316:3: nota:   ‘Eigen::ReadOnlyAccessors’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:67:25: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:67:25: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:78:54: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:78:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:79:54: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:79:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:80:29: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:80:29: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:95:42: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:95:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:95:65: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:95:65: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:98:40: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:98:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:123:77: error: ‘WriteAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:123:77: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:318:3: nota:   ‘Eigen::WriteAccessors’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:123:94: error: ‘ReadOnlyAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:123:94: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:316:3: nota:   ‘Eigen::ReadOnlyAccessors’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:126:46: error: ‘Unaligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:126:46: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:198:3: nota:   ‘Eigen::Unaligned’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:37: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:37: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:55: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:55: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:75: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:75: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:93: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:147:93: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+In file included from /usr/include/eigen3/Eigen/Core:251:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:208:25: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:208:25: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:219:54: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:219:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:220:54: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:220:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:221:29: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:221:29: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:228:47: error: ‘BothDirections’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:228:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:223:3: nota:   ‘Eigen::BothDirections’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:238:54: error: ‘ColPivHouseholderQRPreconditioner’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:238:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:369:3: nota:   ‘Eigen::ColPivHouseholderQRPreconditioner’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:239:42: error: ‘Lower’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:239:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:175:3: nota:   ‘Eigen::Lower’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:240:42: error: ‘Lower’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:240:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:175:3: nota:   ‘Eigen::Lower’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:241:62: error: ‘OnTheLeft’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:241:62: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:278:3: nota:   ‘Eigen::OnTheLeft’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:274:41: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:274:41: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:275:56: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:275:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:276:58: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:276:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:277:58: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:277:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+In file included from /usr/include/eigen3/Eigen/Core:253:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:71:51: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:71:51: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:71:58: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:99:25: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:99:25: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:100:54: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:100:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:101:54: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:101:54: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:102:29: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:102:29: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:110:43: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:110:43: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:110:56: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:110:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:111:43: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:111:43: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:111:56: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:111:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:122:31: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:122:31: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:122:42: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:122:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:123:42: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:123:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:123:62: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:123:62: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:127:23: error: ‘DontAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:127:23: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:271:3: nota:   ‘Eigen::DontAlign’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:145:11: error: ‘AlignedBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:145:11: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:155:20: nota:   ‘Eigen::AlignedBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:146:80: error: ‘PacketAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:146:80: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:89:20: nota:   ‘Eigen::PacketAccessBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:18: error: ‘LinearAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:18: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:125:20: nota:   ‘Eigen::LinearAccessBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:36: error: ‘LvalueBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:36: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:139:20: nota:   ‘Eigen::LvalueBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:48: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:48: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:66: error: ‘NestByRefBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:150:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:157:20: nota:   ‘Eigen::NestByRefBit’
+In file included from /usr/include/eigen3/Eigen/Core:253:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:155:24: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:155:24: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:155:42: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:155:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:155:53: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:155:53: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:17: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:17: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:47: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:61: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:61: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:72: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:174:72: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:17: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:17: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:47: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:61: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:61: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:72: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:185:72: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:237:44: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:237:44: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:237:55: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:237:55: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:255:44: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:255:44: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:255:55: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:255:55: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:285:29: error: ‘NestByRefBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:285:29: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:157:20: nota:   ‘Eigen::NestByRefBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:319:49: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:319:49: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:321:47: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:321:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:322:23: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:322:23: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:328:34: error: ‘EvalBeforeNestingBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:328:34: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:66:20: nota:   ‘Eigen::EvalBeforeNestingBit’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:333:3: error: el argumento de plantilla 1 es inválido
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:409:57: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:409:57: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:411:57: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:411:57: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:424:58: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:424:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:426:58: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:426:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:438:22: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:438:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:438:22: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:438:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:438:22: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:438:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:439:26: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:441:80: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:441:80: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:442:79: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:442:79: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:455:55: error: ‘LvalueBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:455:55: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:139:20: nota:   ‘Eigen::LvalueBit’
+In file included from /usr/include/eigen3/Eigen/Core:255:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h: En el constructor ‘internal::aligned_stack_memory_handler<T>::aligned_stack_memory_handler(T*, size_t, bool)’:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:498:9: error: ‘construct_elements_of_array’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:498:9: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:330:32: nota:   ‘internal::construct_elements_of_array’
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h: En el destructor ‘internal::aligned_stack_memory_handler<T>::~aligned_stack_memory_handler()’:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:503:9: error: ‘destruct_elements_of_array’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:503:9: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:339:34: nota:   ‘internal::destruct_elements_of_array’
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:503:54: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:505:9: error: ‘aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:505:9: nota: alternativas sugeridas:
+/usr/include/pcl-1.5/pcl/pcl_macros.h:343:1: nota:   ‘aligned_free’
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:224:13: nota:   ‘internal::aligned_free’
+In file included from /usr/include/eigen3/Eigen/Core:257:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:152:46: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:152:46: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:152:56: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:152:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:153:46: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:153:46: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:153:56: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:153:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:154:46: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:154:46: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:154:56: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NumTraits.h:154:56: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+In file included from /usr/include/eigen3/Eigen/Core:258:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::sqrt_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:443:5: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:443:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:443:5: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::exp_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:488:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:488:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:488:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::log_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:489:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:489:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:489:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::sin_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:490:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:490:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:490:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::cos_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:491:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:491:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:491:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::tan_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:492:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:492:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:492:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::asin_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:493:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:493:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:493:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::acos_default_impl<Scalar, true>::run(const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:494:1: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:494:1: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:494:1: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h: En la función miembro static ‘static Scalar internal::atan2_default_impl<Scalar, true>::run(const Scalar&, const Scalar&)’:
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:516:5: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:516:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:516:5: error: ‘::THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES’ no se ha declarado
+In file included from /usr/include/eigen3/Eigen/Core:259:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h: En la función ‘Packet internal::ploadt(const typename internal::unpacket_traits<Packet>::type*)’:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:293:18: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:293:18: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h: En la función ‘void internal::pstoret(Scalar*, const Packet&)’:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:304:18: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:304:18: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+In file included from /usr/include/eigen3/Eigen/Core:264:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h: En la función miembro ‘internal::Packet2cf internal::conj_helper<__vector(4) float, internal::Packet2cf, false, false>::pmul(const Packet4f&, const internal::Packet2cf&) const’:
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:224:22: error: ‘pmul’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:224:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:126:1: nota:   ‘internal::pmul’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h: En la función miembro ‘internal::Packet2cf internal::conj_helper<internal::Packet2cf, __vector(4) float, false, false>::pmul(const internal::Packet2cf&, const Packet4f&) const’:
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:233:22: error: ‘pmul’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:233:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:126:1: nota:   ‘internal::pmul’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h: En la función miembro ‘internal::Packet1cd internal::conj_helper<__vector(2) double, internal::Packet1cd, false, false>::pmul(const Packet2d&, const internal::Packet1cd&) const’:
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:420:22: error: ‘pmul’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:420:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:126:1: nota:   ‘internal::pmul’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h: En la función miembro ‘internal::Packet1cd internal::conj_helper<internal::Packet1cd, __vector(2) double, false, false>::pmul(const internal::Packet1cd&, const Packet2d&) const’:
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:429:22: error: ‘pmul’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:429:22: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:126:1: nota:   ‘internal::pmul’
+In file included from /usr/include/eigen3/Eigen/Core:276:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:47:31: error: ‘ReadOnlyAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:47:31: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:316:3: nota:   ‘Eigen::ReadOnlyAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:47:48: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:287:32: error: ‘WriteAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:287:32: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:318:3: nota:   ‘Eigen::WriteAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:287:46: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:287:82: error: ‘ReadOnlyAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:287:82: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:316:3: nota:   ‘Eigen::ReadOnlyAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:287:99: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:579:32: error: ‘DirectAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:579:32: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:320:3: nota:   ‘Eigen::DirectAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:579:47: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:579:83: error: ‘ReadOnlyAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:579:83: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:316:3: nota:   ‘Eigen::ReadOnlyAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:579:100: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:649:32: error: ‘DirectWriteAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:649:32: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:322:3: nota:   ‘Eigen::DirectWriteAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:649:52: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:650:37: error: ‘WriteAccessors’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:650:37: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:318:3: nota:   ‘Eigen::WriteAccessors’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:650:51: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h: En la función ‘typename Derived::Index internal::first_aligned(const Derived&)’:
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:735:39: error: ‘AlignedBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:735:39: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:155:20: nota:   ‘Eigen::AlignedBit’
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:735:73: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h:735:73: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+In file included from /usr/include/eigen3/Eigen/Core:277:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:170:33: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:170:33: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+In file included from /usr/include/eigen3/Eigen/Core:277:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:247:137: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:286:5: error: ‘Transpose’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:297:32: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:298:44: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:329:15: error: ‘Sequential_t’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:333:15: error: ‘Sequential_t’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:459:35: error: ‘Horizontal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:459:35: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:220:3: nota:   ‘Eigen::Horizontal’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:459:45: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:460:47: error: ‘Horizontal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:460:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:220:3: nota:   ‘Eigen::Horizontal’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:460:57: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:461:35: error: ‘Vertical’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:461:35: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:217:3: nota:   ‘Eigen::Vertical’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:461:43: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:462:47: error: ‘Vertical’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:462:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:217:3: nota:   ‘Eigen::Vertical’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:462:55: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:490:29: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:490:29: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:490:37: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:490:37: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:490:44: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:490:44: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:492:30: error: ‘BothDirections’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:492:30: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:223:3: nota:   ‘Eigen::BothDirections’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:492:44: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:493:42: error: ‘BothDirections’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:493:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:223:3: nota:   ‘Eigen::BothDirections’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:493:56: error: el argumento de plantilla 2 es inválido
+In file included from /usr/include/eigen3/Eigen/src/Core/DenseBase.h:499:0,
+                 from /usr/include/eigen3/Eigen/Core:277,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:38:70: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:38:70: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:38:90: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:39:82: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:39:82: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:39:102: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:41:24: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:41:24: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:41:89: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:42:36: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:42:36: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:42:101: error: el argumento de plantilla 2 es inválido
+In file included from /usr/include/eigen3/Eigen/src/Core/DenseBase.h:499:0,
+                 from /usr/include/eigen3/Eigen/Core:277,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:69:21: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:69:21: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:75:33: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:75:33: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:93:21: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:93:21: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:99:33: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:99:33: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:139:21: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:139:21: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:145:33: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:145:33: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:184:21: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:184:21: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:190:33: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:190:33: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:229:21: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:229:21: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:235:33: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:235:33: error: el argumento de plantilla 3 es inválido
+In file included from /usr/include/eigen3/Eigen/Core:277:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h: En la función miembro ‘DenseBase<Derived>::CoeffReturnType DenseBase<Derived>::value() const’:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:448:7: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:448:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:448:7: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:448:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:448:7: error: ‘::THIS_METHOD_IS_ONLY_FOR_1x1_EXPRESSIONS’ no se ha declarado
+In file included from /usr/include/eigen3/Eigen/src/Core/DenseBase.h:499:0,
+                 from /usr/include/eigen3/Eigen/Core:277,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘int DenseBase<Derived>::block(DenseBase<Derived>::Index, DenseBase<Derived>::Index, DenseBase<Derived>::Index, DenseBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:71:23: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:71:23: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘const int DenseBase<Derived>::block(DenseBase<Derived>::Index, DenseBase<Derived>::Index, DenseBase<Derived>::Index, DenseBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:77:29: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:77:29: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘int DenseBase<Derived>::topRightCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:95:23: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:95:23: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘const int DenseBase<Derived>::topRightCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:101:29: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:101:29: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘int DenseBase<Derived>::topLeftCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:141:23: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:141:23: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘const int DenseBase<Derived>::topLeftCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:147:29: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:147:29: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘int DenseBase<Derived>::bottomRightCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:186:23: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:186:23: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘const int DenseBase<Derived>::bottomRightCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:192:29: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:192:29: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘int DenseBase<Derived>::bottomLeftCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:231:23: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:231:23: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h: En la función miembro ‘const int DenseBase<Derived>::bottomLeftCorner(DenseBase<Derived>::Index, DenseBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:237:29: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/../plugins/BlockMethods.h:237:29: error: el argumento de plantilla 3 es inválido
+In file included from /usr/include/eigen3/Eigen/Core:277:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h: En la función miembro ‘void DenseBase<Derived>::evalTo(Dest&) const’:
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:520:7: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:520:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/DenseBase.h:520:7: error: ‘::THE_EVAL_EVALTO_FUNCTION_SHOULD_NEVER_BE_CALLED_FOR_DENSE_OBJECTS’ no se ha declarado
+In file included from /usr/include/eigen3/Eigen/Core:278:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:108:27: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:108:27: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:108:27: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:108:27: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:108:27: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:108:27: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:27: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:27: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:27: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:27: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:27: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:27: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:78: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:78: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:78: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:78: error: el argumento de plantilla 5 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:109:78: error: el argumento de plantilla 6 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:17: error: ‘AutoAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:17: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:269:3: nota:   ‘Eigen::AutoAlign’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:63: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:63: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:77: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:77: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:88: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:125:88: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:139:95: error: ‘ColMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:139:95: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:265:3: nota:   ‘Eigen::ColMajor’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:139:103: error: el argumento de plantilla 4 es inválido
+In file included from /usr/include/eigen3/Eigen/src/Core/MatrixBase.h:150:0,
+                 from /usr/include/eigen3/Eigen/Core:278,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:34:1: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:34:1: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:34:1: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:42:1: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:42:1: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:42:1: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:57:18: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:57:18: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:57:50: error: expected ‘,’ or ‘...’ before ‘<’ token
+In file included from /usr/include/eigen3/Eigen/src/Core/MatrixBase.h:152:0,
+                 from /usr/include/eigen3/Eigen/Core:278,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:37:20: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:37:20: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:37:52: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:56:18: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:56:18: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:56:50: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:75:21: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:75:21: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:75:53: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:89:16: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:89:16: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:89:48: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:103:16: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:103:16: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:103:48: error: expected ‘,’ or ‘...’ before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:117:21: error: ‘MatrixBase’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:117:21: error: ISO C++ prohíbe la declaración de ‘parameter’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:117:53: error: expected ‘,’ or ‘...’ before ‘<’ token
+In file included from /usr/include/eigen3/Eigen/Core:278:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:203:53: error: ‘OnTheRight’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:203:53: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:280:3: nota:   ‘Eigen::OnTheRight’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:203:63: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:204:67: error: invalid type in declaration before ‘;’ token
+In file included from /usr/include/eigen3/Eigen/Core:278:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:243:38: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:243:38: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:243:45: error: el argumento de plantilla 1 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:244:43: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:244:43: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:244:50: error: el argumento de plantilla 1 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:314:21: error: ‘MatrixBase’ no es un miembro de ‘Eigen’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:314:21: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:86:34: nota:   ‘MatrixBase’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:314:21: error: ‘MatrixBase’ no es un miembro de ‘Eigen’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:314:21: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:86:34: nota:   ‘MatrixBase’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:314:39: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:377:26: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:378:27: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:395:26: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:407:88: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:416:22: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:421:66: error: ‘Vertical’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:421:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:217:3: nota:   ‘Eigen::Vertical’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:421:75: error: ‘Horizontal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:421:75: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:220:3: nota:   ‘Eigen::Horizontal’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:427:41: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:427:41: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:427:51: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:427:51: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+In file included from /usr/include/eigen3/Eigen/src/Core/MatrixBase.h:150:0,
+                 from /usr/include/eigen3/Eigen/Core:278,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<internal::scalar_difference_op<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::operator-(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:34:1: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<internal::scalar_sum_op<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::operator+(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:42:1: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<CustomBinaryOp, const Derived, const OtherDerived> MatrixBase<Derived>::binaryExpr(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:59:86: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/CommonCwiseBinaryOps.h:59:103: error: ‘func’ no se declaró en este ámbito
+In file included from /usr/include/eigen3/Eigen/src/Core/MatrixBase.h:152:0,
+                 from /usr/include/eigen3/Eigen/Core:278,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<internal::scalar_product_op<typename internal::traits<T>::Scalar, typename internal::traits<OtherDerived>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::cwiseProduct(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:39:75: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<std::equal_to<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::cwiseEqual(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:58:93: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<std::not_equal_to<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::cwiseNotEqual(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:77:97: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<internal::scalar_min_op<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::cwiseMin(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:91:103: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<internal::scalar_max_op<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::cwiseMax(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:105:103: error: ‘other’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h: En la función miembro ‘const CwiseBinaryOp<internal::scalar_quotient_op<typename internal::traits<T>::Scalar>, const Derived, const OtherDerived> MatrixBase<Derived>::cwiseQuotient(int) const’:
+/usr/include/eigen3/Eigen/src/Core/../plugins/MatrixCwiseBinaryOps.h:119:108: error: ‘other’ no se declaró en este ámbito
+In file included from /usr/include/eigen3/Eigen/Core:278:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h: En la función miembro ‘Derived& MatrixBase<Derived>::operator+=(const ArrayBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:514:6: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:514:6: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:514:6: error: ‘::YOU_CANNOT_MIX_ARRAYS_AND_MATRICES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h: En la función miembro ‘Derived& MatrixBase<Derived>::operator-=(const ArrayBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:517:6: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:517:6: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:517:6: error: ‘::YOU_CANNOT_MIX_ARRAYS_AND_MATRICES’ no se ha declarado
+In file included from /usr/include/eigen3/Eigen/Core:283:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:41:37: error: ‘AlignedBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:41:37: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:155:20: nota:   ‘Eigen::AlignedBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:42:43: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:42:43: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:43:42: error: ‘AlignedBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:43:42: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:155:20: nota:   ‘Eigen::AlignedBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:44:65: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:44:65: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:44:75: error: ‘Unaligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:44:75: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:198:3: nota:   ‘Eigen::Unaligned’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:50:37: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:50:37: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:53:37: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:53:37: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:62:72: error: ‘ActualPacketAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:62:72: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:100:20: nota:   ‘Eigen::ActualPacketAccessBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:63:60: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:63:60: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:65:92: error: ‘LinearAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:65:92: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:125:20: nota:   ‘Eigen::LinearAccessBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:67:68: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:67:68: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:71:47: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:71:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:79:47: error: ‘InnerVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:79:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:237:3: nota:   ‘Eigen::InnerVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:80:47: error: ‘LinearVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:80:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:240:3: nota:   ‘Eigen::LinearVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:81:47: error: ‘SliceVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:81:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:243:3: nota:   ‘Eigen::SliceVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:82:47: error: ‘LinearTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:82:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:234:3: nota:   ‘Eigen::LinearTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:83:47: error: ‘DefaultTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:83:47: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:232:3: nota:   ‘Eigen::DefaultTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:84:36: error: ‘InnerVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:84:36: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:237:3: nota:   ‘Eigen::InnerVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:85:36: error: ‘LinearVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:85:36: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:240:3: nota:   ‘Eigen::LinearVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:86:36: error: ‘SliceVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:86:36: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:243:3: nota:   ‘Eigen::SliceVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:92:62: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:92:62: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:93:63: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:93:63: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:95:45: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:95:45: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:96:63: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:96:63: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:102:40: error: ‘InnerVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:102:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:237:3: nota:   ‘Eigen::InnerVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:102:91: error: ‘DefaultTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:102:91: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:232:3: nota:   ‘Eigen::DefaultTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:104:52: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:104:52: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:105:52: error: ‘InnerUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:105:52: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:254:3: nota:   ‘Eigen::InnerUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:106:52: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:106:52: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:108:39: error: ‘LinearVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:108:39: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:240:3: nota:   ‘Eigen::LinearVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:109:75: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:109:75: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:109:100: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:109:100: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:110:39: error: ‘LinearTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:110:39: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:234:3: nota:   ‘Eigen::LinearTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:111:53: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:111:53: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:111:78: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:111:78: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:112:21: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:112:21: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro static ‘static void internal::assign_innervec_CompleteUnrolling<Derived1, Derived2, Index, Stop>::run(Derived1&, const Derived2&)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:219:51: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:219:51: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro static ‘static void internal::assign_innervec_InnerUnrolling<Derived1, Derived2, Index, Stop>::run(Derived1&, const Derived2&, int)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:236:51: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:236:51: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:262:40: error: ‘InvalidTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:262:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:245:3: nota:   ‘Eigen::InvalidTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:262:67: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:268:40: error: ‘DefaultTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:268:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:232:3: nota:   ‘Eigen::DefaultTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:268:58: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:268:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:268:69: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:268:69: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:282:40: error: ‘DefaultTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:282:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:232:3: nota:   ‘Eigen::DefaultTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:282:58: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:282:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:282:75: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:282:75: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:292:40: error: ‘DefaultTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:292:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:232:3: nota:   ‘Eigen::DefaultTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:292:58: error: ‘InnerUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:292:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:254:3: nota:   ‘Eigen::InnerUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:292:72: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:292:72: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:309:40: error: ‘LinearTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:309:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:234:3: nota:   ‘Eigen::LinearTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:309:57: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:309:57: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:309:68: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:309:68: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:321:40: error: ‘LinearTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:321:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:234:3: nota:   ‘Eigen::LinearTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:321:57: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:321:57: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:321:74: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:321:74: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:335:40: error: ‘InnerVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:335:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:237:3: nota:   ‘Eigen::InnerVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:335:66: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:335:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:335:77: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:335:77: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:350:40: error: ‘InnerVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:350:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:237:3: nota:   ‘Eigen::InnerVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:350:66: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:350:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:350:83: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:350:83: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:360:40: error: ‘InnerVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:360:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:237:3: nota:   ‘Eigen::InnerVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:360:66: error: ‘InnerUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:360:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:254:3: nota:   ‘Eigen::InnerUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:360:80: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:360:80: error: el argumento de plantilla 4 es inválido
+In file included from /usr/include/eigen3/Eigen/Core:283:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:402:40: error: ‘LinearVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:402:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:240:3: nota:   ‘Eigen::LinearVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:402:67: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:402:67: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:402:78: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:402:78: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:430:40: error: ‘LinearVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:430:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:240:3: nota:   ‘Eigen::LinearVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:430:67: error: ‘CompleteUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:430:67: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:257:3: nota:   ‘Eigen::CompleteUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:430:84: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:430:84: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:449:40: error: ‘SliceVectorizedTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:449:40: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:243:3: nota:   ‘Eigen::SliceVectorizedTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:449:66: error: ‘NoUnrolling’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:449:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:252:3: nota:   ‘Eigen::NoUnrolling’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:449:77: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h:449:77: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro ‘Derived& DenseBase<Derived>::lazyAssign(const DenseBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:503:3: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:503:3: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:503:3: error: ‘::THIS_EXPRESSION_IS_NOT_A_LVALUE__IT_IS_READ_ONLY’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Assign.h:504:3: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:504:3: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:504:3: error: ‘::YOU_MIXED_MATRICES_OF_DIFFERENT_SIZES’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Assign.h:505:3: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:505:3: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/Assign.h:505:3: error: ‘::YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Assign.h:512:62: error: ‘InvalidTraversal’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:512:62: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:245:3: nota:   ‘Eigen::InvalidTraversal’
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:522:65: error: ‘EvalBeforeAssigningBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Assign.h:522:65: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:71:20: nota:   ‘Eigen::EvalBeforeAssigningBit’
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro ‘Derived& DenseBase<Derived>::operator=(const DenseBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:555:56: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro ‘Derived& DenseBase<Derived>::operator=(const DenseBase<Derived>&)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:561:51: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro ‘Derived& MatrixBase<Derived>::operator=(const MatrixBase<Derived>&)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:567:51: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/Assign.h: En la función miembro ‘Derived& MatrixBase<Derived>::operator=(const DenseBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/Assign.h:574:56: error: el argumento de plantilla 3 es inválido
+In file included from /usr/include/eigen3/Eigen/Core:286:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h: En la función miembro ‘Scalar& internal::blas_data_mapper<Scalar, Index, StorageOrder>::operator()(Index, Index)’:
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h:137:35: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h:137:35: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h: En la función miembro ‘const Scalar& internal::const_blas_data_mapper<Scalar, Index, StorageOrder>::operator()(Index, Index) const’:
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h:150:35: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h:150:35: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h:169:55: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/util/BlasUtil.h:169:55: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+In file included from /usr/include/eigen3/Eigen/Core:287:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:45:49: error: ‘DontAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:45:49: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:271:3: nota:   ‘Eigen::DontAlign’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:100:42: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h: En la función miembro ‘const T* DenseStorage<T, Size, _Rows, _Cols, _Options>::data() const’:
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:111:50: error: solicitud por el miembro ‘array’ en ‘((const DenseStorage<T, Size, _Rows, _Cols, _Options>*)this)->DenseStorage<T, Size, _Rows, _Cols, _Options>::m_data’, el cual es del tipo ‘const int’ que no es clase
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h: En la función miembro ‘T* DenseStorage<T, Size, _Rows, _Cols, _Options>::data()’:
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:112:38: error: solicitud por el miembro ‘array’ en ‘((DenseStorage<T, Size, _Rows, _Cols, _Options>*)this)->DenseStorage<T, Size, _Rows, _Cols, _Options>::m_data’, el cual es del tipo ‘int’ que no es clase
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:132:74: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:132:74: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:132:83: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:132:83: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:132:100: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:132:100: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:153:85: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:153:85: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:153:109: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:172:92: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:172:92: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:172:109: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:58: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:58: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:67: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:67: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:76: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:76: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:93: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:93: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:191:93: error: el argumento de plantilla 4 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:233:69: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:233:69: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:233:85: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:233:85: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:233:102: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:233:102: error: el argumento de plantilla 4 es inválido
+In file included from /usr/include/eigen3/Eigen/Core:287:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:269:69: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:269:69: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:269:78: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:269:78: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:269:102: error: el argumento de plantilla 2 es inválido
+/usr/include/eigen3/Eigen/src/Core/DenseStorage.h:269:102: error: el argumento de plantilla 3 es inválido
+In file included from /usr/include/eigen3/Eigen/Core:288:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘NumTraits’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘nested’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘::RowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘::ColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘::MaxRowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘::MaxColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘::Flags’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:54:5: error: ‘::CoeffReadCost’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:58:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:59:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:60:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:61:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:63:40: error: ‘Index’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:63:51: error: ‘Index’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:68:12: error: ‘Scalar’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:73:40: error: ‘Index’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:78:12: error: ‘Scalar’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:84:38: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:84:49: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:84:58: error: ISO C++ prohíbe la inicialización del miembro ‘packet’ [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:84:58: error: se hace ‘packet’ static [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:84:58: error: ‘packet’ se declaró como un campo ‘inline’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:84:58: error: declaración plantilla de ‘const PacketScalar packet’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:90:29: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:90:40: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:90:51: error: expected primary-expression before ‘const’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:90:72: error: se declaró la variable o campo ‘writePacket’ como void
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:96:38: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:96:49: error: ‘packet’ se declaró como un campo ‘inline’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:96:51: error: expected ‘;’ before ‘const’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:99:5: error: el dato miembro ‘packet’ no puede ser una plantilla miembro
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:102:29: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:102:42: error: expected primary-expression before ‘const’
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:102:63: error: se declaró la variable o campo ‘writePacket’ como void
+In file included from /usr/include/eigen3/Eigen/Core:289:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘NumTraits’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘nested’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘::RowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘::ColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘::MaxRowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘::MaxColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘::Flags’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:53:5: error: ‘::CoeffReadCost’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:57:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:58:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:59:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:60:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:62:40: error: ‘Index’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:62:51: error: ‘Index’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:67:12: error: ‘Scalar’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:72:40: error: ‘Index’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:77:12: error: ‘Scalar’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:83:38: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:83:49: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:83:58: error: ISO C++ prohíbe la inicialización del miembro ‘packet’ [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:83:58: error: se hace ‘packet’ static [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:83:58: error: ‘packet’ se declaró como un campo ‘inline’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:83:58: error: declaración plantilla de ‘const PacketScalar packet’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:89:29: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:89:40: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:89:51: error: expected primary-expression before ‘const’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:89:72: error: se declaró la variable o campo ‘writePacket’ como void
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:95:38: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:95:49: error: ‘packet’ se declaró como un campo ‘inline’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:95:51: error: expected ‘;’ before ‘const’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:98:5: error: el dato miembro ‘packet’ no puede ser una plantilla miembro
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:101:29: error: ‘Index’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:101:42: error: expected primary-expression before ‘const’
+/usr/include/eigen3/Eigen/src/Core/ForceAlignedAccess.h:101:63: error: se declaró la variable o campo ‘writePacket’ como void
+In file included from /usr/include/eigen3/Eigen/Core:290:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:45:16: error: ‘EvalBeforeNestingBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:45:16: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:66:20: nota:   ‘Eigen::EvalBeforeNestingBit’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:45:41: error: ‘DirectAccessBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:45:41: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:150:20: nota:   ‘Eigen::DirectAccessBit’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘NumTraits’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘nested’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘::RowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘::ColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘::MaxRowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘::MaxColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘::Flags’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:70:5: error: ‘::CoeffReadCost’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:75:12: error: ‘Index’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:76:12: error: ‘Index’ no nombra a un tipo
+In file included from /usr/include/eigen3/Eigen/Core:290:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:84:21: error: se esperaba ‘;’ al final de la declaración miembro
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:84:32: error: ISO C++ prohíbe la declaración de ‘Index’ sin tipo [-fpermissive]
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:84:32: error: se esperaba ‘;’ al final de la declaración miembro
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:84:40: error: expected unqualified-id before ‘{’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:85:21: error: se esperaba ‘;’ al final de la declaración miembro
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:85:27: error: la declaración de ‘const ReturnByValue<Derived>::YOU_ARE_TRYING_TO_ACCESS_A_SINGLE_COEFFICIENT_IN_A_SPECIAL_EXPRESSION_WHERE_THAT_IS_NOT_ALLOWED_BECAUSE_THAT_WOULD_BE_INEFFICIENT& ReturnByValue<Derived>::coeff’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:84:32: error: genera un conflicto con la declaración previa ‘const ReturnByValue<Derived>::YOU_ARE_TRYING_TO_ACCESS_A_SINGLE_COEFFICIENT_IN_A_SPECIAL_EXPRESSION_WHERE_THAT_IS_NOT_ALLOWED_BECAUSE_THAT_WOULD_BE_INEFFICIENT& ReturnByValue<Derived>::coeff’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:85:32: error: expected ‘)’ before ‘,’ token
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:86:15: error: se esperaba ‘;’ al final de la declaración miembro
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:86:29: error: la definición de la función no declara parámetros
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:87:15: error: se esperaba ‘;’ al final de la declaración miembro
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:87:24: error: la declaración de ‘ReturnByValue<Derived>::YOU_ARE_TRYING_TO_ACCESS_A_SINGLE_COEFFICIENT_IN_A_SPECIAL_EXPRESSION_WHERE_THAT_IS_NOT_ALLOWED_BECAUSE_THAT_WOULD_BE_INEFFICIENT& ReturnByValue<Derived>::coeffRef’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:86:29: error: genera un conflicto con la declaración previa ‘ReturnByValue<Derived>::YOU_ARE_TRYING_TO_ACCESS_A_SINGLE_COEFFICIENT_IN_A_SPECIAL_EXPRESSION_WHERE_THAT_IS_NOT_ALLOWED_BECAUSE_THAT_WOULD_BE_INEFFICIENT& ReturnByValue<Derived>::coeffRef’
+/usr/include/eigen3/Eigen/src/Core/ReturnByValue.h:87:29: error: expected ‘)’ before ‘,’ token
+In file included from /usr/include/eigen3/Eigen/Core:291:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h: En la función miembro ‘ExpressionType& NoAlias<ExpressionType, StorageBase>::operator+=(const CoeffBasedProduct<Lhs, Rhs, NestingFlags>&)’:
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:91:66: error: ‘NestByRefBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:91:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:157:20: nota:   ‘Eigen::NestByRefBit’
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:91:78: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h: En la función miembro ‘ExpressionType& NoAlias<ExpressionType, StorageBase>::operator-=(const CoeffBasedProduct<Lhs, Rhs, NestingFlags>&)’:
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:95:66: error: ‘NestByRefBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:95:66: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:157:20: nota:   ‘Eigen::NestByRefBit’
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:95:78: error: el argumento de plantilla 3 es inválido
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/NoAlias.h:131:29: error: el prototipo para ‘NoAlias<Derived, MatrixBase> MatrixBase<Derived>::noalias()’ no coincide con ningún otro en la clase ‘MatrixBase<Derived>’
+/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:314:41: error: el candidato es: int MatrixBase<Derived>::noalias()
+In file included from /usr/include/eigen3/Eigen/Core:292:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:74:97: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:75:26: error: ‘Map’ no es una plantilla
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:75:39: error: ‘Unaligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:75:39: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:198:3: nota:   ‘Eigen::Unaligned’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:75:26: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:75:5: error: la declaración friend no nombra una clase o función
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:76:13: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:77:26: error: ‘Map’ no es una plantilla
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:77:45: error: ‘Unaligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:77:45: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:198:3: nota:   ‘Eigen::Unaligned’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:77:26: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:77:5: error: la declaración friend no nombra una clase o función
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:78:19: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:79:26: error: ‘Map’ no es una plantilla
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:79:39: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:79:39: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:79:26: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:79:5: error: la declaración friend no nombra una clase o función
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:80:13: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:81:26: error: ‘Map’ no es una plantilla
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:81:45: error: ‘Aligned’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:81:45: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:200:3: nota:   ‘Eigen::Aligned’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:81:26: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:81:5: error: la declaración friend no nombra una clase o función
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:82:19: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:83:67: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:84:72: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:85:74: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:86:79: error: ‘Map’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:93:38: error: ‘DontAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:93:38: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:271:3: nota:   ‘Eigen::DontAlign’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:94:49: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:94:49: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:247:24: error: ‘NoChange_t’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:260:36: error: ‘NoChange_t’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:311:61: error: ‘NoChange_t’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:324:49: error: ‘NoChange_t’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:434:19: error: ‘ConstMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:436:19: error: ‘MapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:438:19: error: ‘ConstMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:440:19: error: ‘MapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:442:19: error: ‘ConstMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:444:19: error: ‘MapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:447:19: error: ‘ConstAlignedMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:449:19: error: ‘AlignedMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:451:19: error: ‘ConstAlignedMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:453:19: error: ‘AlignedMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:455:19: error: ‘ConstAlignedMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:457:19: error: ‘AlignedMapType’ no nombra a un tipo
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void* PlainObjectBase<Derived>::operator new(size_t)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: error: ‘conditional_aligned_malloc’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:286:35: nota:   ‘internal::conditional_aligned_malloc’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void* PlainObjectBase<Derived>::operator new [](size_t)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: error: ‘conditional_aligned_malloc’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:286:35: nota:   ‘internal::conditional_aligned_malloc’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void PlainObjectBase<Derived>::operator delete(void*)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: error: ‘conditional_aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:303:34: nota:   ‘internal::conditional_aligned_free’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void PlainObjectBase<Derived>::operator delete [](void*)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: error: ‘conditional_aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:303:34: nota:   ‘internal::conditional_aligned_free’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void* PlainObjectBase<Derived>::operator new(size_t, const std::nothrow_t&)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: error: ‘conditional_aligned_malloc’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:286:35: nota:   ‘internal::conditional_aligned_malloc’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void PlainObjectBase<Derived>::operator delete(void*, const std::nothrow_t&)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: error: ‘conditional_aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:95:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:303:34: nota:   ‘internal::conditional_aligned_free’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘const Scalar& PlainObjectBase<Derived>::coeff(PlainObjectBase<Derived>::Index, PlainObjectBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:105:18: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:105:18: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘PlainObjectBase<Derived>::Scalar& PlainObjectBase<Derived>::coeffRef(PlainObjectBase<Derived>::Index, PlainObjectBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:118:18: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:118:18: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘const Scalar& PlainObjectBase<Derived>::coeffRef(PlainObjectBase<Derived>::Index, PlainObjectBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:131:18: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:131:18: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘PlainObjectBase<Derived>::PacketScalar PlainObjectBase<Derived>::packet(PlainObjectBase<Derived>::Index, PlainObjectBase<Derived>::Index) const’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:147:45: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:147:45: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘void PlainObjectBase<Derived>::writePacket(PlainObjectBase<Derived>::Index, PlainObjectBase<Derived>::Index, const PacketScalar&)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:164:44: error: ‘RowMajorBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:164:44: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:61:20: nota:   ‘Eigen::RowMajorBit’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘void PlainObjectBase<Derived>::resize(PlainObjectBase<Derived>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:225:7: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:225:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:225:7: error: ‘::YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:226:7: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:226:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘Derived& PlainObjectBase<Derived>::_set(const DenseBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:556:114: error: ‘EvalBeforeAssigningBit’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:556:114: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:71:20: nota:   ‘Eigen::EvalBeforeAssigningBit’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:556:180: error: el argumento de plantilla 1 es inválido
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘void PlainObjectBase<Derived>::_init2(PlainObjectBase<Derived>::Index, PlainObjectBase<Derived>::Index, typename internal::enable_if<(PlainObjectBase<Derived>::Base:: SizeAtCompileTime != 2), T0>::type*)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:585:7: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:585:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘void PlainObjectBase<Derived>::_init2(const Scalar&, const Scalar&, typename internal::enable_if<(PlainObjectBase<Derived>::Base:: SizeAtCompileTime == 2), T0>::type*)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:593:7: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:593:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:593:7: error: ‘::THIS_METHOD_IS_ONLY_FOR_VECTORS_OF_A_SPECIFIC_SIZE’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro ‘void PlainObjectBase<Derived>::_swap(const DenseBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:607:105: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:607:105: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void PlainObjectBase<Derived>::_check_template_params()’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: error: ‘DontAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:271:3: nota:   ‘Eigen::DontAlign’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:615:7: error: ‘::INVALID_MATRIX_TEMPLATE_PARAMETERS’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void internal::conservative_resize_like_impl<Derived, OtherDerived, IsVector>::run(DenseBase<Derived>&, internal::conservative_resize_like_impl<Derived, OtherDerived, IsVector>::Index, internal::conservative_resize_like_impl<Derived, OtherDerived, IsVector>::Index)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:639:5: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:639:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:639:5: error: ‘::YOU_CALLED_A_DYNAMIC_SIZE_METHOD_ON_A_FIXED_SIZE_MATRIX_OR_VECTOR’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h: En la función miembro static ‘static void internal::conservative_resize_like_impl<Derived, OtherDerived, IsVector>::run(DenseBase<Derived>&, const DenseBase<OtherDerived>&)’:
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:666:5: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:666:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:666:5: error: ‘::YOU_CALLED_A_DYNAMIC_SIZE_METHOD_ON_A_FIXED_SIZE_MATRIX_OR_VECTOR’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:667:5: error: ‘static_assertion’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:667:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h:54:12: nota:   ‘internal::static_assertion’
+/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:667:5: error: ‘::YOU_CALLED_A_DYNAMIC_SIZE_METHOD_ON_A_FIXED_SIZE_MATRIX_OR_VECTOR’ no se ha declarado
+In file included from /usr/include/eigen3/Eigen/Core:293:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:134:41: error: ‘RowMajor’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:134:41: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:267:3: nota:   ‘Eigen::RowMajor’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘NumTraits’ en el espacio de nombres ‘Eigen’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘nested’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ en el espacio de nombres ‘Eigen::internal’ no nombra un tipo
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected unqualified-id before ‘<’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘::RowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘::ColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘::MaxRowsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘::MaxColsAtCompileTime’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘::Flags’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘traits’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h:31:29: nota:   ‘internal::traits’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: expected primary-expression before ‘>’ token
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:152:5: error: ‘::CoeffReadCost’ no se ha declarado
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:156:38: error: ‘DontAlign’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:156:38: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:271:3: nota:   ‘Eigen::DontAlign’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:157:49: error: ‘Dynamic’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:157:49: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Constants.h:34:11: nota:   ‘Eigen::Dynamic’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:157:86: error: ‘Scalar’ no se declaró en este ámbito
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:237:47: error: expected ‘)’ before ‘dim’
+src/testApp.cpp:64:1: error: expected ‘}’ at end of input
+In file included from /usr/include/eigen3/Eigen/Core:293:0,
+                 from /usr/include/pcl-1.5/pcl/point_types.h:43,
+                 from ../../../addons/ofxPCL/src/ofxPCL.h:4,
+                 from src/testApp.cpp:2:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En la función miembro static ‘static void* Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator new(size_t)’:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: error: ‘conditional_aligned_malloc’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:286:35: nota:   ‘internal::conditional_aligned_malloc’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En la función miembro static ‘static void* Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator new [](size_t)’:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: error: ‘conditional_aligned_malloc’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:286:35: nota:   ‘internal::conditional_aligned_malloc’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En la función miembro static ‘static void Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator delete(void*)’:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: error: ‘conditional_aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:303:34: nota:   ‘internal::conditional_aligned_free’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En la función miembro static ‘static void Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator delete [](void*)’:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: error: ‘conditional_aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:303:34: nota:   ‘internal::conditional_aligned_free’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En la función miembro static ‘static void* Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator new(size_t, const std::nothrow_t&)’:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: error: ‘conditional_aligned_malloc’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:286:35: nota:   ‘internal::conditional_aligned_malloc’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En la función miembro static ‘static void Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator delete(void*, const std::nothrow_t&)’:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: error: ‘conditional_aligned_free’ no es un miembro de ‘Eigen::internal’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:158:5: nota: alternativa sugerida:
+/usr/include/eigen3/Eigen/src/Core/util/Memory.h:303:34: nota:   ‘internal::conditional_aligned_free’
+/usr/include/eigen3/Eigen/src/Core/Matrix.h: En el ámbito global:
+/usr/include/eigen3/Eigen/src/Core/Matrix.h:229:90: error: expected unqualified-id at end of input
+make: *** [obj/x86_64Release/src/testApp.o] Error 1
