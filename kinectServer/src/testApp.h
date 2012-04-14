@@ -80,6 +80,7 @@ class testApp : public ofBaseApp{
 			ofPoint pos;
 			float size;
 			int index;
+			ofPoint bbPos;
 			int getIndex(){return index;}
 		};
 		ofxCv::Tracker<Blob> tracker;

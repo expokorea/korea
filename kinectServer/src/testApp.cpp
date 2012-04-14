@@ -560,6 +560,7 @@ void testApp::update(){
 			blobs[i].pos = polylines[i].getCentroid2D();
 			blobs[i].size = polylines[i].getBoundingBox().height;///TWO_PI;
 			blobs[i].index = i;
+			blobs[i].bbPos = blobs[i].pos;
 		}
 		tracker.track(blobs);
 		/*for(int i=0;i<(int)polylines.size();i++){
@@ -581,21 +582,25 @@ void testApp::update(){
 				if(labels[i]<label && tracker.getAge(labels[i])>2) label=labels[i];
 			}
 			if(label!=9999){
-				const Blob & blob = tracker.getCurrent(label);
+				Blob & blob = tracker.getCurrent(label);
 				int index = tracker.getIndexFromLabel(label);
 
-				ofPoint centroid = blob.pos;
-				float x = centroid.x;
+				//ofPoint centroid = blob.pos;
+				//float x = centroid.x;
 				float diff = 0;
 				for(int j=0;j<polylines[index].size();j++){
-					if(fabs(polylines[index][j].x-centroid.x)>diff){
-						diff =fabs(polylines[index][j].x-centroid.x);
-						x = polylines[index][j].x;
+					if(fabs(polylines[index][j].x-blob.pos.x)>diff && polylines[index][j].y<blob.pos.y){
+						diff = fabs(polylines[index][j].x-blob.pos.x);
+						blob.bbPos = polylines[index][j];
 					}
 				}
-				centroid = ofPoint(x,centroid.y)*ofVec2f(1./320.,1./240.);
+				if(tracker.existsPrevious(label)){
+					blob.bbPos = blob.bbPos *.1 + tracker.getPrevious(label).bbPos*.9;
+				}
+				ofPoint normalizedP = blob.bbPos*ofVec2f(1./320.,1./240.);
+
 				for(int j=0;j<oscContours.size();j++){
-					oscContours[j]->sendBlob(servernum, label, centroid, blob.size);
+					oscContours[j]->sendBlob(servernum, label, normalizedP, blob.size);
 				}
 			}
 		}
@@ -620,6 +625,9 @@ void testApp::draw(){
 			if(tracker.getAge(tracker.getLabelFromIndex(i))>2){
 				const Blob & blob = tracker.getCurrent(tracker.getLabelFromIndex(i));
 				polylines[i].draw();
+				ofSetColor(255,0,0);
+				ofCircle(blob.bbPos,5);
+				ofSetColor(255);
 				ofCircle(blob.pos,blob.size);
 				ofDrawBitmapString(ofToString(tracker.getLabelFromIndex(i)),blob.pos);
 			}
