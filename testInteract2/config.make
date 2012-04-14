@@ -19,7 +19,7 @@ USER_CFLAGS = -I../common/src/graphics -I../common/src/utils -I../common/src/phy
 # for example libraries like:
 # USER_LDFLAGS = libs/libawesomelib.a
 
-USER_LDFLAGS = $(shell pkg-config avahi-client --libs)
+USER_LDFLAGS = $(shell pkg-config avahi-client gstreamer-audio-0.10 gstreamer-base-0.10 --libs) 
 
 #../glfw/src/libglfw.a -lX11 -lXrandr -lXxf86vm 
 

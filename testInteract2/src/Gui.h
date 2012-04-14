@@ -10,11 +10,13 @@
 #include "ofxGui.h"
 #include "Glow.h"
 #include "OscContoursClient.h"
+#include "VideoPlayer.h"
 
 class Gui {
 public:
 	void setGlow(Glow & glow);
 	void setContoursClient(OscContoursClient & contoursClient);
+	void setPlayer(VideoPlayer & _player);
 	void setup(int x, int y);
 	void load(string file);
 	void draw();
@@ -23,6 +25,9 @@ public:
 	ofxPanel guiPSystem;
 	ofxPanel guiField;
 	ofxPanel guiRender;
+	ofxPanel guiAudio;
+
+
 
 	ofxParameter<float> fps;
 	ofxParameter<bool> recording;
@@ -46,5 +51,6 @@ public:
 private:
 	Glow * glow;
 	OscContoursClient * contoursClient;
+	VideoPlayer * player;
 };
 

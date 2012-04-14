@@ -7,10 +7,23 @@
 
 #include "VideoPlayer.h"
 
-void VideoPlayer::load(string path, bool _usePBO){
+void VideoPlayer::load(string _path, string _nameFront, string _nameRear, string _nameSubLFE, bool _usePBO){
 	usePBO = _usePBO;
+	path = _path;
+	nameFront = _nameFront;
+	nameRear = _nameRear;
+	nameSubLFE = _nameSubLFE;
+
+	surroundPlayer = ofPtr<SurroundVideoPlayer>(new SurroundVideoPlayer);
+	surroundPlayer->setDeviceFront(nameFront);
+	surroundPlayer->setDeviceRear(nameRear);
+	surroundPlayer->setDeviceSubLFE(nameSubLFE);
+	surroundPlayer->loadMovie(path);
+	player.setPlayer(surroundPlayer);
 	player.setUseTexture(false);
-	player.loadMovie(path);
+	//player.setVolume(volume);
+	volume.addListener(this,&VideoPlayer::setVolume);
+	//player.loadMovie(path);
 	player.setLoopState(OF_LOOP_NORMAL);
 
 	if(usePBO){
@@ -23,13 +36,28 @@ void VideoPlayer::load(string path, bool _usePBO){
 
 }
 
+void VideoPlayer::setVolume(float & volume){
+	//player.setVolume(volume);
+}
+
 void VideoPlayer::play(){
-	player.play();
+	surroundPlayer->play();
 }
 
 
 void VideoPlayer::update(){
 	player.update();
+	if(player.getIsMovieDone()){
+		player.stop();
+		surroundPlayer = ofPtr<SurroundVideoPlayer>(new SurroundVideoPlayer);
+		surroundPlayer->setDeviceFront(nameFront);
+		surroundPlayer->setDeviceRear(nameRear);
+		surroundPlayer->setDeviceSubLFE(nameSubLFE);
+		surroundPlayer->loadMovie(path);
+		player.setPlayer(surroundPlayer);
+		//player.setVolume(volume);
+		surroundPlayer->play();
+	}
 }
 
 bool VideoPlayer::isFrameNew(){
@@ -75,3 +103,4 @@ float VideoPlayer::getDuration(){
 unsigned long VideoPlayer::getCurrentFrame(){
 	return player.getCurrentFrame();
 }
+

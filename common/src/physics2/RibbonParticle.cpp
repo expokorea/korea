@@ -174,14 +174,14 @@ void RibbonParticle::setupTrails(){
 	for(int i=1; i<(int)trails.size();i++){
 		trails[i] = trails[i-1];
 		trails[i].x -= 4;
-		
+
 	}
-	
+
 	for(int i=0; i<(int)trails.size();i++){
 		float newThick = MIN( (float)thicknessMin,thisThickness + ofSignedNoise(i*.1)*thicknessMax);
 		trailThickness.push_back(newThick);
 	}
-	
+
 	for(int i=0; i<((int)trails.size())-1;i++){
 		float pct = float(trails.size()-i) / ((float)trails.size()*2) * .75 * 255;
 		trailStrip.setColor(i*2,ofColor(r,g,b,pct));
@@ -284,9 +284,9 @@ void RibbonParticle::setHuntting(bool _huntting){
 
 void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	//cout << state << endl;
-	
+
 	if(state != Hiding) hideAlpha = filter(hideAlpha,1.f,.1);
-	
+
 	if(state==RunningAway && target.distance(pos)>maxDistanceRunAway){
 		goBack();
 	}
@@ -377,7 +377,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 	float freqPct = ofMap(ofClamp(vel.length()*thisSpeedFactor/20.f,0,1),0,1,0,1,&ofEasing::cubicOut);
 	float ampPct = ofMap(ofClamp(vel.length()*thisSpeedFactor/10.f,0,1),0,1,0,1,&ofEasing::cubicOut);
 	audioGenerator.freqIn = freqPct;
-	audioGenerator.amp = freqPct;
+	audioGenerator.amp = freqPct*hideAlpha*FlockAudioGenerator::globalAmp;
 #endif
 
 
@@ -407,7 +407,7 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 
 	// create some depth shading
 	float alphaPct = .75 * ofMap(pos.z,depthAlphaMin,depthAlphaMax,.80,1,true) * hideAlpha;
-	
+
 	// hghlight effect
 	if(speedState==Fast){
 		higlightCounter += 1.f/highlightDuration*dt;
@@ -415,11 +415,11 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 		highlightLen = length*highlightLenPct*ofNoise(noiseSeed+ofGetElapsedTimef());
 		higlightPosition = (int)( ofMap(higlightCounter,0,1,-highlightLen, ((int)trails.size()+highlightLen),&ofEasing::expoOut) );
 	}
-		
+
 	for(int i=0; i<(int)trails.size()-1;i++)
 	{
 		float pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
-		
+
 		ofColor myRGB = ofColor(r,g,b);
 		if(speedState==Fast){
 			float dist = fabs(higlightPosition-i);
@@ -453,15 +453,15 @@ void RibbonParticle::update(float dt,const BoundingBox3D & bb){
 			texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 			texturedStrip.setColor(i*2+1,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 		}
-			
+
 		// try to highlight just top, working?
 		trailStrip.setColor(i*2,ofColor(myRGB,pct*alphaPct));
 		//trailStripLineL.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
 		//trailStripLineR.setColor(i,ofColor(rLines,gLines,bLines,pct*alphaPct*.5));
-		
+
 		pct = float(trails.size()-i) / ((float)trails.size() * 2.) * (.5+vel.length()) * 255.;
 		trailStripForGlow.setColor(i*2,ofColor(myRGB,pct*alphaPct));
-		
+
 		//texturedStrip.setColor(i*2,ofColor(rTex,gTex,bTex,pct*alphaPct*1.2));
 
 		trailStrip.setColor(i*2+1,ofColor(r,g,b,pct*alphaPct));

@@ -4,7 +4,7 @@
 #include "ofxGui.h"
 #include "ofNode.h"
 
-//#define USE_AUDIO
+#define USE_AUDIO
 
 #ifdef USE_AUDIO
 #include "FlockAudioGenerator.h"
@@ -106,15 +106,15 @@ private:
 	float tTargetChanged;
 	bool huntting;
 	float hideAlpha;
-	
+
 	// highlight color
 	float higlightCounter;
 	int higlightPosition;
 	float highlightLen;
-	
+
 	// trail size changes
 	vector<float> trailThickness;
-	
+
 	enum SpeedState{
 		Fast,
 		Slow

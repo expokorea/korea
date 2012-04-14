@@ -8,7 +8,7 @@
 #include "SoundManager.h"
 #include "ofConstants.h"
 
-//#define USE_SOUND
+#define USE_SOUND
 #ifdef USE_SOUND
 #include <AL/al.h>
 #include <AL/alc.h>
@@ -40,7 +40,7 @@ SoundManager::~SoundManager() {
 	// TODO Auto-generated destructor stub
 }
 
-void SoundManager::setup(PSystem & flock){
+void SoundManager::setup(vector<PSystem> & flock){
 	this->flock = &flock;
 	mutex.lock();
 	startThread(true,false);
@@ -78,10 +78,12 @@ void SoundManager::createEffect(int effect){
 
 void SoundManager::update(){
 
-	for(int i=0;i<flock->particles.size();i++){
-		alSourcefv(flock->particles[i].audioGenerator.sourceID,AL_POSITION,(flock->particles[i].getPos()-ofVec3f(0,0,300)).getPtr());
-		flock->particles[i].audioGenerator.update();
-	}
+    for(int p=0;p<flock->size();p++){
+        for(int i=0;i<flock->at(p).particles.size();i++){
+            alSourcefv(flock->at(p).particles[i].audioGenerator.sourceID,AL_POSITION,(flock->at(p).particles[i].getPos()-ofVec3f(0,0,300)).getPtr());
+            flock->at(p).particles[i].audioGenerator.update();
+        }
+    }
 }
 
 void SoundManager::threadedFunction(){
@@ -144,42 +146,45 @@ void SoundManager::threadedFunction(){
 
 	//ofLogNotice() << "creating reverb";
 	//createEffect(AL_EFFECT_REVERB);
-	for(int i=0;i<flock->particles.size();i++){
-		flock->particles[i].audioGenerator.bufferIDs.resize(2);
-		alGenBuffers(flock->particles[i].audioGenerator.bufferIDs.size(),&flock->particles[i].audioGenerator.bufferIDs[0]);
-		alGenSources(1,&flock->particles[i].audioGenerator.sourceID);
+
+    for(int p=0;p<flock->size();p++){
+        for(int i=0;i<flock->at(p).particles.size();i+=10){
+            flock->at(p).particles[i].audioGenerator.bufferIDs.resize(2);
+            alGenBuffers(flock->at(p).particles[i].audioGenerator.bufferIDs.size(),&flock->at(p).particles[i].audioGenerator.bufferIDs[0]);
+            alGenSources(1,&flock->at(p).particles[i].audioGenerator.sourceID);
 
 
-		alSourcef (flock->particles[i].audioGenerator.sourceID, AL_PITCH,    1.0f);
-		alSourcef (flock->particles[i].audioGenerator.sourceID, AL_GAIN,     1.0f);
-		alSourcef (flock->particles[i].audioGenerator.sourceID, AL_ROLLOFF_FACTOR,  .01);
-		alSourcei (flock->particles[i].audioGenerator.sourceID, AL_SOURCE_RELATIVE, AL_TRUE);
-		//alSourcef (flock->particles[i].audioGenerator.sourceID, AL_REFERENCE_DISTANCE,  5);
-		alSourcei (flock->particles[i].audioGenerator.sourceID, AL_DISTANCE_MODEL, AL_INVERSE_DISTANCE);
+            alSourcef (flock->at(p).particles[i].audioGenerator.sourceID, AL_PITCH,    1.0f);
+            alSourcef (flock->at(p).particles[i].audioGenerator.sourceID, AL_GAIN,     1.0f);
+            alSourcef (flock->at(p).particles[i].audioGenerator.sourceID, AL_ROLLOFF_FACTOR,  .01);
+            alSourcei (flock->at(p).particles[i].audioGenerator.sourceID, AL_SOURCE_RELATIVE, AL_TRUE);
+            //alSourcef (flock->particles[i].audioGenerator.sourceID, AL_REFERENCE_DISTANCE,  5);
+            alSourcei (flock->at(p).particles[i].audioGenerator.sourceID, AL_DISTANCE_MODEL, AL_INVERSE_DISTANCE);
 
-		alSourcefv(flock->particles[i].audioGenerator.sourceID, AL_POSITION,(flock->particles[i].getPos()-ofVec3f(0,0,300)).getPtr());
+            alSourcefv(flock->at(p).particles[i].audioGenerator.sourceID, AL_POSITION,(flock->at(p).particles[i].getPos()-ofVec3f(0,0,0)).getPtr());
 
-		flock->particles[i].audioGenerator.buffer.resize(2048);
-		for(int j=0;j<flock->particles[i].audioGenerator.bufferIDs.size();j++){
-			flock->particles[i].audioGenerator.process();
-			alBufferData(flock->particles[i].audioGenerator.bufferIDs[j],AL_FORMAT_MONO16,&flock->particles[i].audioGenerator.buffer[0],flock->particles[i].audioGenerator.buffer.size()*2,maxiSettings::sampleRate);
-			ALenum err = alGetError();
-			if ( err != AL_NO_ERROR){
-				ofLogError()<< "ofOpenALSoundPlayer: error creating buffer " << err;
-				//return;
-			}
-		}
-		alSourceQueueBuffers(flock->particles[i].audioGenerator.sourceID,flock->particles[i].audioGenerator.bufferIDs.size(),&flock->particles[i].audioGenerator.bufferIDs[0]);
+            flock->at(p).particles[i].audioGenerator.buffer.resize(4096);
+            for(int j=0;j<flock->at(p).particles[i].audioGenerator.bufferIDs.size();j++){
+                flock->at(p).particles[i].audioGenerator.process();
+                alBufferData(flock->at(p).particles[i].audioGenerator.bufferIDs[j],AL_FORMAT_MONO16,&flock->at(p).particles[i].audioGenerator.buffer[0],flock->at(p).particles[i].audioGenerator.buffer.size()*2,maxiSettings::sampleRate);
+                ALenum err = alGetError();
+                if ( err != AL_NO_ERROR){
+                    ofLogError()<< "ofOpenALSoundPlayer: error creating buffer " << err;
+                    //return;
+                }
+            }
+            alSourceQueueBuffers(flock->at(p).particles[i].audioGenerator.sourceID,flock->at(p).particles[i].audioGenerator.bufferIDs.size(),&flock->at(p).particles[i].audioGenerator.bufferIDs[0]);
 
-		//alSource3i(flock->particles[i].audioGenerator.sourceID, AL_AUXILIARY_SEND_FILTER, uiEffectSlot, 0, AL_FILTER_NULL);
-		alSourcePlayv(1,&flock->particles[i].audioGenerator.sourceID);
-	}
+            //alSource3i(flock->particles[i].audioGenerator.sourceID, AL_AUXILIARY_SEND_FILTER, uiEffectSlot, 0, AL_FILTER_NULL);
+            alSourcePlayv(1,&flock->at(p).particles[i].audioGenerator.sourceID);
+        }
+    }
 	unlock();
 	started.signal();
 
 }
 
-void SoundManager::SourcesUpdater::setup(PSystem & _flock){
+void SoundManager::SourcesUpdater::setup(vector<PSystem> & _flock){
 	flock = &_flock;
 	startThread(true,false);
 }
@@ -188,34 +193,37 @@ void SoundManager::SourcesUpdater::threadedFunction(){
 
 
 	while(isThreadRunning()){
-		for(int i=0; i<flock->particles.size(); i++){
-			int processed;
-			alGetSourcei(flock->particles[i].audioGenerator.sourceID, AL_BUFFERS_PROCESSED, &processed);
-			if(processed<=0) continue;
-			while(processed)
-			{
-				flock->particles[i].audioGenerator.process();
-				int numFrames = flock->particles[i].audioGenerator.buffer.size();
-				ALuint albuffer;
-				alSourceUnqueueBuffers(flock->particles[i].audioGenerator.sourceID, 1, &albuffer);
-				alBufferData(albuffer,AL_FORMAT_MONO16,&flock->particles[i].audioGenerator.buffer[0],numFrames*2,maxiSettings::sampleRate);
-				alSourceQueueBuffers(flock->particles[i].audioGenerator.sourceID, 1, &albuffer);
-				ALenum err = alGetError();
-				if ( err != AL_NO_ERROR){
-					ofLogError() << "Error buffering " << err;
-				}
-				processed--;
-			}
-			ALint state;
-			alGetSourcei(flock->particles[i].audioGenerator.sourceID,AL_SOURCE_STATE,&state);
-			if(state != AL_PLAYING){
-				alSourcePlay(flock->particles[i].audioGenerator.sourceID);
-				cout << "underrun" << endl;
-				//cout << flock->particles[i].audioGenerator.sourceID << " playing" << endl;
-			}
+
+        for(int p=0;p<flock->size();p++){
+            for(int i=0; i<flock->at(p).particles.size(); i+=10){
+                int processed;
+                alGetSourcei(flock->at(p).particles[i].audioGenerator.sourceID, AL_BUFFERS_PROCESSED, &processed);
+                if(processed<=0) continue;
+                while(processed)
+                {
+                    flock->at(p).particles[i].audioGenerator.process();
+                    int numFrames = flock->at(p).particles[i].audioGenerator.buffer.size();
+                    ALuint albuffer;
+                    alSourceUnqueueBuffers(flock->at(p).particles[i].audioGenerator.sourceID, 1, &albuffer);
+                    alBufferData(albuffer,AL_FORMAT_MONO16,&flock->at(p).particles[i].audioGenerator.buffer[0],numFrames*2,maxiSettings::sampleRate);
+                    alSourceQueueBuffers(flock->at(p).particles[i].audioGenerator.sourceID, 1, &albuffer);
+                    ALenum err = alGetError();
+                    if ( err != AL_NO_ERROR){
+                        ofLogError() << "Error buffering " << err;
+                    }
+                    processed--;
+                }
+                ALint state;
+                alGetSourcei(flock->at(p).particles[i].audioGenerator.sourceID,AL_SOURCE_STATE,&state);
+                if(state != AL_PLAYING){
+                    alSourcePlay(flock->at(p).particles[i].audioGenerator.sourceID);
+                    cout << "underrun" << endl;
+                    //cout << flock->particles[i].audioGenerator.sourceID << " playing" << endl;
+                }
 
 
-		}
+            }
+        }
 		ofSleepMillis(1);
 	}
 }

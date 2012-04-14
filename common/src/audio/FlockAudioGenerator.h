@@ -22,6 +22,8 @@ public:
 	void process();
 	void update();
 
+	void paramsChanged(float & p);
+
 	vector<short>  buffer;
 
 	vector<unsigned int> bufferIDs;
@@ -30,7 +32,7 @@ public:
 	int		initialBufferSize; /* buffer size */
 	int		sampleRate;
 
-	ofxParameter<float> minFreq, maxFreq, noiseFreq, resonance;
+	static ofxParameter<float> minFreq, maxFreq, noiseFreq, resonance,globalAmp;
 	ofxParameter<float> freqIn;
 	float lamp,ramp,amp;
 	ofVec3f pos;
@@ -41,6 +43,7 @@ private:
 	maxiEnvelope envelopeBeep;
 	float randomSineFreq,randomSineAmp;
 	int tickCount;
+	float thisMinFreq,thisMaxFreq,thisResonance;
 	//int CurrentCount;//
 	//float myOscOutput,myFilteredOutput;//
 	//maxiEnvelope myEnvelope;

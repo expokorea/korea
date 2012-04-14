@@ -9,6 +9,7 @@
 #include "float.h"
 
 double envelope[] = {0,0,1,25,0,50};
+ofxParameter<float> FlockAudioGenerator::minFreq, FlockAudioGenerator::maxFreq, FlockAudioGenerator::noiseFreq, FlockAudioGenerator::resonance,FlockAudioGenerator::globalAmp;
 
 FlockAudioGenerator::FlockAudioGenerator() {
 	// TODO Auto-generated constructor stub
@@ -25,6 +26,9 @@ void FlockAudioGenerator::setup(){
 	//lAudio.resize(initialBufferSize,0);/* outputs */
 	//rAudio.resize(initialBufferSize,0);/* outputs */
 
+	minFreq.addListener(this,&FlockAudioGenerator::paramsChanged);
+	maxFreq.addListener(this,&FlockAudioGenerator::paramsChanged);
+	resonance.addListener(this,&FlockAudioGenerator::paramsChanged);
 	minFreq.set("min freq.",40,0,1000);
 	maxFreq.set("max freq.",400,0,2000);
 	resonance.set("resonance.",9,0,100);
@@ -39,7 +43,14 @@ void FlockAudioGenerator::setup(){
 	envelopeBeep.amplitude=0;
 }
 
+void FlockAudioGenerator::paramsChanged(float & p){
+    thisMinFreq=minFreq;
+    thisMaxFreq=maxFreq;
+    thisResonance=resonance;
+}
+
 void FlockAudioGenerator::process(){
+
 	//short * output = &buffer[0];
 	float tempf,sinef=0;
 	int bufferSize = buffer.size();
@@ -54,12 +65,12 @@ void FlockAudioGenerator::process(){
 
 	}*/
 	for (int i = 0; i < bufferSize; i++){
-		freq = freq*.99 + ofMap(freqIn,0,1,minFreq,maxFreq,true)*.01;
+		freq = freq*.99 + ofMap(freqIn,0,1,thisMinFreq,thisMaxFreq,true)*.01;
 		sinefreq = sinefreq*.99 + targetSineFreq*.01;
 
 		tempf=mySwitchableOsc.noise();
 
-		tempf=myFilter.lores(myFilter.hires(tempf,freq,resonance),freq,resonance) * amp;
+		tempf=myFilter.lores(myFilter.hires(tempf,freq,thisResonance),freq,thisResonance) * amp;
 		//sinef = sineOsc.sinewave(sinefreq) *	envelopeBeep.line(6,envelope);
 		/*if(beepTriggered){
 			sinef = sineOsc.saw(sinefreq) * sineamp;

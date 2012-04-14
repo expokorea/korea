@@ -9,19 +9,20 @@
 
 #include "PSystem.h"
 #include "Poco/Condition.h"
+#include "AL/alc.h"
 
 class SoundManager: public ofThread {
 public:
 	SoundManager();
 	virtual ~SoundManager();
 
-	void setup(PSystem & flock);
+	void setup(vector<PSystem> & flock);
 	void update();
 	void createEffect(int effect);
 
 private:
 	void threadedFunction();
-	PSystem * flock;
+	vector<PSystem> * flock;
 	static ALCdevice * alDevice;
 	static ALCcontext * alContext;
 	unsigned int  uiEffectSlot;
@@ -30,11 +31,11 @@ private:
 
 	class SourcesUpdater: public ofThread{
 	public:
-		void setup(PSystem & flock);
+		void setup(vector<PSystem> & flock);
 		void threadedFunction();
 
 	private:
-		PSystem * flock;
+		vector<PSystem> * flock;
 	} soundUpdater;
 };
 

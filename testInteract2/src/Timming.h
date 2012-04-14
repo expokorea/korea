@@ -21,6 +21,7 @@ public:
 	ofEvent<bool> particlesIn;
 	ofEvent<int> particlesOut;
 	ofEvent<bool> mappingIn;
+	ofEvent<bool> mappingOut;
 
 	struct ParticlesOutEvent{
 		ParticlesOutEvent(int s, int t):seconds(s),target(t){}
@@ -40,6 +41,7 @@ private:
 	vector<int> timesParticlesin;
 	vector<ParticlesOutEvent> timesParticlesout;
 	vector<int> timesMappingin;
+	vector<int> timesMappingout;
 	float prevTime;
 };
 

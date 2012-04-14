@@ -19,6 +19,10 @@ void Gui::setContoursClient(OscContoursClient & _contoursClient){
 	contoursClient = &_contoursClient;
 }
 
+void Gui::setPlayer(VideoPlayer & _player){
+	player = &_player;
+}
+
 void Gui::setup(int x, int y){
 
 	guiParticles.setup("particles","settings.xml",x,y);
@@ -95,6 +99,14 @@ void Gui::setup(int x, int y){
 	guiRender.add(minRight.set("minRight",0,-500,1024));
 	guiRender.add(maxRight.set("maxRight",0,0,3000));
 
+    guiAudio.setup("audio","settings.xml",x+guiParticles.getWidth()+guiPSystem.getWidth()+guiRender.getWidth()+30,y);
+    //#ifdef USE_AUDIO
+    guiAudio.add(FlockAudioGenerator::minFreq.set("min freq.",40,0,1000));
+    guiAudio.add(FlockAudioGenerator::maxFreq.set("max freq.",400,0,2000));
+    guiAudio.add(FlockAudioGenerator::resonance.set("resonance.",9,0,10));
+    guiAudio.add(FlockAudioGenerator::globalAmp.set("particles vol.",.8,0,1));
+    guiAudio.add(player->volume.set("video vol.",0,0,10));
+    //#endif
 }
 
 void Gui::load(string file){
@@ -110,5 +122,5 @@ void Gui::draw(){
 	guiPSystem.draw();
 	guiField.draw();
 	guiRender.draw();
-
+    guiAudio.draw();
 }

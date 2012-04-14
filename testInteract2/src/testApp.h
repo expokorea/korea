@@ -40,6 +40,7 @@ class testApp : public ofBaseApp{
 		void particlesIn(bool & p);
 		void particlesOut(int & t);
 		void mappingIn(bool & m);
+		void mappingOut(bool & m);
 
 
 		Gui gui;

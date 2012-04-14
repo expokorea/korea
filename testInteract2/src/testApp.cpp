@@ -11,6 +11,7 @@ void testApp::setup(){
 	float ratio = 1600./float(1024*3);
 	gui.setGlow(glow);
 	gui.setContoursClient(contoursClient);
+	gui.setPlayer(player);
 	gui.setup(10, 768*ratio + 10);
 	gui.load("settings.xml");
 
@@ -62,7 +63,11 @@ void testApp::setup(){
 	showGui = true;
 
 	//player.load("file:///F:\\0803yuv.avi");
-	player.load("Overlay2.mov");
+	ofxXmlSettings audiosettings;
+	audiosettings.loadFile("audiodevices.xml");
+	ofxXmlSettings videoSettings;
+	videoSettings.loadFile("video.xml");
+	player.load("file:///"+videoSettings.getValue("video","F:\\master51.avi"),audiosettings.getValue("front","front"),audiosettings.getValue("rear","rear"),audiosettings.getValue("sublfe","sublfe"));
 	player.play();
 
 	contoursClient.setup(5555);
@@ -74,6 +79,7 @@ void testApp::setup(){
 	ofAddListener(timming.particlesIn,this,&testApp::particlesIn);
 	ofAddListener(timming.particlesOut,this,&testApp::particlesOut);
 	ofAddListener(timming.mappingIn,this,&testApp::mappingIn);
+	ofAddListener(timming.mappingOut,this,&testApp::mappingOut);
 }
 
 void testApp::setupMeshes(float & ratio){
@@ -138,6 +144,12 @@ void testApp::mappingIn(bool & m){
 	mappingOsc.sendMessage(msg);
 }
 
+void testApp::mappingOut(bool & m){
+	ofxOscMessage msg;
+	msg.setAddress("stop");
+	mappingOsc.sendMessage(msg);
+}
+
 //--------------------------------------------------------------
 void testApp::update(){
 	if(gui.showVideo){
@@ -150,7 +162,7 @@ void testApp::update(){
 	ofVec3f userPos;
 	if(gui.mouseUser){
 		gui.virtualMouseX = float(mouseX)/gui.ratio - fbo.getWidth()*.5;
-		gui.virtualMouseY = - fbo.getHeight()*.5;//float(mouseY)/ratio - fbo.getHeight()*.5;
+		gui.virtualMouseY = PSystem::bbY + float(mouseY) - fbo.getHeight()*.5;//float(mouseY)/ratio - fbo.getHeight()*.5;
 		userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-1024);
 		particles[0].setUserPosition(userPos);
 		particles[1].setUserPosition(userPos);
@@ -163,7 +175,7 @@ void testApp::update(){
 				}else{
 					gui.virtualMouseX = ofMap((1-contoursClient.getBlobs(server)[i].pos.x),0,1,gui.minLeft,gui.maxLeft);//*fbo.getWidth()*.5 - fbo.getWidth()*.5 + gui.offsetLeft;
 				}
-				gui.virtualMouseY = (contoursClient.getBlobs(server)[i].pos.y - .5) * - fbo.getHeight();
+				gui.virtualMouseY = PSystem::bbY + (contoursClient.getBlobs(server)[i].pos.y - .5) * fbo.getHeight();
 				userPos.set(gui.virtualMouseX,	gui.virtualMouseY,	PSystem::bbZ+PSystem::bbD*.5-1024);
 				if(contoursClient.getBlobs(server)[i].suddenChange){
 					particles[server].runAway();
@@ -361,7 +373,8 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-	//particles.runAway();
+	particles[0].runAway();
+	particles[1].runAway();
 }
 
 //--------------------------------------------------------------

@@ -19,6 +19,7 @@ bool triggerEvent(vector<int> & times,float time, float previousTime){
 	}
 	return false;
 }
+
 int triggerEvent(vector<Timming::ParticlesOutEvent> & times,float time, float previousTime){
 	for(int i=0;i<times.size();i++){
 		if(times[i]<time && times[i]>=previousTime){
@@ -46,6 +47,11 @@ void Timming::setup(VideoPlayer & _player){
 	for(int i=0;i<nummappingin;i++){
 		timesMappingin.push_back(times.getValue("mappingin",0,i));
 	}
+	int nummappingout = times.getNumTags("mappingout");
+	cout << nummappingout << "mapping in" << endl;
+	for(int i=0;i<nummappingout;i++){
+		timesMappingout.push_back(times.getValue("mappingout",0,i));
+	}
 	prevTime=0;
 }
 
@@ -64,6 +70,10 @@ void Timming::update(){
 	if(triggerEvent(timesMappingin,time,prevTime)){
 		cout << "mappingin" << time << endl;
 		ofNotifyEvent(mappingIn,eventArgs);
+	}
+	if(triggerEvent(timesMappingout,time,prevTime)){
+		cout << "mappingout" << time << endl;
+		ofNotifyEvent(mappingOut,eventArgs);
 	}
 	prevTime=time;
 }
