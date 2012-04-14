@@ -7,10 +7,12 @@ void testApp::initPipeline(){
 	gstPlayer=ofPtr<ofGstVideoPlayer> (new ofGstVideoPlayer);
 	gstPlayer->loadMovie(videoname);
 	pipeline = gstPlayer->getGstVideoUtils()->getPipeline();
-	GstElement * videosink = gstPlayer->getGstVideoUtils()->getSink();
-	g_object_set(videosink,"async",0,NULL);
-	g_object_set(videosink,"sync",1,NULL);
-	g_object_set(videosink,"max-lateness",(gint64).08*GST_SECOND,NULL);
+	if(netclock){
+		GstElement * videosink = gstPlayer->getGstVideoUtils()->getSink();
+		g_object_set(videosink,"async",0,NULL);
+		g_object_set(videosink,"sync",1,NULL);
+		g_object_set(videosink,"max-lateness",(gint64).08*GST_SECOND,NULL);
+	}
 	player.setPlayer(gstPlayer);
 }
 
